@@ -16,14 +16,68 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerMultimedia;
+import edu.ub.prog2.utils.Menu;
+import java.util.Scanner;
+
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
  */
 public class AplicacioUB1 {
     
+    private static enum OpcionsMenuPrincipal {MENU_PRINCIPAL_OPCIO1,MENU_PRINCIPAL_OPCIO2,MENU_PRINCIPAL_OPCIO3,MENU_PRINCIPAL_SORTIR};
+    
+    private static String[] descMenuPrincipal={"Afegir fitxer multimèdia",
+                                               "Eliminar fitxer multimèdia",
+                                               "Mostrar carpeta",
+                                               "Sortir"};
+    
     public void gestioAplicacioUB() {
         
+        CarpetaFitxers carpeta = new CarpetaFitxers();
+        
+        Scanner sc = new Scanner(System.in);
+        
+        Menu<OpcionsMenuPrincipal> menu = new Menu<OpcionsMenuPrincipal>("Menu Principal",OpcionsMenuPrincipal.values());
+
+        menu.setDescripcions(descMenuPrincipal);
+
+        OpcionsMenuPrincipal opcio;
+        
+        do {
+            menu.mostrarMenu();
+
+            opcio = menu.getOpcio(sc);
+
+            switch(opcio) {
+                case MENU_PRINCIPAL_OPCIO1:
+                    System.out.println("Ruta del Fitxer:");
+                    String ruta = sc.nextLine();
+                    System.out.println("Descripcio del Fitxer:");
+                    String desc = sc.nextLine();
+                    
+                    FitxerMultimedia fitxer = new FitxerMultimedia(ruta);
+                    fitxer.setDescripcio(desc);
+                    carpeta.addFitxer(fitxer);
+                    
+                    break;
+                case MENU_PRINCIPAL_OPCIO2:
+                    System.out.println("num del Fitxer:");
+                    int n = sc.nextInt();
+                    carpeta.removeFitxer(carpeta.getAt(n-1));
+                    break;
+                case MENU_PRINCIPAL_OPCIO3:
+                    System.out.println(carpeta);
+                    break;
+                
+                case MENU_PRINCIPAL_SORTIR:
+                    System.out.println("Fins aviat!");
+                    break;
+            }
+
+        } while(opcio != OpcionsMenuPrincipal.MENU_PRINCIPAL_SORTIR);
     }
     
 }
