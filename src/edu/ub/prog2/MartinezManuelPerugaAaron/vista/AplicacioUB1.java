@@ -16,8 +16,6 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
-import edu.ub.prog2.utils.Menu;
-
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
