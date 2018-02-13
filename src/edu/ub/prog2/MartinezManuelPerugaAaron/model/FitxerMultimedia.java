@@ -159,7 +159,7 @@ public class FitxerMultimedia extends File {
         if (!Objects.equals(this.camiAbsolut, other.camiAbsolut)) {
             return false;
         }
-        if (!Objects.equals(this.getUltimaModificacio(), other.getUltimaModificacio())) {
+        if (!Objects.equals(this.ultimaModificacio, other.ultimaModificacio)) {
             return false;
         }
         return true;

@@ -1,0 +1,80 @@
+@startuml
+
+skinparam class {
+	BackgroundColor white
+	ArrowColor black
+	BorderColor black
+	BackgroundColor<<Foo>> Wheat
+	BorderColor<<Foo>> Tomato
+}
+
+skinparam note {
+   BorderColor black
+   BorderColor<<Foo>> Tomato
+   BackgroundColor<<Foo>> Wheat
+}
+
+note as N1 #white
+  <b>Getters y Setters</b>
+  
+  <i>no aparecen en el diagrama UML porque son obvios</i>
+end note
+
+class CarpetaFitxers {
+  - carpeta : ArrayList<FitxerMultimedia>
+  - CAPACITY : int
+  + getSize():int
+  + addFitxer(File fitxer):void
+  + removeFitxer(File fitxer):void
+  + getAt(int position):File
+  + clear():void
+  + isFull():boolean
+  + freeSpace():int
+}
+
+class FitxerMultimedia<extends File> {
+  - camiAbsolut : String
+  - nomFitxer : String
+  - descripcio : String
+  - extensio : String
+  - ultimaModificacio : Date
+  - findExtension():String
+  - findName():String
+  - findPath():String
+  - dateLastModified():Date
+}
+
+class Menu<TEnum extends Object> {
+  - _llistaOpcions:TEnum[]
+  - _titol:String
+  - _descripcions:String[]
+  + mostrarMenu():void
+  - getMaxLen():int
+}
+
+class AplicacioUB1 {
+  - OpcionsMenuPrincipal : enum
+  - descMenuPrincipal: String[]
+  + gestioAplicacioUB():void
+}
+
+class IniciadorAplicacioUB<<Main>> {
+}
+
+hide IniciadorAplicacioUB methods
+hide IniciadorAplicacioUB attributes
+
+class CarpetaFitxersFullException<extends Exception><< (C,#FF7700) Exception >> {
+}
+
+hide CarpetaFitxersFullException methods
+hide CarpetaFitxersFullException attributes
+
+IniciadorAplicacioUB "1" -down- "1" AplicacioUB1 : contiene >
+AplicacioUB1 "1" -right- "1..*" Menu : tiene >
+AplicacioUB1 "1" -down- "1" CarpetaFitxers : tiene >
+CarpetaFitxers "1" *- "*" FitxerMultimedia : tiene >
+
+
+
+@enduml
