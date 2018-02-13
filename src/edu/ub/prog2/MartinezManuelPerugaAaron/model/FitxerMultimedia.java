@@ -61,7 +61,11 @@ public class FitxerMultimedia extends File {
         String name = this.getName();
         
         int dotInd = this.getName().lastIndexOf('.');
-        return name.substring(0,dotInd).toLowerCase();
+        if (dotInd == -1) {
+            return name.toLowerCase();
+        } else {
+            return name.substring(0,dotInd).toLowerCase();
+        }
     }
     
     /**
@@ -69,7 +73,11 @@ public class FitxerMultimedia extends File {
      * @return String
      */
     private String findPath() {
+        if (this.getParent() == null) {
+            return "";
+        } else {
         return this.getParent();
+        }
     }
     
     /**
@@ -180,10 +188,14 @@ public class FitxerMultimedia extends File {
 
     @Override
     public String toString() {
+        String ext = "";
+        if(extensio.length() > 0) {
+            ext = "."+extensio;
+        }
         return "Descripció=" + descripcio + ", data=" + ultimaModificacio +
                 ", nom fitxer=" + nomFitxer + ", ext=" + extensio +
                 ", cami complet=" + camiAbsolut+
-                File.separator+nomFitxer+"."+extensio;
+                File.separator+nomFitxer+ext;
     }
     
     
