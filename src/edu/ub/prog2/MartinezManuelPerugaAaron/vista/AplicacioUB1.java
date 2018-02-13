@@ -18,6 +18,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerMultimedia;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.CarpetaFitxersFullException;
 import edu.ub.prog2.utils.Menu;
 import java.util.Scanner;
 
@@ -40,7 +41,8 @@ public class AplicacioUB1 {
         
         Scanner sc = new Scanner(System.in);
         
-        Menu<OpcionsMenuPrincipal> menu = new Menu<OpcionsMenuPrincipal>("Menu Principal",OpcionsMenuPrincipal.values());
+        Menu<OpcionsMenuPrincipal> menu = new Menu<OpcionsMenuPrincipal>("Reproductor UB"
+                + " - Menu Principal - v1.0",OpcionsMenuPrincipal.values());
 
         menu.setDescripcions(descMenuPrincipal);
 
@@ -59,21 +61,32 @@ public class AplicacioUB1 {
                     String desc = sc.nextLine();
                     
                     FitxerMultimedia fitxer = new FitxerMultimedia(ruta);
+                    
+                    // Setteando fitxer
+                    fitxer.setNomFitxer();
+                    fitxer.setExtensio();
                     fitxer.setDescripcio(desc);
+                    fitxer.setUltimaModificacio();
+                    fitxer.setCamiAbsolut();
+                    
+                    try {
                     carpeta.addFitxer(fitxer);
+                    } catch (CarpetaFitxersFullException cf) {
+                        System.out.println(cf.getMessage());
+                    }
                     
                     break;
                 case MENU_PRINCIPAL_OPCIO2:
                     System.out.println("num del Fitxer:");
-                    int n = sc.nextInt();
-                    carpeta.removeFitxer(carpeta.getAt(n-1));
+                    int pos = sc.nextInt();
+                    carpeta.removeFitxer(carpeta.getAt(pos));
                     break;
                 case MENU_PRINCIPAL_OPCIO3:
                     System.out.println(carpeta);
                     break;
                 
                 case MENU_PRINCIPAL_SORTIR:
-                    System.out.println("Fins aviat!");
+                    System.out.println("Adeu!");
                     break;
             }
 

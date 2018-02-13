@@ -34,12 +34,12 @@ public class FitxerMultimedia extends File {
     
     public FitxerMultimedia(String cami) {
         super(cami);
-        nomFitxer = findName();
-        extensio = findExtension();
-        camiAbsolut = this.getParent();
-        ultimaModificacio = new Date(this.lastModified());
     }
     
+    /**
+     * Retorna la extensión del fichero
+     * @return String
+     */
     private String findExtension() {
         String name = this.getName();
 
@@ -53,12 +53,35 @@ public class FitxerMultimedia extends File {
         }
     }
 
+    /**
+     * Retorna el nombre del fichero sin extensión
+     * @return String
+     */
     private String findName() {
         String name = this.getName();
         
         int dotInd = this.getName().lastIndexOf('.');
         return name.substring(0,dotInd).toLowerCase();
     }
+    
+    /**
+     * Retorna la ruta del fichero sin el nombre del fichero
+     * @return String
+     */
+    private String findPath() {
+        return this.getParent();
+    }
+    
+    /**
+     * Retorna la fecha de ultima modificación del fichero
+     * @return Date
+     */
+    
+    private Date dateLastModified() {
+        return new Date(this.lastModified());
+    }
+    
+    // Getters
     
     public String getNomFitxer() {
         return nomFitxer;
@@ -80,25 +103,37 @@ public class FitxerMultimedia extends File {
         return ultimaModificacio;
     }
     
-    public void setNomFitxer(String nomFitxer){
-        this.nomFitxer = nomFitxer;
-    }
-    
-    public void setExtensio(String extensio){
-        this.extensio = extensio;
-    }
+    // Setters
     
     public void setDescripcio(String descripcio){
         this.descripcio = descripcio;
     }
     
-    public void setCamiAbsolut(String cami){
-        camiAbsolut = cami;
-    }
+    //***************************************************************
+    
+    /*
+       Interpretamos que como new File(cami) tiene el nommbre de fichero
+       extension, ruta y fecha de ultima modificación lo aprovechamos y hacemos
+       unos setters sabiendo que igualmente File es inmutable.
+    */
 
-    public void setUltimaModificacio(Date ultimaModificacio) {
-        this.ultimaModificacio = new Date(this.lastModified());
+    public void setNomFitxer(){
+        this.nomFitxer = findName();
     }
+    
+    public void setExtensio(){
+        this.extensio = findExtension();
+    }
+    
+    public void setCamiAbsolut(){
+        camiAbsolut = findPath();
+    }
+    
+    public void setUltimaModificacio() {
+        this.ultimaModificacio = dateLastModified();
+    }
+    
+    //***************************************************************
 
     @Override
     public boolean equals(Object obj) {
@@ -121,6 +156,9 @@ public class FitxerMultimedia extends File {
         if (!Objects.equals(this.extensio, other.extensio)) {
             return false;
         }
+        if (!Objects.equals(this.camiAbsolut, other.camiAbsolut)) {
+            return false;
+        }
         if (!Objects.equals(this.getUltimaModificacio(), other.getUltimaModificacio())) {
             return false;
         }
@@ -130,16 +168,22 @@ public class FitxerMultimedia extends File {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.nomFitxer);
-        hash = 67 * hash + Objects.hashCode(this.descripcio);
-        hash = 67 * hash + Objects.hashCode(this.extensio);
-        hash = 67 * hash + Objects.hashCode(this.lastModified());
+        hash = 83 * hash + Objects.hashCode(this.camiAbsolut);
+        hash = 83 * hash + Objects.hashCode(this.nomFitxer);
+        hash = 83 * hash + Objects.hashCode(this.descripcio);
+        hash = 83 * hash + Objects.hashCode(this.extensio);
+        hash = 83 * hash + Objects.hashCode(this.ultimaModificacio);
         return hash;
     }
 
+
+
     @Override
     public String toString() {
-        return "Descripció=" + descripcio + ", data=" + ultimaModificacio +", nom fitxer=" + nomFitxer + ", ext=" + extensio + ", cami complet=" + camiAbsolut;
+        return "Descripció=" + descripcio + ", data=" + ultimaModificacio +
+                ", nom fitxer=" + nomFitxer + ", ext=" + extensio +
+                ", cami complet=" + camiAbsolut+
+                File.separator+nomFitxer+"."+extensio;
     }
     
     

@@ -18,6 +18,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 import java.io.File;
 import java.util.ArrayList;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.CarpetaFitxersFullException;
 
 /**
  *
@@ -25,54 +26,102 @@ import java.util.ArrayList;
  */
 public class CarpetaFitxers {
     
+    // capacidad máxima de la carpeta
     private static final int CAPACITY = 100;
     
-    private ArrayList<File> carpeta;
+    private ArrayList<File> carpeta = new ArrayList(CAPACITY);
 
     public CarpetaFitxers() {
-        this.carpeta = new ArrayList(CAPACITY);
     }
     
+    /**
+     * Obtiene el tamaño de la carpeta en ficheros
+     * @return int
+     */
     public int getSize(){
         return carpeta.size();
     }
     
-    public void addFitxer(File fitxer){
-        if(!isFull()) {
-            carpeta.add(fitxer);
+    /**
+     * Añade un fichero a la carpeta
+     * @param fitxer
+     * @throws CarpetaFitxersFullException 
+     */
+    public void addFitxer(File fitxer) throws CarpetaFitxersFullException{
+        if(isFull()) {
+            throw new CarpetaFitxersFullException("Carpeta plena");
+        } else {
+            if (carpeta.contains(fitxer)) {
+                System.out.println("Ya existeix el fitxer");
+            } else {
+                carpeta.add(fitxer);
+            }
         }
     }
     
+    /**
+     * Borra un archivo de la carpeta
+     * @param fitxer 
+     */
     public void removeFitxer(File fitxer){
         carpeta.remove(fitxer);
     }
     
+    /**
+     * Obtiene un fichero atraves de su indice empezando desde 1 el primero
+     * @param position
+     * @return File
+     */
     public File getAt(int position){
-        return carpeta.get(position);
+        int fakePos = position-1;
+        File f = null;
+        try {
+            f = carpeta.get(fakePos);
+        } catch (IndexOutOfBoundsException iob) {
+            System.out.println("No hi ha fitxer en aquesta posicio");
+        }
+        return f;
     }
     
+    /**
+     * Elimina los archivos de la carpeta
+     */
     public void clear(){
         carpeta.clear();
     }
     
+    /**
+     * Comprueba si la carpeta está llena
+     * @return boolean
+     */
     public boolean isFull(){
         return carpeta.size() == CAPACITY;
+    }
+    
+    /**
+     * Comprueba el espacio libre
+     * @return int
+     */
+    public int freeSpace() {
+        return CAPACITY-carpeta.size();
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Carpeta de Fitxers:\n==================\n");
+        sb.append("Carpeta de Fitxers: Free Space (").append(freeSpace())
+                .append(")\n====================================\n");
         
-        int id = 1;
-        for (File file: carpeta){
-            sb.append("\n[").append(id).append("] ").append(file);
-            id++;
+        if (carpeta.size() > 0) {
+            int id = 1;
+            for (File file: carpeta){
+                sb.append("\n[").append(id).append("] ").append(file);
+                id++;
+            }
+        }else {
+            sb.append("\nno hi ha fitxers");  
         }
         
         return sb.toString();
-    }
-    
-    
-    
+    }   
 }
