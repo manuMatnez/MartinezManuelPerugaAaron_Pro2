@@ -49,7 +49,7 @@ public class FitxerMultimedia extends File {
             return "";
         }
         else{
-            return name.substring(dotInd+1).toLowerCase();
+            return name.substring(dotInd+1);
         }
     }
 
@@ -62,9 +62,9 @@ public class FitxerMultimedia extends File {
         
         int dotInd = this.getName().lastIndexOf('.');
         if (dotInd == -1) {
-            return name.toLowerCase();
+            return name;
         } else {
-            return name.substring(0,dotInd).toLowerCase();
+            return name.substring(0,dotInd);
         }
     }
     
