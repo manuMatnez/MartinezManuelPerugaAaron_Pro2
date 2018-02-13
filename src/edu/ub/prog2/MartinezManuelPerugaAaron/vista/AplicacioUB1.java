@@ -20,6 +20,7 @@ import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerMultimedia;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.CarpetaFitxersFullException;
 import edu.ub.prog2.utils.Menu;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -60,19 +61,23 @@ public class AplicacioUB1 {
                     System.out.println("Descripcio del Fitxer:");
                     String desc = sc.nextLine();
                     
-                    FitxerMultimedia fitxer = new FitxerMultimedia(ruta);
+                    FitxerMultimedia fitxer;
                     
                     // Setteando fitxer
+                    
+                    
+                    try {
+                    fitxer = new FitxerMultimedia(ruta);
                     fitxer.setNomFitxer();
                     fitxer.setExtensio();
                     fitxer.setDescripcio(desc);
                     fitxer.setUltimaModificacio();
                     fitxer.setCamiAbsolut();
-                    
-                    try {
                     carpeta.addFitxer(fitxer);
                     } catch (CarpetaFitxersFullException cf) {
                         System.out.println(cf.getMessage());
+                    } catch(IOException io) {
+                         System.out.println("archivo no valido");
                     }
                     
                     break;

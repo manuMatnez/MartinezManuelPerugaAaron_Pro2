@@ -17,6 +17,7 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -32,8 +33,11 @@ public class FitxerMultimedia extends File {
     private String extensio;
     private Date ultimaModificacio;
     
-    public FitxerMultimedia(String cami) {
+    public FitxerMultimedia(String cami) throws IOException {
         super(cami);
+        if (cami.length() < 1 || cami.trim().length() == 1 || cami.charAt(0) == ' ') {
+            throw new IOException();
+        }
     }
     
     /**
