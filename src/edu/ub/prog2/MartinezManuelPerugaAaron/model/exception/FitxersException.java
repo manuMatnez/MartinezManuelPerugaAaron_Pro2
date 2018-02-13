@@ -20,16 +20,16 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model.exception;
  *
  * @author Manuel Martinez, Aaron Peruga
  */
-public class CarpetaFitxersFullException extends Exception {
+public class FitxersException extends Exception {
 
-    public CarpetaFitxersFullException() {
+    public FitxersException() {
     }
 
     /**
-     * Excepcion de carpeta llena
+     * Excepcion
      * @param message 
      */
-    public CarpetaFitxersFullException(String message) {
+    public FitxersException(String message) {
         super(message);
     }
 

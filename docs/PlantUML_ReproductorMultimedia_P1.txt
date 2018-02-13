@@ -1,11 +1,11 @@
 @startuml
 
 skinparam class {
-	BackgroundColor white
-	ArrowColor black
-	BorderColor black
-	BackgroundColor<<Foo>> Wheat
-	BorderColor<<Foo>> Tomato
+  BackgroundColor white
+  ArrowColor black
+  BorderColor black
+  BackgroundColor<<Foo>> Wheat
+  BorderColor<<Foo>> Tomato
 }
 
 skinparam note {
@@ -64,11 +64,11 @@ class IniciadorAplicacioUB<<Main>> {
 hide IniciadorAplicacioUB methods
 hide IniciadorAplicacioUB attributes
 
-class CarpetaFitxersFullException<extends Exception><< (C,#FF7700) Exception >> {
+class FitxersException<extends Exception><< (C,#FF7700) Exception >> {
 }
 
-hide CarpetaFitxersFullException methods
-hide CarpetaFitxersFullException attributes
+hide FitxersException methods
+hide FitxersException attributes
 
 IniciadorAplicacioUB "1" -down- "1" AplicacioUB1 : contiene >
 AplicacioUB1 "1" -right- "1..*" Menu : tiene >

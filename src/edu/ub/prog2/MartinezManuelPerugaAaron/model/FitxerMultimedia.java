@@ -16,8 +16,8 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
 import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -33,11 +33,15 @@ public class FitxerMultimedia extends File {
     private String extensio;
     private Date ultimaModificacio;
     
-    public FitxerMultimedia(String cami) throws IOException {
+    public FitxerMultimedia(String cami) throws FitxersException {
         super(cami);
-        if (cami.length() < 1 || cami.trim().length() == 1 || cami.charAt(0) == ' ') {
-            throw new IOException();
+        
+        if (cami.length() < 1) {
+            throw new FitxersException("nombre de fichero no valido, no puede estar vacio");
         }
+        if (cami.charAt(0) == ' '){
+            throw new FitxersException("nombre de fichero no valido, empieza por espacio");
+        }  
     }
     
     /**
@@ -49,7 +53,7 @@ public class FitxerMultimedia extends File {
 
         int dotInd = this.getName().lastIndexOf('.'),
             sepInd = Math.max(name.lastIndexOf('/'), name.lastIndexOf('\\'));
-        if (dotInd <= sepInd) {
+        if (dotInd <= sepInd || dotInd == 0) {
             return "";
         }
         else{
@@ -65,7 +69,7 @@ public class FitxerMultimedia extends File {
         String name = this.getName();
         
         int dotInd = this.getName().lastIndexOf('.');
-        if (dotInd == -1) {
+        if (dotInd <1) {
             return name;
         } else {
             return name.substring(0,dotInd);

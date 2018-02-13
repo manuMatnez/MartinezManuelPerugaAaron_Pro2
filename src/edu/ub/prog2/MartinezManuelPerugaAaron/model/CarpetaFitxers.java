@@ -18,7 +18,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 import java.io.File;
 import java.util.ArrayList;
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.CarpetaFitxersFullException;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
 
 /**
  *
@@ -45,11 +45,11 @@ public class CarpetaFitxers {
     /**
      * Añade un fichero a la carpeta
      * @param fitxer
-     * @throws CarpetaFitxersFullException 
+     * @throws FitxersException 
      */
-    public void addFitxer(File fitxer) throws CarpetaFitxersFullException{
+    public void addFitxer(File fitxer) throws FitxersException{
         if(isFull()) {
-            throw new CarpetaFitxersFullException("Carpeta plena");
+            throw new FitxersException("Carpeta plena");
         } else {
             if (carpeta.contains(fitxer)) {
                 System.out.println("Ya existeix el fitxer");

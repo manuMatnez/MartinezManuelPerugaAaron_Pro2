@@ -34,7 +34,7 @@ public class CarpetaFitxersTest {
     FitxerMultimedia test3;
     
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         test1 = new FitxerMultimedia("/home/ficheros/casa.png");
         test1.setCamiAbsolut();
         test1.setDescripcio("test de casa");

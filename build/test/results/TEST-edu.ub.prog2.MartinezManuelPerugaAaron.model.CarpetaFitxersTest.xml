@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="iManuMtz-Pro.local" name="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" skipped="0" tests="5" time="4.701" timestamp="2018-02-13T22:26:44">
+<testsuite errors="0" failures="0" hostname="iManuMtz-Pro.local" name="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" skipped="0" tests="5" time="5.262" timestamp="2018-02-13T23:37:50">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="ES" />
@@ -63,7 +63,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/build/test/results/TEST-edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest.xml crashfile=/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/build/junitvmwatcher3929221583179107844.properties propsfile=/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/build/junit5935770740024061258.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/build/test/results/TEST-edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest.xml crashfile=/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/build/junitvmwatcher6158664489872395897.properties propsfile=/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/build/junit422123743788337199.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -431,11 +431,11 @@
     <property name="ant.file.type.MartinezManuelPerugaAaron" value="file" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/enterprise/docs/javaee-doc-api.jar" />
   </properties>
-  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testClear" time="0.174" />
-  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testGetSize" time="0.129" />
-  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testRemoveFitxer" time="0.114" />
-  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testFreeSpace" time="0.127" />
-  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testAddFitxer" time="3.906" />
+  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testClear" time="0.179" />
+  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testGetSize" time="0.152" />
+  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testRemoveFitxer" time="0.182" />
+  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testFreeSpace" time="0.151" />
+  <testcase classname="edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxersTest" name="testAddFitxer" time="4.36" />
   <system-out><![CDATA[clear
 Ya existeix el fitxer
 Ya existeix el fitxer

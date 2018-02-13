@@ -18,9 +18,8 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerMultimedia;
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.CarpetaFitxersFullException;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
 import edu.ub.prog2.utils.Menu;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -63,21 +62,18 @@ public class AplicacioUB1 {
                     
                     FitxerMultimedia fitxer;
                     
-                    // Setteando fitxer
-                    
-                    
                     try {
                     fitxer = new FitxerMultimedia(ruta);
+                    
+                    // Setteando fitxer
                     fitxer.setNomFitxer();
                     fitxer.setExtensio();
                     fitxer.setDescripcio(desc);
                     fitxer.setUltimaModificacio();
                     fitxer.setCamiAbsolut();
                     carpeta.addFitxer(fitxer);
-                    } catch (CarpetaFitxersFullException cf) {
+                    } catch (FitxersException cf) {
                         System.out.println(cf.getMessage());
-                    } catch(IOException io) {
-                         System.out.println("archivo no valido");
                     }
                     
                     break;
