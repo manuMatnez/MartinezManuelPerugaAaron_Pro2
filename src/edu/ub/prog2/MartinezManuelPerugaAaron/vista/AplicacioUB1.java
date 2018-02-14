@@ -66,11 +66,8 @@ public class AplicacioUB1 {
                     fitxer = new FitxerMultimedia(ruta);
                     
                     // Setteando fitxer
-                    fitxer.setNomFitxer();
-                    fitxer.setExtensio();
                     fitxer.setDescripcio(desc);
-                    fitxer.setUltimaModificacio();
-                    fitxer.setCamiAbsolut();
+
                     carpeta.addFitxer(fitxer);
                     } catch (FitxersException cf) {
                         System.out.println(cf.getMessage());
@@ -78,7 +75,7 @@ public class AplicacioUB1 {
                     
                     break;
                 case MENU_PRINCIPAL_OPCIO2:
-                    System.out.println("num del Fitxer:");
+                    System.out.println("Num del Fitxer:");
                     int pos = sc.nextInt();
                     carpeta.removeFitxer(carpeta.getAt(pos));
                     break;

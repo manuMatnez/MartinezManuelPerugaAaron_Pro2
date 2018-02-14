@@ -36,25 +36,13 @@ public class CarpetaFitxersTest {
     @Before
     public void setUp() throws Exception {
         test1 = new FitxerMultimedia("/home/ficheros/casa.png");
-        test1.setCamiAbsolut();
         test1.setDescripcio("test de casa");
-        test1.setNomFitxer();
-        test1.setUltimaModificacio();
-        test1.setExtensio();
         
         test2 = new FitxerMultimedia("/home/ficheros/casa.png");
-        test2.setCamiAbsolut();
         test2.setDescripcio("test de casa");
-        test2.setNomFitxer();
-        test2.setUltimaModificacio();
-        test2.setExtensio();
-        
+
         test3 = new FitxerMultimedia("/home/ficheros/playa.png");
-        test3.setCamiAbsolut();
         test3.setDescripcio("test de playa");
-        test3.setNomFitxer();
-        test3.setUltimaModificacio();
-        test3.setExtensio();
     }
     
 
@@ -89,12 +77,7 @@ public class CarpetaFitxersTest {
         // Test limite de ficheros, equals y añadir
         for (int i = 0;i < expResult;i++) {
             FitxerMultimedia tmp = new FitxerMultimedia("/home/"+String.valueOf(i)+"/"+String.valueOf(i)+"."+String.valueOf(i)+String.valueOf(i));
-            tmp.setCamiAbsolut();
             tmp.setDescripcio(String.valueOf(i));
-            tmp.setNomFitxer();
-            tmp.setUltimaModificacio();
-            tmp.setExtensio();
-
             instance.addFitxer(tmp);
             
         }

@@ -27,21 +27,15 @@ import java.util.Objects;
  */
 public class FitxerMultimedia extends File {
     
-    private String camiAbsolut;
-    private String nomFitxer;
     private String descripcio;
-    private String extensio;
-    private Date ultimaModificacio;
     
     public FitxerMultimedia(String cami) throws FitxersException {
         super(cami);
         
         if (cami.length() < 1) {
-            throw new FitxersException("nombre de fichero no valido, no puede estar vacio");
+            throw new FitxersException("Nom de fitxer invalid, ha de tenir al menys un caracter");
         }
-        if (cami.charAt(0) == ' '){
-            throw new FitxersException("nombre de fichero no valido, empieza por espacio");
-        }  
+        
     }
     
     /**
@@ -51,13 +45,13 @@ public class FitxerMultimedia extends File {
     private String findExtension() {
         String name = this.getName();
 
-        int dotInd = this.getName().lastIndexOf('.'),
-            sepInd = Math.max(name.lastIndexOf('/'), name.lastIndexOf('\\'));
-        if (dotInd <= sepInd || dotInd == 0) {
+        int dotIndex = this.getName().lastIndexOf('.'),
+            sepIndex = name.lastIndexOf(File.separator);
+        if (dotIndex <= sepIndex || dotIndex == 0) {
             return "";
         }
         else{
-            return name.substring(dotInd+1);
+            return name.substring(dotIndex+1);
         }
     }
 
@@ -68,11 +62,11 @@ public class FitxerMultimedia extends File {
     private String findName() {
         String name = this.getName();
         
-        int dotInd = this.getName().lastIndexOf('.');
-        if (dotInd <1) {
+        int dotIndex = this.getName().lastIndexOf('.');
+        if (dotIndex < 1) {
             return name;
         } else {
-            return name.substring(0,dotInd);
+            return name.substring(0,dotIndex);
         }
     }
     
@@ -84,27 +78,18 @@ public class FitxerMultimedia extends File {
         if (this.getParent() == null) {
             return "";
         } else {
-        return this.getParent();
+            return this.getParent();
         }
-    }
-    
-    /**
-     * Retorna la fecha de ultima modificación del fichero
-     * @return Date
-     */
-    
-    private Date dateLastModified() {
-        return new Date(this.lastModified());
     }
     
     // Getters
     
     public String getNomFitxer() {
-        return nomFitxer;
+        return findName();
     }
     
     public String getExtensio() {
-        return extensio;
+        return findExtension();
     }
 
     public String getDescripcio() {
@@ -112,41 +97,21 @@ public class FitxerMultimedia extends File {
     }
     
     public String getCamiAbsolut() {
-        return camiAbsolut;
+        return findPath();
+    }
+    
+    public String getCamiAbsolutComplet() {
+        return this.getAbsolutePath();
     }
     
     public Date getUltimaModificacio() {
-        return ultimaModificacio;
+        return new Date(this.lastModified());
     }
     
     // Setters
     
     public void setDescripcio(String descripcio){
         this.descripcio = descripcio;
-    }
-    
-    //***************************************************************
-    
-    /*
-       Interpretamos que como new File(cami) tiene el nommbre de fichero
-       extension, ruta y fecha de ultima modificación lo aprovechamos y hacemos
-       unos setters sabiendo que igualmente File es inmutable.
-    */
-
-    public void setNomFitxer(){
-        this.nomFitxer = findName();
-    }
-    
-    public void setExtensio(){
-        this.extensio = findExtension();
-    }
-    
-    public void setCamiAbsolut(){
-        camiAbsolut = findPath();
-    }
-    
-    public void setUltimaModificacio() {
-        this.ultimaModificacio = dateLastModified();
     }
     
     //***************************************************************
@@ -163,19 +128,19 @@ public class FitxerMultimedia extends File {
             return false;
         }
         final FitxerMultimedia other = (FitxerMultimedia) obj;
-        if (!Objects.equals(this.nomFitxer, other.nomFitxer)) {
+        if (!Objects.equals(this.getNomFitxer(), other.getNomFitxer())) {
             return false;
         }
         if (!Objects.equals(this.descripcio, other.descripcio)) {
             return false;
         }
-        if (!Objects.equals(this.extensio, other.extensio)) {
+        if (!Objects.equals(this.getExtensio(), other.getExtensio())) {
             return false;
         }
-        if (!Objects.equals(this.camiAbsolut, other.camiAbsolut)) {
+        if (!Objects.equals(this.getCamiAbsolut(), other.getCamiAbsolut())) {
             return false;
         }
-        if (!Objects.equals(this.ultimaModificacio, other.ultimaModificacio)) {
+        if (!Objects.equals(this.getUltimaModificacio(), other.getUltimaModificacio())) {
             return false;
         }
         return true;
@@ -184,11 +149,11 @@ public class FitxerMultimedia extends File {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.camiAbsolut);
-        hash = 83 * hash + Objects.hashCode(this.nomFitxer);
+        hash = 83 * hash + Objects.hashCode(this.getCamiAbsolut());
+        hash = 83 * hash + Objects.hashCode(this.getNomFitxer());
         hash = 83 * hash + Objects.hashCode(this.descripcio);
-        hash = 83 * hash + Objects.hashCode(this.extensio);
-        hash = 83 * hash + Objects.hashCode(this.ultimaModificacio);
+        hash = 83 * hash + Objects.hashCode(this.getExtensio());
+        hash = 83 * hash + Objects.hashCode(this.getUltimaModificacio());
         return hash;
     }
 
@@ -196,14 +161,23 @@ public class FitxerMultimedia extends File {
 
     @Override
     public String toString() {
-        String ext = "";
-        if(extensio.length() > 0) {
-            ext = "."+extensio;
+        StringBuilder fitxer = new StringBuilder();
+        
+        fitxer.append("Descripció='").append(descripcio).append("', Data='")
+                .append(this.getUltimaModificacio())
+                .append("', Nom fitxer='").append(this.getNomFitxer())
+                .append("', Ext='");
+        
+        if(this.getExtensio().length() > 0) {
+            fitxer.append(this.getExtensio());
+        } else {
+            fitxer.append("Sense extensio");
         }
-        return "Descripció=" + descripcio + ", data=" + ultimaModificacio +
-                ", nom fitxer=" + nomFitxer + ", ext=" + extensio +
-                ", cami complet=" + camiAbsolut+
-                File.separator+nomFitxer+ext;
+
+        fitxer.append("', Cami complet='").append(getCamiAbsolutComplet())
+        .append("'");
+        
+        return fitxer.toString();
     }
     
     

@@ -119,7 +119,7 @@ public class CarpetaFitxers {
                 id++;
             }
         }else {
-            sb.append("\nno hi ha fitxers");  
+            sb.append("\nNo hi ha fitxers");  
         }
         
         return sb.toString();

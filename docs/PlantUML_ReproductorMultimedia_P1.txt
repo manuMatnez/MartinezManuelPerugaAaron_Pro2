@@ -17,7 +17,7 @@ skinparam note {
 note as N1 #white
   <b>Getters y Setters</b>
   
-  <i>no aparecen en el diagrama UML porque son obvios</i>
+  <i>algunos no aparecen en el diagrama UML porque son obvios</i>
 end note
 
 class CarpetaFitxers {
@@ -33,15 +33,15 @@ class CarpetaFitxers {
 }
 
 class FitxerMultimedia<extends File> {
-  - camiAbsolut : String
-  - nomFitxer : String
   - descripcio : String
-  - extensio : String
-  - ultimaModificacio : Date
   - findExtension():String
   - findName():String
   - findPath():String
-  - dateLastModified():Date
+  + getNomFitxer():String
+  + getExtensio():String
+  + getCamiAbsolut():String
+  + getCamiAbsolutComplet():String
+  + getUltimaModificacio():Date
 }
 
 class Menu<TEnum extends Object> {
@@ -74,7 +74,5 @@ IniciadorAplicacioUB "1" -down- "1" AplicacioUB1 : contiene >
 AplicacioUB1 "1" -right- "1..*" Menu : tiene >
 AplicacioUB1 "1" -down- "1" CarpetaFitxers : tiene >
 CarpetaFitxers "1" *- "*" FitxerMultimedia : tiene >
-
-
 
 @enduml
