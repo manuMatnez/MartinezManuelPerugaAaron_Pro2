@@ -27,11 +27,21 @@ import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
 public class CarpetaFitxers {
     
     // capacidad máxima de la carpeta
-    private static final int CAPACITY = 100;
+    private static int capacity;
     
-    private ArrayList<File> carpeta = new ArrayList(CAPACITY);
+    private ArrayList<File> carpeta;
 
     public CarpetaFitxers() {
+        capacity = 100;
+        carpeta = new ArrayList(capacity);
+    }
+    
+    public CarpetaFitxers(int cap) throws FitxersException {
+        if (cap < 1) {
+            throw new FitxersException("Numero menor de 0: "+cap);
+        }
+        capacity = cap;
+        carpeta = new ArrayList(capacity);
     }
     
     /**
@@ -43,19 +53,15 @@ public class CarpetaFitxers {
     }
     
     /**
-     * Añade un fichero a la carpeta
+     * Añade un fichero a la carpeta si no está ya contenido
      * @param fitxer
      * @throws FitxersException 
      */
     public void addFitxer(File fitxer) throws FitxersException{
-        if(isFull()) {
-            throw new FitxersException("Carpeta plena");
+        if (carpeta.contains(fitxer)) {
+            throw new FitxersException("Ya existeix el fitxer");
         } else {
-            if (carpeta.contains(fitxer)) {
-                System.out.println("Ya existeix el fitxer");
-            } else {
-                carpeta.add(fitxer);
-            }
+            carpeta.add(fitxer);
         }
     }
     
@@ -72,15 +78,11 @@ public class CarpetaFitxers {
      * @param position
      * @return File
      */
-    public File getAt(int position){
+    public File getAt(int position) {
         int fakePos = position-1;
-        File f = null;
-        try {
-            f = carpeta.get(fakePos);
-        } catch (IndexOutOfBoundsException iob) {
-            System.out.println("No hi ha fitxer en aquesta posicio");
-        }
-        return f;
+        File file = carpeta.get(fakePos);
+
+        return file;
     }
     
     /**
@@ -95,7 +97,7 @@ public class CarpetaFitxers {
      * @return boolean
      */
     public boolean isFull(){
-        return carpeta.size() == CAPACITY;
+        return carpeta.size() == capacity;
     }
     
     /**
@@ -103,7 +105,7 @@ public class CarpetaFitxers {
      * @return int
      */
     public int freeSpace() {
-        return CAPACITY-carpeta.size();
+        return capacity-carpeta.size();
     }
 
     @Override

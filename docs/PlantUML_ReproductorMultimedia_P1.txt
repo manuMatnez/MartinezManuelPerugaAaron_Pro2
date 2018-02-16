@@ -22,7 +22,7 @@ end note
 
 class CarpetaFitxers {
   - carpeta : ArrayList<FitxerMultimedia>
-  - CAPACITY : int
+  - capacity : int
   + getSize():int
   + addFitxer(File fitxer):void
   + removeFitxer(File fitxer):void

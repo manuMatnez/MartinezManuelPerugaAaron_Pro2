@@ -20,6 +20,7 @@ import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerMultimedia;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
 import edu.ub.prog2.utils.Menu;
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -37,11 +38,23 @@ public class AplicacioUB1 {
     
     public void gestioAplicacioUB() {
         
-        CarpetaFitxers carpeta = new CarpetaFitxers();
-        
         Scanner sc = new Scanner(System.in);
         
-        Menu<OpcionsMenuPrincipal> menu = new Menu<OpcionsMenuPrincipal>("Reproductor UB"
+        CarpetaFitxers carpeta;
+        
+        System.out.println("Tamaño de la carpeta de fitxers (100 por defecto si [entrada < 1]):");
+        
+        int size = sc.nextInt();
+        
+        try {
+            carpeta = new CarpetaFitxers(size);
+            } catch (FitxersException fe) {
+                System.out.println(fe.getMessage());
+                System.out.println("Valor per defecte: 100");
+                carpeta = new CarpetaFitxers();
+        }
+        
+        Menu<OpcionsMenuPrincipal> menu = new Menu<>("Reproductor UB"
                 + " - Menu Principal - v1.0",OpcionsMenuPrincipal.values());
 
         menu.setDescripcions(descMenuPrincipal);
@@ -55,29 +68,46 @@ public class AplicacioUB1 {
 
             switch(opcio) {
                 case MENU_PRINCIPAL_OPCIO1:
-                    System.out.println("Ruta del Fitxer:");
-                    String ruta = sc.nextLine();
-                    System.out.println("Descripcio del Fitxer:");
-                    String desc = sc.nextLine();
+                    if(carpeta.isFull()) {
+                        System.out.println("Carpeta plena");
+                    } else {
+                        System.out.println("Ruta del Fitxer:");
+                        String ruta = sc.nextLine();
+                        System.out.println("Descripcio del Fitxer:");
+                        String desc = sc.nextLine();
+                        
+                        FitxerMultimedia fitxer;
+                        
+                        try {
+                            fitxer = new FitxerMultimedia(ruta);
                     
-                    FitxerMultimedia fitxer;
-                    
-                    try {
-                    fitxer = new FitxerMultimedia(ruta);
-                    
-                    // Setteando fitxer
-                    fitxer.setDescripcio(desc);
+                            // Setteando fitxer
+                            fitxer.setDescripcio(desc);
 
-                    carpeta.addFitxer(fitxer);
-                    } catch (FitxersException cf) {
-                        System.out.println(cf.getMessage());
+                            carpeta.addFitxer(fitxer);
+                        } catch (FitxersException cf) {
+                            System.out.println(cf.getMessage());
+                        }
                     }
                     
                     break;
                 case MENU_PRINCIPAL_OPCIO2:
                     System.out.println("Num del Fitxer:");
                     int pos = sc.nextInt();
-                    carpeta.removeFitxer(carpeta.getAt(pos));
+                    FitxerMultimedia file;
+                    try {
+                        file = (FitxerMultimedia)carpeta.getAt(pos);
+                        carpeta.removeFitxer(file);
+                        System.out.println("Eliminado -> "+ file.getName());
+                    } catch (IndexOutOfBoundsException iob) {
+                        if (pos < 1) {
+                            System.out.println("La posició começa amb 1");
+                        } else if (pos > carpeta.getSize()) {
+                            System.out.println("La posició no pot ser mes gran que: " + carpeta.getSize());
+                        } else {
+                            System.out.println("No hi ha fitxer en aquesta posicio");
+                        }
+                    }
                     break;
                 case MENU_PRINCIPAL_OPCIO3:
                     System.out.println(carpeta);

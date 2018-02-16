@@ -59,7 +59,11 @@ public class CarpetaFitxersTest {
         
         //Ficheros repetidos
         instance.addFitxer(test1);
+        try {
         instance.addFitxer(test2);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         int expResult2 = 1;
         int result2 = instance.getSize();
         assertEquals(expResult2, result2);
@@ -97,7 +101,11 @@ public class CarpetaFitxersTest {
         
         int expResult = 1;
         
+        try {
         instance.removeFitxer(instance.getAt(2));
+        } catch(IndexOutOfBoundsException io) {
+            System.out.println(io.getMessage());
+        }
         int result = instance.getSize();
         
         assertEquals(expResult, result);
