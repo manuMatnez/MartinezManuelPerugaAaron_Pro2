@@ -32,7 +32,7 @@ public class CarpetaFitxers {
     private ArrayList<File> carpeta;
 
     public CarpetaFitxers() {
-        capacity = 100;
+        capacity = 100; // default
         carpeta = new ArrayList(capacity);
     }
     
