@@ -20,7 +20,6 @@ import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerMultimedia;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
 import edu.ub.prog2.utils.Menu;
-import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -42,12 +41,9 @@ public class AplicacioUB1 {
         
         CarpetaFitxers carpeta;
         
-        System.out.println("Tamaño de la carpeta de fitxers (100 por defecto si [entrada < 1]):");
-        
-        int size = sc.nextInt();
-        
+        // try catch por si se ponen numeros no validos de capacidad
         try {
-            carpeta = new CarpetaFitxers(size);
+            carpeta = new CarpetaFitxers(100);
             } catch (FitxersException fe) {
                 System.out.println(fe.getMessage());
                 System.out.println("Valor per defecte: 100");
@@ -73,18 +69,24 @@ public class AplicacioUB1 {
                     } else {
                         System.out.println("Ruta del Fitxer:");
                         String ruta = sc.nextLine();
-                        System.out.println("Descripcio del Fitxer:");
-                        String desc = sc.nextLine();
                         
                         FitxerMultimedia fitxer;
                         
                         try {
                             fitxer = new FitxerMultimedia(ruta);
                     
-                            // Setteando fitxer
-                            fitxer.setDescripcio(desc);
+                            if (fitxer.exists()) {
+                                
+                                System.out.println("Descripcio del Fitxer:");
+                                String desc = sc.nextLine();
+                                
+                                // Setteando fitxer
+                                fitxer.setDescripcio(desc);
 
-                            carpeta.addFitxer(fitxer);
+                                carpeta.addFitxer(fitxer);
+                            } else {
+                                throw new FitxersException("No existeix el fitxer");
+                            }
                         } catch (FitxersException cf) {
                             System.out.println(cf.getMessage());
                         }
@@ -92,20 +94,24 @@ public class AplicacioUB1 {
                     
                     break;
                 case MENU_PRINCIPAL_OPCIO2:
-                    System.out.println("Num del Fitxer:");
-                    int pos = sc.nextInt();
-                    FitxerMultimedia file;
-                    try {
-                        file = (FitxerMultimedia)carpeta.getAt(pos);
-                        carpeta.removeFitxer(file);
-                        System.out.println("Eliminado -> "+ file.getName());
-                    } catch (IndexOutOfBoundsException iob) {
-                        if (pos < 1) {
-                            System.out.println("La posició começa amb 1");
-                        } else if (pos > carpeta.getSize()) {
-                            System.out.println("La posició no pot ser mes gran que: " + carpeta.getSize());
-                        } else {
-                            System.out.println("No hi ha fitxer en aquesta posicio");
+                    if(carpeta.getSize() == 0) {
+                        System.out.println("La carpeta esta vacia");
+                    } else {
+                        System.out.println("Num del Fitxer:");
+                        int pos = sc.nextInt();
+                        FitxerMultimedia file;
+                        try {
+                            file = (FitxerMultimedia)carpeta.getAt(pos);
+                            carpeta.removeFitxer(file);
+                            System.out.println("Eliminado -> "+ file.getName());
+                        } catch (IndexOutOfBoundsException iob) {
+                            if (pos < 1) {
+                                System.out.println("La posició começa amb 1");
+                            } else if (pos > carpeta.getSize()) {
+                                System.out.println("La posició no pot ser mes gran que: " + carpeta.getSize());
+                            } else {
+                                System.out.println("No hi ha fitxer en aquesta posicio");
+                            }
                         }
                     }
                     break;
