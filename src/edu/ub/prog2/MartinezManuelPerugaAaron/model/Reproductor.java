@@ -24,4 +24,16 @@ import edu.ub.prog2.utils.ReproductorBasic;
  */
 public class Reproductor extends ReproductorBasic {
 
+    public Reproductor() {
+    }
+
+    public Reproductor(String vlcPath) { // MAC -> "/Application/VLC.app"
+        super(vlcPath);
+        
+    }
+
+    public Reproductor(String vlcPath, int verbose) {
+        super(vlcPath, verbose);
+    }
+
 }

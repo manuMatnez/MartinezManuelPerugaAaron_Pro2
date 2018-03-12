@@ -17,6 +17,7 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 import edu.ub.prog2.utils.AplicacioException;
+import java.io.File;
 
 /**
  *
@@ -24,8 +25,13 @@ import edu.ub.prog2.utils.AplicacioException;
  */
 public class Audio extends FitxerReproduible {
 
-    public Audio(String cami) throws AplicacioException {
-        super(cami);
+    public Audio(String cami, File fitxerImatge, String nom, String codec, float durada, int kbps, Reproductor r) throws AplicacioException {
+        super(cami, nom, codec, durada, r);
+    }
+
+    @Override
+    protected void reproduir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

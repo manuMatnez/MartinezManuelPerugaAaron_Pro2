@@ -16,6 +16,10 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
+import edu.ub.prog2.utils.AplicacioException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
@@ -33,4 +37,26 @@ public class Controlador {
     public static Controlador getInstance() {
         return Loader.INSTANCE;
     }
+
+    public void afegirVideo(String path, String nomVideo, String codec,
+            float durada, int alcada, int amplada, float fps) throws AplicacioException {
+    }
+
+    public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException {
+    }
+
+    public List<String> mostrarBiblioteca() { // llista dels retorns de toString() dels fitxers
+        List<String> l = new ArrayList();
+        return l;
+    }
+    
+    public void esborrarFitxer(int id) throws AplicacioException { // id és la posició a llista de getBiblioteca()
+    }
+
+    public void guardarDadesDisc(String camiDesti) throws AplicacioException {
+    }
+
+    public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
+    }
+
 }

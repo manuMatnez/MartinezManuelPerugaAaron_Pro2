@@ -22,10 +22,13 @@ import edu.ub.prog2.utils.AplicacioException;
  *
  * @author Manuel Martinez, Aaron Peruga
  */
-public class FitxerReproduible extends FitxerMultimedia {
-
-    public FitxerReproduible(String cami) throws AplicacioException {
+public abstract class FitxerReproduible extends FitxerMultimedia {
+    
+    protected FitxerReproduible(String cami, String nom, String codec, float durada, Reproductor r)  throws AplicacioException {
         super(cami);
+        
     }
+    
+    protected abstract void reproduir();
 
 }

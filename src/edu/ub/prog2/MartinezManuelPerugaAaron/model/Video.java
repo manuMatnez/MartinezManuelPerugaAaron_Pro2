@@ -24,8 +24,13 @@ import edu.ub.prog2.utils.AplicacioException;
  */
 public class Video extends FitxerReproduible {
 
-    public Video(String cami) throws AplicacioException {
-        super(cami);
+    public Video(String cami, String nom, String codec, float durada, int alcada, int amplada, float fps, Reproductor r) throws AplicacioException {
+        super(cami, nom, codec, durada, r);
+    }
+
+    @Override
+    protected void reproduir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
