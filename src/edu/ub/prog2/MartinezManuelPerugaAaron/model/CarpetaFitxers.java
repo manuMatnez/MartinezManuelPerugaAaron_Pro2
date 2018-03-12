@@ -16,9 +16,9 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
+import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.util.ArrayList;
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
 
 /**
  *
@@ -36,9 +36,9 @@ public class CarpetaFitxers {
         carpeta = new ArrayList(capacity);
     }
     
-    public CarpetaFitxers(int cap) throws FitxersException {
+    public CarpetaFitxers(int cap) throws AplicacioException {
         if (cap < 1) {
-            throw new FitxersException("Numero menor de 0: "+cap);
+            throw new AplicacioException("Numero menor de 0: "+cap);
         }
         capacity = cap;
         carpeta = new ArrayList(capacity);
@@ -55,11 +55,11 @@ public class CarpetaFitxers {
     /**
      * Añade un fichero a la carpeta si no está ya contenido
      * @param fitxer
-     * @throws FitxersException 
+     * @throws AplicacioException 
      */
-    public void addFitxer(File fitxer) throws FitxersException{
+    public void addFitxer(File fitxer) throws AplicacioException {
         if (carpeta.contains(fitxer)) {
-            throw new FitxersException("Ya existeix el fitxer");
+            throw new AplicacioException("Ya existeix el fitxer");
         } else {
             carpeta.add(fitxer);
         }

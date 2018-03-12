@@ -14,26 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
+package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
  */
-public class IniciadorAplicacioUB {
-
-    /**
-    * VLC 2.2 para Mac:
-    * public static void main(String[] args) {
-    * uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH", "/Applications/VLC.app/Contents/MacOS/plugins", 1);
-    * NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib");
-    * Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-    * Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        AplicacioUB1 aplicacio = new AplicacioUB1();
-        aplicacio.gestioAplicacioUB();
-    }
+public class Dades {
     
 }

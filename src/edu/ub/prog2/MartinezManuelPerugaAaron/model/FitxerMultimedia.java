@@ -16,7 +16,7 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
+import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.util.Date;
 import java.util.Objects;
@@ -29,11 +29,11 @@ public class FitxerMultimedia extends File {
     
     private String descripcio;
     
-    public FitxerMultimedia(String cami) throws FitxersException {
+    public FitxerMultimedia(String cami) throws AplicacioException {
         super(cami);
         
         if (cami.length() < 1) {
-            throw new FitxersException("Nom de fitxer invalid, ha de tenir al menys un caracter");
+            throw new AplicacioException("Nom de fitxer invalid, ha de tenir al menys un caracter");
         }
         
     }

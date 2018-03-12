@@ -18,12 +18,11 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerMultimedia;
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.exception.FitxersException;
+import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
 import java.util.Scanner;
 
 /**
- *
  * @author Manuel Martinez, Aaron Peruga
  */
 public class AplicacioUB1 {
@@ -44,8 +43,8 @@ public class AplicacioUB1 {
         // try catch por si se ponen numeros no validos de capacidad
         try {
             carpeta = new CarpetaFitxers(100);
-            } catch (FitxersException fe) {
-                System.out.println(fe.getMessage());
+            } catch (AplicacioException ae) {
+                System.out.println(ae.getMessage());
                 System.out.println("Valor per defecte: 100");
                 carpeta = new CarpetaFitxers();
         }
@@ -85,10 +84,10 @@ public class AplicacioUB1 {
 
                                 carpeta.addFitxer(fitxer);
                             } else {
-                                throw new FitxersException("No existeix el fitxer");
+                                throw new AplicacioException("No existeix el fitxer");
                             }
-                        } catch (FitxersException cf) {
-                            System.out.println(cf.getMessage());
+                        } catch (AplicacioException ae) {
+                            System.out.println(ae.getMessage());
                         }
                     }
                     

@@ -14,23 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.model.exception;
+package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
  */
-public class FitxersException extends Exception {
-
-    public FitxersException() {
-    }
-
-    /**
-     * Excepcion
-     * @param message 
-     */
-    public FitxersException(String message) {
-        super(message);
-    }
-
+public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
+    
 }
