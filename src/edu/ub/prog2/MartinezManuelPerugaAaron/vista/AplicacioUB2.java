@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 manumtz
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 /**
  *
- * @author manumtz
+ * @author Manuel Martinez, Aaron Peruga
  */
 public class AplicacioUB2 {
     
