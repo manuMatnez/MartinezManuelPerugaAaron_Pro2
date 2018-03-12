@@ -21,5 +21,5 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Dades {
-    
+
 }

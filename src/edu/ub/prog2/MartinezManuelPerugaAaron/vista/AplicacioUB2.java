@@ -21,5 +21,5 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class AplicacioUB2 {
-    
+
 }

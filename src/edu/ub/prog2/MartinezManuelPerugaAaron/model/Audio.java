@@ -23,9 +23,9 @@ import edu.ub.prog2.utils.AplicacioException;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Audio extends FitxerReproduible {
-    
+
     public Audio(String cami) throws AplicacioException {
         super(cami);
     }
-    
+
 }

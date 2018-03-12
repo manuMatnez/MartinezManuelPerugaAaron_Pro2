@@ -21,15 +21,16 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Controlador {
-    
+
     private Controlador() {
     }
-    
+
+    private static class Loader {
+
+        private static final Controlador INSTANCE = new Controlador();
+    }
+
     public static Controlador getInstance() {
         return Loader.INSTANCE;
-    }
-    
-    private static class Loader {
-        private static final Controlador INSTANCE = new Controlador();
     }
 }

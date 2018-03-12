@@ -23,5 +23,5 @@ import edu.ub.prog2.utils.ReproductorBasic;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Reproductor extends ReproductorBasic {
-    
+
 }

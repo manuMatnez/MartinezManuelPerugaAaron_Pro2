@@ -23,9 +23,9 @@ import edu.ub.prog2.utils.AplicacioException;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Video extends FitxerReproduible {
-    
+
     public Video(String cami) throws AplicacioException {
         super(cami);
     }
-    
+
 }

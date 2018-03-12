@@ -26,52 +26,54 @@ import java.util.Objects;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class FitxerMultimedia extends File {
-    
+
     private String descripcio;
-    
+
     public FitxerMultimedia(String cami) throws AplicacioException {
         super(cami);
-        
+
         if (cami.length() < 1) {
             throw new AplicacioException("Nom de fitxer invalid, ha de tenir al menys un caracter");
         }
-        
+
     }
-    
+
     /**
      * Retorna la extensión del fichero
+     *
      * @return String
      */
     private String findExtension() {
         String name = this.getName();
 
         int dotIndex = this.getName().lastIndexOf('.'),
-            sepIndex = name.lastIndexOf(File.separator);
+                sepIndex = name.lastIndexOf(File.separator);
         if (dotIndex <= sepIndex || dotIndex == 0) {
             return "";
-        }
-        else{
-            return name.substring(dotIndex+1);
+        } else {
+            return name.substring(dotIndex + 1);
         }
     }
 
     /**
      * Retorna el nombre del fichero sin extensión
+     *
      * @return String
      */
     private String findName() {
         String name = this.getName();
-        
+
         int dotIndex = this.getName().lastIndexOf('.');
         if (dotIndex < 1) {
             return name;
         } else {
-            return name.substring(0,dotIndex);
+            return name.substring(0, dotIndex);
         }
     }
-    
+
     /**
      * Retorna la ruta del fichero sin el nombre del fichero
+     *
      * @return String
      */
     private String findPath() {
@@ -81,13 +83,12 @@ public class FitxerMultimedia extends File {
             return this.getParent();
         }
     }
-    
+
     // Getters
-    
     public String getNomFitxer() {
         return findName();
     }
-    
+
     public String getExtensio() {
         return findExtension();
     }
@@ -95,27 +96,25 @@ public class FitxerMultimedia extends File {
     public String getDescripcio() {
         return descripcio;
     }
-    
+
     public String getCamiAbsolut() {
         return findPath();
     }
-    
+
     public String getCamiAbsolutComplet() {
         return this.getAbsolutePath();
     }
-    
+
     public Date getUltimaModificacio() {
         return new Date(this.lastModified());
     }
-    
+
     // Setters
-    
-    public void setDescripcio(String descripcio){
+    public void setDescripcio(String descripcio) {
         this.descripcio = descripcio;
     }
-    
-    //***************************************************************
 
+    //***************************************************************
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -157,29 +156,25 @@ public class FitxerMultimedia extends File {
         return hash;
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder fitxer = new StringBuilder();
-        
+
         fitxer.append("Descripció='").append(descripcio).append("', Data='")
                 .append(this.getUltimaModificacio())
                 .append("', Nom fitxer='").append(this.getNomFitxer())
                 .append("', Ext='");
-        
-        if(this.getExtensio().length() > 0) {
+
+        if (this.getExtensio().length() > 0) {
             fitxer.append(this.getExtensio());
         } else {
             fitxer.append("Sense extensio");
         }
 
         fitxer.append("', Cami complet='").append(getCamiAbsolutComplet())
-        .append("'");
-        
+                .append("'");
+
         return fitxer.toString();
     }
-    
-    
-    
+
 }
