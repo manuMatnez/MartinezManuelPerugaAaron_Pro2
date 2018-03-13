@@ -24,11 +24,17 @@ import java.io.File;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Audio extends FitxerReproduible {
-
+    
+    private File fitxerImatge;
+    private int kbps;
+    
     public Audio(String cami, File fitxerImatge, String nom, String codec, float durada, int kbps, Reproductor r) throws AplicacioException {
         super(cami, nom, codec, durada, r);
+        
+        this.fitxerImatge=fitxerImatge;
+        this.kbps=kbps;
     }
-
+    
     @Override
     protected void reproduir() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

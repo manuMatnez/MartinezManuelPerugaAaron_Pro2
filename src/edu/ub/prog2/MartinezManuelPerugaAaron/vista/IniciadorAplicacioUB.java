@@ -34,7 +34,7 @@ public class IniciadorAplicacioUB {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        AplicacioUB1 aplicacio = new AplicacioUB1();
+        AplicacioUB2 aplicacio = new AplicacioUB2();
         aplicacio.gestioAplicacioUB();
     }
 

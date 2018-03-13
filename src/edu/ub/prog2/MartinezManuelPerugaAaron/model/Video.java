@@ -23,9 +23,15 @@ import edu.ub.prog2.utils.AplicacioException;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Video extends FitxerReproduible {
-
+    private int alcada;
+    private int amplada;
+    private float fps;
+    
     public Video(String cami, String nom, String codec, float durada, int alcada, int amplada, float fps, Reproductor r) throws AplicacioException {
         super(cami, nom, codec, durada, r);
+        this.alcada=alcada;
+        this.amplada=amplada;
+        this.fps=fps;
     }
 
     @Override
