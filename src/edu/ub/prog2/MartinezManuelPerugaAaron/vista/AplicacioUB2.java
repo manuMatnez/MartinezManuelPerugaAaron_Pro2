@@ -16,7 +16,9 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
+import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import edu.ub.prog2.utils.Menu;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -24,100 +26,147 @@ import java.util.Scanner;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class AplicacioUB2 {
+
+    private Controlador ctrl;
+
+    public AplicacioUB2() {
+        ctrl = Controlador.getInstance();
+    }
+
+    private final static String VERSION = "v2.0";
     
+    private static final String MENU_PRINCIPAL = "Menu Principal";
+
+    // Menú Principal
     private static enum OpcionsMenuPrincipal {
-        MENU_PRINCIPAL_OPCIO1, MENU_PRINCIPAL_OPCIO2, MENU_PRINCIPAL_OPCIO3, MENU_PRINCIPAL_SORTIR
+        MP_GESTION_BIBLIOTECA, MP_GUARDAR_DADES, MP_RECUPERAR_DADES, MP_SORTIR
     };
-    
-    private static enum OpcionsSubmenu {
-        SUBMENU_OPCIO1,  SUBMENU_OPCIO2,  SUBMENU_OPCIO3,  SUBMENU_SORTIR
+
+    private static final String[] DESC_MENU_PRINCIPAL = {"Gestió Biblioteca",
+        "Guardar Dades",
+        "Recuperar Dades",
+        "Sortir"};
+
+    // SubMenu de Gestión de Biblioteca
+    private static enum OpcionsMenuGestioBiblioteca {
+        SM_GB_AFEGIR_FITXER, SM_GB_MOSTRAR_BIBLIOTECA, SM_GB_ELIMINAR_FITXER, SM_GB_TORNAR
     };
-    
+
+    private static final String[] DESC_MENU_GESTIO_BIBLIOTECA = {"Afegir fitxer multimedia a la biblioteca",
+        "Mostrar Biblioteca",
+        "Elimina fitxer multimédia",
+        "Menu Anterior"};
+
+    // SubMenu de Añadir fichero Multimedia a la biblioteca
     private static enum OpcionsMenuAfegir {
-        MENU_OPCIO1, MENU_OPCIO2,  MENU_SORTIR
+        SM_AFEGIR_VIDEO, SM_AFEGIR_AUDIO, SM_AFEGIR_TORNAR
     };
-    
 
-    private static String[] descMenuPrincipal = {"Gestió Biblioteca ",
-        " Guardar dades ",
-        " Recuperar dades ",
-        " Sortir "};
-    
-    private static String[] descSubmenu = {"Afegir fitxer Multimedia a la biblioteca ",
-        " Mostrar Biblioteca ",
-        " Elimina Fitxer Multimédia ",
-        " Menu Anterior "};
-    
-    private static String[] descMenuAfegir= {"Afegir Video",
-        " Afegir Audio ",
-        " Menu Anterior "};
-    
-    
+    private static final String[] DESC_MENU_AFEGIR = {"Afegir Video",
+        "Afegir Audio",
+        "Menu Anterior"};
+
+    private void gestioAfegir(Scanner sc) {
+        Menu<OpcionsMenuAfegir> menuAfegir = new Menu<>(DESC_MENU_GESTIO_BIBLIOTECA[0], OpcionsMenuAfegir.values());
+
+        menuAfegir.setDescripcions(DESC_MENU_AFEGIR);
+
+        OpcionsMenuAfegir opcion;
+
+        do {
+            menuAfegir.mostrarMenu();
+            opcion = menuAfegir.getOpcio(sc);
+
+            switch (opcion) {
+                case SM_AFEGIR_VIDEO:
+                    System.out.print("hola");
+                    //ctrl.afegirVideo(path, nomVideo, codec, 0, 0, 0, 0);
+                    break;
+                case SM_AFEGIR_AUDIO:
+                    //ctrl.afegirAudio(VERSION, VERSION, VERSION, VERSION, 0, 0);
+                    break;
+                case SM_AFEGIR_TORNAR:
+                    System.out.println("Volviendo a >> "+ DESC_MENU_PRINCIPAL[0]);
+                    break;
+            }
+
+        } while (opcion != OpcionsMenuAfegir.SM_AFEGIR_TORNAR);
+    }
+
+    private void gestioBiblioteca(Scanner sc) {
+        Menu<OpcionsMenuGestioBiblioteca> submenu = new Menu<>(DESC_MENU_PRINCIPAL[0], OpcionsMenuGestioBiblioteca.values());
+
+        submenu.setDescripcions(DESC_MENU_GESTIO_BIBLIOTECA);
+
+        OpcionsMenuGestioBiblioteca op;
+
+        do {
+            submenu.mostrarMenu();
+            op = submenu.getOpcio(sc);
+
+            switch (op) {
+                case SM_GB_AFEGIR_FITXER:
+                    gestioAfegir(sc);
+                    break;
+                case SM_GB_MOSTRAR_BIBLIOTECA:
+                    List<String> bibl = ctrl.mostrarBiblioteca();
+                    System.out.println("Carpeta de Fitxers:");
+                    System.out.println("====================================");
+                    
+                    if (bibl.isEmpty()) {
+                        System.out.println("No hi ha fitxers");
+                    } else {
+                        bibl.forEach((file) -> {
+                            System.out.println(file);
+                        });
+                    }
+                    break;
+                    case SM_GB_ELIMINAR_FITXER:
+                    break;
+                    case SM_GB_TORNAR:
+                    System.out.println("Volviendo a >> "+ MENU_PRINCIPAL);
+                    break;
+            }
+
+        } while (op != OpcionsMenuGestioBiblioteca.SM_GB_TORNAR);
+
+    }
+
     public void gestioAplicacioUB() {
-        
-        Scanner sc = new Scanner(System.in);
-        
-        Menu<OpcionsMenuPrincipal> menu = new Menu<>("Reproductor UB"
-                + " - Menu Principal - v1.0", OpcionsMenuPrincipal.values());
 
-        menu.setDescripcions(descMenuPrincipal);
+        System.out.println("/*************************************************\n"
+                + "* Reproductor UB - " + VERSION + " - Grupo C\n"
+                + "* Hecho por: Manuel Martinez & Aaron Peruga"
+                + "\n**************************************************/\n");
+
+        Scanner sc = new Scanner(System.in);
+
+        Menu<OpcionsMenuPrincipal> menu = new Menu<>(MENU_PRINCIPAL, OpcionsMenuPrincipal.values());
+
+        menu.setDescripcions(DESC_MENU_PRINCIPAL);
 
         OpcionsMenuPrincipal opcio;
-        
-        do{
+
+        do {
             menu.mostrarMenu();
-            
+
             opcio = menu.getOpcio(sc);
-            
-            switch(opcio){
-                
-                case MENU_PRINCIPAL_OPCIO1:
-                    
-                    Menu<OpcionsSubmenu> submenu = new Menu<>("Reproductor UB"
-                + " - Menu Gestió Biblioteca", OpcionsSubmenu.values());
-                    
-                    submenu.setDescripcions(descSubmenu);
-                    
-                    OpcionsSubmenu op;
-                    
-                    do{
-                        submenu.mostrarMenu();
-                        op = submenu.getOpcio(sc);
-                        
-                        switch(op){
-                            case SUBMENU_OPCIO1:
-                                Menu<OpcionsMenuAfegir> menuAfegir = new Menu<>("Reroductor UB"
-                                + " - Menu Afegir Fitxer Multimedia", OpcionsMenuAfegir.values());
-                                
-                                menuAfegir.setDescripcions(descMenuAfegir);
-                                
-                                OpcionsMenuAfegir opcion;
-                                
-                                do{
-                                    menuAfegir.mostrarMenu();
-                                    opcion = menuAfegir.getOpcio(sc);
-                                    
-                                    switch(opcion){
-                                        case MENU_OPCIO1:break;
-                                        case MENU_OPCIO2:break;
-                                        case MENU_SORTIR:break;
-                                    }
-                                    
-                                }while(opcion != OpcionsMenuAfegir.MENU_SORTIR);
-                                break;
-                        }
-                        
-                    }while(op != OpcionsSubmenu.SUBMENU_SORTIR);
-                    
+
+            switch (opcio) {
+
+                case MP_GESTION_BIBLIOTECA:
+                    gestioBiblioteca(sc);
                     break;
-                case MENU_PRINCIPAL_OPCIO2: break;
-                case MENU_PRINCIPAL_OPCIO3: break;
-                case MENU_PRINCIPAL_SORTIR: 
+                case MP_GUARDAR_DADES:
+                    break;
+                case MP_RECUPERAR_DADES:
+                    break;
+                case MP_SORTIR:
                     System.out.println("Adeu!!");
                     break;
-                  
-            }   
-        }while(opcio != OpcionsMenuPrincipal.MENU_PRINCIPAL_SORTIR);
+
+            }
+        } while (opcio != OpcionsMenuPrincipal.MP_SORTIR);
     }
 
 }

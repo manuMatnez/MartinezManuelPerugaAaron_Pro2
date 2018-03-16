@@ -52,7 +52,7 @@ public class AplicacioUB1 {
         }
 
         Menu<OpcionsMenuPrincipal> menu = new Menu<>("Reproductor UB"
-                + " - Menu Principal - v1.0", OpcionsMenuPrincipal.values());
+                + " - Menu Principal - v1.0ssddddddddddddddddd", OpcionsMenuPrincipal.values());
 
         menu.setDescripcions(descMenuPrincipal);
 

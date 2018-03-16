@@ -16,7 +16,9 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
 import edu.ub.prog2.utils.AplicacioException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,10 @@ import java.util.List;
  */
 public class Controlador {
 
+    private Dades dades;
+
     private Controlador() {
+        dades = new Dades();
     }
 
     private static class Loader {
@@ -38,6 +43,7 @@ public class Controlador {
         return Loader.INSTANCE;
     }
 
+    // Controlador
     public void afegirVideo(String path, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps) throws AplicacioException {
     }
@@ -45,11 +51,19 @@ public class Controlador {
     public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException {
     }
 
+    /**
+     * Retorna una Lista de los toString() de los ficheros
+     *
+     * @return List
+     */
     public List<String> mostrarBiblioteca() { // llista dels retorns de toString() dels fitxers
-        List<String> l = new ArrayList();
-        return l;
+        List<String> bibl = new ArrayList<>();
+        dades.obtenerBiblioteca().forEach((file) -> {
+            bibl.add(file.toString());
+        });
+        return bibl;
     }
-    
+
     public void esborrarFitxer(int id) throws AplicacioException { // id és la posició a llista de getBiblioteca()
     }
 

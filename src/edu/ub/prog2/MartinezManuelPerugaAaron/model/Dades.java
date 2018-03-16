@@ -16,10 +16,28 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Dades {
+
+    private BibliotecaFitxersMultimedia biblioteca;
+
+    public Dades() {
+        biblioteca = new BibliotecaFitxersMultimedia();
+    }
+
+    /**
+     * Retorna la lista de ficheros multimedia
+     *
+     * @return ArrayList
+     */
+    public ArrayList<File> obtenerBiblioteca() {
+        return biblioteca.getCarpeta();
+    }
 
 }

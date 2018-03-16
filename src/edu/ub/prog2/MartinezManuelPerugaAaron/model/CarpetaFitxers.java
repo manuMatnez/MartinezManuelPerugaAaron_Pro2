@@ -108,17 +108,26 @@ public class CarpetaFitxers {
     /**
      * Comprueba el espacio libre
      *
-     * @return int
+     * @return String
      */
-    public int freeSpace() {
-        return capacity - carpeta.size();
+    public String freeSpace() {
+        return "Free Space (" + String.valueOf(capacity - carpeta.size()) + ")";
+    }
+
+    /**
+     * Obtiene la carpeta de ficheros
+     *
+     * @return ArrayList
+     */
+    public ArrayList<File> getCarpeta() {
+        return carpeta;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Carpeta de Fitxers: Free Space (").append(freeSpace())
-                .append(")\n====================================\n");
+        sb.append("Carpeta de Fitxers: ").append(freeSpace())
+                .append("\n====================================\n");
 
         if (carpeta.size() > 0) {
             int id = 1;

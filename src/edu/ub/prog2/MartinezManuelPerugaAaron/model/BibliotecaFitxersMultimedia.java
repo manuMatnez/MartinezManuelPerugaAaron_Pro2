@@ -16,10 +16,38 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
+import edu.ub.prog2.utils.AplicacioException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
  */
 public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
+
+    public BibliotecaFitxersMultimedia() {
+    }
+    
+    @Override
+    public boolean isFull() {
+        return false;
+    }
+
+    @Override
+    public String freeSpace() {
+        return "Sin limite";
+    }
+
+    @Override
+    public String toString() {
+        return "BibliotecaFitxersMultimedia{" + '}';
+    }
+    
+    
+    
+    
+    
+    
 
 }
