@@ -18,8 +18,6 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
 import edu.ub.prog2.utils.AplicacioException;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,6 +42,15 @@ public class Controlador {
     }
 
     // Controlador
+    /**
+     * Retorna si la carpeta está vacía atraves de Dades
+     *
+     * @return boolean
+     */
+    public boolean estaVacia() {
+        return dades.vacia();
+    }
+
     public void afegirVideo(String path, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps) throws AplicacioException {
     }
@@ -52,36 +59,22 @@ public class Controlador {
     }
 
     /**
-     * Retorna una Lista de los toString() de los ficheros
+     * Retorna una Lista de los toString() de los ficheros atraves de Dades
      *
      * @return List
      */
     public List<String> mostrarBiblioteca() { // llista dels retorns de toString() dels fitxers
-        List<String> bibl = new ArrayList<>();
-        int id = 1;
-        for (File file : dades.getBiblioteca()) {
-            bibl.add("[" + id + "] " + file.toString());
-            id++;
-        }
-        return bibl;
+        return dades.getBiblioteca();
     }
 
     /**
-     * Gestiona la eliminación de un fichero
+     * Gestiona la eliminación de un fichero atraves de Dades
      *
      * @param id
      * @throws AplicacioException
      */
     public void esborrarFitxer(int id) throws AplicacioException {
-        id--;
-        List<File> listaFicheros = dades.getBiblioteca();
-        if (id < 0) {
-            throw new AplicacioException("La posició começa amb 1");
-        } else if (id > listaFicheros.size()) {
-            throw new AplicacioException("La posició no pot ser mes gran que: " + listaFicheros.size());
-        } else {
-            dades.deleteFitxer(id);
-        }
+        dades.deleteFitxer(id);
     }
 
     public void guardarDadesDisc(String camiDesti) throws AplicacioException {

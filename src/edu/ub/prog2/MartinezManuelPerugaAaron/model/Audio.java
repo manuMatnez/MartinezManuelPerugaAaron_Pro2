@@ -24,20 +24,51 @@ import java.io.File;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Audio extends FitxerReproduible {
-    
+
     private File fitxerImatge;
     private int kbps;
-    
+
     public Audio(String cami, File fitxerImatge, String nom, String codec, float durada, int kbps, Reproductor r) throws AplicacioException {
         super(cami, nom, codec, durada, r);
-        
-        this.fitxerImatge=fitxerImatge;
-        this.kbps=kbps;
+
+        this.fitxerImatge = fitxerImatge;
+        this.kbps = kbps;
     }
-    
+
+    public File getFitxerImatge() {
+        return fitxerImatge;
+    }
+
+    public int getKbps() {
+        return kbps;
+    }
+
+    public void setFitxerImatge(File fitxerImatge) {
+        this.fitxerImatge = fitxerImatge;
+    }
+
+    public void setKbps(int kbps) {
+        this.kbps = kbps;
+    }
+
     @Override
     protected void reproduir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public String toString() {
+        StringBuilder fitxer = new StringBuilder();
+        fitxer.append(super.toString());
+        fitxer.append(", Imatge de Fitxer='").append(getFitxerImatge().getAbsolutePath())
+                .append("'");
+        fitxer.append(", Kbps='").append(getKbps())
+                .append("'");
+        return fitxer.toString();
+    }
+
+
+    
+    
 
 }

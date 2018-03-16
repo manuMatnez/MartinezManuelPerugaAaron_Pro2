@@ -168,7 +168,7 @@ public class FitxerMultimedia extends File {
         if (this.getExtensio().length() > 0) {
             fitxer.append(this.getExtensio());
         } else {
-            fitxer.append("Sense extensio");
+            fitxer.append("null");
         }
 
         fitxer.append("', Cami complet='").append(getCamiAbsolutComplet())

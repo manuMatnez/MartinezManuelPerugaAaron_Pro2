@@ -16,10 +16,6 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
-import edu.ub.prog2.utils.AplicacioException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
@@ -27,16 +23,6 @@ import java.util.logging.Logger;
 public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
 
     public BibliotecaFitxersMultimedia() {
-        try {
-            FitxerMultimedia fitxer = new FitxerMultimedia("hola.txt");
-            this.addFitxer(fitxer);
-            FitxerMultimedia fitxer1 = new FitxerMultimedia("holass.txt");
-            this.addFitxer(fitxer1);
-            FitxerMultimedia fitxer2 = new FitxerMultimedia("holad.txte");
-            this.addFitxer(fitxer2);
-        } catch (AplicacioException ex) {
-            Logger.getLogger(BibliotecaFitxersMultimedia.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @Override

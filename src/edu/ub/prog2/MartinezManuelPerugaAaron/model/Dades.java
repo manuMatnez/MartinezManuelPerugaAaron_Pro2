@@ -19,6 +19,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,23 +34,48 @@ public class Dades {
     }
 
     /**
-     * Retorna la lista de ficheros multimedia
+     * Retorna la lista de ficheros multimedia en lista de Strings
      *
-     * @return ArrayList
+     * @return List
      */
-    public ArrayList<File> getBiblioteca() {
-        return biblioteca.getCarpeta();
+    public List<String> getBiblioteca() {
+        List<String> biblio = new ArrayList<>();
+        int id = 1;
+        for (File file : this.biblioteca.getCarpeta()) {
+            biblio.add("[" + id + "] " + file.toString());
+            id++;
+        }
+        return biblio;
     }
 
     /**
      * Borra un fichero de la biblioteca de ficheros
      *
      * @param id
+     * @throws AplicacioException
      */
-    public void deleteFitxer(int id) {
-        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
-        biblioteca.removeFitxer(file);
-
+    public void deleteFitxer(int id) throws AplicacioException {
+        id--;
+        List<File> listaFicheros = this.biblioteca.getCarpeta();
+        if (id < 0) {
+            throw new AplicacioException("La posició começa amb 1");
+        } else if (id > listaFicheros.size()) {
+            throw new AplicacioException("La posició no pot ser mes gran que: " + listaFicheros.size());
+        } else {
+            FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
+            biblioteca.removeFitxer(file);
+        }
     }
+
+    /**
+     * Retorna si la carpeta está vacía
+     *
+     * @return boolean
+     */
+    public boolean vacia() {
+        return this.biblioteca.getCarpeta().isEmpty();
+    }
+    
+    //TODO toString()
 
 }

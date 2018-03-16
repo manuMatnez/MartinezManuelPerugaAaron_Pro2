@@ -23,20 +23,58 @@ import edu.ub.prog2.utils.AplicacioException;
  * @author Manuel Martinez, Aaron Peruga
  */
 public class Video extends FitxerReproduible {
+
     private int alcada;
     private int amplada;
     private float fps;
-    
+
     public Video(String cami, String nom, String codec, float durada, int alcada, int amplada, float fps, Reproductor r) throws AplicacioException {
         super(cami, nom, codec, durada, r);
-        this.alcada=alcada;
-        this.amplada=amplada;
-        this.fps=fps;
+        this.alcada = alcada;
+        this.amplada = amplada;
+        this.fps = fps;
+    }
+
+    public int getAlcada() {
+        return alcada;
+    }
+
+    public void setAlcada(int alcada) {
+        this.alcada = alcada;
+    }
+
+    public int getAmplada() {
+        return amplada;
+    }
+
+    public void setAmplada(int amplada) {
+        this.amplada = amplada;
+    }
+
+    public float getFps() {
+        return fps;
+    }
+
+    public void setFps(float fps) {
+        this.fps = fps;
     }
 
     @Override
     protected void reproduir() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder fitxer = new StringBuilder();
+        fitxer.append(super.toString());
+        fitxer.append(", Alcada='").append(getAlcada())
+                .append("'");
+        fitxer.append(", Amplada='").append(getAmplada())
+                .append("'");
+        fitxer.append(", Fps='").append(getFps())
+                .append("'");
+        return fitxer.toString();
     }
 
 }

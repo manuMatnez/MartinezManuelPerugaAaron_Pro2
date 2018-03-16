@@ -21,8 +21,6 @@ import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -125,18 +123,17 @@ public class AplicacioUB2 {
                     }
                     break;
                 case SM_GB_ELIMINAR_FITXER:
-                    if (ctrl.mostrarBiblioteca().isEmpty()) {
+                    if (ctrl.estaVacia()) {
                         System.out.println("No hi ha fitxers per esborrar");
                     } else {
                         System.out.println("Num del Fitxer:");
                         int id = sc.nextInt();
                         try {
                             ctrl.esborrarFitxer(id);
-                            System.out.println("Fitxer esborrat");
+                            System.out.println("Fitxer amd id "+ id +" esborrat");
                         } catch (AplicacioException ex) {
                             System.out.println(ex.getMessage());
                         }
-
                     }
                     break;
                 case SM_GB_TORNAR:
@@ -174,8 +171,10 @@ public class AplicacioUB2 {
                     gestioBiblioteca(sc);
                     break;
                 case MP_GUARDAR_DADES:
+                    //TODO
                     break;
                 case MP_RECUPERAR_DADES:
+                    //TODO
                     break;
                 case MP_SORTIR:
                     System.out.println("Adeu!!");
