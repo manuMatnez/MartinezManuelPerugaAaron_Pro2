@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class Controlador {
 
-    private Dades dades;
+    private final Dades dades;
 
     private Controlador() {
         dades = new Dades();
@@ -58,13 +58,30 @@ public class Controlador {
      */
     public List<String> mostrarBiblioteca() { // llista dels retorns de toString() dels fitxers
         List<String> bibl = new ArrayList<>();
-        dades.obtenerBiblioteca().forEach((file) -> {
-            bibl.add(file.toString());
-        });
+        int id = 1;
+        for (File file : dades.getBiblioteca()) {
+            bibl.add("[" + id + "] " + file.toString());
+            id++;
+        }
         return bibl;
     }
 
-    public void esborrarFitxer(int id) throws AplicacioException { // id és la posició a llista de getBiblioteca()
+    /**
+     * Gestiona la eliminación de un fichero
+     *
+     * @param id
+     * @throws AplicacioException
+     */
+    public void esborrarFitxer(int id) throws AplicacioException {
+        id--;
+        List<File> listaFicheros = dades.getBiblioteca();
+        if (id < 0) {
+            throw new AplicacioException("La posició começa amb 1");
+        } else if (id > listaFicheros.size()) {
+            throw new AplicacioException("La posició no pot ser mes gran que: " + listaFicheros.size());
+        } else {
+            dades.deleteFitxer(id);
+        }
     }
 
     public void guardarDadesDisc(String camiDesti) throws AplicacioException {

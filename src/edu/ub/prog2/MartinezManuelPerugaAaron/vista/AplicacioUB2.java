@@ -17,9 +17,12 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
+import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,14 +30,14 @@ import java.util.Scanner;
  */
 public class AplicacioUB2 {
 
-    private Controlador ctrl;
+    private final Controlador ctrl;
 
     public AplicacioUB2() {
         ctrl = Controlador.getInstance();
     }
 
     private final static String VERSION = "v2.0";
-    
+
     private static final String MENU_PRINCIPAL = "Menu Principal";
 
     // Menú Principal
@@ -86,7 +89,7 @@ public class AplicacioUB2 {
                     //ctrl.afegirAudio(VERSION, VERSION, VERSION, VERSION, 0, 0);
                     break;
                 case SM_AFEGIR_TORNAR:
-                    System.out.println("Volviendo a >> "+ DESC_MENU_PRINCIPAL[0]);
+                    System.out.println("Volviendo a >> " + DESC_MENU_PRINCIPAL[0]);
                     break;
             }
 
@@ -112,7 +115,7 @@ public class AplicacioUB2 {
                     List<String> bibl = ctrl.mostrarBiblioteca();
                     System.out.println("Carpeta de Fitxers:");
                     System.out.println("====================================");
-                    
+
                     if (bibl.isEmpty()) {
                         System.out.println("No hi ha fitxers");
                     } else {
@@ -121,10 +124,23 @@ public class AplicacioUB2 {
                         });
                     }
                     break;
-                    case SM_GB_ELIMINAR_FITXER:
+                case SM_GB_ELIMINAR_FITXER:
+                    if (ctrl.mostrarBiblioteca().isEmpty()) {
+                        System.out.println("No hi ha fitxers per esborrar");
+                    } else {
+                        System.out.println("Num del Fitxer:");
+                        int id = sc.nextInt();
+                        try {
+                            ctrl.esborrarFitxer(id);
+                            System.out.println("Fitxer esborrat");
+                        } catch (AplicacioException ex) {
+                            System.out.println(ex.getMessage());
+                        }
+
+                    }
                     break;
-                    case SM_GB_TORNAR:
-                    System.out.println("Volviendo a >> "+ MENU_PRINCIPAL);
+                case SM_GB_TORNAR:
+                    System.out.println("Volviendo a >> " + MENU_PRINCIPAL);
                     break;
             }
 

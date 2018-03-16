@@ -16,6 +16,7 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
+import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
  */
 public class Dades {
 
-    private BibliotecaFitxersMultimedia biblioteca;
+    private final BibliotecaFitxersMultimedia biblioteca;
 
     public Dades() {
         biblioteca = new BibliotecaFitxersMultimedia();
@@ -36,8 +37,19 @@ public class Dades {
      *
      * @return ArrayList
      */
-    public ArrayList<File> obtenerBiblioteca() {
+    public ArrayList<File> getBiblioteca() {
         return biblioteca.getCarpeta();
+    }
+
+    /**
+     * Borra un fichero de la biblioteca de ficheros
+     *
+     * @param id
+     */
+    public void deleteFitxer(int id) {
+        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
+        biblioteca.removeFitxer(file);
+
     }
 
 }

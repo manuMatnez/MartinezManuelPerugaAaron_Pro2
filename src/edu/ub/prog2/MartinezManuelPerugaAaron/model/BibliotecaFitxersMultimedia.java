@@ -27,8 +27,18 @@ import java.util.logging.Logger;
 public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
 
     public BibliotecaFitxersMultimedia() {
+        try {
+            FitxerMultimedia fitxer = new FitxerMultimedia("hola.txt");
+            this.addFitxer(fitxer);
+            FitxerMultimedia fitxer1 = new FitxerMultimedia("holass.txt");
+            this.addFitxer(fitxer1);
+            FitxerMultimedia fitxer2 = new FitxerMultimedia("holad.txte");
+            this.addFitxer(fitxer2);
+        } catch (AplicacioException ex) {
+            Logger.getLogger(BibliotecaFitxersMultimedia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     @Override
     public boolean isFull() {
         return false;
@@ -43,11 +53,5 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
     public String toString() {
         return "BibliotecaFitxersMultimedia{" + '}';
     }
-    
-    
-    
-    
-    
-    
 
 }

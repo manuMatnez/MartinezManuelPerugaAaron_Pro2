@@ -77,16 +77,13 @@ public class CarpetaFitxers {
     }
 
     /**
-     * Obtiene un fichero atraves de su indice empezando desde 1 el primero
+     * Obtiene un fichero atraves de su indice
      *
      * @param position
      * @return File
      */
     public File getAt(int position) {
-        int fakePos = position - 1;
-        File file = carpeta.get(fakePos);
-
-        return file;
+        return carpeta.get(position);
     }
 
     /**
