@@ -16,6 +16,11 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+
 /**
  *
  * @author Manuel Martinez, Aaron Peruga
@@ -32,12 +37,27 @@ public class IniciadorAplicacioUB {
             + "* Versio: " + VERSION + "\n"
             + ASTERISKS + "/\n";
 
+    private final static String OS = System.getProperty("os.name").toLowerCase();
+
+    public static boolean isMac() {
+        return (OS.contains("mac"));
+    }
+
     /**
      * Main
      *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        // VLC 2.2 para Mac y Windows 
+        if (isMac()) {
+            uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH", "/Applications/VLC.app/Contents/MacOS/plugins", 1);
+            NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib");
+            Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+            Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+        }
+
         System.out.println(HEADER);
 
         AplicacioUB2 aplicacio = new AplicacioUB2();

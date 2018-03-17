@@ -16,6 +16,7 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
+import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.IniciadorAplicacioUB.isMac;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.util.ArrayList;
@@ -28,9 +29,15 @@ import java.util.List;
 public class Dades {
 
     private final BibliotecaFitxersMultimedia biblioteca;
+    private final Reproductor reproductor;
 
     public Dades() {
         biblioteca = new BibliotecaFitxersMultimedia();
+        if (isMac()) {
+            reproductor = new Reproductor("/Application/VLC.app");
+        } else {
+            reproductor = new Reproductor();
+        }
     }
 
     /**
@@ -105,7 +112,7 @@ public class Dades {
     public void afegirNouVideo(String cami, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps) throws AplicacioException {
         //TODO consultar
-        Video video = new Video(cami, nomVideo, codec, durada, alcada, amplada, fps, null);
+        Video video = new Video(cami, nomVideo, codec, durada, alcada, amplada, fps, reproductor);
         biblioteca.addFitxer(video);
     }
 
@@ -123,7 +130,7 @@ public class Dades {
     public void afegirNouAudio(String cami, String camiImatge, String nomAudio,
             String codec, float durada, int kbps) throws AplicacioException {
         //TODO consultar
-        Audio audio = new Audio(cami, new File(camiImatge), nomAudio, codec, durada, kbps, null);
+        Audio audio = new Audio(cami, new File(camiImatge), nomAudio, codec, durada, kbps, reproductor);
     }
 
 }
