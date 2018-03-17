@@ -38,7 +38,7 @@ public class Dades {
      *
      * @return List
      */
-    public List<String> getBiblioteca() {
+    public List<String> getBibliotecaList() {
         List<String> biblio = new ArrayList<>();
         int id = 1;
         for (File file : this.biblioteca.getCarpeta()) {
@@ -60,7 +60,7 @@ public class Dades {
         if (id < 0) {
             throw new AplicacioException("La posició começa amb 1");
         } else if (id > listaFicheros.size()) {
-            throw new AplicacioException("La posició no pot ser mes gran que: " + listaFicheros.size());
+            throw new AplicacioException("La posició no pot ser mès gran que: " + listaFicheros.size());
         } else {
             FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
             biblioteca.removeFitxer(file);

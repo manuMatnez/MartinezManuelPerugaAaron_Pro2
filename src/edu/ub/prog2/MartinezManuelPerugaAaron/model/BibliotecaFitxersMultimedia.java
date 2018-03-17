@@ -32,12 +32,7 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
 
     @Override
     public String freeSpace() {
-        return "Sin limite";
-    }
-
-    @Override
-    public String toString() {
-        return "BibliotecaFitxersMultimedia{" + '}';
+        return "Sense limit";
     }
 
 }

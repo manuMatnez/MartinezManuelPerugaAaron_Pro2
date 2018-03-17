@@ -5,12 +5,16 @@
         <group>
             <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/model/BibliotecaFitxersMultimedia.java</file>
             <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/vista/AplicacioUB1.java</file>
+            <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/model/Reproductor.java</file>
             <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/controlador/Controlador.java</file>
             <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/model/FitxerReproduible.java</file>
+            <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/model/Audio.java</file>
             <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/model/CarpetaFitxers.java</file>
+            <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/model/FitxerMultimedia.java</file>
             <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/vista/IniciadorAplicacioUB.java</file>
             <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/model/Dades.java</file>
             <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/vista/AplicacioUB2.java</file>
+            <file>file:/Users/manumtz/NetBeansProjects/MartinezManuelPerugaAaron/src/edu/ub/prog2/MartinezManuelPerugaAaron/model/Video.java</file>
         </group>
     </open-files>
 </project-private>

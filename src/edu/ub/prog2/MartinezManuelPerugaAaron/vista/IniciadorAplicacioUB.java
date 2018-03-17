@@ -23,13 +23,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 public class IniciadorAplicacioUB {
 
     /**
-     * VLC 2.2 para Mac: public static void main(String[] args) {
-     * uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH",
-     * "/Applications/VLC.app/Contents/MacOS/plugins", 1);
-     * NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),
-     * "/Applications/VLC.app/Contents/MacOS/lib");
-     * Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-     * Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+     * Main
      *
      * @param args the command line arguments
      */

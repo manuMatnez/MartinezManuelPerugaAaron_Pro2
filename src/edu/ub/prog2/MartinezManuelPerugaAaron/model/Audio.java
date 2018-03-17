@@ -25,50 +25,41 @@ import java.io.File;
  */
 public class Audio extends FitxerReproduible {
 
-    private File fitxerImatge;
-    private int kbps;
+    private final File fitxerImatge;
+    private final int kbps;
 
-    public Audio(String cami, File fitxerImatge, String nom, String codec, float durada, int kbps, Reproductor r) throws AplicacioException {
+    public Audio(String cami, File fitxerImatge, String nom, String codec,
+            float durada, int kbps, Reproductor r) throws AplicacioException {
         super(cami, nom, codec, durada, r);
 
         this.fitxerImatge = fitxerImatge;
         this.kbps = kbps;
     }
 
-    public File getFitxerImatge() {
-        return fitxerImatge;
-    }
-
+    // Getters START
     public int getKbps() {
         return kbps;
     }
-
-    public void setFitxerImatge(File fitxerImatge) {
-        this.fitxerImatge = fitxerImatge;
-    }
-
-    public void setKbps(int kbps) {
-        this.kbps = kbps;
-    }
-
+    // Getters END
+    
     @Override
     protected void reproduir() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("No soportat, es a la practica 3");
     }
 
     @Override
     public String toString() {
         StringBuilder fitxer = new StringBuilder();
+
+        fitxer.append("Tipus='").append(this.getClass().getSimpleName()).append("', ");
+
         fitxer.append(super.toString());
-        fitxer.append(", Imatge de Fitxer='").append(getFitxerImatge().getAbsolutePath())
-                .append("'");
-        fitxer.append(", Kbps='").append(getKbps())
-                .append("'");
+
+        fitxer.append(", Codec='").append(getCodec()).append("'");
+        fitxer.append(", Durada='").append(getDurada()).append("'");
+        fitxer.append(", Kbps='").append(kbps).append("'");
+
         return fitxer.toString();
     }
-
-
-    
-    
 
 }

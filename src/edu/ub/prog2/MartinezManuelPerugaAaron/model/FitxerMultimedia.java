@@ -84,7 +84,7 @@ public class FitxerMultimedia extends File {
         }
     }
 
-    // Getters
+    // Getters START
     public String getNomFitxer() {
         return findName();
     }
@@ -108,11 +108,13 @@ public class FitxerMultimedia extends File {
     public Date getUltimaModificacio() {
         return new Date(this.lastModified());
     }
+    // Getters END
 
-    // Setters
+    // Setters START
     public void setDescripcio(String descripcio) {
         this.descripcio = descripcio;
     }
+    // Setters END
 
     //***************************************************************
     @Override
@@ -163,7 +165,7 @@ public class FitxerMultimedia extends File {
         fitxer.append("Descripció='").append(descripcio).append("', Data='")
                 .append(this.getUltimaModificacio())
                 .append("', Nom fitxer='").append(this.getNomFitxer())
-                .append("', Ext='");
+                .append("', Extensio='");
 
         if (this.getExtensio().length() > 0) {
             fitxer.append(this.getExtensio());
@@ -171,8 +173,7 @@ public class FitxerMultimedia extends File {
             fitxer.append("null");
         }
 
-        fitxer.append("', Cami complet='").append(getCamiAbsolutComplet())
-                .append("'");
+        fitxer.append("', Cami complet='").append(getCamiAbsolutComplet()).append("'");
 
         return fitxer.toString();
     }

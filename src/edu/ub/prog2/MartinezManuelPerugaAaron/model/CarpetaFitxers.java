@@ -108,17 +108,14 @@ public class CarpetaFitxers {
      * @return String
      */
     public String freeSpace() {
-        return "Free Space (" + String.valueOf(capacity - carpeta.size()) + ")";
+        return "Espai lliure (" + String.valueOf(capacity - carpeta.size()) + ")";
     }
 
-    /**
-     * Obtiene la carpeta de ficheros
-     *
-     * @return ArrayList
-     */
+    // Getters START
     public ArrayList<File> getCarpeta() {
         return carpeta;
     }
+    // Getters END
 
     @Override
     public String toString() {

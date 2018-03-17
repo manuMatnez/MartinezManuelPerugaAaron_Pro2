@@ -80,14 +80,15 @@ public class AplicacioUB2 {
 
             switch (opcion) {
                 case SM_AFEGIR_VIDEO:
-                    System.out.print("hola");
+                    //TODO
                     //ctrl.afegirVideo(path, nomVideo, codec, 0, 0, 0, 0);
                     break;
                 case SM_AFEGIR_AUDIO:
+                    //TODO
                     //ctrl.afegirAudio(VERSION, VERSION, VERSION, VERSION, 0, 0);
                     break;
                 case SM_AFEGIR_TORNAR:
-                    System.out.println("Volviendo a >> " + DESC_MENU_PRINCIPAL[0]);
+                    System.out.println("Tornant a >> " + DESC_MENU_PRINCIPAL[0]);
                     break;
             }
 
@@ -126,7 +127,7 @@ public class AplicacioUB2 {
                     if (ctrl.estaVacia()) {
                         System.out.println("No hi ha fitxers per esborrar");
                     } else {
-                        System.out.println("Num del Fitxer:");
+                        System.out.println("ID del Fitxer:");
                         int id = sc.nextInt();
                         try {
                             ctrl.esborrarFitxer(id);
@@ -137,7 +138,7 @@ public class AplicacioUB2 {
                     }
                     break;
                 case SM_GB_TORNAR:
-                    System.out.println("Volviendo a >> " + MENU_PRINCIPAL);
+                    System.out.println("Tornant a >> " + MENU_PRINCIPAL);
                     break;
             }
 

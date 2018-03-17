@@ -24,68 +24,29 @@ import edu.ub.prog2.utils.AplicacioException;
  */
 public abstract class FitxerReproduible extends FitxerMultimedia {
 
-    private String nom;
-    private String codec;
-    private float durada;
-    private Reproductor reproductor;
+    private final String codec;
+    private final float durada;
+    private final Reproductor reproductor;
 
+    // nom no puede ser porque lo sacamos de cami
     protected FitxerReproduible(String cami, String nom, String codec, float durada, Reproductor r) throws AplicacioException {
         super(cami);
-        this.nom = nom;
+        setDescripcio(nom);
         this.codec = codec;
         this.durada = durada;
         this.reproductor = r;
     }
 
-    protected String getNom() {
-        return nom;
-    }
-
-    protected void setNom(String nom) {
-        this.nom = nom;
-    }
-
+    // Getters START
     protected String getCodec() {
         return codec;
-    }
-
-    protected void setCodec(String codec) {
-        this.codec = codec;
     }
 
     protected float getDurada() {
         return durada;
     }
-
-    protected void setDurada(float durada) {
-        this.durada = durada;
-    }
-
-    protected Reproductor getReproductor() {
-        return reproductor;
-    }
-
-    protected void setReproductor(Reproductor reproductor) {
-        this.reproductor = reproductor;
-    }
+    // Getters END
 
     protected abstract void reproduir();
-
-    @Override
-    public String toString() {
-        StringBuilder fitxer = new StringBuilder();
-        fitxer.append("Tipus='").append(this.getClass().getSimpleName())
-                .append("', ");
-        fitxer.append(super.toString());
-        fitxer.append(", Nom='").append(getNom())
-                .append("'");
-        fitxer.append(", Codec='").append(getCodec())
-                .append("'");
-        fitxer.append(", Durada='").append(getDurada())
-                .append("'");
-        fitxer.append(", Reproductor='").append(getReproductor())
-                .append("'");
-        return fitxer.toString();
-    }
 
 }

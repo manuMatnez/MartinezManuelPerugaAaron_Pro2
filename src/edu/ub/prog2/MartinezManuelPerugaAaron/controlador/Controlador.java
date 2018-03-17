@@ -33,7 +33,6 @@ public class Controlador {
     }
 
     private static class Loader {
-
         private static final Controlador INSTANCE = new Controlador();
     }
 
@@ -53,9 +52,12 @@ public class Controlador {
 
     public void afegirVideo(String path, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps) throws AplicacioException {
+        //TODO
     }
 
-    public void afegirAudio(String cami, String camiImatge, String nomAudio, String codec, float durada, int kbps) throws AplicacioException {
+    public void afegirAudio(String cami, String camiImatge, String nomAudio,
+            String codec, float durada, int kbps) throws AplicacioException {
+        //TODO
     }
 
     /**
@@ -64,7 +66,7 @@ public class Controlador {
      * @return List
      */
     public List<String> mostrarBiblioteca() { // llista dels retorns de toString() dels fitxers
-        return dades.getBiblioteca();
+        return dades.getBibliotecaList();
     }
 
     /**
@@ -78,9 +80,11 @@ public class Controlador {
     }
 
     public void guardarDadesDisc(String camiDesti) throws AplicacioException {
+        //TODO
     }
 
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
+        //TODO
     }
 
 }

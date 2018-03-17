@@ -24,56 +24,51 @@ import edu.ub.prog2.utils.AplicacioException;
  */
 public class Video extends FitxerReproduible {
 
-    private int alcada;
-    private int amplada;
-    private float fps;
+    private final int alcada;
+    private final int amplada;
+    private final float fps;
 
-    public Video(String cami, String nom, String codec, float durada, int alcada, int amplada, float fps, Reproductor r) throws AplicacioException {
+    public Video(String cami, String nom, String codec, float durada, int alcada,
+            int amplada, float fps, Reproductor r) throws AplicacioException {
         super(cami, nom, codec, durada, r);
         this.alcada = alcada;
         this.amplada = amplada;
         this.fps = fps;
     }
 
+    // Getters START
     public int getAlcada() {
         return alcada;
-    }
-
-    public void setAlcada(int alcada) {
-        this.alcada = alcada;
     }
 
     public int getAmplada() {
         return amplada;
     }
 
-    public void setAmplada(int amplada) {
-        this.amplada = amplada;
-    }
-
     public float getFps() {
         return fps;
     }
-
-    public void setFps(float fps) {
-        this.fps = fps;
-    }
+    // Getters END
 
     @Override
     protected void reproduir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("No soportat, es a la practica 3");
     }
 
     @Override
     public String toString() {
         StringBuilder fitxer = new StringBuilder();
+
+        fitxer.append("Tipus='").append(this.getClass().getSimpleName()).append("', ");
+        
         fitxer.append(super.toString());
-        fitxer.append(", Alcada='").append(getAlcada())
-                .append("'");
-        fitxer.append(", Amplada='").append(getAmplada())
-                .append("'");
-        fitxer.append(", Fps='").append(getFps())
-                .append("'");
+        
+        fitxer.append(", Codec='").append(getCodec()).append("'");
+        fitxer.append(", Durada='").append(getDurada()).append("'");
+        fitxer.append(", Alcada='").append(alcada).append("'");
+        fitxer.append(", Amplada='").append(amplada).append("'");
+        fitxer.append(", Fps='").append(fps).append("'");
+        
         return fitxer.toString();
     }
 
