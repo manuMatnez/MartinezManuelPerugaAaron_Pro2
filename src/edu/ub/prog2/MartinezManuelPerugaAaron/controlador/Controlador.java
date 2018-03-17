@@ -33,6 +33,7 @@ public class Controlador {
     }
 
     private static class Loader {
+
         private static final Controlador INSTANCE = new Controlador();
     }
 
@@ -42,7 +43,7 @@ public class Controlador {
 
     // Controlador
     /**
-     * Retorna si la carpeta está vacía atraves de Dades
+     * Retorna si la carpeta está vacía a traves de Dades
      *
      * @return boolean
      */
@@ -50,18 +51,41 @@ public class Controlador {
         return dades.vacia();
     }
 
-    public void afegirVideo(String path, String nomVideo, String codec,
+    /**
+     * Añade a la Biblioteca Multimedia un video a traves de Dades
+     *
+     * @param cami
+     * @param nomVideo
+     * @param codec
+     * @param durada
+     * @param alcada
+     * @param amplada
+     * @param fps
+     * @throws AplicacioException
+     */
+    public void afegirVideo(String cami, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps) throws AplicacioException {
-        //TODO
-    }
-
-    public void afegirAudio(String cami, String camiImatge, String nomAudio,
-            String codec, float durada, int kbps) throws AplicacioException {
-        //TODO
+        dades.afegirNouVideo(cami, nomVideo, codec, durada, alcada, amplada, fps);
     }
 
     /**
-     * Retorna una Lista de los toString() de los ficheros atraves de Dades
+     * Añade a la Biblioteca Multimedia un audio a traves de Dades
+     *
+     * @param cami
+     * @param camiImatge
+     * @param nomAudio
+     * @param codec
+     * @param durada
+     * @param kbps
+     * @throws AplicacioException
+     */
+    public void afegirAudio(String cami, String camiImatge, String nomAudio,
+            String codec, float durada, int kbps) throws AplicacioException {
+        dades.afegirNouAudio(cami, camiImatge, nomAudio, codec, durada, kbps);
+    }
+
+    /**
+     * Retorna una Lista de los toString() de los ficheros a traves de Dades
      *
      * @return List
      */
@@ -70,7 +94,7 @@ public class Controlador {
     }
 
     /**
-     * Gestiona la eliminación de un fichero atraves de Dades
+     * Gestiona la eliminación de un fichero a traves de Dades
      *
      * @param id
      * @throws AplicacioException
@@ -85,6 +109,16 @@ public class Controlador {
 
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
         //TODO
+    }
+
+    /**
+     * Comprueba si el fixhero existe a traves de Dades
+     *
+     * @param cami
+     * @throws AplicacioException
+     */
+    public void checkExist(String cami) throws AplicacioException {
+        dades.verify(cami);
     }
 
 }

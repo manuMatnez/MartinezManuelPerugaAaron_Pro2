@@ -34,8 +34,6 @@ public class AplicacioUB2 {
         ctrl = Controlador.getInstance();
     }
 
-    private final static String VERSION = "v2.0";
-
     private static final String MENU_PRINCIPAL = "Menu Principal";
 
     // Menú Principal
@@ -67,6 +65,81 @@ public class AplicacioUB2 {
         "Afegir Audio",
         "Menu Anterior"};
 
+    /**
+     * Pide los datos para poder crear un fichero de video
+     *
+     * @param sc
+     */
+    private void writeVideo(Scanner sc) {
+        System.out.println("Ruta del Fitxer:");
+        String cami = sc.nextLine();
+        try {
+            ctrl.checkExist(cami);
+
+            System.out.println("Descripcio del Fitxer:");
+            String desc = sc.nextLine();
+
+            System.out.println("Codec:");
+            String codec = sc.nextLine();
+
+            System.out.println("Durada:");
+            float durada = sc.nextFloat();
+
+            System.out.println("Alcada:");
+            int alcada = sc.nextInt();
+
+            System.out.println("Amplada:");
+            int amplada = sc.nextInt();
+
+            System.out.println("Frames per Second:");
+            float fps = sc.nextFloat();
+
+            ctrl.afegirVideo(cami, codec, codec, durada, alcada, amplada, fps);
+
+            System.out.println("Fitxer afegit");
+
+        } catch (AplicacioException ae) {
+            System.err.println(ae.getMessage());
+        }
+    }
+
+    /**
+     * Pide los datos para poder crear un fichero de audio
+     *
+     * @param sc
+     */
+    private void writeAudio(Scanner sc) {
+        System.out.println("Ruta del Fitxer:");
+        String cami = sc.nextLine();
+        try {
+            ctrl.checkExist(cami);
+
+            System.out.println("Ruta de la imatge del Fitxer:");
+            String imatgeFitxer = sc.nextLine();
+
+            ctrl.checkExist(imatgeFitxer);
+
+            System.out.println("Descripcio del Fitxer:");
+            String desc = sc.nextLine();
+
+            System.out.println("Codec:");
+            String codec = sc.nextLine();
+
+            System.out.println("Durada:");
+            float durada = sc.nextFloat();
+
+            System.out.println("Kbps:");
+            int kbps = sc.nextInt();
+
+            ctrl.afegirAudio(cami, imatgeFitxer, desc, codec, durada, kbps);
+
+            System.out.println("Fitxer afegit");
+
+        } catch (AplicacioException ae) {
+            System.err.println(ae.getMessage());
+        }
+    }
+
     private void gestioAfegir(Scanner sc) {
         Menu<OpcionsMenuAfegir> menuAfegir = new Menu<>(DESC_MENU_GESTIO_BIBLIOTECA[0], OpcionsMenuAfegir.values());
 
@@ -80,12 +153,10 @@ public class AplicacioUB2 {
 
             switch (opcion) {
                 case SM_AFEGIR_VIDEO:
-                    //TODO
-                    //ctrl.afegirVideo(path, nomVideo, codec, 0, 0, 0, 0);
+                    writeVideo(sc);
                     break;
                 case SM_AFEGIR_AUDIO:
-                    //TODO
-                    //ctrl.afegirAudio(VERSION, VERSION, VERSION, VERSION, 0, 0);
+                    writeAudio(sc);
                     break;
                 case SM_AFEGIR_TORNAR:
                     System.out.println("Tornant a >> " + DESC_MENU_PRINCIPAL[0]);
@@ -131,9 +202,9 @@ public class AplicacioUB2 {
                         int id = sc.nextInt();
                         try {
                             ctrl.esborrarFitxer(id);
-                            System.out.println("Fitxer amd id "+ id +" esborrat");
-                        } catch (AplicacioException ex) {
-                            System.out.println(ex.getMessage());
+                            System.out.println("Fitxer amd id " + id + " esborrat");
+                        } catch (AplicacioException ae) {
+                            System.err.println(ae.getMessage());
                         }
                     }
                     break;
@@ -147,11 +218,6 @@ public class AplicacioUB2 {
     }
 
     public void gestioAplicacioUB() {
-
-        System.out.println("/*************************************************\n"
-                + "* Reproductor UB - " + VERSION + " - Grupo C\n"
-                + "* Hecho por: Manuel Martinez & Aaron Peruga"
-                + "\n**************************************************/\n");
 
         Scanner sc = new Scanner(System.in);
 

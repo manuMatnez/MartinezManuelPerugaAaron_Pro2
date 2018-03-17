@@ -60,7 +60,8 @@ public class Dades {
         if (id < 0) {
             throw new AplicacioException("La posició começa amb 1");
         } else if (id > listaFicheros.size()) {
-            throw new AplicacioException("La posició no pot ser mès gran que: " + listaFicheros.size());
+            throw new AplicacioException("La posició no pot ser mès gran que: "
+                    + listaFicheros.size());
         } else {
             FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
             biblioteca.removeFitxer(file);
@@ -75,7 +76,54 @@ public class Dades {
     public boolean vacia() {
         return this.biblioteca.getCarpeta().isEmpty();
     }
-    
-    //TODO toString()
+
+    /**
+     * Comprueba que el fichero existe, si no existe lanza excepción
+     *
+     * @param cami
+     * @throws AplicacioException
+     */
+    public void verify(String cami) throws AplicacioException {
+        File tmp = new File(cami);
+        if (!tmp.exists()) {
+            throw new AplicacioException("El fitxer " + tmp.getName() + " no existeix");
+        }
+    }
+
+    /**
+     * Añade un nuevo video a la Biblioteca Multimedia
+     *
+     * @param cami
+     * @param nomVideo
+     * @param codec
+     * @param durada
+     * @param alcada
+     * @param amplada
+     * @param fps
+     * @throws AplicacioException
+     */
+    public void afegirNouVideo(String cami, String nomVideo, String codec,
+            float durada, int alcada, int amplada, float fps) throws AplicacioException {
+        //TODO consultar
+        Video video = new Video(cami, nomVideo, codec, durada, alcada, amplada, fps, null);
+        biblioteca.addFitxer(video);
+    }
+
+    /**
+     * Añade un nuevo audio a la Biblioteca Multimedia
+     *
+     * @param cami
+     * @param camiImatge
+     * @param nomAudio
+     * @param codec
+     * @param durada
+     * @param kbps
+     * @throws AplicacioException
+     */
+    public void afegirNouAudio(String cami, String camiImatge, String nomAudio,
+            String codec, float durada, int kbps) throws AplicacioException {
+        //TODO consultar
+        Audio audio = new Audio(cami, new File(camiImatge), nomAudio, codec, durada, kbps, null);
+    }
 
 }

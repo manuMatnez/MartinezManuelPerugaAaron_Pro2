@@ -22,12 +22,24 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
  */
 public class IniciadorAplicacioUB {
 
+    private final static String VERSION = "2.0";
+
+    private final static String ASTERISKS = "*************************************************";
+
+    private final static String HEADER = "/" + ASTERISKS + "\n"
+            + "* Reproductor UB (Grup C)\n"
+            + "* Autors: Manuel Martinez i Aaron Peruga\n"
+            + "* Versio: " + VERSION + "\n"
+            + ASTERISKS + "/\n";
+
     /**
      * Main
      *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println(HEADER);
+
         AplicacioUB2 aplicacio = new AplicacioUB2();
         aplicacio.gestioAplicacioUB();
     }
