@@ -33,7 +33,7 @@ public class CarpetaFitxers {
 
     public CarpetaFitxers() {
         capacity = 100; // default
-        carpeta = new ArrayList(capacity);
+        carpeta = new ArrayList<>(capacity);
     }
 
     public CarpetaFitxers(int cap) throws AplicacioException {
@@ -41,7 +41,7 @@ public class CarpetaFitxers {
             throw new AplicacioException("Numero menor de 0: " + cap);
         }
         capacity = cap;
-        carpeta = new ArrayList(capacity);
+        carpeta = new ArrayList<>(capacity);
     }
 
     /**

@@ -27,7 +27,7 @@ public class Reproductor extends ReproductorBasic {
     public Reproductor() {
     }
 
-    public Reproductor(String vlcPath) { // MAC -> "/Application/VLC.app"
+    public Reproductor(String vlcPath) {
         super(vlcPath);
         
     }

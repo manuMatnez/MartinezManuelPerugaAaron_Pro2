@@ -33,11 +33,7 @@ public class Controlador {
 
     private Controlador() {
         dades = new Dades();
-        if (isMac()) {
-            reproductor = new Reproductor("/Application/VLC.app");
-        } else {
-            reproductor = new Reproductor();
-        }
+        reproductor = new Reproductor();
     }
 
     private static class Loader {
@@ -49,7 +45,6 @@ public class Controlador {
         return Loader.INSTANCE;
     }
 
-    // Controlador
     /**
      * Retorna si la carpeta está vacía a traves de Dades
      *
