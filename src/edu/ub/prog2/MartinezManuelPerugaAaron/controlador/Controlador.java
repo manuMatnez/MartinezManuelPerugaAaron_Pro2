@@ -17,6 +17,8 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.Reproductor;
+import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.IniciadorAplicacioUB.isMac;
 import edu.ub.prog2.utils.AplicacioException;
 import java.util.List;
 
@@ -27,9 +29,15 @@ import java.util.List;
 public class Controlador {
 
     private final Dades dades;
+    private final Reproductor reproductor;
 
     private Controlador() {
         dades = new Dades();
+        if (isMac()) {
+            reproductor = new Reproductor("/Application/VLC.app");
+        } else {
+            reproductor = new Reproductor();
+        }
     }
 
     private static class Loader {
@@ -65,7 +73,7 @@ public class Controlador {
      */
     public void afegirVideo(String cami, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps) throws AplicacioException {
-        dades.afegirNouVideo(cami, nomVideo, codec, durada, alcada, amplada, fps);
+        dades.afegirNouVideo(cami, nomVideo, codec, durada, alcada, amplada, fps, this.reproductor);
     }
 
     /**
@@ -81,7 +89,7 @@ public class Controlador {
      */
     public void afegirAudio(String cami, String camiImatge, String nomAudio,
             String codec, float durada, int kbps) throws AplicacioException {
-        dades.afegirNouAudio(cami, camiImatge, nomAudio, codec, durada, kbps);
+        dades.afegirNouAudio(cami, camiImatge, nomAudio, codec, durada, kbps, this.reproductor);
     }
 
     /**

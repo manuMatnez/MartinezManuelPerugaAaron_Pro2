@@ -55,7 +55,6 @@ public class IniciadorAplicacioUB {
             uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH", "/Applications/VLC.app/Contents/MacOS/plugins", 1);
             NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib");
             Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-            Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         }
 
         System.out.println(HEADER);
