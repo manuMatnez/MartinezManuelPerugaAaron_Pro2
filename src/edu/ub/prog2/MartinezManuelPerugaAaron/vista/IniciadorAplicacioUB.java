@@ -30,30 +30,15 @@ public class IniciadorAplicacioUB {
 
     // Propiedades del Sistema Operativo START
     private final static String OS = System.getProperty("os.name").toLowerCase();
-    private final static String OS_ARCH = System.getProperty("os.arch");
     // Propiedades del Sistema Operativo END
 
-    /*
-    Directorio de la carpeta "plugins" del VLC
-    Ahora la pondrá dentro del proyecto, pero se puede cambiar la ruta
-    Siempre y cuando  los binarios estén en su sitio 
-     */
-    private static String vlcPluginPath;
-
-    /*
-    Directorio de la carpeta "lib" del VLC
-    Ahora la pondrá dentro del proyecto, pero se puede cambiar la ruta
-    Siempre y cuando  los binarios estén en su sitio 
-     */
-    private static String vlcCorePath;
-
     // Constantes añadidas START
-    private final static String VERSION = "2.1";
+    private final static String VERSION = "2.0";
     private final static String ASTERISKS = "*************************************************";
     private final static String HEADER = "/" + ASTERISKS + "\n"
             + "* Reproductor UB (Grup C)\n"
             + "* Autors: Manuel Martinez i Aaron Peruga\n"
-            + "* Versió: " + VERSION + " - " + OS + "\n"
+            + "* Versió: " + VERSION + "\n"
             + ASTERISKS + "/\n";
     // Constantes añadidas END
 
@@ -63,25 +48,7 @@ public class IniciadorAplicacioUB {
      * @return boolean
      */
     public static boolean isMac() {
-        return OS.contains("mac") && OS_ARCH.contains("64");
-    }
-
-    /**
-     * Comprueba si el sistema operativo es Windows de 64 bits
-     *
-     * @return boolean
-     */
-    public static boolean isWin64() {
-        return OS.contains("win") && OS_ARCH.contains("64");
-    }
-
-    /**
-     * Comprueba si el sistema operativo es GNU/Linux de 64 bits
-     *
-     * @return boolean
-     */
-    public static boolean isLinux64() {
-        return OS.contains("nux") && OS_ARCH.contains("64");
+        return OS.contains("mac");
     }
 
     /**
@@ -91,24 +58,16 @@ public class IniciadorAplicacioUB {
      */
     public static void main(String[] args) {
 
-        // VLC 2.2 para Mac, Windows y GNU/Linux x64
+        // VLC 2.2 para Mac
         if (isMac()) {
-            vlcPluginPath = "vlcbin" + File.separator + "macos" + File.separator + "plugins";
-            vlcCorePath = "vlcbin" + File.separator + "macos" + File.separator + "lib";
-        } else if (isWin64()) {
-            vlcPluginPath = "vlcbin" + File.separator + "win64" + File.separator + "plugins";
-            vlcCorePath = "vlcbin" + File.separator + "win64" + File.separator + "lib";
-        } else if (isLinux64()) {
-            vlcPluginPath = "vlcbin" + File.separator + "gnu_amd64" + File.separator + "plugins";
-            vlcCorePath = "vlcbin" + File.separator + "gnu_amd64" + File.separator + "lib";
-        } else {
-            System.err.println("Sistema operatiu no compatible!");
-            System.exit(1);
+            uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH",
+                    "/Applications/VLC.app/Contents/MacOS/plugins", 1);
+            
+            NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),
+                    "/Applications/VLC.app/Contents/MacOS/lib");
+            
+            Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         }
-
-        uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH", vlcPluginPath, 1);
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), vlcCorePath);
-        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 
         System.out.println(HEADER);
 
