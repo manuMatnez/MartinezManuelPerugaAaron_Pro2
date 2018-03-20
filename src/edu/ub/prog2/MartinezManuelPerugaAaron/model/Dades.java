@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,14 +18,23 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Dades - Modelo
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 1.0
  */
-public class Dades {
+public class Dades implements Serializable {
 
     private final BibliotecaFitxersMultimedia biblioteca;
 
@@ -39,13 +48,16 @@ public class Dades {
      * @return List
      */
     public List<String> getBibliotecaList() {
-        List<String> biblio = new ArrayList<>();
-        int id = 1;
-        for (File file : this.biblioteca.getCarpeta()) {
-            biblio.add("[" + id + "] " + file.toString());
-            id++;
+        List<String> bibList;
+        String bibToStr = this.biblioteca.toString();
+
+        if (bibToStr.isEmpty()) {
+            bibList = new ArrayList<>(); // lista buida
+        } else {
+            String[] bibToStrArr = bibToStr.split("\n"); // Array de Strings (Lineas)
+            bibList = new ArrayList<>(Arrays.asList(bibToStrArr));
         }
-        return biblio;
+        return bibList;
     }
 
     /**
@@ -56,12 +68,12 @@ public class Dades {
      */
     public void deleteFitxer(int id) throws AplicacioException {
         id--;
-        List<File> listaFicheros = this.biblioteca.getCarpeta();
+        int size = this.biblioteca.getSize();
         if (id < 0) {
             throw new AplicacioException("La posició começa amb 1");
-        } else if (id > listaFicheros.size()) {
+        } else if (id > size) {
             throw new AplicacioException("La posició no pot ser mès gran que: "
-                    + listaFicheros.size());
+                    + size);
         } else {
             FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
             biblioteca.removeFitxer(file);
@@ -73,8 +85,8 @@ public class Dades {
      *
      * @return boolean
      */
-    public boolean vacia() {
-        return this.biblioteca.getCarpeta().isEmpty();
+    public boolean buida() {
+        return this.biblioteca.getSize() == 0;
     }
 
     /**
@@ -126,6 +138,52 @@ public class Dades {
             String codec, float durada, int kbps, Reproductor r) throws AplicacioException {
         //TODO consultar
         Audio audio = new Audio(cami, new File(camiImatge), nomAudio, codec, durada, kbps, r);
+    }
+
+    /**
+     * Guarda todos los datos del programa en un archivo. Usando Try-Catch con
+     * recursos no hace falta usar finally ni .close(), ya que sirve para las
+     * clases que implementan Closeable
+     *
+     * @param camiDesti
+     * @throws AplicacioException
+     */
+    public void save(String camiDesti) throws AplicacioException {
+        File savedFile = new File(camiDesti);
+        try (FileOutputStream fout = new FileOutputStream(savedFile)) {
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(this);
+            oos.flush();
+        } catch (IOException ex) {
+            throw new AplicacioException("No es pot guardar el fitxer");
+        }
+    }
+
+    /**
+     * Carga todos los datos del programa en un archivo. Usando Try-Catch con
+     * recursos no hace falta usar finally ni .close(), ya que sirve para las
+     * clases que implementan Closeable
+     *
+     * @param camiOrigen
+     * @return
+     * @throws AplicacioException
+     */
+    public Dades load(String camiOrigen) throws AplicacioException {
+        File loadFile = new File(camiOrigen);
+        Dades dades;
+        if (!loadFile.exists()) {
+            throw new AplicacioException("No existeix el fixter de dades");
+        } else {
+            try (FileInputStream fis = new FileInputStream(loadFile)) {
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                dades = (Dades) ois.readObject();
+            } catch (IOException ex) {
+                throw new AplicacioException("No es pot carregar o no existeix el fitxer");
+            } catch (ClassNotFoundException ex) {
+                throw new AplicacioException("Error amb les dades");
+            }
+            return dades;
+        }
     }
 
 }

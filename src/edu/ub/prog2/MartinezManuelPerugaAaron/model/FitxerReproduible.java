@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,14 +19,18 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 import edu.ub.prog2.utils.AplicacioException;
 
 /**
+ * FitxerReproduible - Modelo, la superclass File ya implementa Serializable, no hace falta
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 1.0
  */
 public abstract class FitxerReproduible extends FitxerMultimedia {
 
     private final String codec;
     private final float durada;
-    private final Reproductor reproductor;
+
+    // transient no guardara el reproductor cuando serialicemos
+    private final transient Reproductor reproductor;
 
     // nom no puede ser porque lo sacamos de cami
     protected FitxerReproduible(String cami, String nom, String codec, float durada, Reproductor r) throws AplicacioException {

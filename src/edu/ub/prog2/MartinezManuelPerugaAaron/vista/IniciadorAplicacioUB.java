@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,13 +18,15 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
-import java.io.File;
+import java.util.Collections;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
+ * IniciadorAplicacioUB - Vista (Main Class)
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 2.0
  */
 public class IniciadorAplicacioUB {
 
@@ -34,12 +36,12 @@ public class IniciadorAplicacioUB {
 
     // Constantes añadidas START
     private final static String VERSION = "2.0";
-    private final static String ASTERISKS = "*************************************************";
+    private final static String ASTERISKS = String.join("", Collections.nCopies(50, "*"));
     private final static String HEADER = "/" + ASTERISKS + "\n"
             + "* Reproductor UB (Grup C)\n"
             + "* Autors: Manuel Martinez i Aaron Peruga\n"
             + "* Versió: " + VERSION + "\n"
-            + ASTERISKS + "/\n";
+            + ASTERISKS + "/";
     // Constantes añadidas END
 
     /**
@@ -62,10 +64,10 @@ public class IniciadorAplicacioUB {
         if (isMac()) {
             uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH",
                     "/Applications/VLC.app/Contents/MacOS/plugins", 1);
-            
+
             NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),
                     "/Applications/VLC.app/Contents/MacOS/lib");
-            
+
             Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         }
 
@@ -73,6 +75,7 @@ public class IniciadorAplicacioUB {
 
         AplicacioUB2 aplicacio = new AplicacioUB2();
         aplicacio.gestioAplicacioUB();
+
     }
 
 }

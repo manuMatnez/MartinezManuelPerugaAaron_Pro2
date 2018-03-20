@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,11 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 /**
+ * BibliotecaFitxersMultimedia - Modelo, a superclass CarpetaFitxers ya
+ * implementa Serializable, no hace falta
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 1.0
  */
 public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
 

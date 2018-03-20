@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,8 +19,10 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 import edu.ub.prog2.utils.AplicacioException;
 
 /**
+ * Video - Modelo, la superclass File ya implementa Serializable, no hace falta
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 1.0
  */
 public class Video extends FitxerReproduible {
 
@@ -60,15 +62,15 @@ public class Video extends FitxerReproduible {
         StringBuilder fitxer = new StringBuilder();
 
         fitxer.append("Tipus='").append(this.getClass().getSimpleName()).append("', ");
-        
+
         fitxer.append(super.toString());
-        
+
         fitxer.append(", Codec='").append(getCodec()).append("'");
         fitxer.append(", Durada='").append(getDurada()).append("'");
         fitxer.append(", Alcada='").append(alcada).append("'");
         fitxer.append(", Amplada='").append(amplada).append("'");
         fitxer.append(", Fps='").append(fps).append("'");
-        
+
         return fitxer.toString();
     }
 

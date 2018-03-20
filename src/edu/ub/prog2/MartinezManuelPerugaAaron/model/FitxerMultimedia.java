@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,8 +22,11 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
+ * FitxerMultimedia - Modelo, la superclass ya implementa Serializable, no hace
+ * falta
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 2.0
  */
 public class FitxerMultimedia extends File {
 
@@ -141,10 +144,7 @@ public class FitxerMultimedia extends File {
         if (!Objects.equals(this.getCamiAbsolut(), other.getCamiAbsolut())) {
             return false;
         }
-        if (!Objects.equals(this.getUltimaModificacio(), other.getUltimaModificacio())) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.getUltimaModificacio(), other.getUltimaModificacio());
     }
 
     @Override

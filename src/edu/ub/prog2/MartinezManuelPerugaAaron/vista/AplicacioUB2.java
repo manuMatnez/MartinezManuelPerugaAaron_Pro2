@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,12 +19,15 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 /**
+ * AplicacioUB2 - Vista
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 1.0
  */
 public class AplicacioUB2 {
 
@@ -55,6 +58,9 @@ public class AplicacioUB2 {
         "Mostrar Biblioteca",
         "Elimina fitxer multimédia",
         "Menu Anterior"};
+
+    private static final String CARPETA_FITXERS_TITLE = "Carpeta de Fitxers:\n"
+            + String.join("", Collections.nCopies(35, "-"));
 
     // SubMenu de Añadir fichero Multimedia a la biblioteca
     private static enum OpcionsMenuAfegir {
@@ -99,7 +105,8 @@ public class AplicacioUB2 {
             System.out.println("Fitxer afegit");
 
         } catch (AplicacioException ae) {
-            System.err.println(ae.getMessage());
+            //System.err.println(ae.getMessage()); Salida de error
+            System.out.println(ae.getMessage());
         }
     }
 
@@ -136,7 +143,36 @@ public class AplicacioUB2 {
             System.out.println("Fitxer afegit");
 
         } catch (AplicacioException ae) {
-            System.err.println(ae.getMessage());
+            //System.err.println(ae.getMessage()); Salida de error
+            System.out.println(ae.getMessage());
+        }
+    }
+
+    private void saveFile(Scanner sc) {
+        System.out.println("Ruta completa amb el nom:");
+        String cami = sc.nextLine();
+        try {
+            ctrl.guardarDadesDisc(cami);
+
+            System.out.println("Dades emmagatzemades!!");
+
+        } catch (AplicacioException ae) {
+            //System.err.println(ae.getMessage()); Salida de error
+            System.out.println(ae.getMessage());
+        }
+    }
+
+    private void loadFile(Scanner sc) {
+        System.out.println("Ruta completa amb el nom:");
+        String cami = sc.nextLine();
+        try {
+            ctrl.carregarDadesDisc(cami);
+
+            System.out.println("Dades carregades!!");
+
+        } catch (AplicacioException ae) {
+            //System.err.println(ae.getMessage()); Salida de error
+            System.out.println(ae.getMessage());
         }
     }
 
@@ -145,13 +181,18 @@ public class AplicacioUB2 {
 
         menuAfegir.setDescripcions(DESC_MENU_AFEGIR);
 
-        OpcionsMenuAfegir opcion;
+        OpcionsMenuAfegir opcio;
 
         do {
-            menuAfegir.mostrarMenu();
-            opcion = menuAfegir.getOpcio(sc);
+            System.out.println();
 
-            switch (opcion) {
+            menuAfegir.mostrarMenu();
+
+            opcio = menuAfegir.getOpcio(sc);
+
+            System.out.println();
+
+            switch (opcio) {
                 case SM_AFEGIR_VIDEO:
                     writeVideo(sc);
                     break;
@@ -163,28 +204,32 @@ public class AplicacioUB2 {
                     break;
             }
 
-        } while (opcion != OpcionsMenuAfegir.SM_AFEGIR_TORNAR);
+        } while (opcio != OpcionsMenuAfegir.SM_AFEGIR_TORNAR);
     }
 
     private void gestioBiblioteca(Scanner sc) {
-        Menu<OpcionsMenuGestioBiblioteca> submenu = new Menu<>(DESC_MENU_PRINCIPAL[0], OpcionsMenuGestioBiblioteca.values());
+        Menu<OpcionsMenuGestioBiblioteca> subMenu = new Menu<>(DESC_MENU_PRINCIPAL[0], OpcionsMenuGestioBiblioteca.values());
 
-        submenu.setDescripcions(DESC_MENU_GESTIO_BIBLIOTECA);
+        subMenu.setDescripcions(DESC_MENU_GESTIO_BIBLIOTECA);
 
-        OpcionsMenuGestioBiblioteca op;
+        OpcionsMenuGestioBiblioteca opcio;
 
         do {
-            submenu.mostrarMenu();
-            op = submenu.getOpcio(sc);
+            System.out.println();
 
-            switch (op) {
+            subMenu.mostrarMenu();
+
+            opcio = subMenu.getOpcio(sc);
+
+            System.out.println();
+
+            switch (opcio) {
                 case SM_GB_AFEGIR_FITXER:
                     gestioAfegir(sc);
                     break;
                 case SM_GB_MOSTRAR_BIBLIOTECA:
                     List<String> bibl = ctrl.mostrarBiblioteca();
-                    System.out.println("Carpeta de Fitxers:");
-                    System.out.println("====================================");
+                    System.out.println(CARPETA_FITXERS_TITLE);
 
                     if (bibl.isEmpty()) {
                         System.out.println("No hi ha fitxers");
@@ -195,7 +240,7 @@ public class AplicacioUB2 {
                     }
                     break;
                 case SM_GB_ELIMINAR_FITXER:
-                    if (ctrl.estaVacia()) {
+                    if (ctrl.estaBuida()) {
                         System.out.println("No hi ha fitxers per esborrar");
                     } else {
                         System.out.println("ID del Fitxer:");
@@ -204,7 +249,8 @@ public class AplicacioUB2 {
                             ctrl.esborrarFitxer(id);
                             System.out.println("Fitxer amd id " + id + " esborrat");
                         } catch (AplicacioException ae) {
-                            System.err.println(ae.getMessage());
+                            //System.err.println(ae.getMessage()); Salida de error
+                            System.out.println(ae.getMessage());
                         }
                     }
                     break;
@@ -213,7 +259,7 @@ public class AplicacioUB2 {
                     break;
             }
 
-        } while (op != OpcionsMenuGestioBiblioteca.SM_GB_TORNAR);
+        } while (opcio != OpcionsMenuGestioBiblioteca.SM_GB_TORNAR);
 
     }
 
@@ -228,9 +274,13 @@ public class AplicacioUB2 {
         OpcionsMenuPrincipal opcio;
 
         do {
+            System.out.println();
+
             menu.mostrarMenu();
 
             opcio = menu.getOpcio(sc);
+
+            System.out.println();
 
             switch (opcio) {
 
@@ -238,10 +288,10 @@ public class AplicacioUB2 {
                     gestioBiblioteca(sc);
                     break;
                 case MP_GUARDAR_DADES:
-                    //TODO
+                    saveFile(sc);
                     break;
                 case MP_RECUPERAR_DADES:
-                    //TODO
+                    loadFile(sc);
                     break;
                 case MP_SORTIR:
                     System.out.println("Adeu!!");

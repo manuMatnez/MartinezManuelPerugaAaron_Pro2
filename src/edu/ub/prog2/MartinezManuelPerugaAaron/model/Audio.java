@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,8 +20,10 @@ import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 
 /**
+ * Audio - Modelo, la superclass File ya implementa Serializable, no hace falta
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 1.0
  */
 public class Audio extends FitxerReproduible {
 
@@ -41,7 +43,7 @@ public class Audio extends FitxerReproduible {
         return kbps;
     }
     // Getters END
-    
+
     @Override
     protected void reproduir() {
         throw new UnsupportedOperationException("No soportat, es a la practica 3");

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,17 +18,19 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.Reproductor;
-import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.IniciadorAplicacioUB.isMac;
 import edu.ub.prog2.utils.AplicacioException;
 import java.util.List;
 
 /**
+ * Controlador Singleton (para tener solo un objeto de este tipo de controlador,
+ * dades y reproductor)
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 1.0
  */
 public class Controlador {
 
-    private final Dades dades;
+    private Dades dades;
     private final Reproductor reproductor;
 
     private Controlador() {
@@ -50,8 +52,8 @@ public class Controlador {
      *
      * @return boolean
      */
-    public boolean estaVacia() {
-        return dades.vacia();
+    public boolean estaBuida() {
+        return dades.buida();
     }
 
     /**
@@ -106,12 +108,24 @@ public class Controlador {
         dades.deleteFitxer(id);
     }
 
+    /**
+     * Gestiona el guardado de datos a traves de Dades
+     *
+     * @param camiDesti
+     * @throws AplicacioException
+     */
     public void guardarDadesDisc(String camiDesti) throws AplicacioException {
-        //TODO
+        dades.save(camiDesti);
     }
 
+    /**
+     * Gestiona el cargado de datos a traves de Dades
+     *
+     * @param camiOrigen
+     * @throws AplicacioException
+     */
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
-        //TODO
+        this.dades = dades.load(camiOrigen);
     }
 
     /**

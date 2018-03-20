@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,8 +19,10 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 import edu.ub.prog2.utils.ReproductorBasic;
 
 /**
+ * Reproductor - Modelo
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 1.0
  */
 public class Reproductor extends ReproductorBasic {
 
@@ -29,7 +31,7 @@ public class Reproductor extends ReproductorBasic {
 
     public Reproductor(String vlcPath) {
         super(vlcPath);
-        
+
     }
 
     public Reproductor(String vlcPath, int verbose) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 Manuel Martinez, Aaron Peruga
+ * Copyright (C) 2018 Manuel Martinez, Aaron Peruga, Universitat de Barcelona
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,13 +18,17 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
+ * CarpetaFitxers - Modelo
  *
  * @author Manuel Martinez, Aaron Peruga
+ * @version 2.0
  */
-public class CarpetaFitxers {
+public class CarpetaFitxers implements Serializable {
 
     // capacidad máxima de la carpeta
     private static int capacity;
@@ -111,26 +115,17 @@ public class CarpetaFitxers {
         return "Espai lliure (" + String.valueOf(capacity - carpeta.size()) + ")";
     }
 
-    // Getters START
-    public ArrayList<File> getCarpeta() {
-        return carpeta;
-    }
-    // Getters END
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Carpeta de Fitxers: ").append(freeSpace())
-                .append("\n====================================\n");
+        int id = 1;
 
-        if (carpeta.size() > 0) {
-            int id = 1;
-            for (File file : carpeta) {
-                sb.append("\n[").append(id).append("] ").append(file);
-                id++;
-            }
-        } else {
-            sb.append("\nNo hi ha fitxers");
+        Iterator<File> fileIt = carpeta.iterator();
+
+        while (fileIt.hasNext()) {
+            File currentFile = fileIt.next();
+            sb.append("[").append(id).append("] ").append(currentFile).append("\n");
+            id++;
         }
 
         return sb.toString();
