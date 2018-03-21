@@ -17,9 +17,9 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
+import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.IniciadorAplicacioUB.USER_NAME;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
-import static java.lang.System.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -85,36 +85,36 @@ public class AplicacioUB2 {
      * @param sc
      */
     private void writeVideo(Scanner sc) {
-        out.println("Ruta del Fitxer:");
+        System.out.println("Ruta del Fitxer:");
         String cami = sc.nextLine();
         try {
             ctrl.checkExist(cami);
 
-            out.println("Descripcio del Fitxer:");
+            System.out.println("Descripcio del Fitxer:");
             String desc = sc.nextLine();
 
-            out.println("Codec (String):");
+            System.out.println("Codec (String):");
             String codec = sc.nextLine();
 
-            out.println("Durada (float):");
+            System.out.println("Durada (float):");
             float durada = sc.nextFloat();
 
-            out.println("Alcada (int):");
+            System.out.println("Alcada (int):");
             int alcada = sc.nextInt();
 
-            out.println("Amplada (int):");
+            System.out.println("Amplada (int):");
             int amplada = sc.nextInt();
 
-            out.println("Frames per Second (float):");
+            System.out.println("Frames per Second (float):");
             float fps = sc.nextFloat();
 
             ctrl.afegirVideo(cami, desc, codec, durada, alcada, amplada, fps);
 
-            out.println("Fitxer afegit");
+            System.out.println("Fitxer afegit");
 
         } catch (AplicacioException ae) {
-            //err.println(ae.getMessage()); Salida de error
-            out.println(ae.getMessage());
+            //System.err.println(ae.getMessage()); Salida de error
+            System.out.println(ae.getMessage());
         }
     }
 
@@ -124,63 +124,63 @@ public class AplicacioUB2 {
      * @param sc
      */
     private void writeAudio(Scanner sc) {
-        out.println("Ruta del Fitxer:");
+        System.out.println("Ruta del Fitxer:");
         String cami = sc.nextLine();
         try {
             ctrl.checkExist(cami);
 
-            out.println("Ruta de la imatge del Fitxer:");
+            System.out.println("Ruta de la imatge del Fitxer:");
             String imatgeFitxer = sc.nextLine();
 
             ctrl.checkExist(imatgeFitxer);
 
-            out.println("Descripcio del Fitxer:");
+            System.out.println("Descripcio del Fitxer:");
             String desc = sc.nextLine();
 
-            out.println("Codec (String):");
+            System.out.println("Codec (String):");
             String codec = sc.next();
 
-            out.println("Durada (float):");
+            System.out.println("Durada (float):");
             float durada = sc.nextFloat();
 
-            out.println("Kbps (int):");
+            System.out.println("Kbps (int):");
             int kbps = sc.nextInt();
 
             ctrl.afegirAudio(cami, imatgeFitxer, desc, codec, durada, kbps);
 
-            out.println("Fitxer afegit");
+            System.out.println("Fitxer afegit");
 
         } catch (AplicacioException ae) {
-            //err.println(ae.getMessage()); Salida de error
-            out.println(ae.getMessage());
+            //System.err.println(ae.getMessage()); Salida de error
+            System.out.println(ae.getMessage());
         }
     }
 
     private void saveFile(Scanner sc) {
-        out.println("Ruta completa amb el nom:");
+        System.out.println("Ruta completa amb el nom:");
         String cami = sc.nextLine();
         try {
             ctrl.guardarDadesDisc(cami);
 
-            out.println("Dades emmagatzemades!!");
+            System.out.println("Dades emmagatzemades!!");
 
         } catch (AplicacioException ae) {
-            //err.println(ae.getMessage()); Salida de error
-            out.println(ae.getMessage());
+            //System.err.println(ae.getMessage()); Salida de error
+            System.out.println(ae.getMessage());
         }
     }
 
     private void loadFile(Scanner sc) {
-        out.println("Ruta completa amb el nom:");
+        System.out.println("Ruta completa amb el nom:");
         String cami = sc.nextLine();
         try {
             ctrl.carregarDadesDisc(cami);
 
-            out.println("Dades carregades!!");
+            System.out.println("Dades carregades!!");
 
         } catch (AplicacioException ae) {
-            //err.println(ae.getMessage()); Salida de error
-            out.println(ae.getMessage());
+            //System.err.println(ae.getMessage()); Salida de error
+            System.out.println(ae.getMessage());
         }
     }
 
@@ -192,13 +192,13 @@ public class AplicacioUB2 {
         OpcionsMenuAfegir opcio;
 
         do {
-            out.println();
+            System.out.println();
 
             menuAfegir.mostrarMenu();
 
             opcio = menuAfegir.getOpcio(sc);
 
-            out.println();
+            System.out.println();
 
             switch (opcio) {
                 case SM_AFEGIR_VIDEO:
@@ -208,7 +208,7 @@ public class AplicacioUB2 {
                     writeAudio(sc);
                     break;
                 case SM_AFEGIR_TORNAR:
-                    out.println("Tornant a >> " + DESC_MENU_PRINCIPAL[0]);
+                    System.out.println("Tornant a >> " + DESC_MENU_PRINCIPAL[0]);
                     break;
             }
 
@@ -223,13 +223,13 @@ public class AplicacioUB2 {
         OpcionsMenuGestioBiblioteca opcio;
 
         do {
-            out.println();
+            System.out.println();
 
             subMenu.mostrarMenu();
 
             opcio = subMenu.getOpcio(sc);
 
-            out.println();
+            System.out.println();
 
             switch (opcio) {
                 case SM_GB_AFEGIR_FITXER:
@@ -237,33 +237,33 @@ public class AplicacioUB2 {
                     break;
                 case SM_GB_MOSTRAR_BIBLIOTECA:
                     List<String> bibl = ctrl.mostrarBiblioteca();
-                    out.println(CARPETA_FITXERS_TITLE);
+                    System.out.println(CARPETA_FITXERS_TITLE);
 
                     if (bibl.isEmpty()) {
-                        out.println("No hi ha fitxers");
+                        System.out.println("No hi ha fitxers");
                     } else {
                         bibl.forEach((file) -> {
-                            out.println(file);
+                            System.out.println(file);
                         });
                     }
                     break;
                 case SM_GB_ELIMINAR_FITXER:
                     if (ctrl.estaBuida()) {
-                        out.println("No hi ha fitxers per esborrar");
+                        System.out.println("No hi ha fitxers per esborrar");
                     } else {
-                        out.println("ID del Fitxer:");
+                        System.out.println("ID del Fitxer:");
                         int id = sc.nextInt();
                         try {
                             ctrl.esborrarFitxer(id);
-                            out.println("Fitxer amd id " + id + " esborrat");
+                            System.out.println("Fitxer amd id " + id + " esborrat");
                         } catch (AplicacioException ae) {
-                            //err.println(ae.getMessage()); Salida de error
-                            out.println(ae.getMessage());
+                            //System.err.println(ae.getMessage()); Salida de error
+                            System.out.println(ae.getMessage());
                         }
                     }
                     break;
                 case SM_GB_TORNAR:
-                    out.println("Tornant a >> " + MENU_PRINCIPAL);
+                    System.out.println("Tornant a >> " + MENU_PRINCIPAL);
                     break;
             }
 
@@ -278,10 +278,10 @@ public class AplicacioUB2 {
     public void gestioAplicacioUB() {
 
         try (Scanner sc = new Scanner(System.in)) {
-            
+
             // Para usar '.' en vez de ',' en la terminal
             sc.useLocale(Locale.ENGLISH);
-            
+
             Menu<OpcionsMenuPrincipal> menu = new Menu<>(MENU_PRINCIPAL, OpcionsMenuPrincipal.values());
 
             menu.setDescripcions(DESC_MENU_PRINCIPAL);
@@ -289,13 +289,13 @@ public class AplicacioUB2 {
             OpcionsMenuPrincipal opcio;
 
             do {
-                out.println();
+                System.out.println();
 
                 menu.mostrarMenu();
 
                 opcio = menu.getOpcio(sc);
 
-                out.println();
+                System.out.println();
 
                 switch (opcio) {
 
@@ -309,7 +309,7 @@ public class AplicacioUB2 {
                         loadFile(sc);
                         break;
                     case MP_SORTIR:
-                        out.println("Adeu!!");
+                        System.out.println("Adeu " + USER_NAME + "!!");
                         break;
 
                 }

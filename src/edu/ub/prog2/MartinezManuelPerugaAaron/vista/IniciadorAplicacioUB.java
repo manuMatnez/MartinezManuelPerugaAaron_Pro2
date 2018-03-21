@@ -18,7 +18,6 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
-import static java.lang.System.*;
 import java.util.Collections;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
@@ -32,7 +31,8 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 public class IniciadorAplicacioUB {
 
     // Propiedades del Sistema Operativo START
-    private final static String OS = System.getProperty("os.name").toLowerCase();
+    final static String OS = System.getProperty("os.name").toLowerCase();
+    final static String USER_NAME = System.getProperty("user.name");
     // Propiedades del Sistema Operativo END
 
     // Constantes añadidas START
@@ -72,7 +72,11 @@ public class IniciadorAplicacioUB {
             Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         }
 
-        out.println(HEADER);
+        System.out.println(HEADER);
+
+        System.out.println();
+
+        System.out.println("Benvingut al reproductor UB, " + USER_NAME);
 
         AplicacioUB2 aplicacio = new AplicacioUB2();
         aplicacio.gestioAplicacioUB();
