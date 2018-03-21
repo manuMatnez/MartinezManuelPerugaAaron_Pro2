@@ -21,6 +21,7 @@ import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -85,22 +86,22 @@ public class AplicacioUB2 {
             System.out.println("Descripcio del Fitxer:");
             String desc = sc.nextLine();
 
-            System.out.println("Codec:");
+            System.out.println("Codec (String):");
             String codec = sc.nextLine();
 
-            System.out.println("Durada:");
+            System.out.println("Durada (float):");
             float durada = sc.nextFloat();
 
-            System.out.println("Alcada:");
+            System.out.println("Alcada (int):");
             int alcada = sc.nextInt();
 
-            System.out.println("Amplada:");
+            System.out.println("Amplada (int):");
             int amplada = sc.nextInt();
 
-            System.out.println("Frames per Second:");
+            System.out.println("Frames per Second (float):");
             float fps = sc.nextFloat();
 
-            ctrl.afegirVideo(cami, codec, codec, durada, alcada, amplada, fps);
+            ctrl.afegirVideo(cami, desc, codec, durada, alcada, amplada, fps);
 
             System.out.println("Fitxer afegit");
 
@@ -129,13 +130,13 @@ public class AplicacioUB2 {
             System.out.println("Descripcio del Fitxer:");
             String desc = sc.nextLine();
 
-            System.out.println("Codec:");
-            String codec = sc.nextLine();
+            System.out.println("Codec (String):");
+            String codec = sc.next();
 
-            System.out.println("Durada:");
+            System.out.println("Durada (float):");
             float durada = sc.nextFloat();
 
-            System.out.println("Kbps:");
+            System.out.println("Kbps (int):");
             int kbps = sc.nextInt();
 
             ctrl.afegirAudio(cami, imatgeFitxer, desc, codec, durada, kbps);
@@ -263,42 +264,50 @@ public class AplicacioUB2 {
 
     }
 
+    /**
+     * Método principal de la vista para Gestion de la Aplicación. Try-Catch con
+     * recursos para cerrar Scanner sin close(), sugerido por Netbeans
+     */
     public void gestioAplicacioUB() {
 
-        Scanner sc = new Scanner(System.in);
+        try (Scanner sc = new Scanner(System.in)) {
+            
+            // Para usar '.' en vez de ',' en la terminal
+            sc.useLocale(Locale.ENGLISH);
+            
+            Menu<OpcionsMenuPrincipal> menu = new Menu<>(MENU_PRINCIPAL, OpcionsMenuPrincipal.values());
 
-        Menu<OpcionsMenuPrincipal> menu = new Menu<>(MENU_PRINCIPAL, OpcionsMenuPrincipal.values());
+            menu.setDescripcions(DESC_MENU_PRINCIPAL);
 
-        menu.setDescripcions(DESC_MENU_PRINCIPAL);
+            OpcionsMenuPrincipal opcio;
 
-        OpcionsMenuPrincipal opcio;
+            do {
+                System.out.println();
 
-        do {
-            System.out.println();
+                menu.mostrarMenu();
 
-            menu.mostrarMenu();
+                opcio = menu.getOpcio(sc);
 
-            opcio = menu.getOpcio(sc);
+                System.out.println();
 
-            System.out.println();
+                switch (opcio) {
 
-            switch (opcio) {
+                    case MP_GESTION_BIBLIOTECA:
+                        gestioBiblioteca(sc);
+                        break;
+                    case MP_GUARDAR_DADES:
+                        saveFile(sc);
+                        break;
+                    case MP_RECUPERAR_DADES:
+                        loadFile(sc);
+                        break;
+                    case MP_SORTIR:
+                        System.out.println("Adeu!!");
+                        break;
 
-                case MP_GESTION_BIBLIOTECA:
-                    gestioBiblioteca(sc);
-                    break;
-                case MP_GUARDAR_DADES:
-                    saveFile(sc);
-                    break;
-                case MP_RECUPERAR_DADES:
-                    loadFile(sc);
-                    break;
-                case MP_SORTIR:
-                    System.out.println("Adeu!!");
-                    break;
-
-            }
-        } while (opcio != OpcionsMenuPrincipal.MP_SORTIR);
+                }
+            } while (opcio != OpcionsMenuPrincipal.MP_SORTIR);
+        }
     }
 
 }

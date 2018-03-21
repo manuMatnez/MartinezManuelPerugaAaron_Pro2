@@ -138,6 +138,7 @@ public class Dades implements Serializable {
             String codec, float durada, int kbps, Reproductor r) throws AplicacioException {
         //TODO consultar
         Audio audio = new Audio(cami, new File(camiImatge), nomAudio, codec, durada, kbps, r);
+        biblioteca.addFitxer(audio);
     }
 
     /**
@@ -160,9 +161,9 @@ public class Dades implements Serializable {
     }
 
     /**
-     * Carga todos los datos del programa en un archivo. Usando Try-Catch con
-     * recursos no hace falta usar finally ni .close(), ya que sirve para las
-     * clases que implementan Closeable
+     * Carga todos los datos del programa en un archivo, para sobreescribir
+     * Dades. Usando Try-Catch con recursos no hace falta usar finally ni
+     * .close(), ya que sirve para las clases que implementan Closeable
      *
      * @param camiOrigen
      * @return

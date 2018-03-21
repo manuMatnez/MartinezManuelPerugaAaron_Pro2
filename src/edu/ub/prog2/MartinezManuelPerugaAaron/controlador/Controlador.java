@@ -119,7 +119,8 @@ public class Controlador {
     }
 
     /**
-     * Gestiona el cargado de datos a traves de Dades
+     * Gestiona el cargado de datos a traves de Dades sobreescribiendo los datos
+     * actuales
      *
      * @param camiOrigen
      * @throws AplicacioException
