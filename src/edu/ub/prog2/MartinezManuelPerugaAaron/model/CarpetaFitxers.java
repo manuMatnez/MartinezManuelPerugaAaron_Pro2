@@ -36,8 +36,7 @@ public class CarpetaFitxers implements Serializable {
     private ArrayList<File> carpeta;
 
     public CarpetaFitxers() {
-        capacity = 100; // default
-        carpeta = new ArrayList<>(capacity);
+        carpeta = new ArrayList<>();
     }
 
     public CarpetaFitxers(int cap) throws AplicacioException {
@@ -109,10 +108,10 @@ public class CarpetaFitxers implements Serializable {
     /**
      * Comprueba el espacio libre
      *
-     * @return String
+     * @return int
      */
-    public String freeSpace() {
-        return "Espai lliure (" + String.valueOf(capacity - carpeta.size()) + ")";
+    public int freeSpace() {
+        return capacity - carpeta.size();
     }
 
     @Override

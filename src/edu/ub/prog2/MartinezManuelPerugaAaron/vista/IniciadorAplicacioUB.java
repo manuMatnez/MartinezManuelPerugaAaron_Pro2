@@ -18,6 +18,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
+import static java.lang.System.*;
 import java.util.Collections;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
@@ -71,7 +72,7 @@ public class IniciadorAplicacioUB {
             Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         }
 
-        System.out.println(HEADER);
+        out.println(HEADER);
 
         AplicacioUB2 aplicacio = new AplicacioUB2();
         aplicacio.gestioAplicacioUB();

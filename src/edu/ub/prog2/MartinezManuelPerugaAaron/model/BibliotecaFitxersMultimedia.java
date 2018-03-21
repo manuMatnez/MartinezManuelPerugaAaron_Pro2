@@ -26,6 +26,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
 
     public BibliotecaFitxersMultimedia() {
+        super();
     }
 
     @Override
@@ -34,8 +35,8 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
     }
 
     @Override
-    public String freeSpace() {
-        return "Sense limit";
+    public int freeSpace() {
+        return -1;
     }
 
 }

@@ -19,6 +19,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
+import static java.lang.System.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -45,20 +46,24 @@ public class AplicacioUB2 {
         MP_GESTION_BIBLIOTECA, MP_GUARDAR_DADES, MP_RECUPERAR_DADES, MP_SORTIR
     };
 
-    private static final String[] DESC_MENU_PRINCIPAL = {"Gestió Biblioteca",
+    private static final String[] DESC_MENU_PRINCIPAL = {
+        "Gestió Biblioteca",
         "Guardar Dades",
         "Recuperar Dades",
-        "Sortir"};
+        "Sortir"
+    };
 
     // SubMenu de Gestión de Biblioteca
     private static enum OpcionsMenuGestioBiblioteca {
         SM_GB_AFEGIR_FITXER, SM_GB_MOSTRAR_BIBLIOTECA, SM_GB_ELIMINAR_FITXER, SM_GB_TORNAR
     };
 
-    private static final String[] DESC_MENU_GESTIO_BIBLIOTECA = {"Afegir fitxer multimedia a la biblioteca",
+    private static final String[] DESC_MENU_GESTIO_BIBLIOTECA = {
+        "Afegir fitxer multimedia a la biblioteca",
         "Mostrar Biblioteca",
         "Elimina fitxer multimédia",
-        "Menu Anterior"};
+        "Menu Anterior"
+    };
 
     private static final String CARPETA_FITXERS_TITLE = "Carpeta de Fitxers:\n"
             + String.join("", Collections.nCopies(35, "-"));
@@ -68,9 +73,11 @@ public class AplicacioUB2 {
         SM_AFEGIR_VIDEO, SM_AFEGIR_AUDIO, SM_AFEGIR_TORNAR
     };
 
-    private static final String[] DESC_MENU_AFEGIR = {"Afegir Video",
+    private static final String[] DESC_MENU_AFEGIR = {
+        "Afegir Video",
         "Afegir Audio",
-        "Menu Anterior"};
+        "Menu Anterior"
+    };
 
     /**
      * Pide los datos para poder crear un fichero de video
@@ -78,36 +85,36 @@ public class AplicacioUB2 {
      * @param sc
      */
     private void writeVideo(Scanner sc) {
-        System.out.println("Ruta del Fitxer:");
+        out.println("Ruta del Fitxer:");
         String cami = sc.nextLine();
         try {
             ctrl.checkExist(cami);
 
-            System.out.println("Descripcio del Fitxer:");
+            out.println("Descripcio del Fitxer:");
             String desc = sc.nextLine();
 
-            System.out.println("Codec (String):");
+            out.println("Codec (String):");
             String codec = sc.nextLine();
 
-            System.out.println("Durada (float):");
+            out.println("Durada (float):");
             float durada = sc.nextFloat();
 
-            System.out.println("Alcada (int):");
+            out.println("Alcada (int):");
             int alcada = sc.nextInt();
 
-            System.out.println("Amplada (int):");
+            out.println("Amplada (int):");
             int amplada = sc.nextInt();
 
-            System.out.println("Frames per Second (float):");
+            out.println("Frames per Second (float):");
             float fps = sc.nextFloat();
 
             ctrl.afegirVideo(cami, desc, codec, durada, alcada, amplada, fps);
 
-            System.out.println("Fitxer afegit");
+            out.println("Fitxer afegit");
 
         } catch (AplicacioException ae) {
-            //System.err.println(ae.getMessage()); Salida de error
-            System.out.println(ae.getMessage());
+            //err.println(ae.getMessage()); Salida de error
+            out.println(ae.getMessage());
         }
     }
 
@@ -117,63 +124,63 @@ public class AplicacioUB2 {
      * @param sc
      */
     private void writeAudio(Scanner sc) {
-        System.out.println("Ruta del Fitxer:");
+        out.println("Ruta del Fitxer:");
         String cami = sc.nextLine();
         try {
             ctrl.checkExist(cami);
 
-            System.out.println("Ruta de la imatge del Fitxer:");
+            out.println("Ruta de la imatge del Fitxer:");
             String imatgeFitxer = sc.nextLine();
 
             ctrl.checkExist(imatgeFitxer);
 
-            System.out.println("Descripcio del Fitxer:");
+            out.println("Descripcio del Fitxer:");
             String desc = sc.nextLine();
 
-            System.out.println("Codec (String):");
+            out.println("Codec (String):");
             String codec = sc.next();
 
-            System.out.println("Durada (float):");
+            out.println("Durada (float):");
             float durada = sc.nextFloat();
 
-            System.out.println("Kbps (int):");
+            out.println("Kbps (int):");
             int kbps = sc.nextInt();
 
             ctrl.afegirAudio(cami, imatgeFitxer, desc, codec, durada, kbps);
 
-            System.out.println("Fitxer afegit");
+            out.println("Fitxer afegit");
 
         } catch (AplicacioException ae) {
-            //System.err.println(ae.getMessage()); Salida de error
-            System.out.println(ae.getMessage());
+            //err.println(ae.getMessage()); Salida de error
+            out.println(ae.getMessage());
         }
     }
 
     private void saveFile(Scanner sc) {
-        System.out.println("Ruta completa amb el nom:");
+        out.println("Ruta completa amb el nom:");
         String cami = sc.nextLine();
         try {
             ctrl.guardarDadesDisc(cami);
 
-            System.out.println("Dades emmagatzemades!!");
+            out.println("Dades emmagatzemades!!");
 
         } catch (AplicacioException ae) {
-            //System.err.println(ae.getMessage()); Salida de error
-            System.out.println(ae.getMessage());
+            //err.println(ae.getMessage()); Salida de error
+            out.println(ae.getMessage());
         }
     }
 
     private void loadFile(Scanner sc) {
-        System.out.println("Ruta completa amb el nom:");
+        out.println("Ruta completa amb el nom:");
         String cami = sc.nextLine();
         try {
             ctrl.carregarDadesDisc(cami);
 
-            System.out.println("Dades carregades!!");
+            out.println("Dades carregades!!");
 
         } catch (AplicacioException ae) {
-            //System.err.println(ae.getMessage()); Salida de error
-            System.out.println(ae.getMessage());
+            //err.println(ae.getMessage()); Salida de error
+            out.println(ae.getMessage());
         }
     }
 
@@ -185,13 +192,13 @@ public class AplicacioUB2 {
         OpcionsMenuAfegir opcio;
 
         do {
-            System.out.println();
+            out.println();
 
             menuAfegir.mostrarMenu();
 
             opcio = menuAfegir.getOpcio(sc);
 
-            System.out.println();
+            out.println();
 
             switch (opcio) {
                 case SM_AFEGIR_VIDEO:
@@ -201,7 +208,7 @@ public class AplicacioUB2 {
                     writeAudio(sc);
                     break;
                 case SM_AFEGIR_TORNAR:
-                    System.out.println("Tornant a >> " + DESC_MENU_PRINCIPAL[0]);
+                    out.println("Tornant a >> " + DESC_MENU_PRINCIPAL[0]);
                     break;
             }
 
@@ -216,13 +223,13 @@ public class AplicacioUB2 {
         OpcionsMenuGestioBiblioteca opcio;
 
         do {
-            System.out.println();
+            out.println();
 
             subMenu.mostrarMenu();
 
             opcio = subMenu.getOpcio(sc);
 
-            System.out.println();
+            out.println();
 
             switch (opcio) {
                 case SM_GB_AFEGIR_FITXER:
@@ -230,33 +237,33 @@ public class AplicacioUB2 {
                     break;
                 case SM_GB_MOSTRAR_BIBLIOTECA:
                     List<String> bibl = ctrl.mostrarBiblioteca();
-                    System.out.println(CARPETA_FITXERS_TITLE);
+                    out.println(CARPETA_FITXERS_TITLE);
 
                     if (bibl.isEmpty()) {
-                        System.out.println("No hi ha fitxers");
+                        out.println("No hi ha fitxers");
                     } else {
                         bibl.forEach((file) -> {
-                            System.out.println(file);
+                            out.println(file);
                         });
                     }
                     break;
                 case SM_GB_ELIMINAR_FITXER:
                     if (ctrl.estaBuida()) {
-                        System.out.println("No hi ha fitxers per esborrar");
+                        out.println("No hi ha fitxers per esborrar");
                     } else {
-                        System.out.println("ID del Fitxer:");
+                        out.println("ID del Fitxer:");
                         int id = sc.nextInt();
                         try {
                             ctrl.esborrarFitxer(id);
-                            System.out.println("Fitxer amd id " + id + " esborrat");
+                            out.println("Fitxer amd id " + id + " esborrat");
                         } catch (AplicacioException ae) {
-                            //System.err.println(ae.getMessage()); Salida de error
-                            System.out.println(ae.getMessage());
+                            //err.println(ae.getMessage()); Salida de error
+                            out.println(ae.getMessage());
                         }
                     }
                     break;
                 case SM_GB_TORNAR:
-                    System.out.println("Tornant a >> " + MENU_PRINCIPAL);
+                    out.println("Tornant a >> " + MENU_PRINCIPAL);
                     break;
             }
 
@@ -282,13 +289,13 @@ public class AplicacioUB2 {
             OpcionsMenuPrincipal opcio;
 
             do {
-                System.out.println();
+                out.println();
 
                 menu.mostrarMenu();
 
                 opcio = menu.getOpcio(sc);
 
-                System.out.println();
+                out.println();
 
                 switch (opcio) {
 
@@ -302,7 +309,7 @@ public class AplicacioUB2 {
                         loadFile(sc);
                         break;
                     case MP_SORTIR:
-                        System.out.println("Adeu!!");
+                        out.println("Adeu!!");
                         break;
 
                 }
