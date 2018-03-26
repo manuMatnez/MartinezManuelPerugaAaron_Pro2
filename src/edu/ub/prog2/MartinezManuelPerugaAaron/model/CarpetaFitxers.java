@@ -33,7 +33,7 @@ public class CarpetaFitxers implements Serializable {
     // capacidad máxima de la carpeta
     private static int capacity;
 
-    private ArrayList<File> carpeta;
+    private ArrayList<FitxerMultimedia> carpeta;
 
     public CarpetaFitxers() {
         carpeta = new ArrayList<>();
@@ -63,10 +63,10 @@ public class CarpetaFitxers implements Serializable {
      * @throws AplicacioException
      */
     public void addFitxer(File fitxer) throws AplicacioException {
-        if (carpeta.contains(fitxer)) {
+        if (carpeta.contains((FitxerMultimedia)fitxer)) {
             throw new AplicacioException("Ya existeix el fitxer");
         } else {
-            carpeta.add(fitxer);
+            carpeta.add((FitxerMultimedia)fitxer);
         }
     }
 
@@ -76,7 +76,7 @@ public class CarpetaFitxers implements Serializable {
      * @param fitxer
      */
     public void removeFitxer(File fitxer) {
-        carpeta.remove(fitxer);
+        carpeta.remove((FitxerMultimedia)fitxer);
     }
 
     /**
@@ -119,7 +119,7 @@ public class CarpetaFitxers implements Serializable {
         StringBuilder sb = new StringBuilder();
         int id = 1;
 
-        Iterator<File> fileIt = carpeta.iterator();
+        Iterator<FitxerMultimedia> fileIt = carpeta.iterator();
 
         while (fileIt.hasNext()) {
             File currentFile = fileIt.next();

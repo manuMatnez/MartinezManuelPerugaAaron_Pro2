@@ -70,7 +70,7 @@ public class Controlador {
      */
     public void afegirVideo(String cami, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps) throws AplicacioException {
-        dades.afegirNouVideo(cami, nomVideo, codec, durada, alcada, amplada, fps, this.reproductor);
+        dades.afegirFitxer(cami, nomVideo, codec, durada, alcada, amplada, fps, this.reproductor);
     }
 
     /**
@@ -86,7 +86,7 @@ public class Controlador {
      */
     public void afegirAudio(String cami, String camiImatge, String nomAudio,
             String codec, float durada, int kbps) throws AplicacioException {
-        dades.afegirNouAudio(cami, camiImatge, nomAudio, codec, durada, kbps, this.reproductor);
+        dades.afegirFitxer(cami, camiImatge, nomAudio, codec, durada, kbps, this.reproductor);
     }
 
     /**

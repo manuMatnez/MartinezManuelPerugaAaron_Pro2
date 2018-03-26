@@ -157,16 +157,21 @@ public class AplicacioUB2 {
     }
 
     private void saveFile(Scanner sc) {
-        System.out.println("Ruta completa amb el nom:");
-        String cami = sc.nextLine();
-        try {
-            ctrl.guardarDadesDisc(cami);
+        List<String> bibl = ctrl.mostrarBiblioteca();
+        if (bibl.isEmpty()) {
+            System.out.println("No hi ha dades que guardar");
+        } else {
+            System.out.println("Ruta completa amb el nom:");
+            String cami = sc.nextLine();
+            try {
+                ctrl.guardarDadesDisc(cami);
 
-            System.out.println("Dades emmagatzemades!!");
+                System.out.println("Dades emmagatzemades!!");
 
-        } catch (AplicacioException ae) {
-            //System.err.println(ae.getMessage()); Salida de error
-            System.out.println(ae.getMessage());
+            } catch (AplicacioException ae) {
+                //System.err.println(ae.getMessage()); Salida de error
+                System.out.println(ae.getMessage());
+            }
         }
     }
 

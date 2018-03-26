@@ -115,9 +115,8 @@ public class Dades implements Serializable {
      * @param r
      * @throws AplicacioException
      */
-    public void afegirNouVideo(String cami, String nomVideo, String codec,
+    public void afegirFitxer(String cami, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps, Reproductor r) throws AplicacioException {
-        //TODO consultar
         Video video = new Video(cami, nomVideo, codec, durada, alcada, amplada, fps, r);
         biblioteca.addFitxer(video);
     }
@@ -134,9 +133,8 @@ public class Dades implements Serializable {
      * @param r
      * @throws AplicacioException
      */
-    public void afegirNouAudio(String cami, String camiImatge, String nomAudio,
+    public void afegirFitxer(String cami, String camiImatge, String nomAudio,
             String codec, float durada, int kbps, Reproductor r) throws AplicacioException {
-        //TODO consultar
         Audio audio = new Audio(cami, new File(camiImatge), nomAudio, codec, durada, kbps, r);
         biblioteca.addFitxer(audio);
     }

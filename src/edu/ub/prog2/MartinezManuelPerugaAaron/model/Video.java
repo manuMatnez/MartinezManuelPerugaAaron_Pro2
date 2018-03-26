@@ -31,8 +31,8 @@ public class Video extends FitxerReproduible {
     private final float fps;
 
     public Video(String cami, String nom, String codec, float durada, int alcada,
-            int amplada, float fps, Reproductor r) throws AplicacioException {
-        super(cami, nom, codec, durada, r);
+            int amplada, float fps, Reproductor reproductor) throws AplicacioException {
+        super(cami, nom, codec, durada, reproductor);
         this.alcada = alcada;
         this.amplada = amplada;
         this.fps = fps;

@@ -31,8 +31,8 @@ public class Audio extends FitxerReproduible {
     private final int kbps;
 
     public Audio(String cami, File fitxerImatge, String nom, String codec,
-            float durada, int kbps, Reproductor r) throws AplicacioException {
-        super(cami, nom, codec, durada, r);
+            float durada, int kbps, Reproductor reproductor) throws AplicacioException {
+        super(cami, nom, codec, durada, reproductor);
 
         this.fitxerImatge = fitxerImatge;
         this.kbps = kbps;

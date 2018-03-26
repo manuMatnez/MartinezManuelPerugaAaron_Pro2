@@ -33,12 +33,12 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
     private final transient Reproductor reproductor;
 
     // nom no puede ser porque lo sacamos de cami
-    protected FitxerReproduible(String cami, String nom, String codec, float durada, Reproductor r) throws AplicacioException {
+    protected FitxerReproduible(String cami, String nom, String codec, float durada, Reproductor reproductor) throws AplicacioException {
         super(cami);
         setDescripcio(nom);
         this.codec = codec;
         this.durada = durada;
-        this.reproductor = r;
+        this.reproductor = reproductor;
     }
 
     // Getters START
