@@ -149,8 +149,8 @@ public class Dades implements Serializable {
      */
     public void save(String camiDesti) throws AplicacioException {
         File savedFile = new File(camiDesti);
-        try (FileOutputStream fout = new FileOutputStream(savedFile)) {
-            ObjectOutputStream oos = new ObjectOutputStream(fout);
+        try (FileOutputStream fout = new FileOutputStream(savedFile);
+                ObjectOutputStream oos = new ObjectOutputStream(fout)) {
             oos.writeObject(this);
             oos.flush();
         } catch (IOException ex) {
@@ -173,8 +173,8 @@ public class Dades implements Serializable {
         if (!loadFile.exists()) {
             throw new AplicacioException("No existeix el fixter de dades");
         } else {
-            try (FileInputStream fis = new FileInputStream(loadFile)) {
-                ObjectInputStream ois = new ObjectInputStream(fis);
+            try (FileInputStream fis = new FileInputStream(loadFile);
+                    ObjectInputStream ois = new ObjectInputStream(fis)) {
                 dades = (Dades) ois.readObject();
             } catch (IOException ex) {
                 throw new AplicacioException("No es pot carregar o no existeix el fitxer");
