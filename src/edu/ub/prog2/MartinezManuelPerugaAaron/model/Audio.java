@@ -27,7 +27,7 @@ import java.io.File;
  */
 public class Audio extends FitxerReproduible {
 
-    private final File fitxerImatge;
+    private File fitxerImatge;
     private final int kbps;
 
     public Audio(String cami, File fitxerImatge, String nom, String codec,
@@ -42,7 +42,16 @@ public class Audio extends FitxerReproduible {
     public int getKbps() {
         return kbps;
     }
+    public File getFitxerImatge() {
+        return fitxerImatge;
+    }
     // Getters END
+
+    // Setters START
+    public void setFitxerImatge(File fitxerImatge) {
+        this.fitxerImatge = fitxerImatge;
+    }
+    // Setters END
 
     @Override
     protected void reproduir() {

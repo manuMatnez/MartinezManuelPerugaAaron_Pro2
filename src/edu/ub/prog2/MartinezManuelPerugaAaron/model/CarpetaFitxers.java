@@ -26,7 +26,7 @@ import java.util.Iterator;
  * CarpetaFitxers - Modelo
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 2.0
+ * @version 3.0
  */
 public class CarpetaFitxers implements Serializable {
 
@@ -57,16 +57,16 @@ public class CarpetaFitxers implements Serializable {
     }
 
     /**
-     * Añade un fichero a la carpeta si no está ya contenido
+     * Añade un fichero a la carpeta
      *
      * @param fitxer
      * @throws AplicacioException
      */
     public void addFitxer(File fitxer) throws AplicacioException {
-        if (carpeta.contains((FitxerMultimedia)fitxer)) {
-            throw new AplicacioException("Ya existeix el fitxer");
+        if (isFull()) {
+            throw new AplicacioException("Carpeta plena");
         } else {
-            carpeta.add((FitxerMultimedia)fitxer);
+            carpeta.add((FitxerMultimedia) fitxer);
         }
     }
 
@@ -76,7 +76,7 @@ public class CarpetaFitxers implements Serializable {
      * @param fitxer
      */
     public void removeFitxer(File fitxer) {
-        carpeta.remove((FitxerMultimedia)fitxer);
+        carpeta.remove((FitxerMultimedia) fitxer);
     }
 
     /**
@@ -102,6 +102,7 @@ public class CarpetaFitxers implements Serializable {
      * @return boolean
      */
     public boolean isFull() {
+        System.out.println("ssssssssssssssssssss");
         return carpeta.size() == capacity;
     }
 
@@ -112,6 +113,10 @@ public class CarpetaFitxers implements Serializable {
      */
     public int freeSpace() {
         return capacity - carpeta.size();
+    }
+
+    public boolean contains(File fitxer) {
+        return carpeta.contains((FitxerMultimedia) fitxer);
     }
 
     @Override

@@ -16,17 +16,35 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
+import edu.ub.prog2.utils.AplicacioException;
+import java.io.File;
+
 /**
  * BibliotecaFitxersMultimedia - Modelo, a superclass CarpetaFitxers ya
  * implementa Serializable, no hace falta
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 1.0
+ * @version 2.0
  */
 public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
 
     public BibliotecaFitxersMultimedia() {
         super();
+    }
+
+    /**
+     * Añade un fichero a la carpeta si no existe
+     *
+     * @param fitxer
+     * @throws AplicacioException
+     */
+    @Override
+    public void addFitxer(File fitxer) throws AplicacioException {
+        if (super.contains(fitxer)) {
+            throw new AplicacioException("Ya existeix el fitxer");
+        } else {
+            super.addFitxer(fitxer);
+        }
     }
 
     @Override

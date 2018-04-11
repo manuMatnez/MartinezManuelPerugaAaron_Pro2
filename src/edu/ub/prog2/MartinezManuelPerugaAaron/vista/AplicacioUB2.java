@@ -132,7 +132,7 @@ public class AplicacioUB2 {
             System.out.println("Ruta de la imatge del Fitxer:");
             String imatgeFitxer = sc.nextLine();
 
-            ctrl.checkExist(imatgeFitxer);
+            //ctrl.checkExist(imatgeFitxer);
 
             System.out.println("Descripcio del Fitxer:");
             String desc = sc.nextLine();
