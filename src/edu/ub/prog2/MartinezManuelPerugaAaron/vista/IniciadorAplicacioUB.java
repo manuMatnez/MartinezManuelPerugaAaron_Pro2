@@ -36,7 +36,7 @@ public class IniciadorAplicacioUB {
     // Propiedades del Sistema Operativo END
 
     // Constantes añadidas START
-    private final static String VERSION = "2.0";
+    private final static String VERSION = "3.0";
     private final static String ASTERISKS = String.join("", Collections.nCopies(50, "*"));
     private final static String HEADER = "/" + ASTERISKS + "\n"
             + "* Reproductor UB (Grup C)\n"
