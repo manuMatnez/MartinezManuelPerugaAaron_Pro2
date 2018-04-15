@@ -16,29 +16,34 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
-import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
-import edu.ub.prog2.utils.ReproductorBasic;
+import edu.ub.prog2.utils.AplicacioException;
 
 /**
- * Reproductor - Modelo
+ * AlbumFitxersMultimedia - Modelo
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 2.0
+ * @version 1.0
  */
-public class Reproductor extends ReproductorBasic {
+public class AlbumFitxersMultimedia extends CarpetaFitxers {
 
-    public Reproductor(EscoltadorReproduccioBasic controlador) {
-        super(controlador);
+    private String titol;
+    
+    public AlbumFitxersMultimedia(int cap, String titol) throws AplicacioException {
+        super(cap);
+        this.titol = titol;
     }
 
-    public Reproductor(String vlcPath, EscoltadorReproduccioBasic controlador) {
-        super(vlcPath, controlador);
+    // Getters y Setters START
+    public String getTitol() {
+        return titol;
     }
 
-    public Reproductor(String vlcPath, int verbose, EscoltadorReproduccioBasic controlador) {
-        super(vlcPath, verbose, controlador);
+    public void setTitol(String titol) {
+        this.titol = titol;
     }
-
-
+    // Getters y Setters END
+    
+    
+    
 
 }

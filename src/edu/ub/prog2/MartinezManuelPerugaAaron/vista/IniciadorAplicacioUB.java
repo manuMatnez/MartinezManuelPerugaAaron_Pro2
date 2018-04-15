@@ -78,7 +78,7 @@ public class IniciadorAplicacioUB {
 
         System.out.println("Benvingut al reproductor UB, " + USER_NAME);
 
-        AplicacioUB2 aplicacio = new AplicacioUB2();
+        AplicacioUB3 aplicacio = new AplicacioUB3();
         aplicacio.gestioAplicacioUB();
 
     }

@@ -26,7 +26,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Dades - Modelo
@@ -37,9 +39,11 @@ import java.util.List;
 public class Dades implements Serializable {
 
     private final BibliotecaFitxersMultimedia biblioteca;
+    private final Map<String, AlbumFitxersMultimedia> albums;
 
     public Dades() {
         biblioteca = new BibliotecaFitxersMultimedia();
+        albums = new HashMap<>();
     }
 
     /**

@@ -26,7 +26,7 @@ import java.util.Objects;
  * falta
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 2.0
+ * @version 3.0
  */
 public class FitxerMultimedia extends File {
 
@@ -107,19 +107,25 @@ public class FitxerMultimedia extends File {
         return new Date(this.lastModified());
     }
 
-    // Getters START
+    // Getters y Setters START
     public String getDescripcio() {
         return descripcio;
     }
-    // Getters END
 
-    // Setters START
     public void setDescripcio(String descripcio) {
         this.descripcio = descripcio;
     }
-    // Setters END
+    // Getters y Setters END
 
     //***************************************************************
+
+    @Override
+    public int hashCode() {
+        return this.descripcio.hashCode() * 3 + 
+                this.getCamiAbsolutComplet().hashCode() * 5 + 
+                this.getUltimaModificacio().hashCode() * 7;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -132,31 +138,16 @@ public class FitxerMultimedia extends File {
             return false;
         }
         final FitxerMultimedia other = (FitxerMultimedia) obj;
-        if (!Objects.equals(this.getNomFitxer(), other.getNomFitxer())) {
-            return false;
-        }
         if (!Objects.equals(this.descripcio, other.descripcio)) {
             return false;
         }
-        if (!Objects.equals(this.getExtensio(), other.getExtensio())) {
-            return false;
-        }
-        if (!Objects.equals(this.getCamiAbsolut(), other.getCamiAbsolut())) {
+        if (!Objects.equals(this.getCamiAbsolutComplet(), other.getCamiAbsolutComplet())) {
             return false;
         }
         return Objects.equals(this.getUltimaModificacio(), other.getUltimaModificacio());
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.getCamiAbsolut());
-        hash = 83 * hash + Objects.hashCode(this.getNomFitxer());
-        hash = 83 * hash + Objects.hashCode(this.descripcio);
-        hash = 83 * hash + Objects.hashCode(this.getExtensio());
-        hash = 83 * hash + Objects.hashCode(this.getUltimaModificacio());
-        return hash;
-    }
+    
+    //***************************************************************
 
     @Override
     public String toString() {

@@ -19,6 +19,7 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
+import edu.ub.prog2.utils.InControlador;
 import java.util.List;
 
 /**
@@ -28,14 +29,16 @@ import java.util.List;
  * @author Manuel Martinez, Aaron Peruga
  * @version 1.0
  */
-public class Controlador {
+public class Controlador implements InControlador {
 
     private Dades dades;
     private final Reproductor reproductor;
+    private final EscoltadorReproduccio escoltador;
 
     private Controlador() {
         dades = new Dades();
-        reproductor = new Reproductor();
+        escoltador = new EscoltadorReproduccio();
+        reproductor = new Reproductor(escoltador);
     }
 
     private static class Loader {
@@ -68,6 +71,7 @@ public class Controlador {
      * @param fps
      * @throws AplicacioException
      */
+    @Override
     public void afegirVideo(String cami, String nomVideo, String codec,
             float durada, int alcada, int amplada, float fps) throws AplicacioException {
         dades.afegirFitxer(cami, nomVideo, codec, durada, alcada, amplada, fps, this.reproductor);
@@ -84,6 +88,7 @@ public class Controlador {
      * @param kbps
      * @throws AplicacioException
      */
+    @Override
     public void afegirAudio(String cami, String camiImatge, String nomAudio,
             String codec, float durada, int kbps) throws AplicacioException {
         dades.afegirFitxer(cami, camiImatge, nomAudio, codec, durada, kbps, this.reproductor);
@@ -94,6 +99,7 @@ public class Controlador {
      *
      * @return List
      */
+    @Override
     public List<String> mostrarBiblioteca() { // llista dels retorns de toString() dels fitxers
         return dades.getBibliotecaList();
     }
@@ -104,6 +110,7 @@ public class Controlador {
      * @param id
      * @throws AplicacioException
      */
+    @Override
     public void esborrarFitxer(int id) throws AplicacioException {
         dades.deleteFitxer(id);
     }
@@ -114,6 +121,7 @@ public class Controlador {
      * @param camiDesti
      * @throws AplicacioException
      */
+    @Override
     public void guardarDadesDisc(String camiDesti) throws AplicacioException {
         dades.save(camiDesti);
     }
@@ -125,6 +133,7 @@ public class Controlador {
      * @param camiOrigen
      * @throws AplicacioException
      */
+    @Override
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
         this.dades = dades.load(camiOrigen);
     }
@@ -137,6 +146,88 @@ public class Controlador {
      */
     public void checkExist(String cami) throws AplicacioException {
         dades.verify(cami);
+    }
+    
+    // PRACTICA 3 - IMPLEMENTACION METODOS ABSTRACTOS DE InControlador
+    
+        @Override
+    public void reproduirFitxer(int id) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void afegirAlbum(String titol) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<String> mostrarLlistatAlbums() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void esborrarAlbum(String titol) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean existeixAlbum(String titol) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void afegirFitxer(String titolAlbum, int id) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<String> mostrarAlbum(String titol) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void esborrarFitxer(String titol, int id) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void obrirFinestraReproductor() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void tancarFinestraReproductor() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reproduirCarpeta() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reproduirCarpeta(String titol) throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reemprenReproduccio() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void pausaReproduccio() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void aturaReproduccio() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void saltaReproduccio() throws AplicacioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -102,7 +102,6 @@ public class CarpetaFitxers implements Serializable {
      * @return boolean
      */
     public boolean isFull() {
-        System.out.println("ssssssssssssssssssss");
         return carpeta.size() == capacity;
     }
 

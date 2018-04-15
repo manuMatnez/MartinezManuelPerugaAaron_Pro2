@@ -26,16 +26,16 @@ import java.util.Locale;
 import java.util.Scanner;
 
 /**
- * AplicacioUB2 - Vista
+ * AplicacioUB3 - Vista
  *
  * @author Manuel Martinez, Aaron Peruga
  * @version 1.0
  */
-public class AplicacioUB2 {
+public class AplicacioUB3 {
 
     private final Controlador ctrl;
 
-    public AplicacioUB2() {
+    public AplicacioUB3() {
         ctrl = Controlador.getInstance();
     }
 
