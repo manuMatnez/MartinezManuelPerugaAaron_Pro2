@@ -17,7 +17,6 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.InControlador;
 import java.util.List;

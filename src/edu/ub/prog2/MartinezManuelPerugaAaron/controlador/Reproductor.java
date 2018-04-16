@@ -14,13 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.model;
+package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
 import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import edu.ub.prog2.utils.ReproductorBasic;
 
 /**
- * Reproductor - Modelo
+ * Reproductor - Controlador
  *
  * @author Manuel Martinez, Aaron Peruga
  * @version 2.0
