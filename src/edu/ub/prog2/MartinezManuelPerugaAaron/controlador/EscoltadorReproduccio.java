@@ -31,17 +31,31 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     private boolean[] llistaCtrl;
     private boolean reproduccioCiclica, reproduccioAleatoria;
 
-    /*public EscoltadorReproduccio(CarpetaFitxers llistaReproduint, 
-            boolean[] llistaCtrl, boolean reproduccioCiclica, 
+    public EscoltadorReproduccio() {
+        this.llistaReproduint = null;
+        this.llistaCtrl = null;
+        this.reproduccioCiclica = false;
+        this.reproduccioAleatoria = false;
+    }
+
+    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint,
+            boolean[] llistaCtrl) {
+        this.llistaReproduint = llistaReproduint;
+        this.llistaCtrl = llistaCtrl;
+        this.reproduccioCiclica = false;
+        this.reproduccioAleatoria = false;
+    }
+
+    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint,
+            boolean[] llistaCtrl, boolean reproduccioCiclica,
             boolean reproduccioAleatoria) {
         this.llistaReproduint = llistaReproduint;
         this.llistaCtrl = llistaCtrl;
         this.reproduccioCiclica = reproduccioCiclica;
         this.reproduccioAleatoria = reproduccioAleatoria;
-    }*/
+    }
 
     // Getters y Setters START
-    
     public CarpetaFitxers getLlistaReproduint() {
         return llistaReproduint;
     }
@@ -73,9 +87,8 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     public void setReproduccioAleatoria(boolean reproduccioAleatoria) {
         this.reproduccioAleatoria = reproduccioAleatoria;
     }
-    
-    // Getters y Setters END
 
+    // Getters y Setters END
     @Override
     protected void onEndFile() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

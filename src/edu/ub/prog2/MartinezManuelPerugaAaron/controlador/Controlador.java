@@ -22,8 +22,7 @@ import edu.ub.prog2.utils.InControlador;
 import java.util.List;
 
 /**
- * Controlador Singleton (para tener solo un objeto de este tipo de controlador,
- * dades y reproductor)
+ * Controlador Singleton (para tener solo un objeto de este tipo)
  *
  * @author Manuel Martinez, Aaron Peruga
  * @version 1.0
@@ -41,7 +40,6 @@ public class Controlador implements InControlador {
     }
 
     private static class Loader {
-
         private static final Controlador INSTANCE = new Controlador();
     }
 
