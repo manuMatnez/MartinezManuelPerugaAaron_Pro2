@@ -28,6 +28,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -52,12 +53,12 @@ public class Dades implements Serializable {
      *
      * @return List
      */
-    public List<String> getBibliotecaList() {
+    public List<String> getBiblioteca() {
         List<String> bibList;
         String bibToStr = this.biblioteca.toString();
 
         if (bibToStr.isEmpty()) {
-            bibList = new ArrayList<>(); // lista buida
+            bibList = new ArrayList<>(); // lista estaBuida
         } else {
             String[] bibToStrArr = bibToStr.split("\n"); // Array de Strings (Lineas)
             bibList = new ArrayList<>(Arrays.asList(bibToStrArr));
@@ -66,31 +67,11 @@ public class Dades implements Serializable {
     }
 
     /**
-     * Borra un fichero de la biblioteca de ficheros
-     *
-     * @param id
-     * @throws AplicacioException
-     */
-    public void deleteFitxer(int id) throws AplicacioException {
-        id--;
-        int size = this.biblioteca.getSize();
-        if (id < 0) {
-            throw new AplicacioException("La posició começa amb 1");
-        } else if (id > size) {
-            throw new AplicacioException("La posició no pot ser mès gran que: "
-                    + size);
-        } else {
-            FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
-            biblioteca.removeFitxer(file);
-        }
-    }
-
-    /**
      * Retorna si la carpeta está vacía
      *
      * @return boolean
      */
-    public boolean buida() {
+    public boolean estaBuida() {
         return this.biblioteca.getSize() == 0;
     }
 
@@ -100,7 +81,7 @@ public class Dades implements Serializable {
      * @param cami
      * @throws AplicacioException
      */
-    public void verify(String cami) throws AplicacioException {
+    public void comprovaExistenciaFitxer(String cami) throws AplicacioException {
         File tmp = new File(cami);
         if (!tmp.exists()) {
             throw new AplicacioException("El fitxer " + tmp.getName() + " no existeix");
@@ -145,6 +126,35 @@ public class Dades implements Serializable {
     }
 
     /**
+     * Borra un fichero de la biblioteca de ficheros También borrara de todos
+     * los albums (Práctica 3)
+     *
+     * @param id
+     * @throws AplicacioException
+     */
+    public void esborrarFitxer(int id) throws AplicacioException {
+        id--;
+        int size = this.biblioteca.getSize();
+        if (id < 0) {
+            throw new AplicacioException("La posició começa amb 1");
+        } else if (id > size) {
+            throw new AplicacioException("La posició no pot ser mès gran que: "
+                    + size);
+        }
+
+        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
+        biblioteca.removeFitxer(file);
+
+        // PRACTICA 3
+        for (AlbumFitxersMultimedia album : albums.values()) {
+            if (album.contains(file)) {
+                album.removeFitxer(file);
+            }
+        }
+
+    }
+
+    /**
      * Guarda todos los datos del programa en un archivo. Usando Try-Catch con
      * recursos no hace falta usar finally ni .close(), ya que sirve para las
      * clases que implementan Closeable
@@ -152,7 +162,7 @@ public class Dades implements Serializable {
      * @param camiDesti
      * @throws AplicacioException
      */
-    public void save(String camiDesti) throws AplicacioException {
+    public void guardarDadesDisc(String camiDesti) throws AplicacioException {
         File savedFile = new File(camiDesti);
         try (FileOutputStream fout = new FileOutputStream(savedFile);
                 ObjectOutputStream oos = new ObjectOutputStream(fout)) {
@@ -172,7 +182,7 @@ public class Dades implements Serializable {
      * @return
      * @throws AplicacioException
      */
-    public Dades load(String camiOrigen) throws AplicacioException {
+    public Dades carregarDadesDisc(String camiOrigen) throws AplicacioException {
         File loadFile = new File(camiOrigen);
         Dades dades;
         if (!loadFile.exists()) {
@@ -188,6 +198,116 @@ public class Dades implements Serializable {
             }
             return dades;
         }
+    }
+
+    // PRACTICA 3
+    //********************************************************************
+    /**
+     * Borra un album existente
+     *
+     * @param titol
+     * @throws AplicacioException
+     */
+    public void esborrarUnAlbum(String titol) throws AplicacioException {
+        if (!albums.containsKey(titol)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
+        albums.remove(titol);
+    }
+
+    /**
+     * Añade un nuevo album
+     *
+     * @param titol
+     * @throws AplicacioException
+     */
+    public void afegirAlbum(String titol) throws AplicacioException {
+        if (albums.containsKey(titol)) {
+            throw new AplicacioException("Ya existeix aquest album");
+        }
+
+        // TODO
+        albums.put(titol, new AlbumFitxersMultimedia(10, titol));
+    }
+
+    /**
+     * Comprueba si existe un album
+     *
+     * @param titol
+     * @return boolean
+     */
+    public boolean existeixAlbum(String titol) {
+        return albums.containsKey(titol);
+    }
+
+    /**
+     * Retorna la lista de albums
+     *
+     * @return List
+     */
+    public List<String> albumListToString() {
+        List<String> albumList = new ArrayList<>(albums.size());
+        int id = 1;
+
+        Iterator<String> albumIt = albums.keySet().iterator();
+
+        while (albumIt.hasNext()) {
+            StringBuilder sb = new StringBuilder();
+            String currentAlbum = albumIt.next();
+            sb.append("[").append(id).append("] ").append(albums.get(currentAlbum)).append("\n");
+            id++;
+            albumList.add(sb.toString());
+        }
+        return albumList;
+    }
+
+    /**
+     * Retorna la lista de ficheros multimedia en lista de Strings
+     *
+     * @param titol
+     * @return List
+     * @throws AplicacioException
+     */
+    public List<String> albumToString(String titol) throws AplicacioException {
+        if (!albums.containsKey(titol)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
+
+        List<String> albumList;
+        String albumToStr = this.albums.get(titol).toString();
+
+        if (albumToStr.isEmpty()) {
+            albumList = new ArrayList<>(); // lista estaBuida
+        } else {
+            String[] albumToStrArr = albumToStr.split("\n"); // Array de Strings (Lineas)
+            albumList = new ArrayList<>(Arrays.asList(albumToStrArr));
+        }
+        return albumList;
+    }
+
+    /**
+     * Añade un fichero al Album seleccionado
+     *
+     * @param titolAlbum
+     * @param id
+     * @throws AplicacioException
+     */
+    public void afegirFitxerAlbum(String titolAlbum, int id) throws AplicacioException {
+        id--;
+        int size = this.biblioteca.getSize();
+        if (id < 0) {
+            throw new AplicacioException("La posició começa amb 1");
+        } else if (id > size) {
+            throw new AplicacioException("La posició no pot ser mès gran que: "
+                    + size);
+        }
+
+        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
+        albums.get(titolAlbum).addFitxer(file);
+    }
+
+    public void esborrarFitxerAlbum(String titol, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

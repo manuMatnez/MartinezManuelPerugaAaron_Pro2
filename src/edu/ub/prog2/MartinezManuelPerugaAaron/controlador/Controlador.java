@@ -25,7 +25,7 @@ import java.util.List;
  * Controlador Singleton (para tener solo un objeto de este tipo)
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 1.0
+ * @version 2.0
  */
 public class Controlador implements InControlador {
 
@@ -40,6 +40,7 @@ public class Controlador implements InControlador {
     }
 
     private static class Loader {
+
         private static final Controlador INSTANCE = new Controlador();
     }
 
@@ -53,7 +54,7 @@ public class Controlador implements InControlador {
      * @return boolean
      */
     public boolean estaBuida() {
-        return dades.buida();
+        return dades.estaBuida();
     }
 
     /**
@@ -98,7 +99,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public List<String> mostrarBiblioteca() { // llista dels retorns de toString() dels fitxers
-        return dades.getBibliotecaList();
+        return dades.getBiblioteca();
     }
 
     /**
@@ -109,7 +110,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public void esborrarFitxer(int id) throws AplicacioException {
-        dades.deleteFitxer(id);
+        dades.esborrarFitxer(id);
     }
 
     /**
@@ -120,7 +121,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public void guardarDadesDisc(String camiDesti) throws AplicacioException {
-        dades.save(camiDesti);
+        dades.guardarDadesDisc(camiDesti);
     }
 
     /**
@@ -132,7 +133,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
-        this.dades = dades.load(camiOrigen);
+        this.dades = dades.carregarDadesDisc(camiOrigen);
     }
 
     /**
@@ -141,49 +142,100 @@ public class Controlador implements InControlador {
      * @param cami
      * @throws AplicacioException
      */
-    public void checkExist(String cami) throws AplicacioException {
-        dades.verify(cami);
-    }
-    
-    // PRACTICA 3 - IMPLEMENTACION METODOS ABSTRACTOS DE InControlador
-    
-        @Override
-    public void reproduirFitxer(int id) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void comprovaExistenciaFitxer(String cami) throws AplicacioException {
+        dades.comprovaExistenciaFitxer(cami);
     }
 
+    // PRACTICA 3 - IMPLEMENTACION METODOS -> InControlador
+    /**
+     * Añade un nuevo album a traves de Dades
+     *
+     * @param titol
+     * @throws AplicacioException
+     */
     @Override
     public void afegirAlbum(String titol) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dades.afegirAlbum(titol);
     }
 
+    /**
+     * Retorna una Lista de Strings de Albums a traves de Dades
+     *
+     * @return List
+     */
     @Override
     public List<String> mostrarLlistatAlbums() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dades.albumListToString();
     }
 
+    /**
+     * Borra un album a traves de Dades
+     *
+     * @param titol
+     * @throws AplicacioException
+     */
     @Override
     public void esborrarAlbum(String titol) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dades.esborrarUnAlbum(titol);
     }
 
+    /**
+     * Comprueba si existe el Album a traves de Dades
+     *
+     * @param titol
+     * @return
+     */
     @Override
     public boolean existeixAlbum(String titol) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dades.existeixAlbum(titol);
     }
 
+    /**
+     * Añade un fichero al Album seleccionado a traves de Dades (La comprobación
+     * de la existencia la hacemos aquí aprovechando existeixalbum())
+     *
+     * @param titolAlbum
+     * @param id
+     * @throws AplicacioException
+     */
     @Override
     public void afegirFitxer(String titolAlbum, int id) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!existeixAlbum(titolAlbum)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
+        dades.afegirFitxerAlbum(titolAlbum, id);
     }
 
+    /**
+     * Retorna el contenido de un Album en una Lista de String a traves de Dades
+     *
+     * @param titol
+     * @return
+     * @throws AplicacioException
+     */
     @Override
     public List<String> mostrarAlbum(String titol) throws AplicacioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dades.albumToString(titol);
+    }
+
+    /**
+     * Borra un fichero de un album a traves de Dades (La comprobación de la
+     * existencia la hacemos aquí aprovechando existeixalbum())
+     *
+     * @param titol
+     * @param id
+     * @throws AplicacioException
+     */
+    @Override
+    public void esborrarFitxer(String titol, int id) throws AplicacioException {
+        if (!existeixAlbum(titol)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
+        dades.esborrarFitxerAlbum(titol, id);
     }
 
     @Override
-    public void esborrarFitxer(String titol, int id) throws AplicacioException {
+    public void reproduirFitxer(int id) throws AplicacioException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

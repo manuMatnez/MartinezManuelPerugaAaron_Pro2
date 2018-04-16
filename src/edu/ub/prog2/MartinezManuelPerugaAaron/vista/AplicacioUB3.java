@@ -39,34 +39,98 @@ public class AplicacioUB3 {
         ctrl = Controlador.getInstance();
     }
 
-    private static final String MENU_PRINCIPAL = "Menu Principal";
+    // Titulos de las Secciones de los menús START
+    private static final String MENU_PRINCIPAL_SEC = "Menu Principal";
+    private static final String GESTIO_BIBLIOTECA_SEC = "Gestio de Biblioteca";
+    private static final String AFEGIR_FITXER_BIB_SEC = "Afegir Fitxer a Biblioteca";
+    private static final String GESTIO_ALBUMS_SEC = "Gestio Albums";
+    private static final String GESTIO_ALBUM_SEC = "Gestionar Album";
+    private static final String CONTROL_REPR_VISIO_SEC = "Control Reproduccio/Visio";
+    private static final String GESTION_REPR_CURSO_SEC = "Gestio Reproduccio en Curs";
+    // Titulos de las Secciones de los menús END
+
+    // Menú anterior para no repetir el String
+    private static final String MENU_ANTERIOR_NAME = "Menu anterior";
 
     // Menú Principal
     private static enum OpcionsMenuPrincipal {
-        MP_GESTION_BIBLIOTECA, MP_GUARDAR_DADES, MP_RECUPERAR_DADES, MP_SORTIR
+        MP_GESTION_BIBLIOTECA, MP_GESTIO_ALBUMS, MP_CONTROL_REPRODUCCIÓ, MP_GUARDAR_DADES, MP_RECUPERAR_DADES, MP_SORTIR
     };
 
     private static final String[] DESC_MENU_PRINCIPAL = {
-        "Gestió Biblioteca",
+        "Gestio Biblioteca",
+        "Gestio Albums",
+        "Control Reproduccio/Visio",
         "Guardar Dades",
         "Recuperar Dades",
         "Sortir"
     };
 
-    // SubMenu de Gestión de Biblioteca
+    // Menu de Gestión de Biblioteca
     private static enum OpcionsMenuGestioBiblioteca {
-        SM_GB_AFEGIR_FITXER, SM_GB_MOSTRAR_BIBLIOTECA, SM_GB_ELIMINAR_FITXER, SM_GB_TORNAR
+        M_GB_AFEGIR_FITXER, M_GB_MOSTRAR_BIBLIOTECA, M_GB_ELIMINAR_FITXER, M_GB_TORNAR
     };
 
     private static final String[] DESC_MENU_GESTIO_BIBLIOTECA = {
         "Afegir fitxer multimedia a la biblioteca",
         "Mostrar Biblioteca",
-        "Elimina fitxer multimédia",
-        "Menu Anterior"
+        "Elimina fitxer multimedia",
+        MENU_ANTERIOR_NAME
     };
 
-    private static final String CARPETA_FITXERS_TITLE = "Carpeta de Fitxers:\n"
-            + String.join("", Collections.nCopies(35, "-"));
+    // Menu de la opción GestioAlbums
+    private static enum OpcionsMenuGestioAlbums {
+        M_GA_AFEGIR_ALBUM, M_GA_MOSTRAR_ALBUMS, M_GA_ELIMINAR_ALBUM, M_GA_GESTIONAR_ALBUM, M_GA_TORNAR
+    };
+
+    private static final String[] DESC_MENU_GESTIO_ALBUMS = {
+        "Afegir Albums",
+        "Mostrar Albums",
+        "Eliminar Albums",
+        "Gestionar Album",
+        MENU_ANTERIOR_NAME
+    };
+
+    // SubMenu de la opción gestionar albums
+    private static enum OpcionsSubMenuGestionarAlbum {
+        SM_GA_AFEGIR_FITXER, SM_GA_MOSTRAR_ALBUM, SM_GA_ELIMINAR_FITXER, SM_GA_TORNAR
+    };
+
+    private static final String[] DESC_SUBMENU_GESTIONAR_ALBUM = {
+        "Afegir Fitxer Multimedia",
+        "Mostrar Àlbum",
+        "Eliminar Fitxer Multimedia",
+        MENU_ANTERIOR_NAME
+    };
+
+    // Menu de la opcion control reproducció 
+    private static enum OpcionsMenuControl {
+        M_C_REPRODUIR_FITXER, M_C_REPRODUIR_BIBLIOTECA, M_C_REPRODUIR_ALBUM,
+        M_C_ACT_DES_CONTINUA, M_C_ACT_DES_ALEATORIA, M_C_GESTIO_REPRODUCCIO, M_C_MENU_ANTERIOR
+    };
+
+    private static final String[] DESC_MENU_CONTROL_REPRODUCCIO = {
+        "Reproduir fitxer reproduible",
+        "Reproduir tota la biblioteca",
+        "Reproduir un album",
+        "Activar/Desactivar reproduccio continua ",
+        "Activar/Desactivar reproduccio aleatoria ",
+        "Gestio reproduccio en curs",
+        MENU_ANTERIOR_NAME
+    };
+
+    //SubMenu de la opción gestio Reproduccio en curs
+    private static enum OpcionsSubMenuControl {
+        SM_GR_REEMPREN, SM_GR_PAUSA, SM_GR_ATURA, SM_GR_SALTA, SM_GR_SORTIR
+    }
+
+    private static final String[] DESC_SUBMENU_GESTIO_REPRODUCCIO = {
+        "Re-emprèn",
+        "Pausa",
+        "Atura",
+        "Salta",
+        MENU_ANTERIOR_NAME
+    };
 
     // SubMenu de Añadir fichero Multimedia a la biblioteca
     private static enum OpcionsMenuAfegir {
@@ -76,37 +140,47 @@ public class AplicacioUB3 {
     private static final String[] DESC_MENU_AFEGIR = {
         "Afegir Video",
         "Afegir Audio",
-        "Menu Anterior"
+        MENU_ANTERIOR_NAME
     };
 
+    private static final String CARPETA_FITXERS_TITLE = "Carpeta de Fitxers:\n"
+            + String.join("", Collections.nCopies(35, "-"));
+
     /**
-     * Pide los datos para poder crear un fichero de video
+     * Pide los datos para poder añadir un fichero de video
      *
      * @param sc
      */
     private void writeVideo(Scanner sc) {
-        System.out.println("Ruta del Fitxer:");
+        System.out.print("Ruta del Fitxer >> ");
         String cami = sc.nextLine();
+        System.out.println();
         try {
-            ctrl.checkExist(cami);
+            ctrl.comprovaExistenciaFitxer(cami);
 
-            System.out.println("Descripcio del Fitxer:");
+            System.out.print("Descripcio del Fitxer >> ");
             String desc = sc.nextLine();
+            System.out.println();
 
-            System.out.println("Codec (String):");
+            System.out.print("Codec (String) >> ");
             String codec = sc.nextLine();
+            System.out.println();
 
-            System.out.println("Durada (float):");
+            System.out.print("Durada (float) >> ");
             float durada = sc.nextFloat();
+            System.out.println();
 
-            System.out.println("Alcada (int):");
+            System.out.print("Alcada (int) >> ");
             int alcada = sc.nextInt();
+            System.out.println();
 
-            System.out.println("Amplada (int):");
+            System.out.print("Amplada (int) >> ");
             int amplada = sc.nextInt();
+            System.out.println();
 
-            System.out.println("Frames per Second (float):");
+            System.out.print("Frames per Second (float) >> ");
             float fps = sc.nextFloat();
+            System.out.println();
 
             ctrl.afegirVideo(cami, desc, codec, durada, alcada, amplada, fps);
 
@@ -119,32 +193,37 @@ public class AplicacioUB3 {
     }
 
     /**
-     * Pide los datos para poder crear un fichero de audio
+     * Pide los datos para poder añadir un fichero de audio
      *
      * @param sc
      */
     private void writeAudio(Scanner sc) {
-        System.out.println("Ruta del Fitxer:");
+        System.out.print("Ruta del Fitxer >> ");
         String cami = sc.nextLine();
+        System.out.println();
         try {
-            ctrl.checkExist(cami);
+            ctrl.comprovaExistenciaFitxer(cami);
 
-            System.out.println("Ruta de la imatge del Fitxer:");
+            System.out.print("Ruta de la imatge del Fitxer >> ");
             String imatgeFitxer = sc.nextLine();
+            System.out.println();
 
-            //ctrl.checkExist(imatgeFitxer);
-
-            System.out.println("Descripcio del Fitxer:");
+            //ctrl.comprovaExistenciaFitxer(imatgeFitxer);
+            System.out.print("Descripcio del Fitxer >> ");
             String desc = sc.nextLine();
+            System.out.println();
 
-            System.out.println("Codec (String):");
+            System.out.print("Codec (String) >> ");
             String codec = sc.next();
+            System.out.println();
 
-            System.out.println("Durada (float):");
+            System.out.print("Durada (float) >> ");
             float durada = sc.nextFloat();
+            System.out.println();
 
-            System.out.println("Kbps (int):");
+            System.out.print("Kbps (int) >> ");
             int kbps = sc.nextInt();
+            System.out.println();
 
             ctrl.afegirAudio(cami, imatgeFitxer, desc, codec, durada, kbps);
 
@@ -156,13 +235,57 @@ public class AplicacioUB3 {
         }
     }
 
+    /**
+     * Pide los datos para poder borrar un fichero de la Biblioteca
+     *
+     * @param sc
+     */
+    private void eliminarFitxer(Scanner sc) {
+        if (ctrl.estaBuida()) {
+            System.out.println("No hi ha fitxers per esborrar");
+        } else {
+            System.out.print("ID del Fitxer >> ");
+            int id = sc.nextInt();
+            System.out.println();
+            try {
+                ctrl.esborrarFitxer(id);
+                System.out.println("Fitxer amd id " + id + " esborrat");
+            } catch (AplicacioException ae) {
+                //System.err.println(ae.getMessage()); Salida de error
+                System.out.println(ae.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Muestra el contenido de la biblioteca
+     */
+    private void mostrarBiblioteca() {
+        List<String> bibl = ctrl.mostrarBiblioteca();
+        System.out.println(CARPETA_FITXERS_TITLE);
+
+        if (bibl.isEmpty()) {
+            System.out.println("No hi ha fitxers");
+        } else {
+            bibl.forEach((file) -> {
+                System.out.println(file);
+            });
+        }
+    }
+
+    /**
+     * Pide el path para poder guardar los datos en un archivo
+     *
+     * @param sc
+     */
     private void saveFile(Scanner sc) {
         List<String> bibl = ctrl.mostrarBiblioteca();
         if (bibl.isEmpty()) {
             System.out.println("No hi ha dades que guardar");
         } else {
-            System.out.println("Ruta completa amb el nom:");
+            System.out.print("Ruta completa amb el nom >> ");
             String cami = sc.nextLine();
+            System.out.println();
             try {
                 ctrl.guardarDadesDisc(cami);
 
@@ -175,9 +298,15 @@ public class AplicacioUB3 {
         }
     }
 
+    /**
+     * Pide el path para cargar un archivo con datos guardados
+     *
+     * @param sc
+     */
     private void loadFile(Scanner sc) {
-        System.out.println("Ruta completa amb el nom:");
+        System.out.print("Ruta completa amb el nom >> ");
         String cami = sc.nextLine();
+        System.out.println();
         try {
             ctrl.carregarDadesDisc(cami);
 
@@ -189,8 +318,181 @@ public class AplicacioUB3 {
         }
     }
 
+    /**
+     * Menú Gestionar Albums
+     *
+     * @param sc
+     */
+    private void gestioAlbums(Scanner sc) {
+        Menu<OpcionsMenuGestioAlbums> menuAlbum = new Menu<>(GESTIO_ALBUMS_SEC, OpcionsMenuGestioAlbums.values());
+
+        menuAlbum.setDescripcions(DESC_MENU_GESTIO_ALBUMS);
+
+        OpcionsMenuGestioAlbums opcio;
+
+        do {
+            System.out.println();
+
+            menuAlbum.mostrarMenu();
+
+            opcio = menuAlbum.getOpcio(sc);
+
+            System.out.println();
+
+            switch (opcio) {
+                case M_GA_AFEGIR_ALBUM:
+                    // TODO
+                    break;
+                case M_GA_MOSTRAR_ALBUMS:
+                    // TODO
+                    break;
+                case M_GA_ELIMINAR_ALBUM:
+                    // TODO
+                    break;
+                case M_GA_GESTIONAR_ALBUM:
+                    gestionarAlbum(sc);
+                    break;
+                case M_GA_TORNAR:
+                    System.out.println("Tornant a >> " + MENU_PRINCIPAL_SEC);
+                    break;
+            }
+        } while (opcio != OpcionsMenuGestioAlbums.M_GA_TORNAR);
+    }
+
+    /**
+     * Menú Gestionar un Album
+     *
+     * @param sc
+     */
+    private void gestionarAlbum(Scanner sc) {
+        Menu<OpcionsSubMenuGestionarAlbum> submenuAlbums = new Menu(GESTIO_ALBUM_SEC, OpcionsSubMenuGestionarAlbum.values());
+
+        submenuAlbums.setDescripcions(DESC_SUBMENU_GESTIONAR_ALBUM);
+
+        OpcionsSubMenuGestionarAlbum opcio;
+
+        do {
+            System.out.println();
+
+            submenuAlbums.mostrarMenu();
+
+            opcio = submenuAlbums.getOpcio(sc);
+
+            System.out.println();
+
+            switch (opcio) {
+                case SM_GA_AFEGIR_FITXER:
+                    // TODO
+                    break;
+                case SM_GA_ELIMINAR_FITXER:
+                    // TODO
+                    break;
+                case SM_GA_MOSTRAR_ALBUM:
+                    // TODO
+                    break;
+                case SM_GA_TORNAR:
+                    System.out.println("Tornant a >> " + GESTIO_ALBUMS_SEC);
+                    break;
+            }
+        } while (opcio != OpcionsSubMenuGestionarAlbum.SM_GA_TORNAR);
+    }
+
+    /**
+     * Menú Control de Reproducción/Visión
+     *
+     * @param sc
+     */
+    private void gestioControl(Scanner sc) {
+        Menu<OpcionsMenuControl> menuControl = new Menu<>(CONTROL_REPR_VISIO_SEC, OpcionsMenuControl.values());
+
+        menuControl.setDescripcions(DESC_MENU_CONTROL_REPRODUCCIO);
+
+        OpcionsMenuControl opcio;
+
+        do {
+            System.out.println();
+
+            menuControl.mostrarMenu();
+
+            opcio = menuControl.getOpcio(sc);
+
+            System.out.println();
+
+            switch (opcio) {
+                case M_C_REPRODUIR_FITXER:
+                    // TODO
+                    break;
+                case M_C_REPRODUIR_BIBLIOTECA:
+                    // TODO
+                    break;
+                case M_C_REPRODUIR_ALBUM:
+                    // TODO
+                    break;
+                case M_C_ACT_DES_CONTINUA:
+                    // TODO
+                    break;
+                case M_C_ACT_DES_ALEATORIA:
+                    // TODO
+                    break;
+                case M_C_GESTIO_REPRODUCCIO:
+                    gestionarReproduccio(sc);
+                    break;
+                case M_C_MENU_ANTERIOR:
+                    System.out.println("Tornant a >> " + MENU_PRINCIPAL_SEC);
+                    break;
+            }
+        } while (opcio != OpcionsMenuControl.M_C_MENU_ANTERIOR);
+    }
+
+    /**
+     * Menú Gestiona Reproducción
+     *
+     * @param sc
+     */
+    private void gestionarReproduccio(Scanner sc) {
+        Menu<OpcionsSubMenuControl> submenuControl = new Menu<>(GESTION_REPR_CURSO_SEC, OpcionsSubMenuControl.values());
+
+        submenuControl.setDescripcions(DESC_SUBMENU_GESTIO_REPRODUCCIO);
+
+        OpcionsSubMenuControl opcio;
+
+        do {
+            System.out.println();
+
+            submenuControl.mostrarMenu();
+
+            opcio = submenuControl.getOpcio(sc);
+
+            System.out.println();
+
+            switch (opcio) {
+                case SM_GR_REEMPREN:
+                    // TODO
+                    break;
+                case SM_GR_PAUSA:
+                    // TODO
+                    break;
+                case SM_GR_ATURA:
+                    // TODO
+                    break;
+                case SM_GR_SALTA:
+                    // TODO
+                    break;
+                case SM_GR_SORTIR:
+                    System.out.println("Tornant a >> " + CONTROL_REPR_VISIO_SEC);
+                    break;
+            }
+
+        } while (opcio != OpcionsSubMenuControl.SM_GR_SORTIR);
+    }
+
+    /**
+     * Menú Añadir archivo a la Biblioteca
+     *
+     * @param sc
+     */
     private void gestioAfegir(Scanner sc) {
-        Menu<OpcionsMenuAfegir> menuAfegir = new Menu<>(DESC_MENU_GESTIO_BIBLIOTECA[0], OpcionsMenuAfegir.values());
+        Menu<OpcionsMenuAfegir> menuAfegir = new Menu<>(AFEGIR_FITXER_BIB_SEC, OpcionsMenuAfegir.values());
 
         menuAfegir.setDescripcions(DESC_MENU_AFEGIR);
 
@@ -213,15 +515,20 @@ public class AplicacioUB3 {
                     writeAudio(sc);
                     break;
                 case SM_AFEGIR_TORNAR:
-                    System.out.println("Tornant a >> " + DESC_MENU_PRINCIPAL[0]);
+                    System.out.println("Tornant a >> " + GESTIO_BIBLIOTECA_SEC);
                     break;
             }
 
         } while (opcio != OpcionsMenuAfegir.SM_AFEGIR_TORNAR);
     }
 
+    /**
+     * Menú Gestion Biblioteca
+     *
+     * @param sc
+     */
     private void gestioBiblioteca(Scanner sc) {
-        Menu<OpcionsMenuGestioBiblioteca> subMenu = new Menu<>(DESC_MENU_PRINCIPAL[0], OpcionsMenuGestioBiblioteca.values());
+        Menu<OpcionsMenuGestioBiblioteca> subMenu = new Menu<>(GESTIO_BIBLIOTECA_SEC, OpcionsMenuGestioBiblioteca.values());
 
         subMenu.setDescripcions(DESC_MENU_GESTIO_BIBLIOTECA);
 
@@ -237,48 +544,28 @@ public class AplicacioUB3 {
             System.out.println();
 
             switch (opcio) {
-                case SM_GB_AFEGIR_FITXER:
+                case M_GB_AFEGIR_FITXER:
                     gestioAfegir(sc);
                     break;
-                case SM_GB_MOSTRAR_BIBLIOTECA:
-                    List<String> bibl = ctrl.mostrarBiblioteca();
-                    System.out.println(CARPETA_FITXERS_TITLE);
-
-                    if (bibl.isEmpty()) {
-                        System.out.println("No hi ha fitxers");
-                    } else {
-                        bibl.forEach((file) -> {
-                            System.out.println(file);
-                        });
-                    }
+                case M_GB_MOSTRAR_BIBLIOTECA:
+                    mostrarBiblioteca();
                     break;
-                case SM_GB_ELIMINAR_FITXER:
-                    if (ctrl.estaBuida()) {
-                        System.out.println("No hi ha fitxers per esborrar");
-                    } else {
-                        System.out.println("ID del Fitxer:");
-                        int id = sc.nextInt();
-                        try {
-                            ctrl.esborrarFitxer(id);
-                            System.out.println("Fitxer amd id " + id + " esborrat");
-                        } catch (AplicacioException ae) {
-                            //System.err.println(ae.getMessage()); Salida de error
-                            System.out.println(ae.getMessage());
-                        }
-                    }
+                case M_GB_ELIMINAR_FITXER:
+                    eliminarFitxer(sc);
                     break;
-                case SM_GB_TORNAR:
-                    System.out.println("Tornant a >> " + MENU_PRINCIPAL);
+                case M_GB_TORNAR:
+                    System.out.println("Tornant a >> " + MENU_PRINCIPAL_SEC);
                     break;
             }
 
-        } while (opcio != OpcionsMenuGestioBiblioteca.SM_GB_TORNAR);
+        } while (opcio != OpcionsMenuGestioBiblioteca.M_GB_TORNAR);
 
     }
 
     /**
-     * Método principal de la vista para Gestion de la Aplicación. Try-Catch con
-     * recursos para cerrar Scanner sin close(), sugerido por Netbeans
+     * Menú principal, Método principal de la vista para Gestion de la
+     * Aplicación. Try-Catch con recursos para cerrar Scanner sin close(),
+     * sugerido por Netbeans
      */
     public void gestioAplicacioUB() {
 
@@ -287,7 +574,7 @@ public class AplicacioUB3 {
             // Para usar '.' en vez de ',' en la terminal
             sc.useLocale(Locale.ENGLISH);
 
-            Menu<OpcionsMenuPrincipal> menu = new Menu<>(MENU_PRINCIPAL, OpcionsMenuPrincipal.values());
+            Menu<OpcionsMenuPrincipal> menu = new Menu<>(MENU_PRINCIPAL_SEC, OpcionsMenuPrincipal.values());
 
             menu.setDescripcions(DESC_MENU_PRINCIPAL);
 
@@ -303,9 +590,14 @@ public class AplicacioUB3 {
                 System.out.println();
 
                 switch (opcio) {
-
                     case MP_GESTION_BIBLIOTECA:
                         gestioBiblioteca(sc);
+                        break;
+                    case MP_GESTIO_ALBUMS:
+                        gestioAlbums(sc);
+                        break;
+                    case MP_CONTROL_REPRODUCCIÓ:
+                        gestioControl(sc);
                         break;
                     case MP_GUARDAR_DADES:
                         saveFile(sc);
@@ -316,7 +608,6 @@ public class AplicacioUB3 {
                     case MP_SORTIR:
                         System.out.println("Adeu " + USER_NAME + "!!");
                         break;
-
                 }
             } while (opcio != OpcionsMenuPrincipal.MP_SORTIR);
         }

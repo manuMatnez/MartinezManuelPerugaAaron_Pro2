@@ -27,7 +27,7 @@ import edu.ub.prog2.utils.AplicacioException;
 public class AlbumFitxersMultimedia extends CarpetaFitxers {
 
     private String titol;
-    
+
     public AlbumFitxersMultimedia(int cap, String titol) throws AplicacioException {
         super(cap);
         this.titol = titol;
@@ -43,7 +43,4 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers {
     }
     // Getters y Setters END
     
-    
-    
-
 }

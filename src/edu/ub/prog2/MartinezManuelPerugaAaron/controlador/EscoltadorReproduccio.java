@@ -87,8 +87,8 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     public void setReproduccioAleatoria(boolean reproduccioAleatoria) {
         this.reproduccioAleatoria = reproduccioAleatoria;
     }
-
     // Getters y Setters END
+
     @Override
     protected void onEndFile() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
