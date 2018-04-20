@@ -16,8 +16,12 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.Audio;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerReproduible;
+import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import edu.ub.prog2.utils.ReproductorBasic;
+import java.io.File;
 
 /**
  * Reproductor - Controlador
@@ -39,6 +43,12 @@ public class Reproductor extends ReproductorBasic {
         super(vlcPath, verbose, controlador);
     }
 
+    void reprodueix(FitxerReproduible fr) throws AplicacioException {
+        super.play(fr);
+    }
 
+    void reprodueix(Audio audio, File fitxerImatge) throws AplicacioException {
+        super.play(audio, fitxerImatge);
+    }
 
 }

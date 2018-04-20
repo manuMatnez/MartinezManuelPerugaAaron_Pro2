@@ -236,47 +236,77 @@ public class Controlador implements InControlador {
 
     @Override
     public void reproduirFitxer(int id) throws AplicacioException {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void obrirFinestraReproductor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.reproductor.open();
     }
 
     @Override
     public void tancarFinestraReproductor() throws AplicacioException {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void reproduirCarpeta() throws AplicacioException {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void reproduirCarpeta(String titol) throws AplicacioException {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void reemprenReproduccio() throws AplicacioException {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void pausaReproduccio() throws AplicacioException {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void aturaReproduccio() throws AplicacioException {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void saltaReproduccio() throws AplicacioException {
+        // TODO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Activa o desactiva reproduccion continua
+     */
+    public void activarDesactivarContinua() {
+        if (escoltador.isReproduccioCiclica()) {
+            escoltador.setReproduccioCiclica(false);
+        } else {
+            escoltador.setReproduccioCiclica(true);
+        }
+    }
+
+    /**
+     * Activa o desactiva reproducción aleatoria
+     */
+    public void activarDesactivarAleatoria() {
+        if (escoltador.isReproduccioAleatoria()) {
+            escoltador.setReproduccioAleatoria(false);
+        } else {
+            escoltador.setReproduccioAleatoria(true);
+        }
     }
 
 }

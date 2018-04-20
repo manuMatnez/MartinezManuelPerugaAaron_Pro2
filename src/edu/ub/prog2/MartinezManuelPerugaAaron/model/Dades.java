@@ -49,6 +49,25 @@ public class Dades implements Serializable {
     }
 
     /**
+     * Comprueba que el índice de la biblio está bien y lo retorna restandole 1
+     *
+     * @param id
+     * @return
+     * @throws AplicacioException
+     */
+    private int comprobaIndexBiblio(int id) throws AplicacioException {
+        id--;
+        int size = this.biblioteca.getSize();
+        if (id < 0) {
+            throw new AplicacioException("La posició começa amb 1");
+        } else if (id > size) {
+            throw new AplicacioException("La posició no pot ser mès gran que: "
+                    + size);
+        }
+        return id;
+    }
+
+    /**
      * Retorna la lista de ficheros multimedia en lista de Strings
      *
      * @return List
@@ -133,16 +152,7 @@ public class Dades implements Serializable {
      * @throws AplicacioException
      */
     public void esborrarFitxer(int id) throws AplicacioException {
-        id--;
-        int size = this.biblioteca.getSize();
-        if (id < 0) {
-            throw new AplicacioException("La posició começa amb 1");
-        } else if (id > size) {
-            throw new AplicacioException("La posició no pot ser mès gran que: "
-                    + size);
-        }
-
-        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
+        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(comprobaIndexBiblio(id));
         biblioteca.removeFitxer(file);
 
         // PRACTICA 3
@@ -226,7 +236,7 @@ public class Dades implements Serializable {
             throw new AplicacioException("Ya existeix aquest album");
         }
 
-        // TODO
+        // TODO (PREGUNTAR)
         albums.put(titol, new AlbumFitxersMultimedia(10, titol));
     }
 
@@ -248,9 +258,7 @@ public class Dades implements Serializable {
     public List<String> albumListToString() {
         List<String> albumList = new ArrayList<>(albums.size());
         int id = 1;
-
         Iterator<String> albumIt = albums.keySet().iterator();
-
         while (albumIt.hasNext()) {
             StringBuilder sb = new StringBuilder();
             String currentAlbum = albumIt.next();
@@ -293,21 +301,20 @@ public class Dades implements Serializable {
      * @throws AplicacioException
      */
     public void afegirFitxerAlbum(String titolAlbum, int id) throws AplicacioException {
-        id--;
-        int size = this.biblioteca.getSize();
-        if (id < 0) {
-            throw new AplicacioException("La posició começa amb 1");
-        } else if (id > size) {
-            throw new AplicacioException("La posició no pot ser mès gran que: "
-                    + size);
-        }
-
-        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(id);
+        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(comprobaIndexBiblio(id));
         albums.get(titolAlbum).addFitxer(file);
     }
 
-    public void esborrarFitxerAlbum(String titol, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * Borra un fichero del album seleccionado
+     *
+     * @param titol
+     * @param id
+     * @throws AplicacioException
+     */
+    public void esborrarFitxerAlbum(String titol, int id) throws AplicacioException {
+        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(comprobaIndexBiblio(id));
+        albums.get(titol).removeFitxer(file);
     }
 
 }

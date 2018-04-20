@@ -17,7 +17,10 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerReproduible;
 import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
+import java.io.File;
+import java.io.Serializable;
 
 /**
  * EscoltadorReproduccio - Controlador
@@ -25,32 +28,28 @@ import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
  * @author Manuel Martinez, Aaron Peruga
  * @version 1.0
  */
-public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
+public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements Serializable {
 
     private CarpetaFitxers llistaReproduint;
     private boolean[] llistaCtrl;
     private boolean reproduccioCiclica, reproduccioAleatoria;
+    private int posicio; // TODO
 
     public EscoltadorReproduccio() {
-        this.llistaReproduint = null;
-        this.llistaCtrl = null;
+        setLlistaReproduint(null);
         this.reproduccioCiclica = false;
         this.reproduccioAleatoria = false;
     }
 
-    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint,
-            boolean[] llistaCtrl) {
-        this.llistaReproduint = llistaReproduint;
-        this.llistaCtrl = llistaCtrl;
+    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint) {
+        setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = false;
         this.reproduccioAleatoria = false;
     }
 
-    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint,
-            boolean[] llistaCtrl, boolean reproduccioCiclica,
+    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica,
             boolean reproduccioAleatoria) {
-        this.llistaReproduint = llistaReproduint;
-        this.llistaCtrl = llistaCtrl;
+        setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = reproduccioCiclica;
         this.reproduccioAleatoria = reproduccioAleatoria;
     }
@@ -61,15 +60,19 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     }
 
     public void setLlistaReproduint(CarpetaFitxers llistaReproduint) {
-        this.llistaReproduint = llistaReproduint;
+        try {
+            this.llistaReproduint = llistaReproduint;
+            this.llistaCtrl = new boolean[llistaReproduint.getSize()];
+            this.posicio = 0;
+        } catch (NullPointerException n) {
+            this.llistaReproduint = null;
+            this.llistaCtrl = null;
+            this.posicio = 0;
+        }
     }
 
     public boolean[] getLlistaCtrl() {
         return llistaCtrl;
-    }
-
-    public void setLlistaCtrl(boolean[] llistaCtrl) {
-        this.llistaCtrl = llistaCtrl;
     }
 
     public boolean isReproduccioCiclica() {
@@ -89,19 +92,54 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     }
     // Getters y Setters END
 
+    /**
+     * Cuando acaba la reproducción de un fichero
+     */
     @Override
     protected void onEndFile() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean teSeguent = hasNext();
+        if (reproduccioCiclica && !teSeguent) {
+            setLlistaReproduint(llistaReproduint);
+            next();
+        } else if (teSeguent) {
+            next();
+        }
     }
 
+    /**
+     * Cuando va a reproducir el siguiente fichero
+     */
     @Override
     protected void next() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        posicio++;
+        iniciarReproduccio(llistaReproduint, reproduccioCiclica);
     }
 
+    /**
+     * Comprueba si tiene más ficheros
+     *
+     * @return boolean
+     */
     @Override
     protected boolean hasNext() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return llistaCtrl[llistaCtrl.length - 1] == true;
+    }
+
+    /**
+     * Inicia la reproducción
+     *
+     * @param llistaReproduint
+     * @param reproduccioCiclica
+     */
+    public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica) {
+        setLlistaReproduint(llistaReproduint);
+        setReproduccioCiclica(reproduccioCiclica);
+
+        File file = llistaReproduint.getAt(posicio);
+        if (file instanceof FitxerReproduible) {
+            this.llistaCtrl[posicio] = true;
+            ((FitxerReproduible) file).reproduir();
+        }
     }
 
 }

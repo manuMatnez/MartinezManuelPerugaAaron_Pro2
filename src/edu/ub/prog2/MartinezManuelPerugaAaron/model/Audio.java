@@ -55,7 +55,8 @@ public class Audio extends FitxerReproduible {
     // Setters END
 
     @Override
-    protected void reproduir() {
+    public void reproduir() {
+        // TODO
         throw new UnsupportedOperationException("No soportat, es a la practica 3");
     }
 

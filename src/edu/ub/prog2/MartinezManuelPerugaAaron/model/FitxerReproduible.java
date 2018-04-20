@@ -52,6 +52,7 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
     }
     // Getters END
 
-    protected abstract void reproduir();
+    // Cambio a public para uso en Escoltadorreproduccio
+    public abstract void reproduir();
 
 }

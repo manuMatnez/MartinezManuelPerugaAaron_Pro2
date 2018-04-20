@@ -54,7 +54,8 @@ public class Video extends FitxerReproduible {
     // Getters END
 
     @Override
-    protected void reproduir() {
+    public void reproduir() {
+        // TODO
         throw new UnsupportedOperationException("No soportat, es a la practica 3");
     }
 

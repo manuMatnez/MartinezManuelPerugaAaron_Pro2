@@ -20,6 +20,7 @@ import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.IniciadorAplicacioUB.USER_NAME;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -261,7 +262,7 @@ public class AplicacioUB3 {
      * Muestra el contenido de la biblioteca
      */
     private void mostrarBiblioteca() {
-        List<String> bibl = ctrl.mostrarBiblioteca();
+        List<String> bibl = (ArrayList<String>) ctrl.mostrarBiblioteca();
         System.out.println(CARPETA_FITXERS_TITLE);
 
         if (bibl.isEmpty()) {
@@ -279,7 +280,7 @@ public class AplicacioUB3 {
      * @param sc
      */
     private void saveFile(Scanner sc) {
-        List<String> bibl = ctrl.mostrarBiblioteca();
+        List<String> bibl = (ArrayList<String>) ctrl.mostrarBiblioteca();
         if (bibl.isEmpty()) {
             System.out.println("No hi ha dades que guardar");
         } else {
@@ -365,7 +366,7 @@ public class AplicacioUB3 {
      * @param sc
      */
     private void gestionarAlbum(Scanner sc) {
-        Menu<OpcionsSubMenuGestionarAlbum> submenuAlbums = new Menu(GESTIO_ALBUM_SEC, OpcionsSubMenuGestionarAlbum.values());
+        Menu<OpcionsSubMenuGestionarAlbum> submenuAlbums = new Menu<>(GESTIO_ALBUM_SEC, OpcionsSubMenuGestionarAlbum.values());
 
         submenuAlbums.setDescripcions(DESC_SUBMENU_GESTIONAR_ALBUM);
 
