@@ -90,7 +90,7 @@ public class AplicacioUB3 {
     private static final String[] DESC_MENU_GESTIO_ALBUMS = {
         "Afegir Albums",
         "Mostrar Albums",
-        "Eliminar Albums",
+        "Eliminar Album",
         "Gestionar Album",
         MENU_ANTERIOR_NAME
     };
@@ -147,8 +147,13 @@ public class AplicacioUB3 {
         MENU_ANTERIOR_NAME
     };
 
-    private static final String CARPETA_FITXERS_TITLE = "Carpeta de Fitxers:\n"
-            + String.join("", Collections.nCopies(35, "-"));
+    private static final String SEP = String.join("", Collections.nCopies(35, "-"));
+
+    private static final String BIBLIOTECA_FITXERS_TITLE = "Biblioteca de Fitxers";
+
+    private static final String ALBUMS_FITXERS_TITLE = "Albums";
+
+    private static final String ALBUM_FITXERS_TITLE = "Album ";
 
     /**
      * Pide los datos para poder añadir un fichero de video
@@ -266,12 +271,47 @@ public class AplicacioUB3 {
      */
     private void mostrarBiblioteca() {
         List<String> bibl = (ArrayList<String>) ctrl.mostrarBiblioteca();
-        System.out.println(CARPETA_FITXERS_TITLE);
+        System.out.println(BIBLIOTECA_FITXERS_TITLE + "\n" + SEP);
 
         if (bibl.isEmpty()) {
             System.out.println("No hi ha fitxers");
         } else {
             bibl.forEach((file) -> {
+                System.out.println(file);
+            });
+        }
+    }
+
+    /**
+     * Muestra todos los albums
+     */
+    private void mostrarAlbums() {
+        List<String> albums = (ArrayList<String>) ctrl.mostrarLlistatAlbums();
+        System.out.println(ALBUMS_FITXERS_TITLE + "\n" + SEP);
+
+        if (albums.isEmpty()) {
+            System.out.println("No hi ha fitxers");
+        } else {
+            albums.forEach((album) -> {
+                System.out.println(album);
+            });
+        }
+    }
+
+    /**
+     * Muestra un album
+     *
+     * @param title
+     * @throws AplicacioException
+     */
+    private void mostrarUnAlbum(String title) throws AplicacioException {
+        List<String> album = (ArrayList<String>) ctrl.mostrarAlbum(title);
+        System.out.println(ALBUM_FITXERS_TITLE + title + "\n" + SEP);
+
+        if (album.isEmpty()) {
+            System.out.println("No hi ha fitxers");
+        } else {
+            album.forEach((file) -> {
                 System.out.println(file);
             });
         }
@@ -328,30 +368,46 @@ public class AplicacioUB3 {
      * @param sc
      */
     private void gestioAlbums(Scanner sc) {
-        Menu<OpcionsMenuGestioAlbums> menuAlbum = new Menu<>(GESTIO_ALBUMS_SEC, OpcionsMenuGestioAlbums.values());
+        Menu<OpcionsMenuGestioAlbums> menuAlbums = new Menu<>(GESTIO_ALBUMS_SEC, OpcionsMenuGestioAlbums.values());
 
-        menuAlbum.setDescripcions(DESC_MENU_GESTIO_ALBUMS);
+        menuAlbums.setDescripcions(DESC_MENU_GESTIO_ALBUMS);
 
         OpcionsMenuGestioAlbums opcio;
 
         do {
             System.out.println();
 
-            menuAlbum.mostrarMenu();
+            menuAlbums.mostrarMenu();
 
-            opcio = menuAlbum.getOpcio(sc);
+            opcio = menuAlbums.getOpcio(sc);
 
             System.out.println();
 
             switch (opcio) {
                 case M_GA_AFEGIR_ALBUM:
-                    // TODO (RELLENAR)
+                    try {
+                        System.out.print("Nom del nuou album >> ");
+                        String album = sc.nextLine();
+                        System.out.println();
+                        ctrl.afegirAlbum(album);
+                        System.out.println("Album afegit -> " + album);
+                    } catch (AplicacioException ae) {
+                        System.out.println(ae.getMessage());
+                    }
                     break;
                 case M_GA_MOSTRAR_ALBUMS:
-                    // TODO (RELLENAR)
+                    mostrarAlbums();
                     break;
                 case M_GA_ELIMINAR_ALBUM:
-                    // TODO (RELLENAR)
+                    try {
+                        System.out.print("Nom del album >> ");
+                        String album = sc.nextLine();
+                        System.out.println();
+                        ctrl.esborrarAlbum(album);
+                        System.out.println("Album eliminat -> " + album);
+                    } catch (AplicacioException ae) {
+                        System.out.println(ae.getMessage());
+                    }
                     break;
                 case M_GA_GESTIONAR_ALBUM:
                     gestionarAlbum(sc);
@@ -369,30 +425,59 @@ public class AplicacioUB3 {
      * @param sc
      */
     private void gestionarAlbum(Scanner sc) {
-        Menu<OpcionsSubMenuGestionarAlbum> submenuAlbums = new Menu<>(GESTIO_ALBUM_SEC, OpcionsSubMenuGestionarAlbum.values());
+        Menu<OpcionsSubMenuGestionarAlbum> subMenuAlbum = new Menu<>(GESTIO_ALBUM_SEC, OpcionsSubMenuGestionarAlbum.values());
 
-        submenuAlbums.setDescripcions(DESC_SUBMENU_GESTIONAR_ALBUM);
+        subMenuAlbum.setDescripcions(DESC_SUBMENU_GESTIONAR_ALBUM);
 
         OpcionsSubMenuGestionarAlbum opcio;
 
         do {
             System.out.println();
 
-            submenuAlbums.mostrarMenu();
+            subMenuAlbum.mostrarMenu();
 
-            opcio = submenuAlbums.getOpcio(sc);
+            opcio = subMenuAlbum.getOpcio(sc);
 
             System.out.println();
 
             switch (opcio) {
                 case SM_GA_AFEGIR_FITXER:
-                    // TODO (RELLENAR)
+                    try {
+                        System.out.print("Nom del album >> ");
+                        String album = sc.nextLine();
+                        System.out.println();
+                        System.out.print("ID del fitxer >> ");
+                        int id = sc.nextInt();
+                        System.out.println();
+                        ctrl.afegirFitxer(album, id);
+                        System.out.println("Fitxer amb id " + id + " afegit a " + album);
+                    } catch (AplicacioException ae) {
+                        System.out.println(ae.getMessage());
+                    }
                     break;
                 case SM_GA_ELIMINAR_FITXER:
-                    // TODO (RELLENAR)
+                    try {
+                        System.out.print("Nom del album >> ");
+                        String album = sc.nextLine();
+                        System.out.println();
+                        System.out.print("ID del fitxer >> ");
+                        int id = sc.nextInt();
+                        System.out.println();
+                        ctrl.esborrarFitxer(album, id);
+                        System.out.println("Fitxer amb id " + id + " esborrat en " + album);
+                    } catch (AplicacioException ae) {
+                        System.out.println(ae.getMessage());
+                    }
                     break;
                 case SM_GA_MOSTRAR_ALBUM:
-                    // TODO (RELLENAR)
+                    try {
+                        System.out.print("Nom del album >> ");
+                        String album = sc.nextLine();
+                        System.out.println();
+                        mostrarUnAlbum(album);
+                    } catch (AplicacioException ae) {
+                        System.out.println(ae.getMessage());
+                    }
                     break;
                 case SM_GA_TORNAR:
                     System.out.println(TORNANT_A + GESTIO_ALBUMS_SEC);
@@ -424,19 +509,37 @@ public class AplicacioUB3 {
 
             switch (opcio) {
                 case M_C_REPRODUIR_FITXER:
-                    // TODO (RELLENAR)
+                    try {
+                        System.out.print("ID del fitxer >> ");
+                        int id = sc.nextInt();
+                        System.out.println();
+                        ctrl.reproduirFitxer(id);
+                    } catch (AplicacioException ae) {
+                        System.out.println(ae.getMessage());
+                    }
                     break;
                 case M_C_REPRODUIR_BIBLIOTECA:
-                    // TODO (RELLENAR)
+                    try {
+                        ctrl.reproduirCarpeta();
+                    } catch (AplicacioException ae) {
+                        System.out.println(ae.getMessage());
+                    }
                     break;
                 case M_C_REPRODUIR_ALBUM:
-                    // TODO (RELLENAR)
+                    try {
+                        System.out.print("Nom del album >> ");
+                        String album = sc.nextLine();
+                        System.out.println();
+                        ctrl.reproduirCarpeta(album);
+                    } catch (AplicacioException ae) {
+                        System.out.println(ae.getMessage());
+                    }
                     break;
                 case M_C_ACT_DES_CONTINUA:
-                    // TODO (RELLENAR)
+                    ctrl.activarDesactivarContinua();
                     break;
                 case M_C_ACT_DES_ALEATORIA:
-                    // TODO (RELLENAR)
+                    ctrl.activarDesactivarAleatoria();
                     break;
                 case M_C_GESTIO_REPRODUCCIO:
                     gestionarReproduccio(sc);
@@ -469,22 +572,26 @@ public class AplicacioUB3 {
 
             System.out.println();
 
-            switch (opcio) {
-                case SM_GR_REEMPREN:
-                    // TODO (RELLENAR)
-                    break;
-                case SM_GR_PAUSA:
-                    // TODO (RELLENAR)
-                    break;
-                case SM_GR_ATURA:
-                    // TODO (RELLENAR)
-                    break;
-                case SM_GR_SALTA:
-                    // TODO (RELLENAR)
-                    break;
-                case SM_GR_SORTIR:
-                    System.out.println(TORNANT_A + CONTROL_REPR_VISIO_SEC);
-                    break;
+            try {
+                switch (opcio) {
+                    case SM_GR_REEMPREN:
+                        ctrl.reemprenReproduccio();
+                        break;
+                    case SM_GR_PAUSA:
+                        ctrl.pausaReproduccio();
+                        break;
+                    case SM_GR_ATURA:
+                        ctrl.aturaReproduccio();
+                        break;
+                    case SM_GR_SALTA:
+                        ctrl.saltaReproduccio();
+                        break;
+                    case SM_GR_SORTIR:
+                        System.out.println(TORNANT_A + CONTROL_REPR_VISIO_SEC);
+                        break;
+                }
+            } catch (AplicacioException ae) {
+                System.out.println(ae.getMessage());
             }
 
         } while (opcio != OpcionsSubMenuControl.SM_GR_SORTIR);

@@ -235,54 +235,108 @@ public class Controlador implements InControlador {
         dades.esborrarFitxerAlbum(titol, id);
     }
 
-    @Override
-    public void reproduirFitxer(int id) throws AplicacioException {
-        obrirFinestraReproductor();
-        escoltador.iniciarReproduccio(dades.makeReproduccio(id), false);
-        tancarFinestraReproductor();
-    }
-
-    @Override
-    public void reproduirCarpeta() throws AplicacioException {
-        obrirFinestraReproductor();
-        // TODO (DUDA)
-        escoltador.iniciarReproduccio(dades.makeReproduccio(), false);
-        tancarFinestraReproductor();
-    }
-
-    @Override
-    public void reproduirCarpeta(String titol) throws AplicacioException {
-        obrirFinestraReproductor();
-        // TODO (DUDA)
-        escoltador.iniciarReproduccio(dades.makeReproduccio(titol), false);
-        tancarFinestraReproductor();
-    }
-
+    /**
+     * Abre la ventana del reproductor
+     */
     @Override
     public void obrirFinestraReproductor() {
         reproductor.open();
     }
 
+    /**
+     * Cierra la ventana del reproductor
+     *
+     * @throws AplicacioException
+     */
     @Override
     public void tancarFinestraReproductor() throws AplicacioException {
         reproductor.close();
     }
 
+    /**
+     * Reproduce un solo fichero
+     *
+     * @param id
+     * @throws AplicacioException
+     */
+    @Override
+    public void reproduirFitxer(int id) throws AplicacioException {
+        try {
+            obrirFinestraReproductor();
+            escoltador.iniciarReproduccio(dades.makeReproduccio(id), false);
+        } catch (AplicacioException ae) {
+            tancarFinestraReproductor();
+        }
+    }
+
+    /**
+     * Reproduce la biblioteca
+     *
+     * @throws AplicacioException
+     */
+    @Override
+    public void reproduirCarpeta() throws AplicacioException {
+        try {
+            obrirFinestraReproductor();
+            // TODO (DUDA)
+            escoltador.iniciarReproduccio(dades.makeReproduccio(), false);
+        } catch (AplicacioException ae) {
+            tancarFinestraReproductor();
+        }
+    }
+
+    /**
+     * Reproduce un album
+     *
+     * @param titol
+     * @throws AplicacioException
+     */
+    @Override
+    public void reproduirCarpeta(String titol) throws AplicacioException {
+        try {
+            obrirFinestraReproductor();
+            // TODO (DUDA)
+            escoltador.iniciarReproduccio(dades.makeReproduccio(titol), false);
+        } catch (AplicacioException ae) {
+            tancarFinestraReproductor();
+        }
+    }
+
+    /**
+     * Regresa a la reproducción
+     *
+     * @throws AplicacioException
+     */
     @Override
     public void reemprenReproduccio() throws AplicacioException {
         reproductor.resume();
     }
 
+    /**
+     * Pausa la reproduccion
+     *
+     * @throws AplicacioException
+     */
     @Override
     public void pausaReproduccio() throws AplicacioException {
         reproductor.pause();
     }
 
+    /**
+     * Para la reproduccion
+     *
+     * @throws AplicacioException
+     */
     @Override
     public void aturaReproduccio() throws AplicacioException {
         reproductor.stop();
     }
 
+    /**
+     * Cambia al siguiente para reproducir
+     *
+     * @throws AplicacioException
+     */
     @Override
     public void saltaReproduccio() throws AplicacioException {
         escoltador.next();

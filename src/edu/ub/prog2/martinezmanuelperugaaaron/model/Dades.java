@@ -58,10 +58,12 @@ public class Dades implements Serializable {
     private int comprobaIndexBiblio(int id) throws AplicacioException {
         id--;
         int size = this.biblioteca.getSize();
-        if (id < 0) {
-            throw new AplicacioException("La posició começa amb 1");
+        if (estaBuida()) {
+            throw new AplicacioException("La biblioteca esta buida");
+        } else if (id < 0) {
+            throw new AplicacioException("La posicio começa amb 1");
         } else if (id > size) {
-            throw new AplicacioException("La posició no pot ser mès gran que: "
+            throw new AplicacioException("La posicio no pot ser mès gran que: "
                     + size);
         }
         return id;
@@ -257,13 +259,11 @@ public class Dades implements Serializable {
      */
     public List<String> albumListToString() {
         List<String> albumList = new ArrayList<>(albums.size());
-        int id = 1;
         Iterator<String> albumIt = albums.keySet().iterator();
         while (albumIt.hasNext()) {
             StringBuilder sb = new StringBuilder();
             String currentAlbum = albumIt.next();
-            sb.append("[").append(id).append("] ").append(albums.get(currentAlbum)).append("\n");
-            id++;
+            sb.append("-> ").append(albums.get(currentAlbum).getTitol()).append("\n");
             albumList.add(sb.toString());
         }
         return albumList;
@@ -317,6 +317,11 @@ public class Dades implements Serializable {
         albums.get(titol).removeFitxer(file);
     }
 
+    /**
+     * Asigna el reproductor a cada fichero
+     *
+     * @param reproductor
+     */
     public void setReproductor(Reproductor reproductor) {
         // TODO (DUDA)
         for (int i = 0; i < biblioteca.getSize(); i++) {
@@ -327,15 +332,25 @@ public class Dades implements Serializable {
         }
     }
 
+    /**
+     * Retorna una CarpetaFitxers con un solo fichero
+     *
+     * @param id
+     * @return
+     * @throws AplicacioException
+     */
     public CarpetaFitxers makeReproduccio(int id) throws AplicacioException {
-        if (estaBuida()) {
-            throw new AplicacioException("No hi ha fitxers per reproduir");
-        }
         BibliotecaFitxersMultimedia tmp = new BibliotecaFitxersMultimedia();
         tmp.addFitxer(biblioteca.getAt(comprobaIndexBiblio(id)));
         return tmp;
     }
 
+    /**
+     * Retorna la biblioteca
+     *
+     * @return CarpetaFitxer
+     * @throws AplicacioException
+     */
     public CarpetaFitxers makeReproduccio() throws AplicacioException {
         if (estaBuida()) {
             throw new AplicacioException("No hi ha fitxers per reproduir");
@@ -343,6 +358,13 @@ public class Dades implements Serializable {
         return biblioteca;
     }
 
+    /**
+     * Retorna el album seleccionado
+     *
+     * @param titol
+     * @return CarpetaFitxer
+     * @throws AplicacioException
+     */
     public CarpetaFitxers makeReproduccio(String titol) throws AplicacioException {
         if (estaBuida()) {
             throw new AplicacioException("No hi ha fitxers per reproduir");

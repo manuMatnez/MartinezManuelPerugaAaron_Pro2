@@ -114,7 +114,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      */
     @Override
     protected boolean hasNext() {
-        return llistaCtrl[llistaCtrl.length - 1] == true;
+        return posicio < llistaCtrl.length;
     }
 
     /**
@@ -124,17 +124,23 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      * @param reproduccioCiclica
      */
     public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica) {
-        // TODO (DUDA)
-        setLlistaReproduint(llistaReproduint);
+        // TODO (DUDA + IDEA)
+        //setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = reproduccioCiclica;
+        posicio = 0;
         if (isReproduccioAleatoria()) {
-            posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
+            setLlistaReproduint(new CarpetaFitxers().suffle(llistaReproduint));
+            //posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
         } else {
-            posicio = 0;
+            setLlistaReproduint(llistaReproduint);
+            //posicio = 0;
         }
         continuaReproduccio();
     }
 
+    /**
+     * Continua la reproduccion
+     */
     public void continuaReproduccio() {
         File file = llistaReproduint.getAt(posicio);
         if (file instanceof FitxerReproduible) {

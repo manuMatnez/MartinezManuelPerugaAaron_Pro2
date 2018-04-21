@@ -20,6 +20,7 @@ import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -130,7 +131,19 @@ public class CarpetaFitxers implements Serializable {
             sb.append("[").append(id).append("] ").append(currentFile).append("\n");
             id++;
         }
-
         return sb.toString();
+    }
+
+    /**
+     * IDEA - hacer una carpeta temporal nueva con orden aleatorio para
+     * reproducir - PRACTICA 3
+     *
+     * @param orig
+     * @return
+     */
+    public CarpetaFitxers suffle(CarpetaFitxers orig) {
+        this.carpeta.addAll(orig.carpeta);
+        Collections.shuffle(this.carpeta);
+        return this;
     }
 }

@@ -16,7 +16,6 @@
  */
 package edu.ub.prog2.martinezmanuelperugaaaron.model;
 
-import edu.ub.prog2.martinezmanuelperugaaaron.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 
