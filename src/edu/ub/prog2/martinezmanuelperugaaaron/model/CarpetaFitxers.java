@@ -141,7 +141,7 @@ public class CarpetaFitxers implements Serializable {
      * @param orig
      * @return
      */
-    public CarpetaFitxers suffle(CarpetaFitxers orig) {
+    public CarpetaFitxers shuffle(CarpetaFitxers orig) {
         this.carpeta.addAll(orig.carpeta);
         Collections.shuffle(this.carpeta);
         return this;

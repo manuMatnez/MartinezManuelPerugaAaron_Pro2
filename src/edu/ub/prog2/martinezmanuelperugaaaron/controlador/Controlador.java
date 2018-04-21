@@ -279,7 +279,7 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.makeReproduccio(), false);
+            escoltador.iniciarReproduccio(dades.makeReproduccio(escoltador.isReproduccioAleatoria()), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
@@ -296,7 +296,7 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.makeReproduccio(titol), false);
+            escoltador.iniciarReproduccio(dades.makeReproduccio(titol, escoltador.isReproduccioAleatoria()), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }

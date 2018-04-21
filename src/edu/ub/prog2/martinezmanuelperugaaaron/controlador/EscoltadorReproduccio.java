@@ -125,16 +125,15 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      */
     public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica) {
         // TODO (DUDA + IDEA)
-        //setLlistaReproduint(llistaReproduint);
+        setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = reproduccioCiclica;
         posicio = 0;
-        if (isReproduccioAleatoria()) {
-            setLlistaReproduint(new CarpetaFitxers().suffle(llistaReproduint));
-            //posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
+        /*if (isReproduccioAleatoria()) {
+            posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
         } else {
             setLlistaReproduint(llistaReproduint);
-            //posicio = 0;
-        }
+            posicio = 0;
+        }*/
         continuaReproduccio();
     }
 

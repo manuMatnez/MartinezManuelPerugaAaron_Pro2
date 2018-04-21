@@ -340,7 +340,7 @@ public class Dades implements Serializable {
      * @throws AplicacioException
      */
     public CarpetaFitxers makeReproduccio(int id) throws AplicacioException {
-        BibliotecaFitxersMultimedia tmp = new BibliotecaFitxersMultimedia();
+        CarpetaFitxers tmp = new CarpetaFitxers();
         tmp.addFitxer(biblioteca.getAt(comprobaIndexBiblio(id)));
         return tmp;
     }
@@ -348,28 +348,40 @@ public class Dades implements Serializable {
     /**
      * Retorna la biblioteca
      *
+     * @param shuffle
      * @return CarpetaFitxer
      * @throws AplicacioException
      */
-    public CarpetaFitxers makeReproduccio() throws AplicacioException {
+    public CarpetaFitxers makeReproduccio(boolean shuffle) throws AplicacioException {
         if (estaBuida()) {
             throw new AplicacioException("No hi ha fitxers per reproduir");
         }
-        return biblioteca;
+        
+        if (shuffle) {
+            return new CarpetaFitxers().shuffle(biblioteca);
+        } else {
+            return biblioteca;
+        }
     }
 
     /**
      * Retorna el album seleccionado
      *
      * @param titol
+     * @param shuffle
      * @return CarpetaFitxer
      * @throws AplicacioException
      */
-    public CarpetaFitxers makeReproduccio(String titol) throws AplicacioException {
+    public CarpetaFitxers makeReproduccio(String titol, boolean shuffle) throws AplicacioException {
         if (estaBuida()) {
             throw new AplicacioException("No hi ha fitxers per reproduir");
         }
-        return albums.get(titol);
+
+        if (shuffle) {
+            return new CarpetaFitxers().shuffle(albums.get(titol));
+        } else {
+            return albums.get(titol);
+        }
     }
 
 }
