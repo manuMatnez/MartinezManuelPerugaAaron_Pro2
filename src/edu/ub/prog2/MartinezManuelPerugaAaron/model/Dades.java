@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.model;
+package edu.ub.prog2.martinezmanuelperugaaaron.model;
 
-import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Reproductor;
+import edu.ub.prog2.martinezmanuelperugaaaron.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -72,7 +72,7 @@ public class Dades implements Serializable {
      *
      * @return List
      */
-    public List<String> getBiblioteca() {
+    public List<String> getBibliotecaList() {
         List<String> bibList;
         String bibToStr = this.biblioteca.toString();
 
@@ -236,7 +236,7 @@ public class Dades implements Serializable {
             throw new AplicacioException("Ya existeix aquest album");
         }
 
-        // TODO (PREGUNTAR)
+        // TODO (DUDA PREGUNTAR CANTIDAD)
         albums.put(titol, new AlbumFitxersMultimedia(10, titol));
     }
 
@@ -315,6 +315,39 @@ public class Dades implements Serializable {
     public void esborrarFitxerAlbum(String titol, int id) throws AplicacioException {
         FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(comprobaIndexBiblio(id));
         albums.get(titol).removeFitxer(file);
+    }
+
+    public void setReproductor(Reproductor reproductor) {
+        // TODO (DUDA)
+        for (int i = 0; i < biblioteca.getSize(); i++) {
+            File fitxer = biblioteca.getAt(i);
+            if (fitxer instanceof FitxerReproduible) {
+                ((FitxerReproduible) fitxer).setReproductor(reproductor);
+            }
+        }
+    }
+
+    public CarpetaFitxers makeReproduccio(int id) throws AplicacioException {
+        if (estaBuida()) {
+            throw new AplicacioException("No hi ha fitxers per reproduir");
+        }
+        BibliotecaFitxersMultimedia tmp = new BibliotecaFitxersMultimedia();
+        tmp.addFitxer(biblioteca.getAt(comprobaIndexBiblio(id)));
+        return tmp;
+    }
+
+    public CarpetaFitxers makeReproduccio() throws AplicacioException {
+        if (estaBuida()) {
+            throw new AplicacioException("No hi ha fitxers per reproduir");
+        }
+        return biblioteca;
+    }
+
+    public CarpetaFitxers makeReproduccio(String titol) throws AplicacioException {
+        if (estaBuida()) {
+            throw new AplicacioException("No hi ha fitxers per reproduir");
+        }
+        return albums.get(titol);
     }
 
 }

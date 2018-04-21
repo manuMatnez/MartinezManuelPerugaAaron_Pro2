@@ -14,10 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
+package edu.ub.prog2.martinezmanuelperugaaaron.controlador;
 
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.CarpetaFitxers;
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerReproduible;
+import edu.ub.prog2.martinezmanuelperugaaaron.model.CarpetaFitxers;
+import edu.ub.prog2.martinezmanuelperugaaaron.model.FitxerReproduible;
+import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import java.io.File;
 import java.io.Serializable;
@@ -33,12 +34,12 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     private CarpetaFitxers llistaReproduint;
     private boolean[] llistaCtrl;
     private boolean reproduccioCiclica, reproduccioAleatoria;
-    private int posicio; // TODO
+    private int posicio; // TODO (DUDA)
 
     public EscoltadorReproduccio() {
     }
 
-    // TODO (CONSTRUCTORES)
+    // TODO (DUDA CONSTRUCTORES)
     /*
     public EscoltadorReproduccio(CarpetaFitxers llistaReproduint) {
         setLlistaReproduint(llistaReproduint);
@@ -55,7 +56,6 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     public void setLlistaReproduint(CarpetaFitxers llistaReproduint) {
         this.llistaReproduint = llistaReproduint;
         this.llistaCtrl = new boolean[llistaReproduint.getSize()];
-        this.posicio = 0;
     }
 
     // Getters START
@@ -92,8 +92,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     @Override
     protected void onEndFile() {
         if (reproduccioCiclica && !hasNext()) {
-            setLlistaReproduint(llistaReproduint);
-            next();
+            iniciarReproduccio(llistaReproduint, reproduccioCiclica);
         } else if (hasNext()) {
             next();
         }
@@ -105,7 +104,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     @Override
     protected void next() {
         posicio++;
-        iniciarReproduccio(llistaReproduint, reproduccioCiclica);
+        continuaReproduccio();
     }
 
     /**
@@ -125,13 +124,27 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      * @param reproduccioCiclica
      */
     public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica) {
+        // TODO (DUDA)
         setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = reproduccioCiclica;
+        if (isReproduccioAleatoria()) {
+            posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
+        } else {
+            posicio = 0;
+        }
+        continuaReproduccio();
+    }
 
+    public void continuaReproduccio() {
         File file = llistaReproduint.getAt(posicio);
         if (file instanceof FitxerReproduible) {
-            this.llistaCtrl[posicio] = true;
-            ((FitxerReproduible) file).reproduir();
+            // TODO (DUDA TRY-CATCH)
+            try {
+                this.llistaCtrl[posicio] = true;
+                ((FitxerReproduible) file).reproduir();
+            } catch (AplicacioException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 

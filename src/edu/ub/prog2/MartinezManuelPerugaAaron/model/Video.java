@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.model;
+package edu.ub.prog2.martinezmanuelperugaaaron.model;
 
-import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Reproductor;
+import edu.ub.prog2.martinezmanuelperugaaaron.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 
 /**
@@ -54,9 +54,8 @@ public class Video extends FitxerReproduible {
     // Getters END
 
     @Override
-    public void reproduir() {
-        // TODO
-        throw new UnsupportedOperationException("No soportat, es a la practica 3");
+    public void reproduir() throws AplicacioException {
+        getReproductor().reprodueix(this);
     }
 
     @Override

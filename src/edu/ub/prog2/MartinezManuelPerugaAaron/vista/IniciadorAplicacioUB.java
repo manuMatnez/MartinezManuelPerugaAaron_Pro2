@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
+package edu.ub.prog2.martinezmanuelperugaaaron.vista;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
@@ -81,6 +81,8 @@ public class IniciadorAplicacioUB {
         AplicacioUB3 aplicacio = new AplicacioUB3();
 
         aplicacio.gestioAplicacioUB();
+        
+        System.out.println(USER_NAME + "!!");
     }
 
 }

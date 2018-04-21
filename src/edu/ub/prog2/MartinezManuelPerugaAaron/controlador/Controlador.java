@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
+package edu.ub.prog2.martinezmanuelperugaaaron.controlador;
 
-import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
+import edu.ub.prog2.martinezmanuelperugaaaron.model.Dades;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.InControlador;
 import java.util.List;
@@ -99,7 +99,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public List<String> mostrarBiblioteca() { // llista dels retorns de toString() dels fitxers
-        return dades.getBiblioteca();
+        return dades.getBibliotecaList();
     }
 
     /**
@@ -134,6 +134,7 @@ public class Controlador implements InControlador {
     @Override
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
         this.dades = dades.carregarDadesDisc(camiOrigen);
+        dades.setReproductor(reproductor);
     }
 
     /**
@@ -236,55 +237,55 @@ public class Controlador implements InControlador {
 
     @Override
     public void reproduirFitxer(int id) throws AplicacioException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void obrirFinestraReproductor() {
-        this.reproductor.open();
-    }
-
-    @Override
-    public void tancarFinestraReproductor() throws AplicacioException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        obrirFinestraReproductor();
+        escoltador.iniciarReproduccio(dades.makeReproduccio(id), false);
+        tancarFinestraReproductor();
     }
 
     @Override
     public void reproduirCarpeta() throws AplicacioException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        obrirFinestraReproductor();
+        // TODO (DUDA)
+        escoltador.iniciarReproduccio(dades.makeReproduccio(), false);
+        tancarFinestraReproductor();
     }
 
     @Override
     public void reproduirCarpeta(String titol) throws AplicacioException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        obrirFinestraReproductor();
+        // TODO (DUDA)
+        escoltador.iniciarReproduccio(dades.makeReproduccio(titol), false);
+        tancarFinestraReproductor();
+    }
+
+    @Override
+    public void obrirFinestraReproductor() {
+        reproductor.open();
+    }
+
+    @Override
+    public void tancarFinestraReproductor() throws AplicacioException {
+        reproductor.close();
     }
 
     @Override
     public void reemprenReproduccio() throws AplicacioException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        reproductor.resume();
     }
 
     @Override
     public void pausaReproduccio() throws AplicacioException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        reproductor.pause();
     }
 
     @Override
     public void aturaReproduccio() throws AplicacioException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        reproductor.stop();
     }
 
     @Override
     public void saltaReproduccio() throws AplicacioException {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        escoltador.next();
     }
 
     /**

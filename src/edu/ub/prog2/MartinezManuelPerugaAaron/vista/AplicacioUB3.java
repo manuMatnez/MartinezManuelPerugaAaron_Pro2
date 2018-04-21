@@ -14,10 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
+package edu.ub.prog2.martinezmanuelperugaaaron.vista;
 
-import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
-import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.IniciadorAplicacioUB.USER_NAME;
+import edu.ub.prog2.martinezmanuelperugaaaron.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
 import java.util.ArrayList;
@@ -50,8 +49,9 @@ public class AplicacioUB3 {
     private static final String GESTION_REPR_CURSO_SEC = "Gestio Reproduccio en Curs";
     // Titulos de las Secciones de los menús END
 
-    // Mensaje: Tornant a
+    // Mensaje: 'Tornant a' START
     private static final String TORNANT_A = "Tornant a >> ";
+    // Mensaje: 'Tornant a' END
 
     // Menú anterior para no repetir el String
     private static final String MENU_ANTERIOR_NAME = "Menu anterior";
@@ -345,13 +345,13 @@ public class AplicacioUB3 {
 
             switch (opcio) {
                 case M_GA_AFEGIR_ALBUM:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case M_GA_MOSTRAR_ALBUMS:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case M_GA_ELIMINAR_ALBUM:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case M_GA_GESTIONAR_ALBUM:
                     gestionarAlbum(sc);
@@ -386,13 +386,13 @@ public class AplicacioUB3 {
 
             switch (opcio) {
                 case SM_GA_AFEGIR_FITXER:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case SM_GA_ELIMINAR_FITXER:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case SM_GA_MOSTRAR_ALBUM:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case SM_GA_TORNAR:
                     System.out.println(TORNANT_A + GESTIO_ALBUMS_SEC);
@@ -424,19 +424,19 @@ public class AplicacioUB3 {
 
             switch (opcio) {
                 case M_C_REPRODUIR_FITXER:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case M_C_REPRODUIR_BIBLIOTECA:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case M_C_REPRODUIR_ALBUM:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case M_C_ACT_DES_CONTINUA:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case M_C_ACT_DES_ALEATORIA:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case M_C_GESTIO_REPRODUCCIO:
                     gestionarReproduccio(sc);
@@ -471,16 +471,16 @@ public class AplicacioUB3 {
 
             switch (opcio) {
                 case SM_GR_REEMPREN:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case SM_GR_PAUSA:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case SM_GR_ATURA:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case SM_GR_SALTA:
-                    // TODO
+                    // TODO (RELLENAR)
                     break;
                 case SM_GR_SORTIR:
                     System.out.println(TORNANT_A + CONTROL_REPR_VISIO_SEC);
@@ -610,7 +610,7 @@ public class AplicacioUB3 {
                         loadFile(sc);
                         break;
                     case MP_SORTIR:
-                        System.out.println("Adeu " + USER_NAME + "!!");
+                        System.out.print("Adeu ");
                         break;
                 }
             } while (opcio != OpcionsMenuPrincipal.MP_SORTIR);

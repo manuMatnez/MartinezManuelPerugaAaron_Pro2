@@ -14,13 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.MartinezManuelPerugaAaron.model;
+package edu.ub.prog2.martinezmanuelperugaaaron.model;
 
-import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Reproductor;
+import edu.ub.prog2.martinezmanuelperugaaaron.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 
 /**
- * FitxerReproduible - Modelo, la superclass File ya implementa Serializable, no hace falta
+ * FitxerReproduible - Modelo, la superclass File ya implementa Serializable, no
+ * hace falta
  *
  * @author Manuel Martinez, Aaron Peruga
  * @version 1.0
@@ -31,7 +32,7 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
     private final float durada;
 
     // transient no guardara el reproductor cuando serialicemos
-    private final transient Reproductor reproductor;
+    private transient Reproductor reproductor;
 
     // nom no puede ser porque lo sacamos de cami
     protected FitxerReproduible(String cami, String nom, String codec, float durada, Reproductor reproductor) throws AplicacioException {
@@ -50,9 +51,17 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
     protected float getDurada() {
         return durada;
     }
+
+    public Reproductor getReproductor() {
+        return reproductor;
+    }
     // Getters END
 
+    public void setReproductor(Reproductor reproductor) {
+        this.reproductor = reproductor;
+    }
+
     // Cambio a public para uso en Escoltadorreproduccio
-    public abstract void reproduir();
+    public abstract void reproduir() throws AplicacioException;
 
 }
