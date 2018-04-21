@@ -50,6 +50,9 @@ public class AplicacioUB3 {
     private static final String GESTION_REPR_CURSO_SEC = "Gestio Reproduccio en Curs";
     // Titulos de las Secciones de los menús END
 
+    // Mensaje: Tornant a
+    private static final String TORNANT_A = "Tornant a >> ";
+
     // Menú anterior para no repetir el String
     private static final String MENU_ANTERIOR_NAME = "Menu anterior";
 
@@ -354,7 +357,7 @@ public class AplicacioUB3 {
                     gestionarAlbum(sc);
                     break;
                 case M_GA_TORNAR:
-                    System.out.println("Tornant a >> " + MENU_PRINCIPAL_SEC);
+                    System.out.println(TORNANT_A + MENU_PRINCIPAL_SEC);
                     break;
             }
         } while (opcio != OpcionsMenuGestioAlbums.M_GA_TORNAR);
@@ -392,7 +395,7 @@ public class AplicacioUB3 {
                     // TODO
                     break;
                 case SM_GA_TORNAR:
-                    System.out.println("Tornant a >> " + GESTIO_ALBUMS_SEC);
+                    System.out.println(TORNANT_A + GESTIO_ALBUMS_SEC);
                     break;
             }
         } while (opcio != OpcionsSubMenuGestionarAlbum.SM_GA_TORNAR);
@@ -439,7 +442,7 @@ public class AplicacioUB3 {
                     gestionarReproduccio(sc);
                     break;
                 case M_C_MENU_ANTERIOR:
-                    System.out.println("Tornant a >> " + MENU_PRINCIPAL_SEC);
+                    System.out.println(TORNANT_A + MENU_PRINCIPAL_SEC);
                     break;
             }
         } while (opcio != OpcionsMenuControl.M_C_MENU_ANTERIOR);
@@ -480,7 +483,7 @@ public class AplicacioUB3 {
                     // TODO
                     break;
                 case SM_GR_SORTIR:
-                    System.out.println("Tornant a >> " + CONTROL_REPR_VISIO_SEC);
+                    System.out.println(TORNANT_A + CONTROL_REPR_VISIO_SEC);
                     break;
             }
 
@@ -516,7 +519,7 @@ public class AplicacioUB3 {
                     writeAudio(sc);
                     break;
                 case SM_AFEGIR_TORNAR:
-                    System.out.println("Tornant a >> " + GESTIO_BIBLIOTECA_SEC);
+                    System.out.println(TORNANT_A + GESTIO_BIBLIOTECA_SEC);
                     break;
             }
 
@@ -555,7 +558,7 @@ public class AplicacioUB3 {
                     eliminarFitxer(sc);
                     break;
                 case M_GB_TORNAR:
-                    System.out.println("Tornant a >> " + MENU_PRINCIPAL_SEC);
+                    System.out.println(TORNANT_A + MENU_PRINCIPAL_SEC);
                     break;
             }
 
@@ -564,9 +567,9 @@ public class AplicacioUB3 {
     }
 
     /**
-     * Menú principal, Método principal de la vista para Gestion de la
-     * Aplicación. Try-Catch con recursos para cerrar Scanner sin close(),
-     * sugerido por Netbeans
+     * Menú principal, Función base de la vista para Gestion de la Aplicación.
+     * Try-Catch con recursos para cerrar Scanner sin close(), sugerido por
+     * Netbeans
      */
     public void gestioAplicacioUB() {
 
