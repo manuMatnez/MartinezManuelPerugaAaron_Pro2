@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron.controlador;
+package edu.ub.prog2.martinezmanuelperugaaaron3.controlador;
 
-import edu.ub.prog2.martinezmanuelperugaaaron.model.Dades;
+import edu.ub.prog2.martinezmanuelperugaaaron3.model.Dades;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.InControlador;
 import java.util.List;
@@ -279,7 +279,7 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.makeReproduccio(escoltador.isReproduccioAleatoria()), false);
+            escoltador.iniciarReproduccio(dades.makeReproduccio(), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
@@ -296,7 +296,7 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.makeReproduccio(titol, escoltador.isReproduccioAleatoria()), false);
+            escoltador.iniciarReproduccio(dades.makeReproduccio(titol), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }

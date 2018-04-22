@@ -14,49 +14,48 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron.model;
+package edu.ub.prog2.martinezmanuelperugaaaron3.model;
 
-import edu.ub.prog2.martinezmanuelperugaaaron.controlador.Reproductor;
+import edu.ub.prog2.martinezmanuelperugaaaron3.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
-import java.io.File;
 
 /**
- * Audio - Modelo, la superclass File ya implementa Serializable, no hace falta
+ * Video - Modelo, la superclass File ya implementa Serializable, no hace falta
  *
  * @author Manuel Martinez, Aaron Peruga
  * @version 1.0
  */
-public class Audio extends FitxerReproduible {
+public class Video extends FitxerReproduible {
 
-    private File fitxerImatge;
-    private final int kbps;
+    private final int alcada;
+    private final int amplada;
+    private final float fps;
 
-    public Audio(String cami, File fitxerImatge, String nom, String codec,
-            float durada, int kbps, Reproductor reproductor) throws AplicacioException {
+    public Video(String cami, String nom, String codec, float durada, int alcada,
+            int amplada, float fps, Reproductor reproductor) throws AplicacioException {
         super(cami, nom, codec, durada, reproductor);
-
-        this.fitxerImatge = fitxerImatge;
-        this.kbps = kbps;
+        this.alcada = alcada;
+        this.amplada = amplada;
+        this.fps = fps;
     }
 
     // Getters START
-    public int getKbps() {
-        return kbps;
+    public int getAlcada() {
+        return alcada;
     }
-    public File getFitxerImatge() {
-        return fitxerImatge;
+
+    public int getAmplada() {
+        return amplada;
+    }
+
+    public float getFps() {
+        return fps;
     }
     // Getters END
 
-    // Setters START
-    public void setFitxerImatge(File fitxerImatge) {
-        this.fitxerImatge = fitxerImatge;
-    }
-    // Setters END
-
     @Override
     public void reproduir() throws AplicacioException {
-        getReproductor().reprodueix(this, fitxerImatge);
+        getReproductor().reprodueix(this);
     }
 
     @Override
@@ -69,7 +68,9 @@ public class Audio extends FitxerReproduible {
 
         fitxer.append(", Codec='").append(getCodec()).append("'");
         fitxer.append(", Durada='").append(getDurada()).append("'");
-        fitxer.append(", Kbps='").append(kbps).append("'");
+        fitxer.append(", Alcada='").append(alcada).append("'");
+        fitxer.append(", Amplada='").append(amplada).append("'");
+        fitxer.append(", Fps='").append(fps).append("'");
 
         return fitxer.toString();
     }

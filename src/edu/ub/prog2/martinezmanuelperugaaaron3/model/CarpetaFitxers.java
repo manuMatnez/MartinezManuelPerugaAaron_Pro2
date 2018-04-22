@@ -14,13 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron.model;
+package edu.ub.prog2.martinezmanuelperugaaaron3.model;
 
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -134,16 +133,4 @@ public class CarpetaFitxers implements Serializable {
         return sb.toString();
     }
 
-    /**
-     * IDEA - hacer una carpeta temporal nueva con orden aleatorio para
-     * reproducir - PRACTICA 3
-     *
-     * @param orig
-     * @return
-     */
-    public CarpetaFitxers shuffle(CarpetaFitxers orig) {
-        this.carpeta.addAll(orig.carpeta);
-        Collections.shuffle(this.carpeta);
-        return this;
-    }
 }

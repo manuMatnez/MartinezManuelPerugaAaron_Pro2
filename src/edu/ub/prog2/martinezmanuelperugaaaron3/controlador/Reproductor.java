@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron.controlador;
+package edu.ub.prog2.martinezmanuelperugaaaron3.controlador;
 
-import edu.ub.prog2.martinezmanuelperugaaaron.model.Audio;
-import edu.ub.prog2.martinezmanuelperugaaaron.model.FitxerReproduible;
+import edu.ub.prog2.martinezmanuelperugaaaron3.model.Audio;
+import edu.ub.prog2.martinezmanuelperugaaaron3.model.FitxerReproduible;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import edu.ub.prog2.utils.ReproductorBasic;

@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron.controlador;
+package edu.ub.prog2.martinezmanuelperugaaaron3.controlador;
 
-import edu.ub.prog2.martinezmanuelperugaaaron.model.CarpetaFitxers;
-import edu.ub.prog2.martinezmanuelperugaaaron.model.FitxerReproduible;
+import edu.ub.prog2.martinezmanuelperugaaaron3.model.CarpetaFitxers;
+import edu.ub.prog2.martinezmanuelperugaaaron3.model.FitxerReproduible;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import java.io.File;
@@ -103,7 +103,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      */
     @Override
     protected void next() {
-        posicio++;
+        posicio = (posicio + 1) % llistaCtrl.length;
         continuaReproduccio();
     }
 
@@ -114,7 +114,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      */
     @Override
     protected boolean hasNext() {
-        return posicio < llistaCtrl.length;
+        return !llistaCtrl[(posicio + 1) % llistaCtrl.length];
     }
 
     /**
@@ -128,12 +128,12 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
         setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = reproduccioCiclica;
         posicio = 0;
-        /*if (isReproduccioAleatoria()) {
+        if (isReproduccioAleatoria()) {
             posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
         } else {
             setLlistaReproduint(llistaReproduint);
             posicio = 0;
-        }*/
+        }
         continuaReproduccio();
     }
 

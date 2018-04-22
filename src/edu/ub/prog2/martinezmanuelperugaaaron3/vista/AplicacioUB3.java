@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron.vista;
+package edu.ub.prog2.martinezmanuelperugaaaron3.vista;
 
-import edu.ub.prog2.martinezmanuelperugaaaron.controlador.Controlador;
+import edu.ub.prog2.martinezmanuelperugaaaron3.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.Menu;
 import java.util.ArrayList;
