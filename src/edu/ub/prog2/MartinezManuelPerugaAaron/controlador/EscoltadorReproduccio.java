@@ -113,7 +113,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      * @param reproduccioCiclica
      */
     public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica) {
-        // TODO (DUDA + IDEA)
+        // TODO (DUDA)
         setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = reproduccioCiclica;
 

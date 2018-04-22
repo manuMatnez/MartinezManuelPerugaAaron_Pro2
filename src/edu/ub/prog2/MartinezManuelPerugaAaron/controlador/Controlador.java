@@ -344,16 +344,22 @@ public class Controlador implements InControlador {
 
     /**
      * Activa o desactiva reproduccion continua
+     *
+     * @return boolean
      */
-    public void activarDesactivarContinua() {
+    public boolean activarDesactivarContinua() {
         escoltador.setReproduccioCiclica(!escoltador.isReproduccioCiclica());
+        return escoltador.isReproduccioCiclica();
     }
 
     /**
      * Activa o desactiva reproducción aleatoria
+     *
+     * @return boolean
      */
-    public void activarDesactivarAleatoria() {
+    public boolean activarDesactivarAleatoria() {
         escoltador.setReproduccioAleatoria(!escoltador.isReproduccioAleatoria());
+        return escoltador.isReproduccioAleatoria();
     }
 
 }

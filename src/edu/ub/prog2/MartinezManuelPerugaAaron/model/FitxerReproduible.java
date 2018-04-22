@@ -64,4 +64,26 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
     // Cambio a public para uso en Escoltadorreproduccio
     public abstract void reproduir() throws AplicacioException;
 
+    @Override
+    public String toString() {
+        String ext = this.getExtensio();
+
+        StringBuilder fitxer = new StringBuilder();
+
+        fitxer.append("Nom='").append(getDescripcio()).append("', Data='")
+                .append(this.getUltimaModificacio())
+                .append("', Nom fitxer='").append(this.getNomFitxer())
+                .append("', Extensio='");
+
+        if (ext.length() > 0) {
+            fitxer.append(ext);
+        } else {
+            fitxer.append("null");
+        }
+
+        fitxer.append("', Cami complet='").append(getCamiAbsolutComplet()).append("'");
+
+        return fitxer.toString();
+    }
+
 }
