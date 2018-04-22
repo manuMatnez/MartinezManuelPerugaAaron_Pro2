@@ -160,6 +160,17 @@ public class Controlador implements InControlador {
     }
 
     /**
+     * Añade un nuevo album con tamaño personalizado a traves de Dades
+     *
+     * @param titol
+     * @param size
+     * @throws AplicacioException
+     */
+    public void afegirAlbum(String titol, int size) throws AplicacioException {
+        dades.afegirAlbum(titol, size);
+    }
+
+    /**
      * Retorna una Lista de Strings de Albums a traves de Dades
      *
      * @return List

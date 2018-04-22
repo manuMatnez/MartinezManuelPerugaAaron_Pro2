@@ -239,7 +239,23 @@ public class Dades implements Serializable {
         }
 
         // TODO (DUDA PREGUNTAR CANTIDAD)
-        albums.put(titol, new AlbumFitxersMultimedia(10, titol));
+        albums.put(titol, new AlbumFitxersMultimedia(titol));
+    }
+
+    /**
+     * Añade un nuevo album con tamaño personalizado
+     *
+     * @param titol
+     * @param size
+     * @throws AplicacioException
+     */
+    public void afegirAlbum(String titol, int size) throws AplicacioException  {
+        if (albums.containsKey(titol)) {
+            throw new AplicacioException("Ya existeix aquest album");
+        }
+
+        // TODO (DUDA PREGUNTAR CANTIDAD)
+        albums.put(titol, new AlbumFitxersMultimedia(size, titol));
     }
 
     /**

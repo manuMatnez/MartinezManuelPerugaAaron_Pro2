@@ -166,11 +166,39 @@ public class AplicacioUB3 {
             System.out.print("Nom del nuou album >> ");
             String album = sc.nextLine();
             System.out.println();
-            ctrl.afegirAlbum(album);
+            preguntaTamanyAlbum(sc, album);
             System.out.println("Album afegit -> " + album);
         } catch (AplicacioException ae) {
             System.out.println(ae.getMessage());
         }
+    }
+
+    /**
+     * Pregunta si quiere tamaño personalizado del album
+     *
+     * @param sc
+     * @param album
+     * @throws AplicacioException
+     */
+    private void preguntaTamanyAlbum(Scanner sc, String album) throws AplicacioException {
+        System.out.print("Vols un tamany de album personalitzat? (s/n) >> ");
+        char respuesta = sc.next().toLowerCase().charAt(0);
+        System.out.println();
+        switch (respuesta) {
+            case 's':
+                System.out.print("Tamany del nuou album >> ");
+                int size = sc.nextInt();
+                System.out.println();
+                ctrl.afegirAlbum(album, size);
+                break;
+            case 'n':
+                ctrl.afegirAlbum(album);
+                break;
+            default:
+                preguntaTamanyAlbum(sc, album);
+                break;
+        }
+
     }
 
     /**

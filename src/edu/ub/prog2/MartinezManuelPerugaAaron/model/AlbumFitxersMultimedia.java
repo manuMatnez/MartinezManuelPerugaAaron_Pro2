@@ -28,6 +28,11 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers {
 
     private String titol;
 
+    public AlbumFitxersMultimedia(String titol) throws AplicacioException {
+        super();
+        this.titol = titol;
+    }
+
     public AlbumFitxersMultimedia(int cap, String titol) throws AplicacioException {
         super(cap);
         this.titol = titol;
@@ -42,5 +47,5 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers {
         this.titol = titol;
     }
     // Getters y Setters END
-    
+
 }

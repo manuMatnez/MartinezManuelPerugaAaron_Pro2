@@ -40,6 +40,10 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     public EscoltadorReproduccio() {
     }
 
+    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint) {
+        setLlistaReproduint(llistaReproduint);
+    }
+
     /**
      * Asigna una CarpetaFitxers, un array de booleans del mismo tamaño y una
      * posición de inicio para poder reproducir
