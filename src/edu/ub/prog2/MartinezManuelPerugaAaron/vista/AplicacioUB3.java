@@ -165,9 +165,9 @@ public class AplicacioUB3 {
         try {
             System.out.print("Nom del nuou album >> ");
             String album = sc.nextLine();
-            System.out.println();
+
             preguntaTamanyAlbum(sc, album);
-            System.out.println("Album afegit -> " + album);
+            System.out.println("\nAlbum afegit -> " + album);
         } catch (AplicacioException ae) {
             System.out.println(ae.getMessage());
         }
@@ -182,13 +182,11 @@ public class AplicacioUB3 {
      */
     private void preguntaTamanyAlbum(Scanner sc, String album) throws AplicacioException {
         System.out.print("Vols un tamany de album personalitzat? (s/n) >> ");
-        char respuesta = sc.next().toLowerCase().charAt(0);
-        System.out.println();
+        char respuesta = sc.nextLine().toLowerCase().charAt(0);
         switch (respuesta) {
             case 's':
                 System.out.print("Tamany del nuou album >> ");
                 int size = sc.nextInt();
-                System.out.println();
                 ctrl.afegirAlbum(album, size);
                 break;
             case 'n':
@@ -210,9 +208,8 @@ public class AplicacioUB3 {
         try {
             System.out.print("Nom del album >> ");
             String album = sc.nextLine();
-            System.out.println();
             ctrl.esborrarAlbum(album);
-            System.out.println("Album eliminat -> " + album);
+            System.out.println("\nAlbum eliminat -> " + album);
         } catch (AplicacioException ae) {
             System.out.println(ae.getMessage());
         }
@@ -245,12 +242,10 @@ public class AplicacioUB3 {
         try {
             System.out.print("Nom del album >> ");
             String album = sc.nextLine();
-            System.out.println();
             System.out.print("ID del fitxer >> ");
             int id = sc.nextInt();
-            System.out.println();
             ctrl.afegirFitxer(album, id);
-            System.out.println("Fitxer amb id " + id + " afegit a " + album);
+            System.out.println("\nFitxer amb id " + id + " afegit a " + album);
         } catch (AplicacioException ae) {
             System.out.println(ae.getMessage());
         }
@@ -265,12 +260,10 @@ public class AplicacioUB3 {
         try {
             System.out.print("Nom del album >> ");
             String album = sc.nextLine();
-            System.out.println();
             System.out.print("ID del fitxer >> ");
             int id = sc.nextInt();
-            System.out.println();
             ctrl.esborrarFitxer(album, id);
-            System.out.println("Fitxer amb id " + id + " esborrat en " + album);
+            System.out.println("\nFitxer amb id " + id + " esborrat en " + album);
         } catch (AplicacioException ae) {
             System.out.println(ae.getMessage());
         }
@@ -304,7 +297,6 @@ public class AplicacioUB3 {
         try {
             System.out.print("Nom del album >> ");
             String album = sc.nextLine();
-            System.out.println();
             mostrarUnAlbum(album);
         } catch (AplicacioException ae) {
             System.out.println(ae.getMessage());
@@ -321,41 +313,54 @@ public class AplicacioUB3 {
     private void afegirVideoBiblioteca(Scanner sc) {
         System.out.print("Ruta del Fitxer >> ");
         String cami = sc.nextLine();
-        System.out.println();
         try {
             ctrl.comprovaExistenciaFitxer(cami);
 
             System.out.print("Nom del Fitxer >> ");
             String desc = sc.nextLine();
-            System.out.println();
 
             System.out.print("Codec (String) >> ");
             String codec = sc.nextLine();
-            System.out.println();
 
             System.out.print("Durada (float) >> ");
             float durada = sc.nextFloat();
-            System.out.println();
 
             System.out.print("Alcada (int) >> ");
             int alcada = sc.nextInt();
-            System.out.println();
 
             System.out.print("Amplada (int) >> ");
             int amplada = sc.nextInt();
-            System.out.println();
 
             System.out.print("Frames per Second (float) >> ");
             float fps = sc.nextFloat();
-            System.out.println();
 
             ctrl.afegirVideo(cami, desc, codec, durada, alcada, amplada, fps);
 
-            System.out.println("Fitxer afegit");
+            System.out.println("\nFitxer afegit");
 
         } catch (AplicacioException ae) {
             //System.err.println(ae.getMessage()); Salida de error
             System.out.println(ae.getMessage());
+        }
+    }
+
+    /**
+     * Pregunta y pide los datos de la ubicación de la caratula de la canción
+     *
+     * @param sc
+     * @return String
+     */
+    private String preguntaImatgeFitxer(Scanner sc) {
+        System.out.print("Vols afegir una imatge al fitxer de audio? (s/n) >> ");
+        char respuesta = sc.nextLine().toLowerCase().charAt(0);
+        switch (respuesta) {
+            case 's':
+                System.out.print("Ruta de la imatge del Fitxer >> ");
+                return sc.nextLine();
+            case 'n':
+                return "";
+            default:
+                return preguntaImatgeFitxer(sc);
         }
     }
 
@@ -367,34 +372,27 @@ public class AplicacioUB3 {
     private void afegirAudioBiblioteca(Scanner sc) {
         System.out.print("Ruta del Fitxer >> ");
         String cami = sc.nextLine();
-        System.out.println();
         try {
             ctrl.comprovaExistenciaFitxer(cami);
 
-            System.out.print("Ruta de la imatge del Fitxer >> ");
-            String imatgeFitxer = sc.nextLine();
-            System.out.println();
-
+            String imatgeFitxer = preguntaImatgeFitxer(sc);
             //ctrl.comprovaExistenciaFitxer(imatgeFitxer);
+
             System.out.print("Nom del Fitxer >> ");
             String desc = sc.nextLine();
-            System.out.println();
 
             System.out.print("Codec (String) >> ");
             String codec = sc.next();
-            System.out.println();
 
             System.out.print("Durada (float) >> ");
             float durada = sc.nextFloat();
-            System.out.println();
 
             System.out.print("Kbps (int) >> ");
             int kbps = sc.nextInt();
-            System.out.println();
 
             ctrl.afegirAudio(cami, imatgeFitxer, desc, codec, durada, kbps);
 
-            System.out.println("Fitxer afegit");
+            System.out.println("\nFitxer afegit");
 
         } catch (AplicacioException ae) {
             //System.err.println(ae.getMessage()); Salida de error
@@ -415,10 +413,9 @@ public class AplicacioUB3 {
         } else {
             System.out.print("ID del Fitxer >> ");
             int id = sc.nextInt();
-            System.out.println();
             try {
                 ctrl.esborrarFitxer(id);
-                System.out.println("Fitxer amd id " + id + " esborrat");
+                System.out.println("\nFitxer amd id " + id + " esborrat");
             } catch (AplicacioException ae) {
                 //System.err.println(ae.getMessage()); Salida de error
                 System.out.println(ae.getMessage());
@@ -453,7 +450,6 @@ public class AplicacioUB3 {
         try {
             System.out.print("ID del fitxer >> ");
             int id = sc.nextInt();
-            System.out.println();
             ctrl.reproduirFitxer(id);
         } catch (AplicacioException ae) {
             System.out.println(ae.getMessage());
@@ -469,7 +465,6 @@ public class AplicacioUB3 {
         try {
             System.out.print("Nom del album >> ");
             String album = sc.nextLine();
-            System.out.println();
             ctrl.reproduirCarpeta(album);
         } catch (AplicacioException ae) {
             System.out.println(ae.getMessage());
@@ -486,15 +481,14 @@ public class AplicacioUB3 {
     private void guardarDades(Scanner sc) {
         List<String> bibl = (ArrayList<String>) ctrl.mostrarBiblioteca();
         if (bibl.isEmpty()) {
-            System.out.println("No hi ha dades que guardar");
+            System.out.println("No hi ha dades que guardar\n");
         } else {
             System.out.print("Ruta completa amb el nom >> ");
             String cami = sc.nextLine();
-            System.out.println();
             try {
                 ctrl.guardarDadesDisc(cami);
 
-                System.out.println("Dades emmagatzemades!!");
+                System.out.println("\nDades emmagatzemades!!\n");
 
             } catch (AplicacioException ae) {
                 //System.err.println(ae.getMessage()); Salida de error
@@ -511,11 +505,10 @@ public class AplicacioUB3 {
     private void cargarDades(Scanner sc) {
         System.out.print("Ruta completa amb el nom >> ");
         String cami = sc.nextLine();
-        System.out.println();
         try {
             ctrl.carregarDadesDisc(cami);
 
-            System.out.println("Dades carregades!!");
+            System.out.println("\nDades carregades!!\n");
 
         } catch (AplicacioException ae) {
             //System.err.println(ae.getMessage()); Salida de error
@@ -537,8 +530,6 @@ public class AplicacioUB3 {
         OpcionsMenuGestioAlbums opcio;
 
         do {
-            System.out.println();
-
             menuAlbums.mostrarMenu();
 
             opcio = menuAlbums.getOpcio(sc);
@@ -562,6 +553,7 @@ public class AplicacioUB3 {
                     System.out.println(TORNANT_A + MENU_PRINCIPAL_SEC);
                     break;
             }
+            System.out.println();
         } while (opcio != OpcionsMenuGestioAlbums.M_GA_TORNAR);
     }
 
@@ -578,8 +570,6 @@ public class AplicacioUB3 {
         OpcionsSubMenuGestionarAlbum opcio;
 
         do {
-            System.out.println();
-
             subMenuAlbum.mostrarMenu();
 
             opcio = subMenuAlbum.getOpcio(sc);
@@ -600,6 +590,7 @@ public class AplicacioUB3 {
                     System.out.println(TORNANT_A + GESTIO_ALBUMS_SEC);
                     break;
             }
+            System.out.println();
         } while (opcio != OpcionsSubMenuGestionarAlbum.SM_GA_TORNAR);
     }
 
@@ -616,8 +607,6 @@ public class AplicacioUB3 {
         OpcionsMenuControl opcio;
 
         do {
-            System.out.println();
-
             menuControl.mostrarMenu();
 
             opcio = menuControl.getOpcio(sc);
@@ -661,6 +650,7 @@ public class AplicacioUB3 {
                     System.out.println(TORNANT_A + MENU_PRINCIPAL_SEC);
                     break;
             }
+            System.out.println();
         } while (opcio != OpcionsMenuControl.M_C_MENU_ANTERIOR);
     }
 
@@ -670,18 +660,16 @@ public class AplicacioUB3 {
      * @param sc
      */
     private void gestionarReproduccio(Scanner sc) {
-        Menu<OpcionsSubMenuControl> submenuControl = new Menu<>(GESTION_REPR_CURSO_SEC, OpcionsSubMenuControl.values());
+        Menu<OpcionsSubMenuControl> subMenuControl = new Menu<>(GESTION_REPR_CURSO_SEC, OpcionsSubMenuControl.values());
 
-        submenuControl.setDescripcions(DESC_SUBMENU_GESTIO_REPRODUCCIO);
+        subMenuControl.setDescripcions(DESC_SUBMENU_GESTIO_REPRODUCCIO);
 
         OpcionsSubMenuControl opcio;
 
         do {
-            System.out.println();
+            subMenuControl.mostrarMenu();
 
-            submenuControl.mostrarMenu();
-
-            opcio = submenuControl.getOpcio(sc);
+            opcio = subMenuControl.getOpcio(sc);
 
             System.out.println();
 
@@ -718,7 +706,7 @@ public class AplicacioUB3 {
                     System.out.println(TORNANT_A + CONTROL_REPR_VISIO_SEC);
                     break;
             }
-
+            System.out.println();
         } while (opcio != OpcionsSubMenuControl.SM_GR_SORTIR);
     }
 
@@ -735,8 +723,6 @@ public class AplicacioUB3 {
         OpcionsMenuAfegir opcio;
 
         do {
-            System.out.println();
-
             menuAfegir.mostrarMenu();
 
             opcio = menuAfegir.getOpcio(sc);
@@ -754,7 +740,7 @@ public class AplicacioUB3 {
                     System.out.println(TORNANT_A + GESTIO_BIBLIOTECA_SEC);
                     break;
             }
-
+            System.out.println();
         } while (opcio != OpcionsMenuAfegir.SM_AFEGIR_TORNAR);
     }
 
@@ -771,8 +757,6 @@ public class AplicacioUB3 {
         OpcionsMenuGestioBiblioteca opcio;
 
         do {
-            System.out.println();
-
             subMenu.mostrarMenu();
 
             opcio = subMenu.getOpcio(sc);
@@ -793,7 +777,7 @@ public class AplicacioUB3 {
                     System.out.println(TORNANT_A + MENU_PRINCIPAL_SEC);
                     break;
             }
-
+            System.out.println();
         } while (opcio != OpcionsMenuGestioBiblioteca.M_GB_TORNAR);
 
     }
@@ -817,8 +801,6 @@ public class AplicacioUB3 {
             OpcionsMenuPrincipal opcio;
 
             do {
-                System.out.println();
-
                 menu.mostrarMenu();
 
                 opcio = menu.getOpcio(sc);

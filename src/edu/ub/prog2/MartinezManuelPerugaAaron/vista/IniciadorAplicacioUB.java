@@ -72,11 +72,9 @@ public class IniciadorAplicacioUB {
             Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         }
 
-        System.out.println(HEADER);
+        System.out.println(HEADER+"\n");
 
-        System.out.println();
-
-        System.out.println("Benvingut al reproductor UB, " + USER_NAME);
+        System.out.println("Benvingut al reproductor UB, " + USER_NAME + "\n");
 
         AplicacioUB3 aplicacio = new AplicacioUB3();
 
