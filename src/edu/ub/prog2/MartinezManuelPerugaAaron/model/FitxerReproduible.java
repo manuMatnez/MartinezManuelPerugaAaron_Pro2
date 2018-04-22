@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron3.model;
+package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
-import edu.ub.prog2.martinezmanuelperugaaaron3.controlador.Reproductor;
+import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 
 /**

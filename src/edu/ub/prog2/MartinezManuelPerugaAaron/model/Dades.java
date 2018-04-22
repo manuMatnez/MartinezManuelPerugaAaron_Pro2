@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron3.model;
+package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
-import edu.ub.prog2.martinezmanuelperugaaaron3.controlador.Reproductor;
+import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Reproductor;
 import edu.ub.prog2.utils.AplicacioException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -339,7 +339,7 @@ public class Dades implements Serializable {
      * @return
      * @throws AplicacioException
      */
-    public CarpetaFitxers makeReproduccio(int id) throws AplicacioException {
+    public CarpetaFitxers getCarpetaReproduccio(int id) throws AplicacioException {
         CarpetaFitxers tmp = new CarpetaFitxers();
         tmp.addFitxer(biblioteca.getAt(comprobaIndexBiblio(id)));
         return tmp;
@@ -351,7 +351,7 @@ public class Dades implements Serializable {
      * @return CarpetaFitxer
      * @throws AplicacioException
      */
-    public CarpetaFitxers makeReproduccio() throws AplicacioException {
+    public CarpetaFitxers getCarpetaReproduccio() throws AplicacioException {
         if (estaBuida()) {
             throw new AplicacioException("No hi ha fitxers per reproduir");
         }
@@ -365,7 +365,7 @@ public class Dades implements Serializable {
      * @return CarpetaFitxer
      * @throws AplicacioException
      */
-    public CarpetaFitxers makeReproduccio(String titol) throws AplicacioException {
+    public CarpetaFitxers getCarpetaReproduccio(String titol) throws AplicacioException {
         if (estaBuida()) {
             throw new AplicacioException("No hi ha fitxers per reproduir");
         }

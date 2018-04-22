@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.ub.prog2.martinezmanuelperugaaaron3.controlador;
+package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
-import edu.ub.prog2.martinezmanuelperugaaaron3.model.Dades;
+import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.InControlador;
 import java.util.List;
@@ -263,7 +263,7 @@ public class Controlador implements InControlador {
     public void reproduirFitxer(int id) throws AplicacioException {
         try {
             obrirFinestraReproductor();
-            escoltador.iniciarReproduccio(dades.makeReproduccio(id), false);
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(id), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
@@ -279,7 +279,7 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.makeReproduccio(), false);
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
@@ -296,7 +296,7 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.makeReproduccio(titol), false);
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(titol), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
