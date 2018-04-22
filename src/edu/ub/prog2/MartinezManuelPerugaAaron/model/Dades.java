@@ -340,7 +340,7 @@ public class Dades implements Serializable {
      * @throws AplicacioException
      */
     public CarpetaFitxers getCarpetaReproduccio(int id) throws AplicacioException {
-        CarpetaFitxers tmp = new CarpetaFitxers();
+        CarpetaFitxers tmp = new CarpetaFitxers(1);
         tmp.addFitxer(biblioteca.getAt(comprobaIndexBiblio(id)));
         return tmp;
     }

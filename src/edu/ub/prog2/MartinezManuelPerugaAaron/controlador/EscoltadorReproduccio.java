@@ -36,37 +36,28 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     private boolean reproduccioCiclica, reproduccioAleatoria;
     private int posicio; // TODO (DUDA)
 
+    // TODO (DUDA CONSTRUCTORES)
     public EscoltadorReproduccio() {
     }
 
-    // TODO (DUDA CONSTRUCTORES)
-    /*
-    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint) {
-        setLlistaReproduint(llistaReproduint);
-        this.reproduccioCiclica = false;
-        this.reproduccioAleatoria = false;
-    }
-
-    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica,
-            boolean reproduccioAleatoria) {
-        setLlistaReproduint(llistaReproduint);
-        this.reproduccioCiclica = reproduccioCiclica;
-        this.reproduccioAleatoria = reproduccioAleatoria;
-    }*/
+    /**
+     * Asigna una CarpetaFitxers, un array de booleans del mismo tamaño y una
+     * posición de inicio para poder reproducir
+     *
+     * @param llistaReproduint
+     */
     public void setLlistaReproduint(CarpetaFitxers llistaReproduint) {
         this.llistaReproduint = llistaReproduint;
         this.llistaCtrl = new boolean[llistaReproduint.getSize()];
+
+        if (isReproduccioAleatoria()) {
+            posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
+        } else {
+            posicio = 0;
+        }
     }
 
-    // Getters START
-    public CarpetaFitxers getLlistaReproduint() {
-        return llistaReproduint;
-    }
-
-    public boolean[] getLlistaCtrl() {
-        return llistaCtrl;
-    }
-
+    // Getters y Setters START
     public boolean isReproduccioCiclica() {
         return reproduccioCiclica;
     }
@@ -74,9 +65,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     public boolean isReproduccioAleatoria() {
         return reproduccioAleatoria;
     }
-    // Getters y Setters END
 
-    //  Setters START
     public void setReproduccioCiclica(boolean reproduccioCiclica) {
         this.reproduccioCiclica = reproduccioCiclica;
     }
@@ -84,7 +73,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     public void setReproduccioAleatoria(boolean reproduccioAleatoria) {
         this.reproduccioAleatoria = reproduccioAleatoria;
     }
-    // Setters END
+    // Getters y Setters END
 
     /**
      * Es llamado cuando acaba la reproducción de un fichero
@@ -104,7 +93,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     @Override
     protected void next() {
         posicio = (posicio + 1) % llistaCtrl.length;
-        continuaReproduccio();
+        continua();
     }
 
     /**
@@ -127,20 +116,14 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
         // TODO (DUDA + IDEA)
         setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = reproduccioCiclica;
-        posicio = 0;
-        if (isReproduccioAleatoria()) {
-            posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
-        } else {
-            setLlistaReproduint(llistaReproduint);
-            posicio = 0;
-        }
-        continuaReproduccio();
+
+        continua();
     }
 
     /**
-     * Continua la reproduccion
+     * Continua la reproduccion de IniciarReproduccio() / next()
      */
-    public void continuaReproduccio() {
+    public void continua() {
         File file = llistaReproduint.getAt(posicio);
         if (file instanceof FitxerReproduible) {
             // TODO (DUDA TRY-CATCH)

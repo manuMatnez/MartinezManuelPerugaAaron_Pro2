@@ -36,6 +36,7 @@ public class CarpetaFitxers implements Serializable {
     private ArrayList<FitxerMultimedia> carpeta;
 
     public CarpetaFitxers() {
+        capacity = 10;
         carpeta = new ArrayList<>();
     }
 

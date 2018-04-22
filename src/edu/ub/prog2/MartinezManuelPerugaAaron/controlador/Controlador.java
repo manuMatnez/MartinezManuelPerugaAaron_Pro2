@@ -263,7 +263,7 @@ public class Controlador implements InControlador {
     public void reproduirFitxer(int id) throws AplicacioException {
         try {
             obrirFinestraReproductor();
-            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(id), false);
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(id), escoltador.isReproduccioCiclica());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
@@ -279,7 +279,7 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(), false);
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(), escoltador.isReproduccioCiclica());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
@@ -296,7 +296,7 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(titol), false);
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(titol), escoltador.isReproduccioCiclica());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
@@ -346,22 +346,14 @@ public class Controlador implements InControlador {
      * Activa o desactiva reproduccion continua
      */
     public void activarDesactivarContinua() {
-        if (escoltador.isReproduccioCiclica()) {
-            escoltador.setReproduccioCiclica(false);
-        } else {
-            escoltador.setReproduccioCiclica(true);
-        }
+        escoltador.setReproduccioCiclica(!escoltador.isReproduccioCiclica());
     }
 
     /**
      * Activa o desactiva reproducción aleatoria
      */
     public void activarDesactivarAleatoria() {
-        if (escoltador.isReproduccioAleatoria()) {
-            escoltador.setReproduccioAleatoria(false);
-        } else {
-            escoltador.setReproduccioAleatoria(true);
-        }
+        escoltador.setReproduccioAleatoria(!escoltador.isReproduccioAleatoria());
     }
 
 }
