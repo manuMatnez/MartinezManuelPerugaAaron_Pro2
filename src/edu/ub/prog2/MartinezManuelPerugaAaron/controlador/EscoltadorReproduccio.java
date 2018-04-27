@@ -22,6 +22,10 @@ import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import java.io.File;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * EscoltadorReproduccio - Controlador
@@ -32,9 +36,10 @@ import java.io.Serializable;
 public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements Serializable {
 
     private CarpetaFitxers llistaReproduint;
-    private boolean[] llistaCtrl;
+    private List<Integer> llistaCtrl;
     private boolean reproduccioCiclica, reproduccioAleatoria;
-    private int posicio; // TODO (DUDA)
+    private int posicio;
+    private int size;
 
     // TODO (DUDA CONSTRUCTORES)
     public EscoltadorReproduccio() {
@@ -45,19 +50,19 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     }
 
     /**
-     * Asigna una CarpetaFitxers, un array de booleans del mismo tamaño y una
+     * Asigna una CarpetaFitxers, una lista de enteros del mismo tamaño y una
      * posición de inicio para poder reproducir
      *
      * @param llistaReproduint
      */
     public void setLlistaReproduint(CarpetaFitxers llistaReproduint) {
         this.llistaReproduint = llistaReproduint;
-        this.llistaCtrl = new boolean[llistaReproduint.getSize()];
-
+        // (JAVA8) Generamos una Lista de interos desde 0 hasta tamaño de carpeta-1
+        llistaCtrl = IntStream.range(0, llistaReproduint.getSize()).boxed().collect(Collectors.toList());
+        posicio = 0;
+        size = llistaReproduint.getSize() - 1;
         if (isReproduccioAleatoria()) {
-            posicio = (int) Math.round(Math.random() * (llistaCtrl.length - 1));
-        } else {
-            posicio = 0;
+            Collections.shuffle(llistaCtrl);
         }
     }
 
@@ -80,34 +85,42 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     // Getters y Setters END
 
     /**
-     * Es llamado cuando acaba la reproducción de un fichero
+     * Es llamado cuando acaba la reproducción de un fichero, comprobamos si
+     * puede continuar o no la reproducción y en caso afirmativo la continuamos
      */
     @Override
     protected void onEndFile() {
-        if (reproduccioCiclica && !hasNext()) {
-            iniciarReproduccio(llistaReproduint, reproduccioCiclica);
-        } else if (hasNext()) {
-            next();
+        if (reproduccioCiclica) {
+            if (hasNext()) {
+                next();
+            } else {
+                iniciarReproduccio(llistaReproduint, reproduccioCiclica);
+            }
+        } else {
+            if (hasNext()) {
+                next();
+            }
         }
     }
 
     /**
      * Es llamado desde onEndFile() cuando va a reproducir el siguiente fichero
+     * en caso de que sea posible
      */
     @Override
     protected void next() {
-        posicio = (posicio + 1) % llistaCtrl.length;
+        posicio++;
         continua();
     }
 
     /**
-     * Comprueba si tiene más ficheros
+     * Comprueba si hay más archivos por reproducir
      *
      * @return boolean
      */
     @Override
     protected boolean hasNext() {
-        return !llistaCtrl[(posicio + 1) % llistaCtrl.length];
+        return posicio != size;
     }
 
     /**
@@ -117,10 +130,8 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      * @param reproduccioCiclica
      */
     public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica) {
-        // TODO (DUDA)
         setLlistaReproduint(llistaReproduint);
         this.reproduccioCiclica = reproduccioCiclica;
-
         continua();
     }
 
@@ -128,11 +139,10 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      * Continua la reproduccion de IniciarReproduccio() / next()
      */
     public void continua() {
-        File file = llistaReproduint.getAt(posicio);
+        File file = llistaReproduint.getAt(llistaCtrl.get(posicio));
         if (file instanceof FitxerReproduible) {
             // TODO (DUDA TRY-CATCH)
             try {
-                this.llistaCtrl[posicio] = true;
                 ((FitxerReproduible) file).reproduir();
             } catch (AplicacioException ex) {
                 System.out.println(ex.getMessage());
