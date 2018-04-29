@@ -304,6 +304,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void reproduirCarpeta(String titol) throws AplicacioException {
+        if (!dades.existeixAlbum(titol)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
@@ -311,6 +314,7 @@ public class Controlador implements InControlador {
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
         }
+        
     }
 
     /**

@@ -563,7 +563,7 @@ public class AplicacioUB3 {
      * @param sc
      */
     private void gestionarAlbum(Scanner sc, String album) {
-        Menu<OpcionsSubMenuGestionarAlbum> subMenuAlbum = new Menu<>(GESTIO_ALBUM_SEC, OpcionsSubMenuGestionarAlbum.values());
+        Menu<OpcionsSubMenuGestionarAlbum> subMenuAlbum = new Menu<>(GESTIO_ALBUM_SEC + ": " + album, OpcionsSubMenuGestionarAlbum.values());
 
         subMenuAlbum.setDescripcions(DESC_SUBMENU_GESTIONAR_ALBUM);
 
@@ -704,9 +704,9 @@ public class AplicacioUB3 {
                     break;
                 case SM_GR_SORTIR:
                     System.out.println(TORNANT_A + CONTROL_REPR_VISIO_SEC);
+                    System.out.println();
                     break;
             }
-            System.out.println();
         } while (opcio != OpcionsSubMenuControl.SM_GR_SORTIR);
     }
 
