@@ -156,6 +156,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void afegirAlbum(String titol) throws AplicacioException {
+        if (existeixAlbum(titol)) {
+            throw new AplicacioException("Ya existeix aquest album");
+        }
         dades.afegirAlbum(titol);
     }
 
@@ -167,6 +170,9 @@ public class Controlador implements InControlador {
      * @throws AplicacioException
      */
     public void afegirAlbum(String titol, int size) throws AplicacioException {
+        if (existeixAlbum(titol)) {
+            throw new AplicacioException("Ya existeix aquest album");
+        }
         dades.afegirAlbum(titol, size);
     }
 
@@ -188,6 +194,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void esborrarAlbum(String titol) throws AplicacioException {
+        if (!existeixAlbum(titol)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
         dades.esborrarUnAlbum(titol);
     }
 
@@ -227,6 +236,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public List<String> mostrarAlbum(String titol) throws AplicacioException {
+        if (!existeixAlbum(titol)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
         return dades.albumToString(titol);
     }
 

@@ -39,7 +39,6 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     private List<Integer> llistaCtrl;
     private boolean reproduccioCiclica, reproduccioAleatoria;
     private int posicio;
-    private int size;
 
     // TODO (DUDA CONSTRUCTORES)
     public EscoltadorReproduccio() {
@@ -60,7 +59,6 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
         // (JAVA8) Generamos una Lista de interos desde 0 hasta tamaño de carpeta-1
         llistaCtrl = IntStream.range(0, llistaReproduint.getSize()).boxed().collect(Collectors.toList());
         posicio = 0;
-        size = llistaReproduint.getSize() - 1;
         if (isReproduccioAleatoria()) {
             Collections.shuffle(llistaCtrl);
         }
@@ -109,7 +107,8 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      */
     @Override
     protected void next() {
-        posicio++;
+        // circular
+        posicio = (posicio + 1) % llistaCtrl.size();
         continua();
     }
 
@@ -120,7 +119,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      */
     @Override
     protected boolean hasNext() {
-        return posicio != size;
+        return posicio != llistaCtrl.size() - 1;
     }
 
     /**

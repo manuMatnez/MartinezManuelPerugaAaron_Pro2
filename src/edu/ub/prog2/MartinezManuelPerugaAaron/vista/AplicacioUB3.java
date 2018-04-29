@@ -88,7 +88,7 @@ public class AplicacioUB3 {
     };
 
     private static final String[] DESC_MENU_GESTIO_ALBUMS = {
-        "Afegir Albums",
+        "Afegir Album",
         "Mostrar Albums",
         "Eliminar Album",
         "Gestionar Album",
@@ -223,7 +223,7 @@ public class AplicacioUB3 {
         System.out.println(ALBUMS_FITXERS_TITLE + "\n" + SEP);
 
         if (albums.isEmpty()) {
-            System.out.println("No hi ha fitxers");
+            System.out.println("No hi ha albums");
         } else {
             albums.forEach((album) -> {
                 System.out.println(album);

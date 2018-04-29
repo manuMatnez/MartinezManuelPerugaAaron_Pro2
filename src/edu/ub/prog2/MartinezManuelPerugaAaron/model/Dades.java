@@ -52,7 +52,7 @@ public class Dades implements Serializable {
      * Comprueba que el índice de la biblio está bien y lo retorna restandole 1
      *
      * @param id
-     * @return
+     * @return int
      * @throws AplicacioException
      */
     private int comprobaIndexBiblio(int id) throws AplicacioException {
@@ -62,7 +62,29 @@ public class Dades implements Serializable {
             throw new AplicacioException("La biblioteca esta buida");
         } else if (id < 0) {
             throw new AplicacioException("La posicio começa amb 1");
-        } else if (id > size) {
+        } else if (id > size - 1) {
+            throw new AplicacioException("La posicio no pot ser mès gran que: "
+                    + size);
+        }
+        return id;
+    }
+    
+        /**
+     * Comprueba que el índice del album está bien y lo retorna restandole 1
+     *
+     * @param title
+     * @param id
+     * @return int
+     * @throws AplicacioException
+     */
+    private int comprobaIndexAlbum(String title, int id) throws AplicacioException {
+        id--;
+        int size = this.albums.get(title).getSize();
+        if (estaBuida()) {
+            throw new AplicacioException("La biblioteca esta buida");
+        } else if (id < 0) {
+            throw new AplicacioException("La posicio começa amb 1");
+        } else if (id > size - 1) {
             throw new AplicacioException("La posicio no pot ser mès gran que: "
                     + size);
         }
@@ -158,11 +180,11 @@ public class Dades implements Serializable {
         biblioteca.removeFitxer(file);
 
         // PRACTICA 3
-        for (AlbumFitxersMultimedia album : albums.values()) {
-            if (album.contains(file)) {
+        albums.values().forEach((album) -> {
+            while(album.contains(file)) {
                 album.removeFitxer(file);
             }
-        }
+        });
 
     }
 
@@ -191,7 +213,7 @@ public class Dades implements Serializable {
      * .close(), ya que sirve para las clases que implementan Closeable
      *
      * @param camiOrigen
-     * @return
+     * @return Dades
      * @throws AplicacioException
      */
     public Dades carregarDadesDisc(String camiOrigen) throws AplicacioException {
@@ -218,12 +240,8 @@ public class Dades implements Serializable {
      * Borra un album existente
      *
      * @param titol
-     * @throws AplicacioException
      */
-    public void esborrarUnAlbum(String titol) throws AplicacioException {
-        if (!albums.containsKey(titol)) {
-            throw new AplicacioException("No existeix aquest album");
-        }
+    public void esborrarUnAlbum(String titol) {
         albums.remove(titol);
     }
 
@@ -234,10 +252,6 @@ public class Dades implements Serializable {
      * @throws AplicacioException
      */
     public void afegirAlbum(String titol) throws AplicacioException {
-        if (albums.containsKey(titol)) {
-            throw new AplicacioException("Ya existeix aquest album");
-        }
-
         // TODO (DUDA PREGUNTAR CANTIDAD)
         albums.put(titol, new AlbumFitxersMultimedia(titol));
     }
@@ -250,10 +264,6 @@ public class Dades implements Serializable {
      * @throws AplicacioException
      */
     public void afegirAlbum(String titol, int size) throws AplicacioException  {
-        if (albums.containsKey(titol)) {
-            throw new AplicacioException("Ya existeix aquest album");
-        }
-
         // TODO (DUDA PREGUNTAR CANTIDAD)
         albums.put(titol, new AlbumFitxersMultimedia(size, titol));
     }
@@ -279,7 +289,8 @@ public class Dades implements Serializable {
         while (albumIt.hasNext()) {
             StringBuilder sb = new StringBuilder();
             String currentAlbum = albumIt.next();
-            sb.append("-> ").append(albums.get(currentAlbum).getTitol()).append("\n");
+            sb.append("-> ").append(albums.get(currentAlbum).getTitol())
+                    .append(" (Spai lliure ").append(albums.get(currentAlbum).freeSpace()).append(")");
             albumList.add(sb.toString());
         }
         return albumList;
@@ -290,13 +301,8 @@ public class Dades implements Serializable {
      *
      * @param titol
      * @return List
-     * @throws AplicacioException
      */
-    public List<String> albumToString(String titol) throws AplicacioException {
-        if (!albums.containsKey(titol)) {
-            throw new AplicacioException("No existeix aquest album");
-        }
-
+    public List<String> albumToString(String titol) {
         List<String> albumList;
         String albumToStr = this.albums.get(titol).toString();
 
@@ -329,7 +335,7 @@ public class Dades implements Serializable {
      * @throws AplicacioException
      */
     public void esborrarFitxerAlbum(String titol, int id) throws AplicacioException {
-        FitxerMultimedia file = (FitxerMultimedia) biblioteca.getAt(comprobaIndexBiblio(id));
+        FitxerMultimedia file = (FitxerMultimedia) albums.get(titol).getAt(comprobaIndexAlbum(titol, id));
         albums.get(titol).removeFitxer(file);
     }
 

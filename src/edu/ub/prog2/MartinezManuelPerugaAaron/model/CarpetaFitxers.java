@@ -31,7 +31,7 @@ import java.util.Iterator;
 public class CarpetaFitxers implements Serializable {
 
     // capacidad máxima de la carpeta
-    private static int capacity;
+    private int capacity;
 
     private ArrayList<FitxerMultimedia> carpeta;
 
