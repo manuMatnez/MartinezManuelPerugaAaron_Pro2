@@ -212,8 +212,7 @@ public class Controlador implements InControlador {
     }
 
     /**
-     * Añade un fichero al Album seleccionado a traves de Dades (La comprobación
-     * de la existencia la hacemos aquí aprovechando existeixalbum())
+     * Añade un fichero al Album seleccionado a traves de Dades
      *
      * @param titolAlbum
      * @param id
@@ -221,9 +220,6 @@ public class Controlador implements InControlador {
      */
     @Override
     public void afegirFitxer(String titolAlbum, int id) throws AplicacioException {
-        if (!existeixAlbum(titolAlbum)) {
-            throw new AplicacioException("No existeix aquest album");
-        }
         dades.afegirFitxerAlbum(titolAlbum, id);
     }
 
@@ -232,19 +228,14 @@ public class Controlador implements InControlador {
      *
      * @param titol
      * @return
-     * @throws AplicacioException
      */
     @Override
-    public List<String> mostrarAlbum(String titol) throws AplicacioException {
-        if (!existeixAlbum(titol)) {
-            throw new AplicacioException("No existeix aquest album");
-        }
+    public List<String> mostrarAlbum(String titol) {
         return dades.albumToString(titol);
     }
 
     /**
-     * Borra un fichero de un album a traves de Dades (La comprobación de la
-     * existencia la hacemos aquí aprovechando existeixalbum())
+     * Borra un fichero de un album a traves de Dades
      *
      * @param titol
      * @param id
@@ -252,9 +243,6 @@ public class Controlador implements InControlador {
      */
     @Override
     public void esborrarFitxer(String titol, int id) throws AplicacioException {
-        if (!existeixAlbum(titol)) {
-            throw new AplicacioException("No existeix aquest album");
-        }
         dades.esborrarFitxerAlbum(titol, id);
     }
 
@@ -383,6 +371,15 @@ public class Controlador implements InControlador {
     public boolean activarDesactivarAleatoria() {
         escoltador.setReproduccioAleatoria(!escoltador.isReproduccioAleatoria());
         return escoltador.isReproduccioAleatoria();
+    }
+
+    /**
+     * Retorna si el album está vacío a traves de Dades
+     *
+     * @return boolean
+     */
+    public boolean estaBuitAlbum(String titol) {
+        return dades.estaBuitAlbum(titol);
     }
 
 }

@@ -230,6 +230,17 @@ public class AplicacioUB3 {
             });
         }
     }
+
+    private void seleccionaAlbum(Scanner sc) {
+        System.out.print("Nom del album >> ");
+        String album = sc.nextLine();
+        System.out.println();
+        if (ctrl.existeixAlbum(album)) {
+            gestionarAlbum(sc, album);
+        } else {
+            System.out.println("No existeix l album");
+        }
+    }
     // FUNCIONES ALBUMS END
 
     // FUNCIONES UN ALBUM START
@@ -238,10 +249,10 @@ public class AplicacioUB3 {
      *
      * @param sc
      */
-    private void afegirFitxerAlbum(Scanner sc) {
+    private void afegirFitxerAlbum(Scanner sc, String album) {
         try {
-            System.out.print("Nom del album >> ");
-            String album = sc.nextLine();
+            //System.out.print("Nom del album >> ");
+            //String album = sc.nextLine();
             System.out.print("ID del fitxer >> ");
             int id = sc.nextInt();
             ctrl.afegirFitxer(album, id);
@@ -256,16 +267,20 @@ public class AplicacioUB3 {
      *
      * @param sc
      */
-    private void eliminarFitxerAlbum(Scanner sc) {
-        try {
-            System.out.print("Nom del album >> ");
-            String album = sc.nextLine();
-            System.out.print("ID del fitxer >> ");
-            int id = sc.nextInt();
-            ctrl.esborrarFitxer(album, id);
-            System.out.println("\nFitxer amb id " + id + " esborrat en " + album);
-        } catch (AplicacioException ae) {
-            System.out.println(ae.getMessage());
+    private void eliminarFitxerAlbum(Scanner sc, String album) {
+        if (ctrl.existeixAlbum(album)) {
+            System.out.println("L album ja esta buit");
+        } else {
+            try {
+                //System.out.print("Nom del album >> ");
+                //String album = sc.nextLine();
+                System.out.print("ID del fitxer >> ");
+                int id = sc.nextInt();
+                ctrl.esborrarFitxer(album, id);
+                System.out.println("\nFitxer amb id " + id + " esborrat en " + album);
+            } catch (AplicacioException ae) {
+                System.out.println(ae.getMessage());
+            }
         }
     }
 
@@ -275,7 +290,7 @@ public class AplicacioUB3 {
      * @param title
      * @throws AplicacioException
      */
-    private void mostrarUnAlbum(String title) throws AplicacioException {
+    private void mostrarUnAlbum(String title) {
         List<String> album = (ArrayList<String>) ctrl.mostrarAlbum(title);
         System.out.println(ALBUM_FITXERS_TITLE + title + "\n" + SEP);
 
@@ -288,22 +303,7 @@ public class AplicacioUB3 {
         }
     }
 
-    /**
-     * Pide los datos para mostrar un album
-     *
-     * @param sc
-     */
-    private void mostrarAlbum(Scanner sc) {
-        try {
-            System.out.print("Nom del album >> ");
-            String album = sc.nextLine();
-            mostrarUnAlbum(album);
-        } catch (AplicacioException ae) {
-            System.out.println(ae.getMessage());
-        }
-    }
     // FUNCIONES UN ALBUM END
-
     // FUNCIONES AFEGIR BIBLIOTECA START
     /**
      * Pide los datos para poder añadir un fichero de video
@@ -547,7 +547,7 @@ public class AplicacioUB3 {
                     eliminarAlbum(sc);
                     break;
                 case M_GA_GESTIONAR_ALBUM:
-                    gestionarAlbum(sc);
+                    seleccionaAlbum(sc);
                     break;
                 case M_GA_TORNAR:
                     System.out.println(TORNANT_A + MENU_PRINCIPAL_SEC);
@@ -562,7 +562,7 @@ public class AplicacioUB3 {
      *
      * @param sc
      */
-    private void gestionarAlbum(Scanner sc) {
+    private void gestionarAlbum(Scanner sc, String album) {
         Menu<OpcionsSubMenuGestionarAlbum> subMenuAlbum = new Menu<>(GESTIO_ALBUM_SEC, OpcionsSubMenuGestionarAlbum.values());
 
         subMenuAlbum.setDescripcions(DESC_SUBMENU_GESTIONAR_ALBUM);
@@ -578,13 +578,13 @@ public class AplicacioUB3 {
 
             switch (opcio) {
                 case SM_GA_AFEGIR_FITXER:
-                    afegirFitxerAlbum(sc);
+                    afegirFitxerAlbum(sc, album);
                     break;
                 case SM_GA_ELIMINAR_FITXER:
-                    eliminarFitxerAlbum(sc);
+                    eliminarFitxerAlbum(sc, album);
                     break;
                 case SM_GA_MOSTRAR_ALBUM:
-                    mostrarAlbum(sc);
+                    mostrarUnAlbum(album);
                     break;
                 case SM_GA_TORNAR:
                     System.out.println(TORNANT_A + GESTIO_ALBUMS_SEC);

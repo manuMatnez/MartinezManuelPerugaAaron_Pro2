@@ -61,15 +61,15 @@ public class Dades implements Serializable {
         if (estaBuida()) {
             throw new AplicacioException("La biblioteca esta buida");
         } else if (id < 0) {
-            throw new AplicacioException("La posicio começa amb 1");
+            throw new AplicacioException("La posicio comeca amb 1");
         } else if (id > size - 1) {
-            throw new AplicacioException("La posicio no pot ser mès gran que: "
+            throw new AplicacioException("La posicio no pot ser mes gran que: "
                     + size);
         }
         return id;
     }
-    
-        /**
+
+    /**
      * Comprueba que el índice del album está bien y lo retorna restandole 1
      *
      * @param title
@@ -81,11 +81,11 @@ public class Dades implements Serializable {
         id--;
         int size = this.albums.get(title).getSize();
         if (estaBuida()) {
-            throw new AplicacioException("La biblioteca esta buida");
+            throw new AplicacioException("L album esta buit");
         } else if (id < 0) {
-            throw new AplicacioException("La posicio começa amb 1");
+            throw new AplicacioException("La posicio comeca amb 1");
         } else if (id > size - 1) {
-            throw new AplicacioException("La posicio no pot ser mès gran que: "
+            throw new AplicacioException("La posicio no pot ser mes gran que: "
                     + size);
         }
         return id;
@@ -181,7 +181,7 @@ public class Dades implements Serializable {
 
         // PRACTICA 3
         albums.values().forEach((album) -> {
-            while(album.contains(file)) {
+            while (album.contains(file)) {
                 album.removeFitxer(file);
             }
         });
@@ -263,7 +263,7 @@ public class Dades implements Serializable {
      * @param size
      * @throws AplicacioException
      */
-    public void afegirAlbum(String titol, int size) throws AplicacioException  {
+    public void afegirAlbum(String titol, int size) throws AplicacioException {
         // TODO (DUDA PREGUNTAR CANTIDAD)
         albums.put(titol, new AlbumFitxersMultimedia(size, titol));
     }
@@ -286,12 +286,14 @@ public class Dades implements Serializable {
     public List<String> albumListToString() {
         List<String> albumList = new ArrayList<>(albums.size());
         Iterator<String> albumIt = albums.keySet().iterator();
+        int id = 1;
         while (albumIt.hasNext()) {
             StringBuilder sb = new StringBuilder();
             String currentAlbum = albumIt.next();
-            sb.append("-> ").append(albums.get(currentAlbum).getTitol())
-                    .append(" (Spai lliure ").append(albums.get(currentAlbum).freeSpace()).append(")");
+            sb.append("[").append(id).append("] ").append(albums.get(currentAlbum).getTitol())
+                    .append(" (spai lliure: ").append(albums.get(currentAlbum).freeSpace()).append(")");
             albumList.add(sb.toString());
+            id++;
         }
         return albumList;
     }
@@ -392,6 +394,10 @@ public class Dades implements Serializable {
             throw new AplicacioException("No hi ha fitxers per reproduir");
         }
         return albums.get(titol);
+    }
+
+    public boolean estaBuitAlbum(String titol) {
+        return this.albums.get(titol).getSize() == 0;
     }
 
 }
