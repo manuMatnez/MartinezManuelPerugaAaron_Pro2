@@ -39,10 +39,21 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     private List<Integer> llistaCtrl;
     private boolean reproduccioCiclica, reproduccioAleatoria;
     private int posicio;
+    private boolean reproduint;
 
     // TODO (DUDA CONSTRUCTORES)
     public EscoltadorReproduccio() {
     }
+
+    // Getters & Setters START
+    public boolean isReproduint() {
+        return reproduint;
+    }
+
+    public void setReproduint(boolean reproduint) {
+        this.reproduint = reproduint;
+    }
+    // Getters & Setters END
 
     /**
      * Es llamado cuando acaba la reproducción de un fichero, comprobamos si
@@ -59,6 +70,8 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
         } else {
             if (hasNext()) {
                 next();
+            } else {
+                reproduint = false;
             }
         }
     }
@@ -107,6 +120,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
         this.reproduccioCiclica = reproduccioCiclica;
         this.reproduccioAleatoria = reproduccioAleatoria;
         posicio = -1;
+        reproduint = true;
         if (reproduccioAleatoria) {
             Collections.shuffle(llistaCtrl);
         }

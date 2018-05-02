@@ -17,19 +17,19 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 import edu.ub.prog2.utils.AplicacioException;
+import java.util.Objects;
 
 /**
  * AlbumFitxersMultimedia - Modelo
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 1.0
+ * @version 2.0
  */
 public class AlbumFitxersMultimedia extends CarpetaFitxers {
 
     private String titol;
 
-    public AlbumFitxersMultimedia(String titol) throws AplicacioException {
-        super();
+    public AlbumFitxersMultimedia(String titol) {
         this.titol = titol;
     }
 
@@ -47,5 +47,30 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers {
         this.titol = titol;
     }
     // Getters y Setters END
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.titol);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AlbumFitxersMultimedia other = (AlbumFitxersMultimedia) obj;
+        if (!Objects.equals(this.titol, other.titol)) {
+            return false;
+        }
+        return true;
+    }
 
 }

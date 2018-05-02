@@ -26,7 +26,7 @@ import java.util.List;
  * Controlador Singleton (para tener solo un objeto de este tipo)
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 2.0
+ * @version 3.0
  */
 public class Controlador implements InControlador {
 
@@ -47,15 +47,6 @@ public class Controlador implements InControlador {
 
     public static Controlador getInstance() {
         return Loader.INSTANCE;
-    }
-
-    /**
-     * Retorna si la carpeta está vacía a traves de Dades
-     *
-     * @return boolean
-     */
-    public boolean biblioBuida() {
-        return dades.biblioBuida();
     }
 
     /**
@@ -157,7 +148,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public void afegirAlbum(String titol) throws AplicacioException {
-        dades.afegirAlbum(titol);
+        dades.afegirAlbum(titol, 10);
     }
 
     /**
@@ -271,7 +262,7 @@ public class Controlador implements InControlador {
                     dades.isReproduccioCiclica(), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
-            throw new AplicacioException("Error al reproduir " + ae.getMessage());
+            throw new AplicacioException("Error al reproduir");
         }
     }
 
@@ -288,7 +279,7 @@ public class Controlador implements InControlador {
                     dades.isReproduccioCiclica(), dades.isReproduccioAleatoria());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
-            throw new AplicacioException("Error al reproduir " + ae.getMessage());
+            throw new AplicacioException("Error al reproduir");
         }
     }
 
@@ -300,7 +291,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public void reproduirCarpeta(String titol) throws AplicacioException {
-        if (!dades.existeixAlbum(titol)) {
+        if (!existeixAlbum(titol)) {
             throw new AplicacioException("No existeix aquest album");
         }
         try {
@@ -310,7 +301,7 @@ public class Controlador implements InControlador {
                     dades.isReproduccioCiclica(), dades.isReproduccioAleatoria());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
-            throw new AplicacioException("Error al reproduir " + ae.getMessage());
+            throw new AplicacioException("Error al reproduir");
         }
     }
 
@@ -321,6 +312,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void reemprenReproduccio() throws AplicacioException {
+        if (!escoltador.isReproduint()) {
+            throw new AplicacioException("No hi ha reproduccio en curs pausada");
+        }
         reproductor.resume();
     }
 
@@ -331,6 +325,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void pausaReproduccio() throws AplicacioException {
+        if (!escoltador.isReproduint()) {
+            throw new AplicacioException("No hi ha reproduccio en curs");
+        }
         reproductor.pause();
     }
 
@@ -341,6 +338,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void aturaReproduccio() throws AplicacioException {
+        if (!escoltador.isReproduint()) {
+            throw new AplicacioException("No hi ha reproduccio en curs per aturar");
+        }
         reproductor.stop();
         tancarFinestraReproductor();
     }
@@ -352,6 +352,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void saltaReproduccio() throws AplicacioException {
+        if (!escoltador.isReproduint()) {
+            throw new AplicacioException("No hi ha reproduccio en curs per poder saltar");
+        }
         if (!escoltador.hasNext()) {
             throw new AplicacioException("No hi han mes fitxers per reproduir");
         }
@@ -378,24 +381,8 @@ public class Controlador implements InControlador {
         return dades.isReproduccioAleatoria();
     }
 
-    /**
-     * Retorna si no hay albums a traves de Dades
-     *
-     * @return boolean
-     */
-    public boolean albumsBuit() {
-        return dades.albumsBuit();
-    }
-
-    /**
-     * Retorna si el album está vacío a traves de Dades
-     *
-     * @param titol
-     * @return boolean
-     * @throws AplicacioException
-     */
-    public boolean albumBuit(String titol) throws AplicacioException {
-        return dades.albumBuit(titol);
+    public String getTitolAlbum(int id) throws AplicacioException {
+        return dades.getTitolAlbum(id);
     }
 
 }

@@ -26,7 +26,7 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
  * IniciadorAplicacioUB - Vista (Main Class)
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 2.0
+ * @version 3.0
  */
 public class IniciadorAplicacioUB {
 
@@ -36,7 +36,7 @@ public class IniciadorAplicacioUB {
     // Propiedades del Sistema Operativo END
 
     // Constantes añadidas START
-    private final static String VERSION = "3.0";
+    private final static String VERSION = "3.1 Beta";
     private final static String ASTERISKS = String.join("", Collections.nCopies(50, "*"));
     private final static String HEADER = "/" + ASTERISKS + "\n"
             + "* Reproductor UB (Grup C)\n"
