@@ -120,13 +120,6 @@ public class FitxerMultimedia extends File {
     //***************************************************************
 
     @Override
-    public int hashCode() {
-        return this.descripcio.hashCode() * 3 + 
-                this.getCamiAbsolutComplet().hashCode() * 5 + 
-                this.getUltimaModificacio().hashCode() * 7;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -145,6 +138,15 @@ public class FitxerMultimedia extends File {
             return false;
         }
         return Objects.equals(this.getUltimaModificacio(), other.getUltimaModificacio());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.descripcio);
+        hash = 97 * hash + Objects.hashCode(this.getCamiAbsolutComplet());
+        hash = 97 * hash + Objects.hashCode(this.getUltimaModificacio());
+        return hash;
     }
     
     //***************************************************************

@@ -39,48 +39,16 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     private List<Integer> llistaCtrl;
     private boolean reproduccioCiclica, reproduccioAleatoria;
     private int posicio;
+    private boolean reproduint;
 
     // TODO (DUDA CONSTRUCTORES)
     public EscoltadorReproduccio() {
+        reproduint = false;
     }
 
-    public EscoltadorReproduccio(CarpetaFitxers llistaReproduint) {
-        setLlistaReproduint(llistaReproduint);
+    public boolean isReproduint() {
+        return reproduint;
     }
-
-    /**
-     * Asigna una CarpetaFitxers, una lista de enteros del mismo tamaño y una
-     * posición de inicio para poder reproducir
-     *
-     * @param llistaReproduint
-     */
-    public void setLlistaReproduint(CarpetaFitxers llistaReproduint) {
-        this.llistaReproduint = llistaReproduint;
-        // (JAVA8) Generamos una Lista de interos desde 0 hasta tamaño de carpeta-1
-        llistaCtrl = IntStream.range(0, llistaReproduint.getSize()).boxed().collect(Collectors.toList());
-        posicio = 0;
-        if (isReproduccioAleatoria()) {
-            Collections.shuffle(llistaCtrl);
-        }
-    }
-
-    // Getters y Setters START
-    public boolean isReproduccioCiclica() {
-        return reproduccioCiclica;
-    }
-
-    public boolean isReproduccioAleatoria() {
-        return reproduccioAleatoria;
-    }
-
-    public void setReproduccioCiclica(boolean reproduccioCiclica) {
-        this.reproduccioCiclica = reproduccioCiclica;
-    }
-
-    public void setReproduccioAleatoria(boolean reproduccioAleatoria) {
-        this.reproduccioAleatoria = reproduccioAleatoria;
-    }
-    // Getters y Setters END
 
     /**
      * Es llamado cuando acaba la reproducción de un fichero, comprobamos si
@@ -92,11 +60,13 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
             if (hasNext()) {
                 next();
             } else {
-                iniciarReproduccio(llistaReproduint, reproduccioCiclica);
+                iniciarReproduccio(llistaReproduint, reproduccioCiclica, reproduccioAleatoria);
             }
         } else {
             if (hasNext()) {
                 next();
+            } else {
+                reproduint = false;
             }
         }
     }
@@ -108,8 +78,17 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     @Override
     protected void next() {
         // circular
-        posicio = (posicio + 1) % llistaCtrl.size();
-        continua();
+        //posicio = (posicio + 1) % llistaCtrl.size();
+        posicio++;
+        File file = llistaReproduint.getAt(llistaCtrl.get(posicio));
+        if (file instanceof FitxerReproduible) {
+            // TODO (DUDA TRY-CATCH)
+            try {
+                ((FitxerReproduible) file).reproduir();
+            } catch (AplicacioException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 
     /**
@@ -127,26 +106,20 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
      *
      * @param llistaReproduint
      * @param reproduccioCiclica
+     * @param reproduccioAleatoria
      */
-    public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica) {
-        setLlistaReproduint(llistaReproduint);
+    public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica, boolean reproduccioAleatoria) {
+        this.llistaReproduint = llistaReproduint;
+        // (JAVA8) Generamos una Lista de interos desde 0 hasta tamaño de carpeta-1
+        llistaCtrl = IntStream.range(0, llistaReproduint.getSize()).boxed().collect(Collectors.toList());
         this.reproduccioCiclica = reproduccioCiclica;
-        continua();
-    }
-
-    /**
-     * Continua la reproduccion de IniciarReproduccio() / next()
-     */
-    public void continua() {
-        File file = llistaReproduint.getAt(llistaCtrl.get(posicio));
-        if (file instanceof FitxerReproduible) {
-            // TODO (DUDA TRY-CATCH)
-            try {
-                ((FitxerReproduible) file).reproduir();
-            } catch (AplicacioException ex) {
-                System.out.println(ex.getMessage());
-            }
+        this.reproduccioAleatoria = reproduccioAleatoria;
+        posicio = -1;
+        if (reproduccioAleatoria) {
+            Collections.shuffle(llistaCtrl);
         }
+        reproduint = true;
+        next();
     }
 
 }

@@ -27,10 +27,10 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Dades - Modelo
@@ -43,9 +43,13 @@ public class Dades implements Serializable {
     private final BibliotecaFitxersMultimedia biblioteca;
     private final Map<String, AlbumFitxersMultimedia> albums;
 
+    private boolean reproduccioCiclica, reproduccioAleatoria;
+
     public Dades() {
         biblioteca = new BibliotecaFitxersMultimedia();
-        albums = new HashMap<>();
+        albums = new TreeMap<>();
+        reproduccioCiclica = false;
+        reproduccioAleatoria = false;
     }
 
     /**
@@ -196,7 +200,7 @@ public class Dades implements Serializable {
      * @param camiDesti
      * @throws AplicacioException
      */
-    public void guardarDadesDisc(String camiDesti) throws AplicacioException {
+    public void guardarDades(String camiDesti) throws AplicacioException {
         File savedFile = new File(camiDesti);
         try (FileOutputStream fout = new FileOutputStream(savedFile);
                 ObjectOutputStream oos = new ObjectOutputStream(fout)) {
@@ -216,7 +220,7 @@ public class Dades implements Serializable {
      * @return Dades
      * @throws AplicacioException
      */
-    public Dades carregarDadesDisc(String camiOrigen) throws AplicacioException {
+    public static Dades carregarDades(String camiOrigen) throws AplicacioException {
         File loadFile = new File(camiOrigen);
         Dades dades;
         if (!loadFile.exists()) {
@@ -236,12 +240,34 @@ public class Dades implements Serializable {
 
     // PRACTICA 3
     //********************************************************************
+    
+    // Getters y Setters START
+    public boolean isReproduccioCiclica() {
+        return reproduccioCiclica;
+    }
+
+    public boolean isReproduccioAleatoria() {
+        return reproduccioAleatoria;
+    }
+
+    public void setReproduccioCiclica(boolean reproduccioCiclica) {
+        this.reproduccioCiclica = reproduccioCiclica;
+    }
+
+    public void setReproduccioAleatoria(boolean reproduccioAleatoria) {
+        this.reproduccioAleatoria = reproduccioAleatoria;
+    }
+    // Getters y Setters END
+
     /**
      * Borra un album existente
      *
      * @param titol
      */
-    public void esborrarUnAlbum(String titol) {
+    public void esborrarUnAlbum(String titol) throws AplicacioException {
+        if (!existeixAlbum(titol)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
         albums.remove(titol);
     }
 
@@ -264,7 +290,9 @@ public class Dades implements Serializable {
      * @throws AplicacioException
      */
     public void afegirAlbum(String titol, int size) throws AplicacioException {
-        // TODO (DUDA PREGUNTAR CANTIDAD)
+        if (existeixAlbum(titol)) {
+            throw new AplicacioException("Ya existeix aquest album");
+        }
         albums.put(titol, new AlbumFitxersMultimedia(size, titol));
     }
 

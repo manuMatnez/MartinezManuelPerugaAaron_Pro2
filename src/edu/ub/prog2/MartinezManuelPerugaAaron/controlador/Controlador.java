@@ -17,6 +17,7 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.controlador;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades;
+import static edu.ub.prog2.MartinezManuelPerugaAaron.model.Dades.carregarDades;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.InControlador;
 import java.util.List;
@@ -121,7 +122,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public void guardarDadesDisc(String camiDesti) throws AplicacioException {
-        dades.guardarDadesDisc(camiDesti);
+        dades.guardarDades(camiDesti);
     }
 
     /**
@@ -133,7 +134,7 @@ public class Controlador implements InControlador {
      */
     @Override
     public void carregarDadesDisc(String camiOrigen) throws AplicacioException {
-        this.dades = dades.carregarDadesDisc(camiOrigen);
+        this.dades = carregarDades(camiOrigen);
         dades.setReproductor(reproductor);
     }
 
@@ -156,9 +157,6 @@ public class Controlador implements InControlador {
      */
     @Override
     public void afegirAlbum(String titol) throws AplicacioException {
-        if (existeixAlbum(titol)) {
-            throw new AplicacioException("Ya existeix aquest album");
-        }
         dades.afegirAlbum(titol);
     }
 
@@ -170,9 +168,6 @@ public class Controlador implements InControlador {
      * @throws AplicacioException
      */
     public void afegirAlbum(String titol, int size) throws AplicacioException {
-        if (existeixAlbum(titol)) {
-            throw new AplicacioException("Ya existeix aquest album");
-        }
         dades.afegirAlbum(titol, size);
     }
 
@@ -194,9 +189,6 @@ public class Controlador implements InControlador {
      */
     @Override
     public void esborrarAlbum(String titol) throws AplicacioException {
-        if (!existeixAlbum(titol)) {
-            throw new AplicacioException("No existeix aquest album");
-        }
         dades.esborrarUnAlbum(titol);
     }
 
@@ -274,9 +266,15 @@ public class Controlador implements InControlador {
     public void reproduirFitxer(int id) throws AplicacioException {
         try {
             obrirFinestraReproductor();
-            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(id), escoltador.isReproduccioCiclica());
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(id),
+                    dades.isReproduccioCiclica(), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
+            throw new AplicacioException("Error al reproduir " + ae.getMessage());
+        } finally {
+            if (escoltador.isReproduint()) {
+                tancarFinestraReproductor();
+            }
         }
     }
 
@@ -290,9 +288,15 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(), escoltador.isReproduccioCiclica());
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(),
+                    dades.isReproduccioCiclica(), dades.isReproduccioAleatoria());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
+            throw new AplicacioException("Error al reproduir " + ae.getMessage());
+        } finally {
+            if (escoltador.isReproduint()) {
+                tancarFinestraReproductor();
+            }
         }
     }
 
@@ -310,11 +314,17 @@ public class Controlador implements InControlador {
         try {
             obrirFinestraReproductor();
             // TODO (DUDA)
-            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(titol), escoltador.isReproduccioCiclica());
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(titol),
+                    dades.isReproduccioCiclica(), dades.isReproduccioAleatoria());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
+            throw new AplicacioException("Error al reproduir " + ae.getMessage());
+        } finally {
+            if (escoltador.isReproduint()) {
+                tancarFinestraReproductor();
+            }
         }
-        
+
     }
 
     /**
@@ -324,6 +334,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void reemprenReproduccio() throws AplicacioException {
+        if (!escoltador.isReproduint()) {
+            throw new AplicacioException("No hi ha res reproduint");
+        }
         reproductor.resume();
     }
 
@@ -334,6 +347,9 @@ public class Controlador implements InControlador {
      */
     @Override
     public void pausaReproduccio() throws AplicacioException {
+        if (!escoltador.isReproduint()) {
+            throw new AplicacioException("No hi ha res reproduint");
+        }
         reproductor.pause();
     }
 
@@ -344,7 +360,11 @@ public class Controlador implements InControlador {
      */
     @Override
     public void aturaReproduccio() throws AplicacioException {
+        if (!escoltador.isReproduint()) {
+            throw new AplicacioException("No hi ha res reproduint");
+        }
         reproductor.stop();
+        tancarFinestraReproductor();
     }
 
     /**
@@ -354,6 +374,12 @@ public class Controlador implements InControlador {
      */
     @Override
     public void saltaReproduccio() throws AplicacioException {
+        if (!escoltador.isReproduint()) {
+            throw new AplicacioException("No hi ha res reproduint");
+        }
+        if (!escoltador.hasNext()) {
+            throw new AplicacioException("No hi han mes fitxers per reproduir");
+        }
         escoltador.next();
     }
 
@@ -363,8 +389,8 @@ public class Controlador implements InControlador {
      * @return boolean
      */
     public boolean activarDesactivarContinua() {
-        escoltador.setReproduccioCiclica(!escoltador.isReproduccioCiclica());
-        return escoltador.isReproduccioCiclica();
+        dades.setReproduccioCiclica(!dades.isReproduccioCiclica());
+        return dades.isReproduccioCiclica();
     }
 
     /**
@@ -373,13 +399,14 @@ public class Controlador implements InControlador {
      * @return boolean
      */
     public boolean activarDesactivarAleatoria() {
-        escoltador.setReproduccioAleatoria(!escoltador.isReproduccioAleatoria());
-        return escoltador.isReproduccioAleatoria();
+        dades.setReproduccioAleatoria(!dades.isReproduccioAleatoria());
+        return dades.isReproduccioAleatoria();
     }
 
     /**
      * Retorna si el album está vacío a traves de Dades
      *
+     * @param titol
      * @return boolean
      */
     public boolean estaBuitAlbum(String titol) {

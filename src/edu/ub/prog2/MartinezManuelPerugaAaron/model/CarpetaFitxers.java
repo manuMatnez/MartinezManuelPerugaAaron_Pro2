@@ -17,6 +17,7 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.model;
 
 import edu.ub.prog2.utils.AplicacioException;
+import edu.ub.prog2.utils.InFileFolder;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import java.util.Iterator;
  * @author Manuel Martinez, Aaron Peruga
  * @version 3.0
  */
-public class CarpetaFitxers implements Serializable {
+public class CarpetaFitxers implements InFileFolder, Serializable {
 
     // capacidad máxima de la carpeta
     private int capacity;
@@ -53,6 +54,7 @@ public class CarpetaFitxers implements Serializable {
      *
      * @return int
      */
+    @Override
     public int getSize() {
         return carpeta.size();
     }
@@ -63,6 +65,7 @@ public class CarpetaFitxers implements Serializable {
      * @param fitxer
      * @throws AplicacioException
      */
+    @Override
     public void addFitxer(File fitxer) throws AplicacioException {
         if (isFull()) {
             throw new AplicacioException("Carpeta plena");
@@ -76,6 +79,7 @@ public class CarpetaFitxers implements Serializable {
      *
      * @param fitxer
      */
+    @Override
     public void removeFitxer(File fitxer) {
         carpeta.remove((FitxerMultimedia) fitxer);
     }
@@ -86,6 +90,7 @@ public class CarpetaFitxers implements Serializable {
      * @param position
      * @return File
      */
+    @Override
     public File getAt(int position) {
         return carpeta.get(position);
     }
@@ -93,6 +98,7 @@ public class CarpetaFitxers implements Serializable {
     /**
      * Elimina los archivos de la carpeta
      */
+    @Override
     public void clear() {
         carpeta.clear();
     }
@@ -102,6 +108,7 @@ public class CarpetaFitxers implements Serializable {
      *
      * @return boolean
      */
+    @Override
     public boolean isFull() {
         return carpeta.size() == capacity;
     }
