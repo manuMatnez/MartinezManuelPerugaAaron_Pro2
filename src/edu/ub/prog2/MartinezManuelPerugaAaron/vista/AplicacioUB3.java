@@ -291,15 +291,19 @@ public class AplicacioUB3 {
      * @throws AplicacioException
      */
     private void mostrarUnAlbum(String title) {
-        List<String> album = (ArrayList<String>) ctrl.mostrarAlbum(title);
-        System.out.println(ALBUM_FITXERS_TITLE + title + "\n" + SEP);
+        try {
+            List<String> album = (ArrayList<String>) ctrl.mostrarAlbum(title);
+            System.out.println(ALBUM_FITXERS_TITLE + title + "\n" + SEP);
 
-        if (album.isEmpty()) {
-            System.out.println("No hi ha fitxers");
-        } else {
-            album.forEach((file) -> {
-                System.out.println(file);
-            });
+            if (album.isEmpty()) {
+                System.out.println("No hi ha fitxers");
+            } else {
+                album.forEach((file) -> {
+                    System.out.println(file);
+                });
+            }
+        } catch (AplicacioException ae) {
+            System.out.println(ae.getMessage());
         }
     }
 

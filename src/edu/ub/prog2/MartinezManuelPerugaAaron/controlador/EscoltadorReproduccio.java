@@ -39,15 +39,9 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
     private List<Integer> llistaCtrl;
     private boolean reproduccioCiclica, reproduccioAleatoria;
     private int posicio;
-    private boolean reproduint;
 
     // TODO (DUDA CONSTRUCTORES)
     public EscoltadorReproduccio() {
-        reproduint = false;
-    }
-
-    public boolean isReproduint() {
-        return reproduint;
     }
 
     /**
@@ -65,8 +59,6 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
         } else {
             if (hasNext()) {
                 next();
-            } else {
-                reproduint = false;
             }
         }
     }
@@ -118,7 +110,6 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements
         if (reproduccioAleatoria) {
             Collections.shuffle(llistaCtrl);
         }
-        reproduint = true;
         next();
     }
 

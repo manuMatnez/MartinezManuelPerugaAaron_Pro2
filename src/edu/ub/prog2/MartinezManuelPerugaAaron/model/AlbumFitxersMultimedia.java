@@ -49,4 +49,29 @@ public class AlbumFitxersMultimedia extends CarpetaFitxers {
     }
     // Getters y Setters END
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + Objects.hashCode(this.titol);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AlbumFitxersMultimedia other = (AlbumFitxersMultimedia) obj;
+        if (!Objects.equals(this.titol, other.titol)) {
+            return false;
+        }
+        return true;
+    }
+
 }

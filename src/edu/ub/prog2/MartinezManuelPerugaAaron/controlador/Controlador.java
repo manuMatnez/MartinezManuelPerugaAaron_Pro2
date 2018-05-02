@@ -55,7 +55,7 @@ public class Controlador implements InControlador {
      * @return boolean
      */
     public boolean estaBuida() {
-        return dades.estaBuida();
+        return dades.biblioBuida();
     }
 
     /**
@@ -219,10 +219,11 @@ public class Controlador implements InControlador {
      * Retorna el contenido de un Album en una Lista de String a traves de Dades
      *
      * @param titol
-     * @return
+     * @return List
+     * @throws AplicacioException
      */
     @Override
-    public List<String> mostrarAlbum(String titol) {
+    public List<String> mostrarAlbum(String titol) throws AplicacioException {
         return dades.albumToString(titol);
     }
 
@@ -271,10 +272,6 @@ public class Controlador implements InControlador {
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
             throw new AplicacioException("Error al reproduir " + ae.getMessage());
-        } finally {
-            if (escoltador.isReproduint()) {
-                tancarFinestraReproductor();
-            }
         }
     }
 
@@ -287,16 +284,11 @@ public class Controlador implements InControlador {
     public void reproduirCarpeta() throws AplicacioException {
         try {
             obrirFinestraReproductor();
-            // TODO (DUDA)
             escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(),
                     dades.isReproduccioCiclica(), dades.isReproduccioAleatoria());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
             throw new AplicacioException("Error al reproduir " + ae.getMessage());
-        } finally {
-            if (escoltador.isReproduint()) {
-                tancarFinestraReproductor();
-            }
         }
     }
 
@@ -319,37 +311,27 @@ public class Controlador implements InControlador {
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
             throw new AplicacioException("Error al reproduir " + ae.getMessage());
-        } finally {
-            if (escoltador.isReproduint()) {
-                tancarFinestraReproductor();
-            }
         }
 
     }
 
     /**
      * Regresa a la reproducción
-     *
+     * 
      * @throws AplicacioException
      */
     @Override
     public void reemprenReproduccio() throws AplicacioException {
-        if (!escoltador.isReproduint()) {
-            throw new AplicacioException("No hi ha res reproduint");
-        }
         reproductor.resume();
     }
 
     /**
      * Pausa la reproduccion
-     *
+     * 
      * @throws AplicacioException
      */
     @Override
     public void pausaReproduccio() throws AplicacioException {
-        if (!escoltador.isReproduint()) {
-            throw new AplicacioException("No hi ha res reproduint");
-        }
         reproductor.pause();
     }
 
@@ -360,9 +342,6 @@ public class Controlador implements InControlador {
      */
     @Override
     public void aturaReproduccio() throws AplicacioException {
-        if (!escoltador.isReproduint()) {
-            throw new AplicacioException("No hi ha res reproduint");
-        }
         reproductor.stop();
         tancarFinestraReproductor();
     }
@@ -374,9 +353,6 @@ public class Controlador implements InControlador {
      */
     @Override
     public void saltaReproduccio() throws AplicacioException {
-        if (!escoltador.isReproduint()) {
-            throw new AplicacioException("No hi ha res reproduint");
-        }
         if (!escoltador.hasNext()) {
             throw new AplicacioException("No hi han mes fitxers per reproduir");
         }
@@ -408,9 +384,10 @@ public class Controlador implements InControlador {
      *
      * @param titol
      * @return boolean
+     * @throws AplicacioException
      */
-    public boolean estaBuitAlbum(String titol) {
-        return dades.estaBuitAlbum(titol);
+    public boolean estaBuitAlbum(String titol) throws AplicacioException {
+        return dades.albumBuit(titol);
     }
 
 }
