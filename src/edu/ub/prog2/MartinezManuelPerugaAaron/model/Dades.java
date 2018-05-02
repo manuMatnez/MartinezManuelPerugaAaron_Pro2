@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 /**
  * Dades - Modelo
@@ -47,7 +47,7 @@ public class Dades implements Serializable {
 
     public Dades() {
         biblioteca = new BibliotecaFitxersMultimedia();
-        albums = new TreeMap<>();
+        albums = new HashMap<>();
         reproduccioCiclica = false;
         reproduccioAleatoria = false;
     }
