@@ -43,7 +43,7 @@ public class CarpetaFitxers implements InFileFolder, Serializable {
 
     public CarpetaFitxers(int cap) throws AplicacioException {
         if (cap < 1) {
-            throw new AplicacioException("Numero menor de 0: " + cap);
+            throw new AplicacioException("Nombre menor de 0: " + cap);
         }
         capacity = cap;
         carpeta = new ArrayList<>(capacity);

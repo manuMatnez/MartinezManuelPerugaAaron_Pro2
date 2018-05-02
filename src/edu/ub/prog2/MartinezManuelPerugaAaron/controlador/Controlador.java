@@ -54,7 +54,7 @@ public class Controlador implements InControlador {
      *
      * @return boolean
      */
-    public boolean estaBuida() {
+    public boolean biblioBuida() {
         return dades.biblioBuida();
     }
 
@@ -312,12 +312,11 @@ public class Controlador implements InControlador {
             tancarFinestraReproductor();
             throw new AplicacioException("Error al reproduir " + ae.getMessage());
         }
-
     }
 
     /**
      * Regresa a la reproducción
-     * 
+     *
      * @throws AplicacioException
      */
     @Override
@@ -327,7 +326,7 @@ public class Controlador implements InControlador {
 
     /**
      * Pausa la reproduccion
-     * 
+     *
      * @throws AplicacioException
      */
     @Override
@@ -380,13 +379,22 @@ public class Controlador implements InControlador {
     }
 
     /**
+     * Retorna si no hay albums a traves de Dades
+     *
+     * @return boolean
+     */
+    public boolean albumsBuit() {
+        return dades.albumsBuit();
+    }
+
+    /**
      * Retorna si el album está vacío a traves de Dades
      *
      * @param titol
      * @return boolean
      * @throws AplicacioException
      */
-    public boolean estaBuitAlbum(String titol) throws AplicacioException {
+    public boolean albumBuit(String titol) throws AplicacioException {
         return dades.albumBuit(titol);
     }
 
