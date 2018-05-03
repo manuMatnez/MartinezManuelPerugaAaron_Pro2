@@ -33,7 +33,7 @@ import java.util.stream.IntStream;
  * @author Manuel Martinez, Aaron Peruga
  * @version 1.0
  */
-public class EscoltadorReproduccio extends EscoltadorReproduccioBasic implements Serializable {
+public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
 
     private CarpetaFitxers llistaReproduint;
     private List<Integer> llistaCtrl;

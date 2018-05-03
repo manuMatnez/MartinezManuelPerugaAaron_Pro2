@@ -1,3 +1,13 @@
-/dist/
+.DS_Store
 *.DS_Store
-/build/
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
