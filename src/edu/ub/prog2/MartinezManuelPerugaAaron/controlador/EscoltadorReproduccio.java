@@ -60,16 +60,10 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
      */
     @Override
     protected void onEndFile() {
-        if (reproduccioCiclica) {
-            posicio = (posicio + 1) % llistaCtrl.size();
+        if (hasNext()) {
             next();
         } else {
-            if (hasNext()) {
-                posicio++;
-                next();
-            } else {
-                reproduint = false;
-            }
+            reproduint = false;
         }
     }
 
@@ -79,9 +73,9 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
      */
     @Override
     protected void next() {
+        posicio = (posicio + 1) % llistaCtrl.size();
         File file = llistaReproduint.getAt(llistaCtrl.get(posicio));
         if (file instanceof FitxerReproduible) {
-            // TODO (DUDA TRY-CATCH)
             try {
                 ((FitxerReproduible) file).reproduir();
             } catch (AplicacioException ex) {
@@ -97,7 +91,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
      */
     @Override
     protected boolean hasNext() {
-        return posicio != llistaCtrl.size() - 1;
+        return posicio != llistaCtrl.size() - 1 || reproduccioCiclica;
     }
 
     /**
@@ -113,9 +107,9 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
         llistaCtrl = IntStream.range(0, llistaReproduint.getSize()).boxed().collect(Collectors.toList());
         this.reproduccioCiclica = reproduccioCiclica;
         this.reproduccioAleatoria = reproduccioAleatoria;
-        posicio = 0;
+        posicio = -1;
         reproduint = true;
-        if (reproduccioAleatoria) {
+        if (this.reproduccioAleatoria) {
             Collections.shuffle(llistaCtrl);
         }
         next();

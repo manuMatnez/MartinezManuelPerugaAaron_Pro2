@@ -61,7 +61,7 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
         this.reproductor = reproductor;
     }
 
-    // Cambio a public para uso en Escoltadorreproduccio
+    // Cambio a public para uso en EscoltadorReproduccio
     public abstract void reproduir() throws AplicacioException;
 
     @Override

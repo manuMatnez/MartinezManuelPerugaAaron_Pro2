@@ -355,8 +355,7 @@ public class Controlador implements InControlador {
     public void saltaReproduccio() throws AplicacioException {
         if (!escoltador.isReproduint()) {
             throw new AplicacioException("No hi ha reproduccio en curs per poder saltar");
-        }
-        if (!escoltador.hasNext()) {
+        } else if (!escoltador.hasNext()) {
             throw new AplicacioException("No hi han mes fitxers per reproduir");
         }
         escoltador.next();

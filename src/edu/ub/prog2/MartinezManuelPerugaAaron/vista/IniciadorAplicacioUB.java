@@ -36,7 +36,7 @@ public class IniciadorAplicacioUB {
     // Propiedades del Sistema Operativo END
 
     // Constantes añadidas START
-    private final static String VERSION = "3.1 Beta";
+    private final static String VERSION = "3.2";
     private final static String ASTERISKS = String.join("", Collections.nCopies(50, "*"));
     private final static String HEADER = "/" + ASTERISKS + "\n"
             + "* Reproductor UB (Grup C)\n"
@@ -72,14 +72,14 @@ public class IniciadorAplicacioUB {
             Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         }
 
-        System.out.println(HEADER+"\n");
+        System.out.println(HEADER + "\n");
 
         System.out.println("Benvingut al reproductor UB, " + USER_NAME + "\n");
 
         AplicacioUB3 aplicacio = new AplicacioUB3();
 
         aplicacio.gestioAplicacioUB();
-        
+
         System.out.println(USER_NAME + "!!");
     }
 
