@@ -342,6 +342,7 @@ public class Controlador implements InControlador {
             throw new AplicacioException("No hi ha reproduccio en curs per aturar");
         }
         reproductor.stop();
+        escoltador.setReproduint(false);
         tancarFinestraReproductor();
     }
 
