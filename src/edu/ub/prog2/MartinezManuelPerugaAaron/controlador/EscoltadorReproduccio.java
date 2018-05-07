@@ -21,7 +21,6 @@ import edu.ub.prog2.MartinezManuelPerugaAaron.model.FitxerReproduible;
 import edu.ub.prog2.utils.AplicacioException;
 import edu.ub.prog2.utils.EscoltadorReproduccioBasic;
 import java.io.File;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,13 +61,11 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     @Override
     protected void onEndFile() {
         if (reproduccioCiclica) {
-            if (hasNext()) {
-                next();
-            } else {
-                iniciarReproduccio(llistaReproduint, reproduccioCiclica, reproduccioAleatoria);
-            }
+            posicio = (posicio + 1) % llistaCtrl.size();
+            next();
         } else {
             if (hasNext()) {
+                posicio++;
                 next();
             } else {
                 reproduint = false;
@@ -82,9 +79,6 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
      */
     @Override
     protected void next() {
-        // circular
-        //posicio = (posicio + 1) % llistaCtrl.size();
-        posicio++;
         File file = llistaReproduint.getAt(llistaCtrl.get(posicio));
         if (file instanceof FitxerReproduible) {
             // TODO (DUDA TRY-CATCH)
@@ -119,7 +113,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
         llistaCtrl = IntStream.range(0, llistaReproduint.getSize()).boxed().collect(Collectors.toList());
         this.reproduccioCiclica = reproduccioCiclica;
         this.reproduccioAleatoria = reproduccioAleatoria;
-        posicio = -1;
+        posicio = 0;
         reproduint = true;
         if (reproduccioAleatoria) {
             Collections.shuffle(llistaCtrl);
