@@ -343,7 +343,6 @@ public class Dades implements Serializable {
      * @param reproductor
      */
     public void setReproductor(Reproductor reproductor) {
-        // TODO (DUDA)
         for (int i = 0; i < biblioteca.getSize(); i++) {
             File fitxer = biblioteca.getAt(i);
             if (fitxer instanceof FitxerReproduible) {

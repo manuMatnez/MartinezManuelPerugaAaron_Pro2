@@ -296,7 +296,6 @@ public class Controlador implements InControlador {
         }
         try {
             obrirFinestraReproductor();
-            // TODO (DUDA)
             escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(titol),
                     dades.isReproduccioCiclica(), dades.isReproduccioAleatoria());
         } catch (AplicacioException ae) {

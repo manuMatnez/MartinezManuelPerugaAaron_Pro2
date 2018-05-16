@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
  * EscoltadorReproduccio - Controlador
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 1.0
+ * @version 1.2
  */
 public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
 
@@ -40,7 +40,6 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     private int posicio;
     private boolean reproduint;
 
-    // TODO (DUDA CONSTRUCTORES)
     public EscoltadorReproduccio() {
     }
 
@@ -55,32 +54,38 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     // Getters & Setters END
 
     /**
-     * Es llamado cuando acaba la reproducción de un fichero, comprobamos si
-     * puede continuar o no la reproducción y en caso afirmativo la continuamos
+     * Es llamado cuando acaba la reproducción de un fichero y lo usamos para
+     * llamar a next()
      */
     @Override
     protected void onEndFile() {
-        if (hasNext()) {
-            next();
-        } else {
-            reproduint = false;
-        }
+        next();
     }
 
     /**
      * Es llamado desde onEndFile() cuando va a reproducir el siguiente fichero
-     * en caso de que sea posible
+     * en caso de que sea posible, si no acaba la reproducción
      */
     @Override
     protected void next() {
         posicio = (posicio + 1) % llistaCtrl.size();
-        File file = llistaReproduint.getAt(llistaCtrl.get(posicio));
-        if (file instanceof FitxerReproduible) {
-            try {
-                ((FitxerReproduible) file).reproduir();
-            } catch (AplicacioException ex) {
-                System.out.println(ex.getMessage());
+        if (hasNext()) {
+            File file = llistaReproduint.getAt(llistaCtrl.get(posicio));
+            if (file instanceof FitxerReproduible) {
+                try {
+                    ((FitxerReproduible) file).reproduir();
+                } catch (AplicacioException ex) {
+                    /////////////////////////////////////////////////////////////
+                    // Evitamos el loop de ciclica so no funciona ningún fichero
+                    // Los que no funcionen se elimina el index de la llistaCtrl
+                    llistaCtrl.remove(posicio);
+                    posicio--;
+                    /////////////////////////////////////////////////////////////
+                    next();
+                }
             }
+        } else {
+            reproduint = false;
         }
     }
 
@@ -91,7 +96,7 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
      */
     @Override
     protected boolean hasNext() {
-        return posicio != llistaCtrl.size() - 1 || reproduccioCiclica;
+        return posicio + 1 <= llistaCtrl.size() || (reproduccioCiclica && !llistaCtrl.isEmpty());
     }
 
     /**
@@ -103,8 +108,10 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
      */
     public void iniciarReproduccio(CarpetaFitxers llistaReproduint, boolean reproduccioCiclica, boolean reproduccioAleatoria) {
         this.llistaReproduint = llistaReproduint;
+        //////////////////////////////////////////////////////////////////////////////////////////////////
         // (JAVA8) Generamos una Lista de interos desde 0 hasta tamaño de carpeta-1
         llistaCtrl = IntStream.range(0, llistaReproduint.getSize()).boxed().collect(Collectors.toList());
+        //////////////////////////////////////////////////////////////////////////////////////////////////
         this.reproduccioCiclica = reproduccioCiclica;
         this.reproduccioAleatoria = reproduccioAleatoria;
         posicio = -1;

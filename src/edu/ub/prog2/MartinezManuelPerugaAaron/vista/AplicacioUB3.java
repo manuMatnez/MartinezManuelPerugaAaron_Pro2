@@ -840,6 +840,11 @@ public class AplicacioUB3 {
                         cargarDades(sc);
                         break;
                     case MP_SORTIR:
+                        try {
+                            ctrl.tancarFinestraReproductor();
+                        } catch (AplicacioException ae) {
+                            System.err.print(ae.getMessage());
+                        }
                         System.out.print("Adeu ");
                         break;
                 }
