@@ -35,16 +35,7 @@ public class AplicacioUB4 extends JFrame {
     private final Controlador ctrl;
     private final static String TITLE = "Reproductor UB (Grup C)";
 
-    final static String OS = System.getProperty("os.name").toLowerCase();
-
-    /**
-     * Comprueba si el sistema operativo es MacOS de 64 bits
-     *
-     * @return boolean
-     */
-    public static boolean isMac() {
-        return OS.contains("mac");
-    }
+    final static boolean MAC = System.getProperty("os.name").toLowerCase().contains("mac");
 
     /**
      * AplicacioUB4
@@ -88,7 +79,7 @@ public class AplicacioUB4 extends JFrame {
     public static void main(String args[]) {
 
         // VLC 2.2 para Mac
-        if (isMac()) {
+        if (MAC) {
             uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH",
                     "/Applications/VLC.app/Contents/MacOS/plugins", 1);
 
