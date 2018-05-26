@@ -18,32 +18,24 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
-import java.util.Collections;
+import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
- * IniciadorAplicacioUB - Vista (Main Class)
+ * AplicacioUB4 - Vista
  *
  * @author Manuel Martinez, Aaron Peruga
- * @version 3.0
+ * @version 1.0
  */
-public class IniciadorAplicacioUB {
+public class AplicacioUB4 extends JFrame {
 
-    // Propiedades del Sistema Operativo START
+    private final Controlador ctrl;
+    private final static String TITLE = "Reproductor UB (Grup C)";
+
     final static String OS = System.getProperty("os.name").toLowerCase();
-    final static String USER_NAME = System.getProperty("user.name");
-    // Propiedades del Sistema Operativo END
-
-    // Constantes añadidas START
-    private final static String VERSION = "3.2";
-    private final static String ASTERISKS = String.join("", Collections.nCopies(50, "*"));
-    private final static String HEADER = "/" + ASTERISKS + "\n"
-            + "* Reproductor UB (Grup C)\n"
-            + "* Autors: Manuel Martinez i Aaron Peruga\n"
-            + "* Versió: " + VERSION + "\n"
-            + ASTERISKS + "/";
-    // Constantes añadidas END
 
     /**
      * Comprueba si el sistema operativo es MacOS de 64 bits
@@ -55,11 +47,43 @@ public class IniciadorAplicacioUB {
     }
 
     /**
+     * AplicacioUB4
+     */
+    public AplicacioUB4() {
+        initComponents();
+        this.ctrl = Controlador.getInstance();
+    }
+
+    /**
+     * Inicializa el formulario (los componentes)
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(TITLE);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    /**
      * Main
      *
-     * @param args the command line arguments
+     * @param args[]
      */
-    public static void main(String[] args) {
+    public static void main(String args[]) {
 
         // VLC 2.2 para Mac
         if (isMac()) {
@@ -72,15 +96,11 @@ public class IniciadorAplicacioUB {
             Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
         }
 
-        System.out.println(HEADER + "\n");
-
-        System.out.println("Benvingut al reproductor UB, " + USER_NAME + "\n");
-
-        AplicacioUB3 aplicacio = new AplicacioUB3();
-
-        aplicacio.gestioAplicacioUB();
-
-        System.out.println(USER_NAME + "!!");
+        EventQueue.invokeLater(() -> {
+            new AplicacioUB4().setVisible(true);
+        });
     }
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
 }
