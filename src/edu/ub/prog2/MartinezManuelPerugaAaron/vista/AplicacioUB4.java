@@ -41,8 +41,8 @@ public class AplicacioUB4 extends JFrame {
      * AplicacioUB4
      */
     public AplicacioUB4() {
-        initComponents();
         this.ctrl = Controlador.getInstance();
+        initComponents();
     }
 
     /**

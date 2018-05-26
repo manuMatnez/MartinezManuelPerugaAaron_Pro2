@@ -16,6 +16,7 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
+import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import java.awt.Frame;
 import javax.swing.JDialog;
 
@@ -27,6 +28,9 @@ import javax.swing.JDialog;
  */
 public class FrmAfegirFitxerMultimedia extends JDialog {
 
+    private final Controlador ctrl;
+    private final static String TITLE = "Afegir Fitxer";
+    
     /**
      * FrmAfegirFitxerMultimedia
      *
@@ -35,6 +39,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
      */
     public FrmAfegirFitxerMultimedia(Frame parent, boolean modal) {
         super(parent, modal);
+        this.ctrl = Controlador.getInstance();
         initComponents();
     }
 
@@ -46,6 +51,8 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(TITLE);
+        setName(getClass().getSimpleName());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
