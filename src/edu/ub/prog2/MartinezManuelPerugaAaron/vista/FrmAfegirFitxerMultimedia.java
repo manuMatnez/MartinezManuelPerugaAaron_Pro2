@@ -16,83 +16,51 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
-import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
-import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import uk.co.caprica.vlcj.binding.LibVlc;
-import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+import java.awt.Frame;
+import javax.swing.JDialog;
 
 /**
- * AplicacioUB4 - Vista
+ * FrmAfegirFitxerMultimedia - Vista
  *
  * @author Manuel Martinez, Aaron Peruga
  * @version 1.0
  */
-public class AplicacioUB4 extends JFrame {
-
-    private final Controlador ctrl;
-    private final static String TITLE = "Reproductor UB (Grup C)";
-
-    final static boolean MAC = System.getProperty("os.name").toLowerCase().contains("mac");
+public class FrmAfegirFitxerMultimedia extends JDialog {
 
     /**
-     * AplicacioUB4
+     * FrmAfegirFitxerMultimedia
+     *
+     * @param parent
+     * @param modal
      */
-    public AplicacioUB4() {
+    public FrmAfegirFitxerMultimedia(Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        this.ctrl = Controlador.getInstance();
     }
 
     /**
-     * Inicializa el formulario JFrame
+     * Inicializa el formulario JDialog
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle(TITLE);
-        setName(getClass().getSimpleName());
-        setPreferredSize(new java.awt.Dimension(640, 480));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 334, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Main
-     *
-     * @param args[]
-     */
-    public static void main(String args[]) {
-
-        // VLC 2.2 para Mac
-        if (MAC) {
-            uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH",
-                    "/Applications/VLC.app/Contents/MacOS/plugins", 1);
-
-            NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),
-                    "/Applications/VLC.app/Contents/MacOS/lib");
-
-            Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-        }
-
-        EventQueue.invokeLater(() -> {
-            new AplicacioUB4().setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
