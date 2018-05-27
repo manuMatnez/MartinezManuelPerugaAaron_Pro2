@@ -17,7 +17,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="miCarregar">
                   <Properties>
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                      <KeyStroke key="Meta+C"/>
+                      <KeyStroke key="Ctrl+D"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Carregar"/>
                   </Properties>
@@ -28,7 +28,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="miGuardar">
                   <Properties>
                     <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                      <KeyStroke key="Meta+G"/>
+                      <KeyStroke key="Ctrl+Alt+D"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Guardar"/>
                   </Properties>
@@ -41,12 +41,38 @@
             <MenuItem class="javax.swing.JMenuItem" name="miSortir">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Meta+Q"/>
+                  <KeyStroke key="Ctrl+Q"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sortir"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSortirActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mPreferencies">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Prefer&#xe8;ncies"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem2">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+R"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Reproducci&#xf3; Aleatoria"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JCheckBoxMenuItem" name="jCheckBoxMenuItem1">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+L"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Reproduccio Continua"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMenuItem1ActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -59,7 +85,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="miSobre">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Meta+S"/>
+                  <KeyStroke key="Ctrl+S"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sobre"/>
               </Properties>
@@ -104,29 +130,6 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblBiblioteca" min="-2" max="-2" attributes="0"/>
-                          <Component id="scpBiblioteca" min="-2" pref="120" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbRepAleatoria" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbRepContinua" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cmbAlbums" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="lblAlbums" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblAlbum" min="-2" max="-2" attributes="0"/>
-                                  <Component id="scpAlbums" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
                   <Component id="btnAfegirFitxerBiblioteca" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnEliminarImatge" min="-2" max="-2" attributes="0"/>
@@ -136,8 +139,21 @@
                   <Component id="btnCrearAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEliminarAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAfegirImatgeAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="scpBiblioteca" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="lblBiblioteca" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblAlbums" min="-2" max="-2" attributes="0"/>
+                          <Component id="scpAlbums" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="lblAlbum" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbAlbums" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="156" max="32767" attributes="0"/>
+              <EmptySpace pref="363" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -145,43 +161,35 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="lblBiblioteca" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblBiblioteca" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAlbums" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="scpBiblioteca" pref="241" max="32767" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnAfegirFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
+                  <Component id="scpBiblioteca" pref="241" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="cmbAlbums" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnEliminarImatge" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnEliminarImatgeAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblAlbum" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCrearAlbum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEliminarAlbum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnAfegirImatgeAlbum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="cbRepAleatoria" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="cbRepContinua" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblAlbums" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmbAlbums" min="-2" max="-2" attributes="0"/>
-                          <Component id="scpAlbums" min="-2" pref="176" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="scpAlbums" max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnAfegirFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnEliminarImatge" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEliminarImatgeAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnCrearAlbum" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnEliminarAlbum" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnAfegirImatgeAlbum" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -264,22 +272,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Albums"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="cbRepAleatoria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Reproducci&#xf3; Aleatoria"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRepAleatoriaActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="cbRepContinua">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Reproducci&#xf3; Continua"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbRepContinuaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAlbum">
       <Properties>

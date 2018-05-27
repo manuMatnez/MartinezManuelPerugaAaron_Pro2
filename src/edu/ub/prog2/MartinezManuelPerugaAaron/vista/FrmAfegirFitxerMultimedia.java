@@ -20,6 +20,7 @@ import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import java.awt.Frame;
 import java.io.File;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 
 /**
  * FrmAfegirFitxerMultimedia - Vista
@@ -36,14 +37,12 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
      * FrmAfegirFitxerMultimedia
      *
      * @param parent
-     * @param fitxer
      * @param modal
      */
-    public FrmAfegirFitxerMultimedia(Frame parent, File fitxer, boolean modal) {
+    public FrmAfegirFitxerMultimedia(Frame parent, boolean modal) {
         super(parent, modal);
         this.ctrl = Controlador.getInstance();
         initComponents();
-        this.textCami.setText(fitxer.getAbsolutePath());
     }
 
     /**
@@ -53,20 +52,23 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngpAudioVideo = new javax.swing.ButtonGroup();
         textCami = new javax.swing.JTextField();
-        etCami = new javax.swing.JLabel();
+        lblCami = new javax.swing.JLabel();
         btnAcceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        btnObrir = new javax.swing.JButton();
+        rbtnAudio = new javax.swing.JRadioButton();
+        rbtnVideo = new javax.swing.JRadioButton();
+
+        btngpAudioVideo.add(rbtnAudio);
+        btngpAudioVideo.add(rbtnVideo);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(TITLE);
         setName(getClass().getSimpleName());
 
-        textCami.setText("jTextField1");
-
-        etCami.setText("Introduir cami fitxer");
+        lblCami.setText("Introduir cami fitxer");
 
         btnAcceptar.setText("Aceptar");
         btnAcceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,9 +84,26 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
             }
         });
 
-        jRadioButton1.setText("Audio");
+        btnObrir.setText("Obrir");
+        btnObrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrirActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Video");
+        rbtnAudio.setText("Audio");
+        rbtnAudio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnAudioActionPerformed(evt);
+            }
+        });
+
+        rbtnVideo.setText("Video");
+        rbtnVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnVideoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,35 +112,39 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(etCami, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textCami, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
-                        .addGap(0, 1, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAcceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar)))
+                        .addComponent(btnCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCami, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textCami, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnObrir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rbtnVideo)
+                                    .addComponent(rbtnAudio))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textCami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(etCami)))
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(jRadioButton2)
-                .addGap(92, 92, 92)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textCami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCami)
+                    .addComponent(btnObrir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbtnAudio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rbtnVideo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAcceptar)
                     .addComponent(btnCancelar))
@@ -139,13 +162,33 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
 
     }//GEN-LAST:event_btnAcceptarActionPerformed
 
+    private void btnObrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrirActionPerformed
+        File file;
+        JFileChooser fileChooser = new JFileChooser();
+        int resultat = fileChooser.showOpenDialog(this);
+        if (resultat == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            this.textCami.setText(file.getAbsolutePath());
+        }
+    }//GEN-LAST:event_btnObrirActionPerformed
+
+    private void rbtnAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnAudioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnAudioActionPerformed
+
+    private void rbtnVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnVideoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnVideoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel etCami;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JButton btnObrir;
+    private javax.swing.ButtonGroup btngpAudioVideo;
+    private javax.swing.JLabel lblCami;
+    private javax.swing.JRadioButton rbtnAudio;
+    private javax.swing.JRadioButton rbtnVideo;
     private javax.swing.JTextField textCami;
     // End of variables declaration//GEN-END:variables
 }
