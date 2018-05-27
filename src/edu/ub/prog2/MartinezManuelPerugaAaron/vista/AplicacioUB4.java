@@ -16,8 +16,6 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
-
-import edu.ub.prog2.MartinezManuelPerugaAaron.vista.FrmAfegirFitxerMultimedia;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
@@ -179,6 +177,11 @@ public class AplicacioUB4 extends JFrame {
 
         miSortir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.META_MASK));
         miSortir.setText("Sortir");
+        miSortir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSortirActionPerformed(evt);
+            }
+        });
         mMenu.add(miSortir);
 
         mbMenu.add(mMenu);
@@ -301,11 +304,12 @@ public class AplicacioUB4 extends JFrame {
         JFileChooser fileChooser = new JFileChooser();
         int resultat = fileChooser.showOpenDialog(this);
         if (resultat == JFileChooser.APPROVE_OPTION) {
-            file=fileChooser.getSelectedFile();
-            FrmAfegirFitxerMultimedia f = new FrmAfegirFitxerMultimedia(this,true);
-            f.setTextCami(file);
+            file = fileChooser.getSelectedFile();
+            FrmAfegirFitxerMultimedia form = new FrmAfegirFitxerMultimedia(this, file, true);
+
+            form.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_btnAfegirFitxerBibliotecaActionPerformed
 
     private void btnEliminarAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlbumActionPerformed
@@ -315,6 +319,10 @@ public class AplicacioUB4 extends JFrame {
     private void btnCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlbumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCrearAlbumActionPerformed
+
+    private void miSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSortirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_miSortirActionPerformed
 
     /**
      * Main
@@ -337,7 +345,7 @@ public class AplicacioUB4 extends JFrame {
         EventQueue.invokeLater(() -> {
             new AplicacioUB4().setVisible(true);
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

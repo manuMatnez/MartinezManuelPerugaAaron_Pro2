@@ -31,27 +31,21 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
 
     private final Controlador ctrl;
     private final static String TITLE = "Afegir Fitxer";
-    public static String cami;
-    
+
     /**
      * FrmAfegirFitxerMultimedia
      *
      * @param parent
+     * @param fitxer
      * @param modal
      */
-    public FrmAfegirFitxerMultimedia(Frame parent, boolean modal) {
+    public FrmAfegirFitxerMultimedia(Frame parent, File fitxer, boolean modal) {
         super(parent, modal);
         this.ctrl = Controlador.getInstance();
         initComponents();
-        
-        
-    }
-    
-    public void setTextCami(File fitxer){
-        this.textCami.setText(fitxer.toString());
+        this.textCami.setText(fitxer.getAbsolutePath());
     }
 
-    
     /**
      * Inicializa el formulario JDialog
      */
@@ -138,11 +132,11 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAcceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptarActionPerformed
-        
+
     }//GEN-LAST:event_btnAcceptarActionPerformed
 
 
