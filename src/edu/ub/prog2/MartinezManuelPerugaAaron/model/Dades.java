@@ -270,7 +270,7 @@ public class Dades implements Serializable {
         while (albumIt.hasNext()) {
             StringBuilder sb = new StringBuilder();
             AlbumFitxersMultimedia currentAlbum = albumIt.next();
-            sb.append("[").append(id).append("] ").append(currentAlbum.getTitol())
+            sb.append(currentAlbum.getTitol())
                     .append(" (spai lliure: ").append(currentAlbum.freeSpace()).append(")");
             albumList.add(sb.toString());
             id++;

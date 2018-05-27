@@ -98,30 +98,43 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblBiblioteca" min="-2" max="-2" attributes="0"/>
-                  <Component id="scpBiblioteca" min="-2" pref="120" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cbRepAleatoria" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbRepContinua" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="scpAlbums" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblBiblioteca" min="-2" max="-2" attributes="0"/>
+                          <Component id="scpBiblioteca" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmbAlbum" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="cbRepAleatoria" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbRepContinua" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="lblAlbum" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cmbAlbums" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="lblAlbums" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblAlbum" min="-2" max="-2" attributes="0"/>
+                                  <Component id="scpAlbums" min="-2" pref="120" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="lblAlbums" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAfegirFitxerBiblioteca" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnEliminarImatge" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnEliminarImatgeAlbum" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnCrearAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEliminarAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAfegirImatgeAlbum" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="262" max="32767" attributes="0"/>
+              <EmptySpace pref="156" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -132,32 +145,46 @@
               <Component id="lblBiblioteca" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="scpBiblioteca" pref="241" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnAfegirFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnEliminarImatge" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEliminarImatgeAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCrearAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnEliminarAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAfegirImatgeAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="cbRepAleatoria" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="cbRepContinua" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="lblAlbums" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="scpAlbums" pref="346" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="lblAlbum" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cmbAlbum" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblAlbums" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cmbAlbums" min="-2" max="-2" attributes="0"/>
+                          <Component id="scpAlbums" min="-2" pref="176" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="scpBiblioteca" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JComboBox" name="cmbAlbum">
+    <Component class="javax.swing.JComboBox" name="cmbAlbums">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -168,6 +195,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAlbumsActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -179,7 +209,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="lstAlbums">
+        <Component class="javax.swing.JList" name="lstAlbum">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -251,6 +281,45 @@
     <Component class="javax.swing.JLabel" name="lblAlbum">
       <Properties>
         <Property name="text" type="java.lang.String" value="Album"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAfegirFitxerBiblioteca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Afegir Fitxer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAfegirFitxerBibliotecaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEliminarImatge">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar Imatge"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnCrearAlbum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Crear Album"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearAlbumActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEliminarAlbum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar Album"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarAlbumActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAfegirImatgeAlbum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Afegir Imatge al &#xe1;lbum"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEliminarImatgeAlbum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar Imatge album"/>
       </Properties>
     </Component>
   </SubComponents>
