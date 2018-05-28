@@ -21,6 +21,7 @@ import com.sun.jna.NativeLibrary;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import java.awt.EventQueue;
 import java.io.File;
+import java.util.Locale;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import uk.co.caprica.vlcj.binding.LibVlc;
@@ -309,6 +310,8 @@ public class AplicacioUB4 extends JFrame {
      * @param args[]
      */
     public static void main(String args[]) {
+        
+        Locale.setDefault(Locale.US);
 
         // VLC 2.2 para Mac
         if (MAC) {

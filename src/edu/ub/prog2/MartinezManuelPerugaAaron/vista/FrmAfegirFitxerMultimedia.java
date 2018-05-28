@@ -17,10 +17,17 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
+import edu.ub.prog2.utils.AplicacioException;
 import java.awt.Frame;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JTextField;
 
 /**
  * FrmAfegirFitxerMultimedia - Vista
@@ -31,8 +38,9 @@ import javax.swing.JFileChooser;
 public class FrmAfegirFitxerMultimedia extends JDialog {
 
     private final Controlador ctrl;
-    private final static String TITLE_AUDIO = "Afegir Fitxer de Audio";
-    private final static String TITLE_VIDEO = "Afegir Fitxer de Video";
+    private final static String TITLE = "Afegir Fitxer de";
+    private final static String TITLE_AUDIO = "Audio";
+    private final static String TITLE_VIDEO = "Video";
 
     /**
      * FrmAfegirFitxerMultimedia
@@ -44,6 +52,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         super(parent, modal);
         this.ctrl = Controlador.getInstance();
         initComponents();
+        checkCtrl(); // Cambia entre audio o video
     }
 
     /**
@@ -78,12 +87,13 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         lblAmplada = new javax.swing.JLabel();
         tfAlcada = new javax.swing.JTextField();
         tfAmplada = new javax.swing.JTextField();
+        ImageIcon logoUB = new ImageIcon(getClass().getClassLoader().getResource("assets/logo_ub.png"));
+        lblLogoUB = new javax.swing.JLabel(logoUB);
 
         btngpAudioVideo.add(rbtnAudio);
         btngpAudioVideo.add(rbtnVideo);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(TITLE_AUDIO);
         setName(getClass().getSimpleName());
         setResizable(false);
 
@@ -139,12 +149,13 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         pnlAudioImatgeLayout.setHorizontalGroup(
             pnlAudioImatgeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAudioImatgeLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(lblImatge)
+                .addContainerGap()
+                .addComponent(lblImatge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfCamiImatge)
+                .addComponent(tfCamiImatge, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnObrirImatge))
+                .addComponent(btnObrirImatge)
+                .addGap(12, 12, 12))
         );
         pnlAudioImatgeLayout.setVerticalGroup(
             pnlAudioImatgeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,28 +171,49 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
 
         lblDurada.setText("Durada");
 
-        lblFpsKbps.setText("Kbs");
+        tfDurada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfDuradaKeyTyped(evt);
+            }
+        });
 
-        pnlVideo.setVisible(false);
+        lblFpsKbps.setText("-");
+
+        tfFpsKbps.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfFpsKbpsKeyTyped(evt);
+            }
+        });
 
         lblAlcada.setText("Alçada");
 
         lblAmplada.setText("Amplada");
+
+        tfAlcada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfAlcadaKeyTyped(evt);
+            }
+        });
+
+        tfAmplada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfAmpladaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlVideoLayout = new javax.swing.GroupLayout(pnlVideo);
         pnlVideo.setLayout(pnlVideoLayout);
         pnlVideoLayout.setHorizontalGroup(
             pnlVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlVideoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAmplada)
                     .addComponent(lblAlcada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfAlcada)
-                    .addComponent(tfAmplada, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(tfAmplada, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
         );
         pnlVideoLayout.setVerticalGroup(
             pnlVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,53 +228,57 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
                 .addGap(15, 15, 15))
         );
 
+        lblLogoUB.setText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLogoUB, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbtnAudio)
+                    .addComponent(rbtnVideo))
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlAudioImatge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAcceptar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCancelar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbtnAudio)
-                            .addComponent(rbtnVideo))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCami, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfCami))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblCodec)
-                                            .addComponent(lblDurada)
-                                            .addComponent(lblFpsKbps))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfCodec)
-                                            .addComponent(tfDurada, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(tfFpsKbps)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblNom)
-                                        .addGap(21, 21, 21)
-                                        .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(13, 13, 13)
-                                .addComponent(pnlVideo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblCami, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnObrirFitxer)))
+                        .addComponent(tfCami))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblCodec)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfCodec))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblNom)
+                                .addGap(21, 21, 21)
+                                .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDurada)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfDurada, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblFpsKbps, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)
+                                .addComponent(tfFpsKbps, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnlVideo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnObrirFitxer))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(pnlAudioImatge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAcceptar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,44 +286,45 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblNom)
-                                .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rbtnAudio)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rbtnVideo))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(tfCami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnObrirFitxer)
-                                        .addComponent(lblCami)))
-                                .addGap(6, 6, 6)))
+                        .addComponent(lblLogoUB, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnAudio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCodec)
-                            .addComponent(tfCodec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDurada)
-                            .addComponent(tfDurada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblFpsKbps)
-                            .addComponent(tfFpsKbps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(rbtnVideo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(pnlVideo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlAudioImatge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfCami, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnObrirFitxer)
+                            .addComponent(lblCami))
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlVideo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblNom)
+                                    .addComponent(tfNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblCodec)
+                                    .addComponent(tfCodec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfDurada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblDurada))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblFpsKbps)
+                                    .addComponent(tfFpsKbps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlAudioImatge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAcceptar)
                     .addComponent(btnCancelar))
                 .addContainerGap())
         );
+
+        lblLogoUB.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -297,45 +334,153 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAcceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptarActionPerformed
+        String cami = tfCami.getText();
+        String nom = tfNom.getText();
+        String codec = tfCodec.getText();
+        float durada = tfDurada.getText().isEmpty() ? 0.0f : Float.parseFloat(tfDurada.getText());
 
+        if (rbtnAudio.isSelected()) {
+            String camiImatge = tfCamiImatge.getText();
+            int kbps = tfFpsKbps.getText().isEmpty() ? 0 : Integer.parseInt(tfFpsKbps.getText());
+            try {
+                ctrl.afegirAudio(cami, camiImatge, nom, codec, durada, kbps);
+                this.dispose(); // TODO actualizar lista
+            } catch (AplicacioException ex) {
+                 // TODO JDialog
+            }
+        } else {
+            float fps = tfFpsKbps.getText().isEmpty() ? 0.0f : Float.parseFloat(tfFpsKbps.getText());
+            int amplada = tfAmplada.getText().isEmpty() ? 0 : Integer.parseInt(tfAmplada.getText());
+            int alcada = tfAlcada.getText().isEmpty() ? 0 : Integer.parseInt(tfAlcada.getText());
+            try {
+                ctrl.afegirVideo(cami, nom, codec, durada, alcada, amplada, fps);
+                this.dispose(); // TODO actualizar lista
+            } catch (AplicacioException ex) {
+                // TODO JDialog
+            }
+        }
     }//GEN-LAST:event_btnAcceptarActionPerformed
 
     private void btnObrirFitxerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrirFitxerActionPerformed
-        File file;
-        JFileChooser fileChooser = new JFileChooser();
-        int resultat = fileChooser.showOpenDialog(this);
-        if (resultat == JFileChooser.APPROVE_OPTION) {
-            file = fileChooser.getSelectedFile();
-            this.tfCami.setText(file.getAbsolutePath());
-        }
+        this.tfCami.setText(fileChooserPath());
     }//GEN-LAST:event_btnObrirFitxerActionPerformed
 
     private void rbtnAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnAudioActionPerformed
-        lblFpsKbps.setText("Kbs");
-        pnlVideo.setVisible(false);
-        pnlAudioImatge.setVisible(true);
-        this.setTitle(TITLE_AUDIO);
-        this.pack();
+        checkCtrl();
     }//GEN-LAST:event_rbtnAudioActionPerformed
 
     private void rbtnVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnVideoActionPerformed
-        lblFpsKbps.setText("Fps");
-        pnlVideo.setVisible(true);
-        pnlAudioImatge.setVisible(false);
-        this.setTitle(TITLE_VIDEO);
-        this.pack();
+        checkCtrl();
     }//GEN-LAST:event_rbtnVideoActionPerformed
 
     private void btnObrirImatgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrirImatgeActionPerformed
-        File file;
+        this.tfCamiImatge.setText(fileChooserPath());
+    }//GEN-LAST:event_btnObrirImatgeActionPerformed
+
+    private void tfAlcadaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAlcadaKeyTyped
+        onlyIntNumbers(tfAlcada, evt);
+    }//GEN-LAST:event_tfAlcadaKeyTyped
+
+    private void tfAmpladaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAmpladaKeyTyped
+        onlyIntNumbers(tfAmplada, evt);
+        if (tfAmplada.getText().length() > String.valueOf(Integer.MAX_VALUE).length() - 1) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfAmpladaKeyTyped
+
+    private void tfFpsKbpsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFpsKbpsKeyTyped
+        if (rbtnAudio.isSelected()) {
+            onlyIntNumbers(tfFpsKbps, evt);
+        } else {
+            onlyFloatNumbers(tfFpsKbps, evt);
+        }
+    }//GEN-LAST:event_tfFpsKbpsKeyTyped
+
+    private void tfDuradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDuradaKeyTyped
+        onlyFloatNumbers(tfDurada, evt);
+    }//GEN-LAST:event_tfDuradaKeyTyped
+
+    private void onlyIntNumbers(JTextField tf, KeyEvent evt) {
+        char vChar = evt.getKeyChar();
+        if (!(Character.isDigit(vChar) || (vChar == KeyEvent.VK_BACK_SPACE)
+                || (vChar == KeyEvent.VK_DELETE))) {
+            evt.consume();
+        }
+        String txt = tf.getText();
+        try {
+            int screen = Integer.parseInt(txt);
+        } catch (NumberFormatException ne) {
+            if (txt.isEmpty()) {
+                txt = "0";
+            }
+            if (Long.parseLong(txt) > Integer.MAX_VALUE) {
+                evt.consume();
+            }
+        }
+    }
+
+    private void onlyFloatNumbers(JTextField tf, KeyEvent evt) {
+        char vChar = evt.getKeyChar();
+        if (!(Character.isDigit(vChar) || (vChar == KeyEvent.VK_BACK_SPACE)
+                || (vChar == KeyEvent.VK_DELETE) || (vChar == KeyEvent.VK_PERIOD && !tf.getText().contains(".") && !tf.getText().isEmpty()))) {
+            evt.consume();
+        }
+        String txt = tf.getText();
+        try {
+            float screen = Float.parseFloat(txt);
+        } catch (NumberFormatException ne) {
+            if (txt.isEmpty()) {
+                txt = "0.0";
+            }
+            if (Double.parseDouble(txt) > Float.MAX_VALUE) {
+                evt.consume();
+            }
+
+        }
+    }
+
+    /**
+     * Retorna el String del path absoluto del fichero seleccionado
+     *
+     * @return String
+     */
+    private String fileChooserPath() {
+        String path = "";
         JFileChooser fileChooser = new JFileChooser();
         int resultat = fileChooser.showOpenDialog(this);
         if (resultat == JFileChooser.APPROVE_OPTION) {
-            file = fileChooser.getSelectedFile();
-            this.tfCamiImatge.setText(file.getAbsolutePath());
+            File file = fileChooser.getSelectedFile();
+            path = file.getAbsolutePath();
         }
-    }//GEN-LAST:event_btnObrirImatgeActionPerformed
+        return path;
+    }
 
+    /**
+     * Activa desactiva los controles requeridos para rellenar el formulario de
+     * Audio o Video
+     */
+    private void checkCtrl() {
+        if (rbtnAudio.isSelected()) {
+            setTitle(TITLE + " " + TITLE_AUDIO);
+            lblFpsKbps.setText("Kbs");
+            pnlVideo.setVisible(false);
+            pnlAudioImatge.setVisible(true);
+            rbtnAudio.setEnabled(false);
+            rbtnVideo.setEnabled(true);
+        } else {
+            setTitle(TITLE + " " + TITLE_VIDEO);
+            lblFpsKbps.setText("Fps");
+            pnlVideo.setVisible(true);
+            pnlAudioImatge.setVisible(false);
+            rbtnAudio.setEnabled(true);
+            rbtnVideo.setEnabled(false);
+        }
+        tfCamiImatge.setText("");
+        tfAmplada.setText("");
+        tfAlcada.setText("");
+        tfFpsKbps.setText("");
+        pack();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcceptar;
@@ -350,6 +495,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     private javax.swing.JLabel lblDurada;
     private javax.swing.JLabel lblFpsKbps;
     private javax.swing.JLabel lblImatge;
+    private javax.swing.JLabel lblLogoUB;
     private javax.swing.JLabel lblNom;
     private javax.swing.JPanel pnlAudioImatge;
     private javax.swing.JPanel pnlVideo;
