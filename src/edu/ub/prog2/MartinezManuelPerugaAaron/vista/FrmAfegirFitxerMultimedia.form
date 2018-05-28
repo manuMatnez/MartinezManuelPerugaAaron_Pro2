@@ -12,11 +12,12 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-      <Connection code="TITLE" type="code"/>
+      <Connection code="TITLE_AUDIO" type="code"/>
     </Property>
     <Property name="name" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection code="getClass().getSimpleName()" type="code"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -40,38 +41,57 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnAcceptar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="pnlAudioImatge" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnAcceptar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblCami" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
-                          <Component id="rbtnVideo" min="-2" max="-2" attributes="0"/>
-                          <Component id="rbtnAudio" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="rbtnAudio" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbtnVideo" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="tfCami" pref="363" max="32767" attributes="0"/>
+                              <Component id="lblCami" min="-2" pref="45" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnObrir" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfCami" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblCodec" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDurada" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblCodec" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblDurada" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblFpsKbps" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfCodec" max="32767" attributes="0"/>
+                                          <Component id="tfDurada" pref="100" max="32767" attributes="0"/>
+                                          <Component id="tfFpsKbps" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblNom" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                      <Component id="tfNom" min="-2" pref="191" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfCodec" max="32767" attributes="0"/>
-                                  <Component id="tfDurada" pref="100" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                              <Component id="pnlVideo" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="btnObrirFitxer" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -82,24 +102,30 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfCami" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCami" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnObrir" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="rbtnAudio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rbtnVideo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="226" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAcceptar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblNom" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfNom" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="rbtnAudio" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="rbtnVideo" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="tfCami" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnObrirFitxer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblCami" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblCodec" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfCodec" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -109,8 +135,23 @@
                           <Component id="lblDurada" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfDurada" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblFpsKbps" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfFpsKbps" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="pnlVideo" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlAudioImatge" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnAcceptar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -122,7 +163,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblCami">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Introduir cami fitxer"/>
+        <Property name="text" type="java.lang.String" value="Fitxer"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnAcceptar">
@@ -141,16 +182,17 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnObrir">
+    <Component class="javax.swing.JButton" name="btnObrirFitxer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Obrir"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrirFitxerActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbtnAudio">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Audio"/>
       </Properties>
       <Events>
@@ -164,6 +206,56 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnVideoActionPerformed"/>
       </Events>
+    </Component>
+    <Container class="javax.swing.JPanel" name="pnlAudioImatge">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                  <Component id="lblImatge" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="tfCamiImatge" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnObrirImatge" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="tfCamiImatge" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblImatge" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnObrirImatge" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblImatge">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Imatge"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfCamiImatge">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnObrirImatge">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Obrir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrirImatgeActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblNom">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nom"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfNom">
     </Component>
     <Component class="javax.swing.JLabel" name="lblCodec">
       <Properties>
@@ -179,5 +271,71 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfDurada">
     </Component>
+    <Component class="javax.swing.JLabel" name="lblFpsKbps">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;Kbs&quot;" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfFpsKbps">
+    </Component>
+    <Container class="javax.swing.JPanel" name="pnlVideo">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="pnlVideo.setVisible(false);"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblAmplada" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAlcada" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="tfAlcada" max="32767" attributes="0"/>
+                      <Component id="tfAmplada" pref="110" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="tfAlcada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAlcada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="tfAmplada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAmplada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblAlcada">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Al&#xe7;ada"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblAmplada">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Amplada"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfAlcada">
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfAmplada">
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
