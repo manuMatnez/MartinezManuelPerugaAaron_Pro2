@@ -69,6 +69,9 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
     @Override
     protected void next() {
         posicio = (posicio + 1) % llistaCtrl.size();
+        if (reproduccioAleatoria && posicio == 0) { // TODO Testear
+            Collections.shuffle(llistaCtrl);
+        }
         if (hasNext()) {
             File file = llistaReproduint.getAt(llistaCtrl.get(posicio));
             if (file instanceof FitxerReproduible) {
@@ -116,9 +119,6 @@ public class EscoltadorReproduccio extends EscoltadorReproduccioBasic {
         this.reproduccioAleatoria = reproduccioAleatoria;
         posicio = -1;
         reproduint = true;
-        if (this.reproduccioAleatoria) {
-            Collections.shuffle(llistaCtrl);
-        }
         next();
     }
 
