@@ -19,11 +19,8 @@ package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import java.awt.Frame;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -347,13 +344,13 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
                 String camiImatge = tfCamiImatge.getText();
                 int kbps = tfFpsKbps.getText().isEmpty() ? 0 : Integer.parseInt(tfFpsKbps.getText());
                 ctrl.afegirAudio(cami, camiImatge, nom, codec, durada, kbps);
-                this.dispose(); // TODO actualizar lista
+                this.dispose();
             } else {
                 float fps = tfFpsKbps.getText().isEmpty() ? 0.0f : Float.parseFloat(tfFpsKbps.getText());
                 int amplada = tfAmplada.getText().isEmpty() ? 0 : Integer.parseInt(tfAmplada.getText());
                 int alcada = tfAlcada.getText().isEmpty() ? 0 : Integer.parseInt(tfAlcada.getText());
                 ctrl.afegirVideo(cami, nom, codec, durada, alcada, amplada, fps);
-                this.dispose(); // TODO actualizar lista
+                this.dispose();
             }
         } catch (AplicacioException ex) {
             // TODO JDialog
@@ -370,11 +367,11 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     }//GEN-LAST:event_btnObrirFitxerActionPerformed
 
     private void rbtnAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnAudioActionPerformed
-        checkCtrl();
+        checkCtrl(); // Cambia entre audio o video
     }//GEN-LAST:event_rbtnAudioActionPerformed
 
     private void rbtnVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnVideoActionPerformed
-        checkCtrl();
+        checkCtrl(); // Cambia entre audio o video
     }//GEN-LAST:event_rbtnVideoActionPerformed
 
     private void btnObrirImatgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrirImatgeActionPerformed
@@ -401,6 +398,13 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         onlyFloatNumbers(tfDurada, evt);
     }//GEN-LAST:event_tfDuradaKeyTyped
 
+    /**
+     * Controla el evento para que acepte solo números ints válidos el
+     * JTextField
+     *
+     * @param tf
+     * @param evt
+     */
     private void onlyIntNumbers(JTextField tf, KeyEvent evt) {
         char vChar = evt.getKeyChar();
         if (!(Character.isDigit(vChar) || (vChar == KeyEvent.VK_BACK_SPACE)
@@ -420,6 +424,13 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         }
     }
 
+    /**
+     * Controla el evento para que acepte solo números floats válidos el
+     * JTextField
+     *
+     * @param tf
+     * @param evt
+     */
     private void onlyFloatNumbers(JTextField tf, KeyEvent evt) {
         char vChar = evt.getKeyChar();
         if (!(Character.isDigit(vChar) || (vChar == KeyEvent.VK_BACK_SPACE)
@@ -457,7 +468,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     }
 
     /**
-     * Activa desactiva los controles requeridos para rellenar el formulario de
+     * Activa desactiva los controles requeridos para rellenar el JDialog de
      * Audio o Video
      */
     private void checkCtrl() {

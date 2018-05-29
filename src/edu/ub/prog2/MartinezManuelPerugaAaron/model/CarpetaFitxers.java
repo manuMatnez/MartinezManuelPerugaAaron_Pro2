@@ -126,6 +126,8 @@ public class CarpetaFitxers implements InFileFolder, Serializable {
         return carpeta.contains((FitxerMultimedia) fitxer);
     }
 
+    //Prácticas 1 - 3
+    /*
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -134,9 +136,26 @@ public class CarpetaFitxers implements InFileFolder, Serializable {
         Iterator<FitxerMultimedia> fileIt = carpeta.iterator();
 
         while (fileIt.hasNext()) {
-            File currentFile = fileIt.next();
+            FitxerMultimedia currentFile = fileIt.next();
             sb.append("[").append(id).append("] ").append(currentFile).append("\n");
             id++;
+        }
+        return sb.toString();
+    }
+     */
+    // Práctica 4
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        Iterator<FitxerMultimedia> fileIt = carpeta.iterator();
+
+        while (fileIt.hasNext()) {
+            FitxerMultimedia currentFile = fileIt.next();
+            sb.append(currentFile.getDescripcio())
+                    .append(" [").append(currentFile.getClass().getSimpleName())
+                    .append("] (").append(currentFile.getUltimaModificacio())
+                    .append(")").append("\n");
         }
         return sb.toString();
     }

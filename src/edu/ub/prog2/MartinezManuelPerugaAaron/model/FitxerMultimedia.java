@@ -87,22 +87,48 @@ public class FitxerMultimedia extends File {
         }
     }
 
+    /**
+     * Obtiene el nombre del fichero
+     *
+     * @return String
+     */
     public String getNomFitxer() {
         return findName();
     }
 
+    /**
+     * Obtiene la extensión del fichero
+     *
+     * @return String
+     */
     public String getExtensio() {
         return findExtension();
     }
 
+    /**
+     * Obtiene el path absoluto del fichero sin el nombre de fichero ni
+     * extensión
+     *
+     * @return String
+     */
     public String getCamiAbsolut() {
         return findPath();
     }
 
+    /**
+     * Obtiene el path absoluto completo del fichero
+     *
+     * @return
+     */
     public String getCamiAbsolutComplet() {
         return this.getAbsolutePath();
     }
 
+    /**
+     * Obtiene la fecha de última modificación
+     *
+     * @return Date
+     */
     public Date getUltimaModificacio() {
         return new Date(this.lastModified());
     }
@@ -118,7 +144,6 @@ public class FitxerMultimedia extends File {
     // Getters y Setters END
 
     //***************************************************************
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -148,8 +173,6 @@ public class FitxerMultimedia extends File {
         hash = 97 * hash + Objects.hashCode(this.getUltimaModificacio());
         return hash;
     }
-    
-    //***************************************************************
 
     @Override
     public String toString() {
@@ -172,5 +195,4 @@ public class FitxerMultimedia extends File {
 
         return fitxer.toString();
     }
-
 }

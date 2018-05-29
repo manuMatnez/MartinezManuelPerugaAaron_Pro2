@@ -200,8 +200,6 @@ public class Dades implements Serializable {
         }
     }
 
-    // PRACTICA 3
-    //********************************************************************
     // Getters y Setters START
     public boolean isReproduccioCiclica() {
         return reproduccioCiclica;

@@ -139,7 +139,6 @@ public class Controlador implements InControlador {
         dades.comprovaExistenciaFitxer(cami);
     }
 
-    // PRACTICA 3 - IMPLEMENTACION METODOS -> InControlador
     /**
      * Añade un nuevo album a traves de Dades
      *

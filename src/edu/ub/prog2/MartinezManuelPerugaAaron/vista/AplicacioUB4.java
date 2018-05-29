@@ -20,10 +20,16 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
+import java.util.List;
 import java.util.Locale;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.ListModel;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
@@ -99,11 +105,7 @@ public class AplicacioUB4 extends JFrame {
         });
         scpAlbums.setViewportView(lstAlbum);
 
-        lstBiblioteca.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        lstBiblioteca.setModel(updateBiblioteca());
         scpBiblioteca.setViewportView(lstBiblioteca);
 
         lblBiblioteca.setText("Biblioteca");
@@ -285,6 +287,12 @@ public class AplicacioUB4 extends JFrame {
 
     private void btnAfegirFitxerBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFitxerBibliotecaActionPerformed
         FrmAfegirFitxerMultimedia form = new FrmAfegirFitxerMultimedia(this, true);
+        form.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent ev) {
+                lstBiblioteca.setModel(updateBiblioteca());
+            }
+        });
         form.setVisible(true);
     }//GEN-LAST:event_btnAfegirFitxerBibliotecaActionPerformed
 
@@ -305,12 +313,35 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     /**
+     * Retorna una Lista Modelo de la biblioteca para asociarsela a un JList
+     *
+     * @return ListModel<String>
+     */
+    private ListModel<String> updateBiblioteca() {
+        List<String> bibList = ctrl.mostrarBiblioteca();
+        ListModel<String> model = new javax.swing.AbstractListModel<String>() {
+            String[] strings = bibList.toArray(new String[bibList.size()]);
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        };
+        return model;
+    }
+
+    /**
      * Main
      *
      * @param args[]
      */
     public static void main(String args[]) {
-        
+
         Locale.setDefault(Locale.US);
 
         // VLC 2.2 para Mac
