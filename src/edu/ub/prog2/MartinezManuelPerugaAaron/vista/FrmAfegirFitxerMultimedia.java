@@ -358,6 +358,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
             dialog = optionPane.createDialog("Error!");
         } finally {
             dialog.setAlwaysOnTop(true);
+            dialog.setBounds(0, 23, dialog.getWidth(), dialog.getHeight());
             dialog.setVisible(true);
         }
     }//GEN-LAST:event_btnAcceptarActionPerformed
