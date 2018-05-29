@@ -37,6 +37,15 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
     // nom no puede ser porque lo sacamos de cami
     protected FitxerReproduible(String cami, String nom, String codec, float durada, Reproductor reproductor) throws AplicacioException {
         super(cami);
+        if (nom.isEmpty()) {
+            throw new AplicacioException("Nom no pot estar buit");
+        }
+        if (codec.isEmpty()) {
+            throw new AplicacioException("Codec no pot estar buit");
+        }
+        if (durada == 0.0) {
+            throw new AplicacioException("Durada no pot etar buida o ser 0.0");
+        }
         setDescripcio(nom);
         this.codec = codec;
         this.durada = durada;

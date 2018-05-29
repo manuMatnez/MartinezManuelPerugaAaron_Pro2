@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -339,25 +340,28 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         String codec = tfCodec.getText();
         float durada = tfDurada.getText().isEmpty() ? 0.0f : Float.parseFloat(tfDurada.getText());
 
-        if (rbtnAudio.isSelected()) {
-            String camiImatge = tfCamiImatge.getText();
-            int kbps = tfFpsKbps.getText().isEmpty() ? 0 : Integer.parseInt(tfFpsKbps.getText());
-            try {
+        JOptionPane optionPane = new JOptionPane("Fitxer " + nom + " Afegit", JOptionPane.PLAIN_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Fitxer Afegit!");
+        try {
+            if (rbtnAudio.isSelected()) {
+                String camiImatge = tfCamiImatge.getText();
+                int kbps = tfFpsKbps.getText().isEmpty() ? 0 : Integer.parseInt(tfFpsKbps.getText());
                 ctrl.afegirAudio(cami, camiImatge, nom, codec, durada, kbps);
                 this.dispose(); // TODO actualizar lista
-            } catch (AplicacioException ex) {
-                 // TODO JDialog
-            }
-        } else {
-            float fps = tfFpsKbps.getText().isEmpty() ? 0.0f : Float.parseFloat(tfFpsKbps.getText());
-            int amplada = tfAmplada.getText().isEmpty() ? 0 : Integer.parseInt(tfAmplada.getText());
-            int alcada = tfAlcada.getText().isEmpty() ? 0 : Integer.parseInt(tfAlcada.getText());
-            try {
+            } else {
+                float fps = tfFpsKbps.getText().isEmpty() ? 0.0f : Float.parseFloat(tfFpsKbps.getText());
+                int amplada = tfAmplada.getText().isEmpty() ? 0 : Integer.parseInt(tfAmplada.getText());
+                int alcada = tfAlcada.getText().isEmpty() ? 0 : Integer.parseInt(tfAlcada.getText());
                 ctrl.afegirVideo(cami, nom, codec, durada, alcada, amplada, fps);
                 this.dispose(); // TODO actualizar lista
-            } catch (AplicacioException ex) {
-                // TODO JDialog
             }
+        } catch (AplicacioException ex) {
+            // TODO JDialog
+            optionPane = new JOptionPane(ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+            dialog = optionPane.createDialog("Error!");
+        } finally {
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
         }
     }//GEN-LAST:event_btnAcceptarActionPerformed
 
@@ -383,9 +387,6 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
 
     private void tfAmpladaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAmpladaKeyTyped
         onlyIntNumbers(tfAmplada, evt);
-        if (tfAmplada.getText().length() > String.valueOf(Integer.MAX_VALUE).length() - 1) {
-            evt.consume();
-        }
     }//GEN-LAST:event_tfAmpladaKeyTyped
 
     private void tfFpsKbpsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfFpsKbpsKeyTyped

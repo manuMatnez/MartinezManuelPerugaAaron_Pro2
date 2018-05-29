@@ -34,7 +34,9 @@ public class Audio extends FitxerReproduible {
     public Audio(String cami, File fitxerImatge, String nom, String codec,
             float durada, int kbps, Reproductor reproductor) throws AplicacioException {
         super(cami, nom, codec, durada, reproductor);
-
+        if (kbps == 0) {
+            throw new AplicacioException("Kbps no pot estar buit o ser 0");
+        }
         this.fitxerImatge = fitxerImatge;
         this.kbps = kbps;
     }
@@ -43,6 +45,7 @@ public class Audio extends FitxerReproduible {
     public int getKbps() {
         return kbps;
     }
+
     public File getFitxerImatge() {
         return fitxerImatge;
     }

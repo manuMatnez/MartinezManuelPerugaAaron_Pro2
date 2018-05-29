@@ -34,6 +34,15 @@ public class Video extends FitxerReproduible {
     public Video(String cami, String nom, String codec, float durada, int alcada,
             int amplada, float fps, Reproductor reproductor) throws AplicacioException {
         super(cami, nom, codec, durada, reproductor);
+        if (alcada == 0) {
+            throw new AplicacioException("Alçada no pot estar buida o ser 0");
+        }
+        if (amplada == 0) {
+            throw new AplicacioException("Amplada no pot estar buida o ser 0");
+        }
+        if (fps == 0.0) {
+            throw new AplicacioException("Fps no pot estar buit o ser 0");
+        }
         this.alcada = alcada;
         this.amplada = amplada;
         this.fps = fps;
