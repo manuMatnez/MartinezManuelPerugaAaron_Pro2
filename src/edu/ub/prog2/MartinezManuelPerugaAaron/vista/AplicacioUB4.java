@@ -21,13 +21,16 @@ import com.sun.jna.NativeLibrary;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import java.awt.EventQueue;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
@@ -74,7 +77,8 @@ public class AplicacioUB4 extends JFrame {
         textNomAlbum = new javax.swing.JTextField();
         etNomAlbum = new javax.swing.JLabel();
         etSpai = new javax.swing.JLabel();
-        cmbEspacioAlbum = new javax.swing.JComboBox<>();
+        textSpaiAlbum = new javax.swing.JTextField();
+        btnEliminarFitxerBiblioteca = new javax.swing.JButton();
         mbMenu = new javax.swing.JMenuBar();
         mMenu = new javax.swing.JMenu();
         mDades = new javax.swing.JMenu();
@@ -97,11 +101,7 @@ public class AplicacioUB4 extends JFrame {
             }
         });
 
-        lstAlbum.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        lstAlbum.setModel(updateAlbum());
         scpAlbums.setViewportView(lstAlbum);
 
         lstBiblioteca.setModel(updateBiblioteca());
@@ -136,12 +136,18 @@ public class AplicacioUB4 extends JFrame {
 
         etNomAlbum.setText("Nom de l'álbum:");
 
-        etSpai.setText("Spai:");
+        etSpai.setText("Spai de l'álbum:");
 
-        cmbEspacioAlbum.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
-        cmbEspacioAlbum.addActionListener(new java.awt.event.ActionListener() {
+        textSpaiAlbum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textSpaiAlbumKeyTyped(evt);
+            }
+        });
+
+        btnEliminarFitxerBiblioteca.setText("Eliminar Fitxer");
+        btnEliminarFitxerBiblioteca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEspacioAlbumActionPerformed(evt);
+                btnEliminarFitxerBibliotecaActionPerformed(evt);
             }
         });
 
@@ -183,6 +189,7 @@ public class AplicacioUB4 extends JFrame {
         mPreferencies.setText("Preferències");
 
         cbmiRepAleatoria.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        cbmiRepAleatoria.setSelected(ctrl.isReproduccioAleatoria());
         cbmiRepAleatoria.setText("Reproducció Aleatoria");
         cbmiRepAleatoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,8 +198,9 @@ public class AplicacioUB4 extends JFrame {
         });
         mPreferencies.add(cbmiRepAleatoria);
 
-        cbmiRepContinua.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        cbmiRepContinua.setText("Reproduccio Continua");
+        cbmiRepContinua.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        cbmiRepContinua.setSelected(ctrl.isReproduccioContinua());
+        cbmiRepContinua.setText("Reproducció Continua");
         cbmiRepContinua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbmiRepContinuaActionPerformed(evt);
@@ -224,22 +232,29 @@ public class AplicacioUB4 extends JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(etNomAlbum)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textNomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(scpBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmbAlbums, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnEliminarAlbum, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(btnEliminarAlbum))
+                                            .addComponent(cmbAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(63, 63, 63)
                                         .addComponent(etBiblioteca)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(etAlbums)
-                                        .addGap(24, 24, 24)))
+                                        .addGap(57, 57, 57)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(93, 93, 93)
@@ -248,22 +263,20 @@ public class AplicacioUB4 extends JFrame {
                                     .addComponent(scpAlbums, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(btnAfegirFitxerBiblioteca)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 544, Short.MAX_VALUE)
-                        .addComponent(btnCrearAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(etSpai)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbEspacioAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(etNomAlbum)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textNomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnCrearAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(etSpai)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(textSpaiAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnEliminarFitxerBiblioteca)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +288,7 @@ public class AplicacioUB4 extends JFrame {
                     .addComponent(etAlbum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scpBiblioteca, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                    .addComponent(scpBiblioteca, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmbAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -284,17 +297,19 @@ public class AplicacioUB4 extends JFrame {
                     .addComponent(scpAlbums))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAfegirFitxerBiblioteca)
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEliminarFitxerBiblioteca)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textNomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(etNomAlbum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etSpai)
-                    .addComponent(cmbEspacioAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textSpaiAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etSpai))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCrearAlbum)
-                .addContainerGap())
+                .addGap(8, 8, 8))
         );
 
         pack();
@@ -310,6 +325,8 @@ public class AplicacioUB4 extends JFrame {
             cami = file.getPath();
             try {
                 ctrl.carregarDadesDisc(cami);
+                refreshAll();
+                JOptionPane.showMessageDialog(this, "Dades carregades correctament", "Dades carregades", JOptionPane.INFORMATION_MESSAGE);
             } catch (AplicacioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -317,7 +334,21 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_miCarregarActionPerformed
 
     private void miGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGuardarActionPerformed
-
+        File file;
+        String cami;
+        JFileChooser fileChooser = new JFileChooser();
+        int resultat = fileChooser.showSaveDialog(this);
+        if (resultat == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+            cami = file.getPath();
+            try {
+                ctrl.guardarDadesDisc(cami);
+                fileChooser.setVisible(false);
+                JOptionPane.showMessageDialog(this, "Dades guardades correctament", "Dades guardades", JOptionPane.INFORMATION_MESSAGE);
+            } catch (AplicacioException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_miGuardarActionPerformed
 
     private void miSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSobreActionPerformed
@@ -325,7 +356,8 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_miSobreActionPerformed
 
     private void cmbAlbumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlbumsActionPerformed
-        // TODO add your handling code here:
+
+        lstAlbum.setModel(updateAlbum());
     }//GEN-LAST:event_cmbAlbumsActionPerformed
 
     private void btnAfegirFitxerBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFitxerBibliotecaActionPerformed
@@ -340,30 +372,32 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_btnAfegirFitxerBibliotecaActionPerformed
 
     private void btnEliminarAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlbumActionPerformed
-        String album;
-
-        album = (String) this.cmbAlbums.getSelectedItem();
+        int index = this.cmbAlbums.getSelectedIndex();
 
         try {
-            ctrl.esborrarAlbum(album);
-            this.cmbAlbums.removeItem(album);
+            String titol = ctrl.getTitolAlbum(index);
+            ctrl.esborrarAlbum(titol);
+            this.cmbAlbums.setModel(updateAlbums());
+            JOptionPane.showMessageDialog(this, "Álbum " + titol + " esborrat correctament", "Álbum esborray", JOptionPane.INFORMATION_MESSAGE);
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarAlbumActionPerformed
 
     private void btnCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlbumActionPerformed
-        String nomAlbum;
-        int capacitat;
+        String nomAlbum = this.textNomAlbum.getText();
+        int capacitat = 10;
 
-        nomAlbum = this.textNomAlbum.getText();
-
-        capacitat = this.cmbEspacioAlbum.getSelectedIndex() + 1;
+        if (!this.textSpaiAlbum.getText().isEmpty()) {
+            capacitat = Integer.parseInt(this.textSpaiAlbum.getText());
+        }
 
         try {
             ctrl.afegirAlbum(nomAlbum, capacitat);
-            this.cmbAlbums.addItem(nomAlbum);
-
+            this.cmbAlbums.setModel(updateAlbums());
+            JOptionPane.showMessageDialog(this, "Álbum " + nomAlbum + " creat correctament", "Álbum creat", JOptionPane.INFORMATION_MESSAGE);
+            this.textNomAlbum.setText("");
+            this.textSpaiAlbum.setText("");
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -377,13 +411,33 @@ public class AplicacioUB4 extends JFrame {
         ctrl.activarDesactivarContinua();
     }//GEN-LAST:event_cbmiRepContinuaActionPerformed
 
-    private void cmbEspacioAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEspacioAlbumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEspacioAlbumActionPerformed
-
     private void cbmiRepAleatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmiRepAleatoriaActionPerformed
         ctrl.activarDesactivarAleatoria();
     }//GEN-LAST:event_cbmiRepAleatoriaActionPerformed
+
+    private void textSpaiAlbumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSpaiAlbumKeyTyped
+        onlyIntNumbers(textSpaiAlbum, evt);
+    }//GEN-LAST:event_textSpaiAlbumKeyTyped
+
+    private void btnEliminarFitxerBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFitxerBibliotecaActionPerformed
+        int[] indices = this.lstBiblioteca.getSelectedIndices();
+
+        if (indices.length > 0) {
+            try {
+                int eliminados = 0;
+                for (int i : indices) {
+                    ctrl.esborrarFitxer(i - eliminados);
+                    eliminados++;
+                }
+                this.lstBiblioteca.setModel(updateBiblioteca());
+                JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s", "Fitxer Esborrat/s", JOptionPane.INFORMATION_MESSAGE);
+            } catch (AplicacioException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarFitxerBibliotecaActionPerformed
 
     /**
      * Retorna una Lista Modelo de la biblioteca para asociarsela a un JList
@@ -406,6 +460,129 @@ public class AplicacioUB4 extends JFrame {
             }
         };
         return model;
+    }
+
+    /**
+     * Retorna una Lista Modelo del álbum seleccionado para asociarsela a un
+     * JList
+     *
+     * @return ListModel<String>
+     */
+    private ListModel<String> updateAlbum() {
+        ListModel<String> model, emptyModel;
+        int index = this.cmbAlbums.getSelectedIndex();
+        emptyModel = new javax.swing.AbstractListModel<String>() {
+            String[] strings = new String[0];
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        };
+        if (index < 0) {
+            return emptyModel;
+        } else {
+            try {
+                String titol = ctrl.getTitolAlbum(index);
+                List<String> albumList = ctrl.mostrarAlbum(titol);
+                model = new javax.swing.AbstractListModel<String>() {
+                    String[] strings = albumList.toArray(new String[albumList.size()]);
+
+                    @Override
+                    public int getSize() {
+                        return strings.length;
+                    }
+
+                    @Override
+                    public String getElementAt(int i) {
+                        return strings[i];
+                    }
+                };
+                return model;
+            } catch (AplicacioException ex) {
+                return emptyModel;
+            }
+        }
+    }
+
+    /**
+     * Retorna una Lista Modelo de la albums para asociarsela a un JComboBox
+     *
+     * @return DefaultComboBoxModel<String>
+     */
+    private DefaultComboBoxModel<String> updateAlbums() {
+        List<String> albumsList = ctrl.mostrarLlistatAlbums();
+        String[] strings = albumsList.toArray(new String[albumsList.size()]);
+        return new DefaultComboBoxModel<>(strings);
+    }
+
+    /**
+     * Controla el evento para que acepte solo números ints válidos el
+     * JTextField
+     *
+     * @param tf
+     * @param evt
+     */
+    public static void onlyIntNumbers(JTextField tf, KeyEvent evt) {
+        char vChar = evt.getKeyChar();
+        if (!(Character.isDigit(vChar) || (vChar == KeyEvent.VK_BACK_SPACE)
+                || (vChar == KeyEvent.VK_DELETE))) {
+            evt.consume();
+        }
+        String txt = tf.getText();
+        try {
+            int screen = Integer.parseInt(txt);
+        } catch (NumberFormatException ne) {
+            if (txt.isEmpty()) {
+                txt = "0";
+            }
+            if (Long.parseLong(txt) > Integer.MAX_VALUE) {
+                evt.consume();
+            }
+        }
+    }
+
+    /**
+     * Controla el evento para que acepte solo números floats válidos el
+     * JTextField
+     *
+     * @param tf
+     * @param evt
+     */
+    public static void onlyFloatNumbers(JTextField tf, KeyEvent evt) {
+        char vChar = evt.getKeyChar();
+        if (!(Character.isDigit(vChar) || (vChar == KeyEvent.VK_BACK_SPACE)
+                || (vChar == KeyEvent.VK_DELETE) || (vChar == KeyEvent.VK_PERIOD && !tf.getText().contains(".") && !tf.getText().isEmpty()))) {
+            evt.consume();
+        }
+        String txt = tf.getText();
+        try {
+            float screen = Float.parseFloat(txt);
+        } catch (NumberFormatException ne) {
+            if (txt.isEmpty()) {
+                txt = "0.0";
+            }
+            if (Double.parseDouble(txt) > Float.MAX_VALUE) {
+                evt.consume();
+            }
+
+        }
+    }
+
+    /**
+     * Refresca la vista entera
+     */
+    private void refreshAll() {
+        this.lstBiblioteca.setModel(updateBiblioteca());
+        this.cmbAlbums.setModel(updateAlbums());
+        this.lstAlbum.setModel(updateAlbum());
+        this.cbmiRepContinua.setSelected(ctrl.isReproduccioContinua());
+        this.cbmiRepAleatoria.setSelected(ctrl.isReproduccioAleatoria());
     }
 
     /**
@@ -436,10 +613,10 @@ public class AplicacioUB4 extends JFrame {
     private javax.swing.JButton btnAfegirFitxerBiblioteca;
     private javax.swing.JButton btnCrearAlbum;
     private javax.swing.JButton btnEliminarAlbum;
+    private javax.swing.JButton btnEliminarFitxerBiblioteca;
     private javax.swing.JCheckBoxMenuItem cbmiRepAleatoria;
     private javax.swing.JCheckBoxMenuItem cbmiRepContinua;
     private javax.swing.JComboBox<String> cmbAlbums;
-    private javax.swing.JComboBox<String> cmbEspacioAlbum;
     private javax.swing.JLabel etAlbum;
     private javax.swing.JLabel etAlbums;
     private javax.swing.JLabel etBiblioteca;
@@ -459,5 +636,7 @@ public class AplicacioUB4 extends JFrame {
     private javax.swing.JScrollPane scpAlbums;
     private javax.swing.JScrollPane scpBiblioteca;
     private javax.swing.JTextField textNomAlbum;
+    private javax.swing.JTextField textSpaiAlbum;
     // End of variables declaration//GEN-END:variables
+
 }

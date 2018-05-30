@@ -383,4 +383,22 @@ public class Controlador implements InControlador {
         return dades.getTitolAlbum(id);
     }
 
+    /**
+     * Comprueba si es reproducción aleatoria
+     *
+     * @return boolean
+     */
+    public boolean isReproduccioAleatoria() {
+        return dades.isReproduccioAleatoria();
+    }
+
+    /**
+     * Comprueba si es reproduccion ciclica
+     *
+     * @return boolean
+     */
+    public boolean isReproduccioContinua() {
+        return dades.isReproduccioCiclica();
+    }
+
 }

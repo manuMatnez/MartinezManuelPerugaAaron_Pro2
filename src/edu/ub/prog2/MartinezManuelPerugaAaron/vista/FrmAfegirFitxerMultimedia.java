@@ -17,15 +17,15 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
+import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.AplicacioUB4.onlyFloatNumbers;
+import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.AplicacioUB4.onlyIntNumbers;
 import edu.ub.prog2.utils.AplicacioException;
 import java.awt.Frame;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  * FrmAfegirFitxerMultimedia - Vista
@@ -336,10 +336,6 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         String codec = textCodec.getText();
         float durada = textDurada.getText().isEmpty() ? 0.0f : Float.parseFloat(textDurada.getText());
 
-        String msg = "Fitxer " + nom + " Afegit";
-        String titol = "Fitxer Afegit";
-        int option = JOptionPane.INFORMATION_MESSAGE;
-
         try {
             if (rbtnAudio.isSelected()) {
                 String camiImatge = textCamiImatge.getText();
@@ -351,13 +347,10 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
                 int alcada = textAlcada.getText().isEmpty() ? 0 : Integer.parseInt(textAlcada.getText());
                 ctrl.afegirVideo(cami, nom, codec, durada, alcada, amplada, fps);
             }
-            JOptionPane.showMessageDialog(this, msg, titol, option);
+            JOptionPane.showMessageDialog(this, "Fitxer " + nom + " afegit", "Fitxer Afegit", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } catch (AplicacioException ex) {
-            option = JOptionPane.ERROR_MESSAGE;
-            titol = "Error";
-            msg = ex.getMessage();
-            JOptionPane.showMessageDialog(this, msg, titol, option);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAcceptarActionPerformed
 
@@ -396,59 +389,6 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     private void textDuradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDuradaKeyTyped
         onlyFloatNumbers(textDurada, evt);
     }//GEN-LAST:event_textDuradaKeyTyped
-
-    /**
-     * Controla el evento para que acepte solo números ints válidos el
-     * JTextField
-     *
-     * @param tf
-     * @param evt
-     */
-    private void onlyIntNumbers(JTextField tf, KeyEvent evt) {
-        char vChar = evt.getKeyChar();
-        if (!(Character.isDigit(vChar) || (vChar == KeyEvent.VK_BACK_SPACE)
-                || (vChar == KeyEvent.VK_DELETE))) {
-            evt.consume();
-        }
-        String txt = tf.getText();
-        try {
-            int screen = Integer.parseInt(txt);
-        } catch (NumberFormatException ne) {
-            if (txt.isEmpty()) {
-                txt = "0";
-            }
-            if (Long.parseLong(txt) > Integer.MAX_VALUE) {
-                evt.consume();
-            }
-        }
-    }
-
-    /**
-     * Controla el evento para que acepte solo números floats válidos el
-     * JTextField
-     *
-     * @param tf
-     * @param evt
-     */
-    private void onlyFloatNumbers(JTextField tf, KeyEvent evt) {
-        char vChar = evt.getKeyChar();
-        if (!(Character.isDigit(vChar) || (vChar == KeyEvent.VK_BACK_SPACE)
-                || (vChar == KeyEvent.VK_DELETE) || (vChar == KeyEvent.VK_PERIOD && !tf.getText().contains(".") && !tf.getText().isEmpty()))) {
-            evt.consume();
-        }
-        String txt = tf.getText();
-        try {
-            float screen = Float.parseFloat(txt);
-        } catch (NumberFormatException ne) {
-            if (txt.isEmpty()) {
-                txt = "0.0";
-            }
-            if (Double.parseDouble(txt) > Float.MAX_VALUE) {
-                evt.consume();
-            }
-
-        }
-    }
 
     /**
      * Retorna el String del path absoluto del fichero seleccionado
