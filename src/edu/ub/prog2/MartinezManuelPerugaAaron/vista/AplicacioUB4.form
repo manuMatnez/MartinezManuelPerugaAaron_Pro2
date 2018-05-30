@@ -143,15 +143,19 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="scpBiblioteca" min="-2" pref="200" max="-2" attributes="0"/>
-                                      <EmptySpace pref="84" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="scpBiblioteca" min="-2" pref="230" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                              <Component id="btnEliminarAlbum" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cmbAlbums" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="btnEliminarAlbum" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnReproduirAlbum" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnReproduirFitxerAlbum" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="cmbAlbums" min="-2" pref="160" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -159,42 +163,61 @@
                                       <Component id="etBiblioteca" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="etAlbums" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
                                       <Component id="etAlbum" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="scpAlbums" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="scpAlbums" alignment="1" min="-2" pref="225" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAfegirFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="btnReempren" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnPause" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="etSpai" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="textSpaiAlbum" min="-2" pref="148" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnCrearAlbum" min="-2" pref="119" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="etSpai" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="btnAtura" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="textSpaiAlbum" min="-2" pref="148" max="-2" attributes="0"/>
+                                      <Component id="btnSalta" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="btnReproduirBiblioteca" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="btnReproduirFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="btnAfegirFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="btnEliminarFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnEliminarFitxerAlbum" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCrearAlbum" alignment="1" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <Component id="btnAfegirFitxerAlbum" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnEliminarFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -209,31 +232,56 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scpBiblioteca" pref="240" max="32767" attributes="0"/>
+                  <Component id="scpBiblioteca" pref="231" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="cmbAlbums" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnEliminarAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnReproduirAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnReproduirFitxerAlbum" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="scpAlbums" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnAfegirFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnEliminarFitxerBiblioteca" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="textNomAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="etNomAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btnAfegirFitxerAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnEliminarFitxerAlbum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="textNomAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="etNomAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnAfegirFitxerBiblioteca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEliminarFitxerBiblioteca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnReproduirFitxerBiblioteca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnReproduirBiblioteca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="textSpaiAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="etSpai" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnReempren" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPause" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnCrearAlbum" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnCrearAlbum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAtura" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalta" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -349,10 +397,75 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnEliminarFitxerBiblioteca">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Eliminar Fitxer"/>
+        <Property name="text" type="java.lang.String" value="Eliminar Fitxers"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarFitxerBibliotecaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAfegirFitxerAlbum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Afegir Fitxer al &#xc1;lbum"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAfegirFitxerAlbumActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEliminarFitxerAlbum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Eliminar Fitxer  de l&apos;&#xc1;lbum"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAtura">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Atura"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSalta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnReempren">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reempren"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPause">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pause"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnReproduirAlbum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reproduir &#xc1;lbum"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReproduirAlbumActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnReproduirBiblioteca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reproduir Biblioteca"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReproduirBibliotecaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnReproduirFitxerBiblioteca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reproduir Fitxer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReproduirFitxerBibliotecaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnReproduirFitxerAlbum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reproduir Fitxer &#xc1;lbum"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReproduirFitxerAlbumActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

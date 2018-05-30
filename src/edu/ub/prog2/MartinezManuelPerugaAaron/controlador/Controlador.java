@@ -266,6 +266,27 @@ public class Controlador implements InControlador {
     }
 
     /**
+     * Reproduce un solo fichero de un album
+     *
+     * @param id
+     * @param titolAlbum
+     * @throws AplicacioException
+     */
+    public void reproduirFitxer(int id, String titolAlbum) throws AplicacioException {
+        if (!existeixAlbum(titolAlbum)) {
+            throw new AplicacioException("No existeix aquest album");
+        }
+        try {
+            obrirFinestraReproductor();
+            escoltador.iniciarReproduccio(dades.getCarpetaReproduccioAlbum(id, titolAlbum),
+                    dades.isReproduccioCiclica(), false);
+        } catch (AplicacioException ae) {
+            tancarFinestraReproductor();
+            throw new AplicacioException("Error al reproduir");
+        }
+    }
+
+    /**
      * Reproduce la biblioteca
      *
      * @throws AplicacioException

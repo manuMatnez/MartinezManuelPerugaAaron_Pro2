@@ -37,12 +37,12 @@ import java.util.List;
  * @version 3.0
  */
 public class Dades implements Serializable {
-
+    
     private final BibliotecaFitxersMultimedia biblioteca;
     private final List<AlbumFitxersMultimedia> albums;
-
+    
     private boolean reproduccioCiclica, reproduccioAleatoria;
-
+    
     public Dades() {
         biblioteca = new BibliotecaFitxersMultimedia();
         albums = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Dades implements Serializable {
     public List<String> getBibliotecaList() {
         List<String> bibList;
         String bibToStr = this.biblioteca.toString();
-
+        
         if (bibToStr.isEmpty()) {
             bibList = new ArrayList<>(); // lista biblioBuida
         } else {
@@ -151,7 +151,7 @@ public class Dades implements Serializable {
         } catch (IndexOutOfBoundsException io) {
             throw new AplicacioException("Id de fitxer incorrecte");
         }
-
+        
     }
 
     /**
@@ -204,15 +204,15 @@ public class Dades implements Serializable {
     public boolean isReproduccioCiclica() {
         return reproduccioCiclica;
     }
-
+    
     public boolean isReproduccioAleatoria() {
         return reproduccioAleatoria;
     }
-
+    
     public void setReproduccioCiclica(boolean reproduccioCiclica) {
         this.reproduccioCiclica = reproduccioCiclica;
     }
-
+    
     public void setReproduccioAleatoria(boolean reproduccioAleatoria) {
         this.reproduccioAleatoria = reproduccioAleatoria;
     }
@@ -286,7 +286,7 @@ public class Dades implements Serializable {
     public List<String> albumToString(String titol) throws AplicacioException {
         List<String> albumList;
         String albumToStr = getAlbumByTitle(titol).toString();
-
+        
         if (albumToStr.isEmpty()) {
             albumList = new ArrayList<>(); // lista biblioBuida
         } else {
@@ -368,6 +368,19 @@ public class Dades implements Serializable {
             throw new AplicacioException("Id de fitxer incorrecte");
         }
     }
+    
+    public CarpetaFitxers getCarpetaReproduccioAlbum(int id, String titolAlbum) throws AplicacioException {
+        if (biblioBuida()) {
+            throw new AplicacioException("No hi ha fitxers a la biblioteca");
+        }
+        try {
+            CarpetaFitxers tmp = new CarpetaFitxers(1);
+            tmp.addFitxer(getAlbumByTitle(titolAlbum).getAt(id));
+            return tmp;
+        } catch (IndexOutOfBoundsException io) {
+            throw new AplicacioException("Id de fitxer incorrecte");
+        }
+    }
 
     /**
      * Retorna la biblioteca
@@ -414,7 +427,7 @@ public class Dades implements Serializable {
             throw new AplicacioException("Id del album incorrecte");
         }
     }
-
+    
     public AlbumFitxersMultimedia getAlbumByTitle(String title) throws AplicacioException {
         AlbumFitxersMultimedia albumTmp = new AlbumFitxersMultimedia(title);
         int albumIndex = albums.indexOf(albumTmp);
@@ -423,5 +436,5 @@ public class Dades implements Serializable {
         }
         return albums.get(albumIndex);
     }
-
+    
 }
