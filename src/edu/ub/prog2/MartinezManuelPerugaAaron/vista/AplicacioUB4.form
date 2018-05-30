@@ -420,21 +420,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Atura"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAturaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSalta">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salta"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaltaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnReempren">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reempren"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReemprenActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPause">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pause"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPauseActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnReproduirAlbum">
       <Properties>

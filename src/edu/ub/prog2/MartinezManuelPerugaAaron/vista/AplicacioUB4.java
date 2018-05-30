@@ -171,12 +171,32 @@ public class AplicacioUB4 extends JFrame {
         btnEliminarFitxerAlbum.setText("Eliminar Fitxer  de l'Álbum");
 
         btnAtura.setText("Atura");
+        btnAtura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAturaActionPerformed(evt);
+            }
+        });
 
         btnSalta.setText("Salta");
+        btnSalta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaltaActionPerformed(evt);
+            }
+        });
 
         btnReempren.setText("Reempren");
+        btnReempren.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReemprenActionPerformed(evt);
+            }
+        });
 
         btnPause.setText("Pause");
+        btnPause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPauseActionPerformed(evt);
+            }
+        });
 
         btnReproduirAlbum.setText("Reproduir Álbum");
         btnReproduirAlbum.addActionListener(new java.awt.event.ActionListener() {
@@ -588,6 +608,38 @@ public class AplicacioUB4 extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnReproduirFitxerAlbumActionPerformed
+
+    private void btnReemprenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReemprenActionPerformed
+        try {
+            ctrl.reemprenReproduccio();
+        } catch (AplicacioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnReemprenActionPerformed
+
+    private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
+        try {
+            ctrl.pausaReproduccio();
+        } catch (AplicacioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPauseActionPerformed
+
+    private void btnAturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAturaActionPerformed
+        try {
+            ctrl.aturaReproduccio();
+        } catch (AplicacioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAturaActionPerformed
+
+    private void btnSaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaltaActionPerformed
+        try {
+            ctrl.saltaReproduccio();
+        } catch (AplicacioException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSaltaActionPerformed
 
     /**
      * Retorna una Lista Modelo de la biblioteca para asociarsela a un JList
