@@ -21,6 +21,7 @@ import com.sun.jna.NativeLibrary;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -74,10 +75,6 @@ public class AplicacioUB4 extends JFrame {
         btnAfegirFitxerBiblioteca = new javax.swing.JButton();
         btnCrearAlbum = new javax.swing.JButton();
         btnEliminarAlbum = new javax.swing.JButton();
-        textNomAlbum = new javax.swing.JTextField();
-        etNomAlbum = new javax.swing.JLabel();
-        etSpai = new javax.swing.JLabel();
-        textSpaiAlbum = new javax.swing.JTextField();
         btnEliminarFitxerBiblioteca = new javax.swing.JButton();
         btnAfegirFitxerAlbum = new javax.swing.JButton();
         btnEliminarFitxerAlbum = new javax.swing.JButton();
@@ -103,7 +100,9 @@ public class AplicacioUB4 extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(TITLE);
+        setMinimumSize(new java.awt.Dimension(640, 480));
         setName(getClass().getSimpleName());
+        setPreferredSize(new java.awt.Dimension(640, 480));
 
         cmbAlbums.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,16 +140,6 @@ public class AplicacioUB4 extends JFrame {
         btnEliminarAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarAlbumActionPerformed(evt);
-            }
-        });
-
-        etNomAlbum.setText("Nom de l'álbum:");
-
-        etSpai.setText("Spai de l'álbum:");
-
-        textSpaiAlbum.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                textSpaiAlbumKeyTyped(evt);
             }
         });
 
@@ -305,71 +294,61 @@ public class AplicacioUB4 extends JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(etNomAlbum)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textNomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(etBiblioteca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(etAlbums)
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(scpBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbAlbums, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(scpBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmbAlbums, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(btnEliminarAlbum)
-                                                    .addComponent(btnReproduirAlbum)
-                                                    .addComponent(btnReproduirFitxerAlbum))
-                                                .addGap(2, 2, 2))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(63, 63, 63)
-                                        .addComponent(etBiblioteca)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(etAlbums)
-                                        .addGap(45, 45, 45)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(121, 121, 121)
-                                        .addComponent(etAlbum)
-                                        .addGap(79, 79, 79))
-                                    .addComponent(scpAlbums, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnReempren)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPause)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(etSpai)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textSpaiAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnAtura)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnSalta))
+                                    .addComponent(btnEliminarAlbum)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnReproduirBiblioteca)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnReproduirFitxerBiblioteca))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnAfegirFitxerBiblioteca)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnEliminarFitxerBiblioteca)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEliminarFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnCrearAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAfegirFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING))))))
-                .addContainerGap())
+                                        .addComponent(btnCrearAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(2, 2, 2))
+                            .addComponent(btnReproduirAlbum, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnReproduirBiblioteca)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnReproduirFitxerBiblioteca))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAfegirFitxerBiblioteca)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminarFitxerBiblioteca)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(etAlbum)
+                        .addGap(69, 69, 69))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scpAlbums, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAfegirFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnEliminarFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnReproduirFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(btnReempren, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSalta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAtura)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,47 +360,42 @@ public class AplicacioUB4 extends JFrame {
                     .addComponent(etAlbum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scpBiblioteca, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarAlbum)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReproduirAlbum)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnReproduirFitxerAlbum)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(scpAlbums))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAfegirFitxerAlbum)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarFitxerAlbum)
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textNomAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(etNomAlbum)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scpBiblioteca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAfegirFitxerBiblioteca)
                             .addComponent(btnEliminarFitxerBiblioteca))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnReproduirFitxerBiblioteca)
-                            .addComponent(btnReproduirBiblioteca))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textSpaiAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(etSpai)
-                    .addComponent(btnReempren)
-                    .addComponent(btnPause))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrearAlbum)
-                    .addComponent(btnAtura)
-                    .addComponent(btnSalta))
-                .addGap(8, 8, 8))
+                            .addComponent(btnReproduirBiblioteca))
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnAtura)
+                            .addComponent(btnSalta)
+                            .addComponent(btnReempren)
+                            .addComponent(btnPause))
+                        .addGap(15, 15, 15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminarAlbum)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCrearAlbum)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnReproduirAlbum)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(scpAlbums, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAfegirFitxerAlbum)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarFitxerAlbum)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReproduirFitxerAlbum)
+                        .addGap(91, 91, 91))))
         );
 
         pack();
@@ -497,22 +471,24 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_btnEliminarAlbumActionPerformed
 
     private void btnCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlbumActionPerformed
-        String nomAlbum = this.textNomAlbum.getText();
-        int capacitat = 10;
 
-        if (!this.textSpaiAlbum.getText().isEmpty()) {
-            capacitat = Integer.parseInt(this.textSpaiAlbum.getText());
+        String titol = JOptionPane.showInputDialog(this, "Introdueix el nom d l'álbum", "Crear Álbum - Nom", JOptionPane.QUESTION_MESSAGE);
+        int capacitat;
+        try {
+            capacitat = Integer.parseInt(JOptionPane.showInputDialog(this, "Introdueix la capacitat de l'álbum", "Crear Álbum - Capacitat", JOptionPane.QUESTION_MESSAGE));
+        } catch (HeadlessException | NumberFormatException ex) {
+            capacitat = 10;
         }
 
         try {
-            ctrl.afegirAlbum(nomAlbum, capacitat);
+            ctrl.afegirAlbum(titol, capacitat);
             this.cmbAlbums.setModel(updateAlbums());
-            JOptionPane.showMessageDialog(this, "Álbum " + nomAlbum + " creat correctament", "Álbum creat", JOptionPane.INFORMATION_MESSAGE);
-            this.textNomAlbum.setText("");
-            this.textSpaiAlbum.setText("");
+            JOptionPane.showMessageDialog(this, "Álbum " + titol + " creat correctament", "Álbum creat", JOptionPane.INFORMATION_MESSAGE);
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }//GEN-LAST:event_btnCrearAlbumActionPerformed
 
     private void miSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSortirActionPerformed
@@ -526,10 +502,6 @@ public class AplicacioUB4 extends JFrame {
     private void cbmiRepAleatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmiRepAleatoriaActionPerformed
         ctrl.activarDesactivarAleatoria();
     }//GEN-LAST:event_cbmiRepAleatoriaActionPerformed
-
-    private void textSpaiAlbumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSpaiAlbumKeyTyped
-        onlyIntNumbers(textSpaiAlbum, evt);
-    }//GEN-LAST:event_textSpaiAlbumKeyTyped
 
     private void btnEliminarFitxerBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFitxerBibliotecaActionPerformed
         int[] indices = this.lstBiblioteca.getSelectedIndices();
@@ -832,8 +804,6 @@ public class AplicacioUB4 extends JFrame {
     private javax.swing.JLabel etAlbum;
     private javax.swing.JLabel etAlbums;
     private javax.swing.JLabel etBiblioteca;
-    private javax.swing.JLabel etNomAlbum;
-    private javax.swing.JLabel etSpai;
     private javax.swing.JList<String> lstAlbum;
     private javax.swing.JList<String> lstBiblioteca;
     private javax.swing.JMenu mDades;
@@ -847,8 +817,6 @@ public class AplicacioUB4 extends JFrame {
     private javax.swing.JMenuItem miSortir;
     private javax.swing.JScrollPane scpAlbums;
     private javax.swing.JScrollPane scpBiblioteca;
-    private javax.swing.JTextField textNomAlbum;
-    private javax.swing.JTextField textSpaiAlbum;
     // End of variables declaration//GEN-END:variables
 
 }

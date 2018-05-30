@@ -261,7 +261,7 @@ public class Controlador implements InControlador {
                     dades.isReproduccioCiclica(), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
-            throw new AplicacioException("Error al reproduir");
+            throw new AplicacioException(ae.getMessage());
         }
     }
 
@@ -273,16 +273,13 @@ public class Controlador implements InControlador {
      * @throws AplicacioException
      */
     public void reproduirFitxer(int id, String titolAlbum) throws AplicacioException {
-        if (!existeixAlbum(titolAlbum)) {
-            throw new AplicacioException("No existeix aquest album");
-        }
         try {
             obrirFinestraReproductor();
             escoltador.iniciarReproduccio(dades.getCarpetaReproduccioAlbum(id, titolAlbum),
                     dades.isReproduccioCiclica(), false);
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
-            throw new AplicacioException("Error al reproduir");
+            throw new AplicacioException(ae.getMessage());
         }
     }
 
@@ -299,7 +296,7 @@ public class Controlador implements InControlador {
                     dades.isReproduccioCiclica(), dades.isReproduccioAleatoria());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
-            throw new AplicacioException("Error al reproduir");
+            throw new AplicacioException(ae.getMessage());
         }
     }
 
@@ -311,16 +308,13 @@ public class Controlador implements InControlador {
      */
     @Override
     public void reproduirCarpeta(String titol) throws AplicacioException {
-        if (!existeixAlbum(titol)) {
-            throw new AplicacioException("No existeix aquest album");
-        }
         try {
             obrirFinestraReproductor();
             escoltador.iniciarReproduccio(dades.getCarpetaReproduccio(titol),
                     dades.isReproduccioCiclica(), dades.isReproduccioAleatoria());
         } catch (AplicacioException ae) {
             tancarFinestraReproductor();
-            throw new AplicacioException("Error al reproduir");
+            throw new AplicacioException(ae.getMessage());
         }
     }
 
