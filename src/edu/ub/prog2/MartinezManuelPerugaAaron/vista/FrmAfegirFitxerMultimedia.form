@@ -38,38 +38,38 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblLogoUB" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="etLogoUB" min="-2" pref="60" max="-2" attributes="0"/>
                   <Component id="rbtnAudio" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="rbtnVideo" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="lblCami" min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="etCami" min="-2" pref="45" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tfCami" max="32767" attributes="0"/>
+                      <Component id="textCami" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblCodec" min="-2" max="-2" attributes="0"/>
+                              <Component id="etCodec" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="tfCodec" max="32767" attributes="0"/>
+                              <Component id="textCodec" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblNom" min="-2" max="-2" attributes="0"/>
+                              <Component id="etNom" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="tfNom" min="-2" pref="191" max="-2" attributes="0"/>
+                              <Component id="textNom" min="-2" pref="191" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblDurada" min="-2" max="-2" attributes="0"/>
+                              <Component id="etDurada" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tfDurada" min="-2" pref="191" max="-2" attributes="0"/>
+                              <Component id="textDurada" min="-2" pref="191" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblFpsKbps" min="-2" pref="44" max="-2" attributes="0"/>
+                              <Component id="etFpsKbps" min="-2" pref="44" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              <Component id="tfFpsKbps" min="-2" pref="191" max="-2" attributes="0"/>
+                              <Component id="textFpsKbps" min="-2" pref="191" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -99,7 +99,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblLogoUB" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="etLogoUB" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="rbtnAudio" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -107,32 +107,32 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfCami" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textCami" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnObrirFitxer" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCami" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="etCami" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="pnlVideo" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblNom" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfNom" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etNom" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textNom" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblCodec" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfCodec" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etCodec" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textCodec" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="tfDurada" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblDurada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textDurada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etDurada" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblFpsKbps" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfFpsKbps" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etFpsKbps" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textFpsKbps" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -151,9 +151,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="tfCami">
+    <Component class="javax.swing.JTextField" name="textCami">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblCami">
+    <Component class="javax.swing.JLabel" name="etCami">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fitxer"/>
       </Properties>
@@ -206,9 +206,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="lblImatge" min="-2" pref="49" max="-2" attributes="0"/>
+                  <Component id="etImatge" min="-2" pref="49" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="tfCamiImatge" pref="424" max="32767" attributes="0"/>
+                  <Component id="textCamiImatge" pref="424" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="btnObrirImatge" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -218,20 +218,20 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfCamiImatge" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblImatge" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="textCamiImatge" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="etImatge" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnObrirImatge" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblImatge">
+        <Component class="javax.swing.JLabel" name="etImatge">
           <Properties>
             <Property name="text" type="java.lang.String" value="Imatge"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfCamiImatge">
+        <Component class="javax.swing.JTextField" name="textCamiImatge">
         </Component>
         <Component class="javax.swing.JButton" name="btnObrirImatge">
           <Properties>
@@ -243,31 +243,31 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblNom">
+    <Component class="javax.swing.JLabel" name="etNom">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nom"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfNom">
+    <Component class="javax.swing.JTextField" name="textNom">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblCodec">
+    <Component class="javax.swing.JLabel" name="etCodec">
       <Properties>
         <Property name="text" type="java.lang.String" value="Codec"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDurada">
+    <Component class="javax.swing.JLabel" name="etDurada">
       <Properties>
         <Property name="text" type="java.lang.String" value="Durada"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfCodec">
+    <Component class="javax.swing.JTextField" name="textCodec">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfDurada">
+    <Component class="javax.swing.JTextField" name="textDurada">
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfDuradaKeyTyped"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textDuradaKeyTyped"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblFpsKbps">
+    <Component class="javax.swing.JLabel" name="etFpsKbps">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="&quot;-&quot;" type="code"/>
@@ -277,9 +277,9 @@
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JLabel()"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfFpsKbps">
+    <Component class="javax.swing.JTextField" name="textFpsKbps">
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfFpsKbpsKeyTyped"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textFpsKbpsKeyTyped"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="pnlVideo">
@@ -290,13 +290,13 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblAmplada" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblAlcada" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="etAmplada" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="etAlcada" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="tfAlcada" max="32767" attributes="0"/>
-                      <Component id="tfAmplada" pref="110" max="32767" attributes="0"/>
+                      <Component id="textAlcada" max="32767" attributes="0"/>
+                      <Component id="textAmplada" pref="110" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -305,13 +305,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfAlcada" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblAlcada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="textAlcada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="etAlcada" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfAmplada" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblAmplada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="textAmplada" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="etAmplada" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -319,29 +319,29 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblAlcada">
+        <Component class="javax.swing.JLabel" name="etAlcada">
           <Properties>
             <Property name="text" type="java.lang.String" value="Al&#xe7;ada"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblAmplada">
+        <Component class="javax.swing.JLabel" name="etAmplada">
           <Properties>
             <Property name="text" type="java.lang.String" value="Amplada"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfAlcada">
+        <Component class="javax.swing.JTextField" name="textAlcada">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfAlcadaKeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textAlcadaKeyTyped"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfAmplada">
+        <Component class="javax.swing.JTextField" name="textAmplada">
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfAmpladaKeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textAmpladaKeyTyped"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblLogoUB">
+    <Component class="javax.swing.JLabel" name="etLogoUB">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="&quot;&quot;" type="code"/>
