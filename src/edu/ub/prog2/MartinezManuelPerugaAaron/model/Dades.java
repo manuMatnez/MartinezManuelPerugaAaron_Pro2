@@ -428,6 +428,12 @@ public class Dades implements Serializable {
         }
     }
     
+    /**
+     * Obtiene el album a traves del título
+     * @param title
+     * @return
+     * @throws AplicacioException 
+     */
     public AlbumFitxersMultimedia getAlbumByTitle(String title) throws AplicacioException {
         AlbumFitxersMultimedia albumTmp = new AlbumFitxersMultimedia(title);
         int albumIndex = albums.indexOf(albumTmp);

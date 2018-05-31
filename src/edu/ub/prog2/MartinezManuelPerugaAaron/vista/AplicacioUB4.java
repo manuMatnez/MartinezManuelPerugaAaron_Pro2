@@ -163,6 +163,11 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnEliminarFitxerAlbum.setText("Eliminar Fitxer  de l'Álbum");
+        btnEliminarFitxerAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarFitxerAlbumActionPerformed(evt);
+            }
+        });
 
         btnAtura.setText("Atura");
         btnAtura.addActionListener(new java.awt.event.ActionListener() {
@@ -331,24 +336,17 @@ public class AplicacioUB4 extends JFrame {
                                 .addComponent(btnReproduirFitxerBiblioteca))
                             .addComponent(btnAfegirFitxerBiblioteca))
                         .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReproduirFitxerAlbum))
+                            .addComponent(btnReproduirFitxerAlbum)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(scpAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnAfegirFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(btnEliminarFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                .addComponent(scpAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAfegirFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnEliminarFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)))
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(etAlbum)
                         .addGap(101, 101, 101))))
             .addGroup(layout.createSequentialGroup()
@@ -526,6 +524,7 @@ public class AplicacioUB4 extends JFrame {
                 }
                 this.lstBiblioteca.setModel(updateBiblioteca());
                 this.lstAlbum.setModel(updateAlbum());
+                this.cmbAlbums.setModel(updateAlbums());
                 JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s", "Fitxer Esborrat/s", JOptionPane.INFORMATION_MESSAGE);
             } catch (AplicacioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -543,6 +542,7 @@ public class AplicacioUB4 extends JFrame {
                 String titol = ctrl.getTitolAlbum(indexAlbum);
                 ctrl.afegirFitxer(titol, index);
                 this.lstAlbum.setModel(updateAlbum());
+                this.cmbAlbums.setModel(updateAlbums());
                 JOptionPane.showMessageDialog(this, "Fitxer afegit al álbum", "Fitxer Afegit al Álbum", JOptionPane.INFORMATION_MESSAGE);
             } catch (AplicacioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -623,6 +623,24 @@ public class AplicacioUB4 extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaltaActionPerformed
+
+    private void btnEliminarFitxerAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFitxerAlbumActionPerformed
+        int index = this.lstAlbum.getSelectedIndex();
+        if (index >= 0) {
+            try {
+                int indexAlbum = this.cmbAlbums.getSelectedIndex();
+                String titol = ctrl.getTitolAlbum(indexAlbum);
+                ctrl.esborrarFitxer(titol, index);
+                this.lstAlbum.setModel(updateAlbum());
+                this.cmbAlbums.setModel(updateAlbums());
+                JOptionPane.showMessageDialog(this, "Fitxer esborrat del álbum", "Fitxer esborrat del Álbum", JOptionPane.INFORMATION_MESSAGE);
+            } catch (AplicacioException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un fitxer de biblioteca abans", "Avis", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarFitxerAlbumActionPerformed
 
     /**
      * Retorna una Lista Modelo de la biblioteca para asociarsela a un JList
