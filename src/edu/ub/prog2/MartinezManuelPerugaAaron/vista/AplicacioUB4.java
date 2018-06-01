@@ -488,24 +488,23 @@ public class AplicacioUB4 extends JFrame {
 
     private void btnCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlbumActionPerformed
         String titol = JOptionPane.showInputDialog(this, "Introdueix el nom d l'álbum", "Crear Álbum - Nom", JOptionPane.QUESTION_MESSAGE);
-        if (titol == null) {
-            titol = "";
-        }
-        int capacitat;
-        try {
-            capacitat = Integer.parseInt(JOptionPane.showInputDialog(this, "Introdueix la capacitat de l'álbum", "Crear Álbum - Capacitat", JOptionPane.QUESTION_MESSAGE));
-        } catch (HeadlessException | NumberFormatException ex) {
-            capacitat = 10;
-        }
+        if (titol != null) {
+            int capacitat;
+            try {
+                capacitat = Integer.parseInt(JOptionPane.showInputDialog(this, "Introdueix la capacitat de l'álbum", "Crear Álbum - Capacitat", JOptionPane.QUESTION_MESSAGE));
+            } catch (HeadlessException | NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Capacitat no valida, assignada 10 per defecte", "Error amb Capacitat", JOptionPane.ERROR_MESSAGE);
+                capacitat = 10;
+            }
 
-        try {
-            ctrl.afegirAlbum(titol, capacitat);
-            this.cmbAlbums.setModel(updateAlbums());
-            JOptionPane.showMessageDialog(this, "Álbum " + titol + " creat correctament", "Álbum creat", JOptionPane.INFORMATION_MESSAGE);
-        } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            try {
+                ctrl.afegirAlbum(titol, capacitat);
+                this.cmbAlbums.setModel(updateAlbums());
+                JOptionPane.showMessageDialog(this, "Álbum " + titol + " creat correctament", "Álbum creat", JOptionPane.INFORMATION_MESSAGE);
+            } catch (AplicacioException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
 
     }//GEN-LAST:event_btnCrearAlbumActionPerformed
 
