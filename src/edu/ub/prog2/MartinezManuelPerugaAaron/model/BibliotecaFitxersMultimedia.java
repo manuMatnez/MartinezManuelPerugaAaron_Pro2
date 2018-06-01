@@ -40,6 +40,9 @@ public class BibliotecaFitxersMultimedia extends CarpetaFitxers {
      */
     @Override
     public void addFitxer(File fitxer) throws AplicacioException {
+        if (!fitxer.exists()) {
+            throw new AplicacioException("El fitxer " + fitxer.getName() + " no existeix");
+        }
         if (super.contains(fitxer)) {
             throw new AplicacioException("Ya existeix el fitxer");
         } else {

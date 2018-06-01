@@ -130,16 +130,6 @@ public class Controlador implements InControlador {
     }
 
     /**
-     * Comprueba si el fixhero existe a traves de Dades
-     *
-     * @param cami
-     * @throws AplicacioException
-     */
-    public void comprovaExistenciaFitxer(String cami) throws AplicacioException {
-        dades.comprovaExistenciaFitxer(cami);
-    }
-
-    /**
      * Añade un nuevo album a traves de Dades
      *
      * @param titol

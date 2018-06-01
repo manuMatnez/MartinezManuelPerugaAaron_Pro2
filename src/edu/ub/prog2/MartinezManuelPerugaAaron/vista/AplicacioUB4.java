@@ -105,6 +105,11 @@ public class AplicacioUB4 extends JFrame {
         setTitle(TITLE);
         setMinimumSize(new java.awt.Dimension(640, 480));
         setName(getClass().getSimpleName());
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         cmbAlbums.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,14 +160,14 @@ public class AplicacioUB4 extends JFrame {
             }
         });
 
-        btnAfegirFitxerAlbum.setText("Afegir Fitxer al Álbum");
+        btnAfegirFitxerAlbum.setText("Afegir Fitxers al Álbum");
         btnAfegirFitxerAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAfegirFitxerAlbumActionPerformed(evt);
             }
         });
 
-        btnEliminarFitxerAlbum.setText("Eliminar Fitxer  de l'Álbum");
+        btnEliminarFitxerAlbum.setText("Eliminar Fitxers de l'Álbum");
         btnEliminarFitxerAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarFitxerAlbumActionPerformed(evt);
@@ -474,6 +479,7 @@ public class AplicacioUB4 extends JFrame {
             String titol = ctrl.getTitolAlbum(index);
             ctrl.esborrarAlbum(titol);
             this.cmbAlbums.setModel(updateAlbums());
+            this.lstAlbum.setModel(updateAlbum());
             JOptionPane.showMessageDialog(this, "Álbum " + titol + " esborrat correctament", "Álbum esborray", JOptionPane.INFORMATION_MESSAGE);
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -482,6 +488,9 @@ public class AplicacioUB4 extends JFrame {
 
     private void btnCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlbumActionPerformed
         String titol = JOptionPane.showInputDialog(this, "Introdueix el nom d l'álbum", "Crear Álbum - Nom", JOptionPane.QUESTION_MESSAGE);
+        if (titol == null) {
+            titol = "";
+        }
         int capacitat;
         try {
             capacitat = Integer.parseInt(JOptionPane.showInputDialog(this, "Introdueix la capacitat de l'álbum", "Crear Álbum - Capacitat", JOptionPane.QUESTION_MESSAGE));
@@ -535,20 +544,23 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_btnEliminarFitxerBibliotecaActionPerformed
 
     private void btnAfegirFitxerAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFitxerAlbumActionPerformed
-        int index = this.lstBiblioteca.getSelectedIndex();
-        if (index >= 0) {
+        int[] indices = this.lstBiblioteca.getSelectedIndices();
+        int indexAlbum = this.cmbAlbums.getSelectedIndex();
+
+        if (indices.length > 0) {
             try {
-                int indexAlbum = this.cmbAlbums.getSelectedIndex();
                 String titol = ctrl.getTitolAlbum(indexAlbum);
-                ctrl.afegirFitxer(titol, index);
+                for (int i : indices) {
+                    ctrl.afegirFitxer(titol, i);
+                }
                 this.lstAlbum.setModel(updateAlbum());
                 this.cmbAlbums.setModel(updateAlbums());
-                JOptionPane.showMessageDialog(this, "Fitxer afegit al álbum", "Fitxer Afegit al Álbum", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Fitxer/s afegit/s al álbum", "Fitxer Afegit/s al Álbum", JOptionPane.INFORMATION_MESSAGE);
             } catch (AplicacioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Selecciona un fitxer de biblioteca abans", "Avis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAfegirFitxerAlbumActionPerformed
 
@@ -625,22 +637,32 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_btnSaltaActionPerformed
 
     private void btnEliminarFitxerAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFitxerAlbumActionPerformed
-        int index = this.lstAlbum.getSelectedIndex();
-        if (index >= 0) {
+        int[] indices = this.lstAlbum.getSelectedIndices();
+        int indexAlbum = this.cmbAlbums.getSelectedIndex();
+
+        if (indices.length > 0) {
             try {
-                int indexAlbum = this.cmbAlbums.getSelectedIndex();
+                int eliminados = 0;
                 String titol = ctrl.getTitolAlbum(indexAlbum);
-                ctrl.esborrarFitxer(titol, index);
+                for (int i : indices) {
+                    ctrl.esborrarFitxer(titol, i - eliminados);
+                    eliminados++;
+                }
                 this.lstAlbum.setModel(updateAlbum());
                 this.cmbAlbums.setModel(updateAlbums());
-                JOptionPane.showMessageDialog(this, "Fitxer esborrat del álbum", "Fitxer esborrat del Álbum", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s del álbum", "Fitxer Esborrat/s del Álbum", JOptionPane.INFORMATION_MESSAGE);
             } catch (AplicacioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Selecciona un fitxer de biblioteca abans", "Avis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarFitxerAlbumActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        lstBiblioteca.clearSelection();
+        lstAlbum.clearSelection();
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * Retorna una Lista Modelo de la biblioteca para asociarsela a un JList

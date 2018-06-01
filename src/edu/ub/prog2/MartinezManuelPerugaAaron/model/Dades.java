@@ -37,12 +37,12 @@ import java.util.List;
  * @version 3.0
  */
 public class Dades implements Serializable {
-    
+
     private final BibliotecaFitxersMultimedia biblioteca;
     private final List<AlbumFitxersMultimedia> albums;
-    
+
     private boolean reproduccioCiclica, reproduccioAleatoria;
-    
+
     public Dades() {
         biblioteca = new BibliotecaFitxersMultimedia();
         albums = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Dades implements Serializable {
     public List<String> getBibliotecaList() {
         List<String> bibList;
         String bibToStr = this.biblioteca.toString();
-        
+
         if (bibToStr.isEmpty()) {
             bibList = new ArrayList<>(); // lista biblioBuida
         } else {
@@ -75,19 +75,6 @@ public class Dades implements Serializable {
      */
     public boolean biblioBuida() {
         return this.biblioteca.getSize() == 0;
-    }
-
-    /**
-     * Comprueba que el fichero existe, si no existe lanza excepción
-     *
-     * @param cami
-     * @throws AplicacioException
-     */
-    public void comprovaExistenciaFitxer(String cami) throws AplicacioException {
-        File tmp = new File(cami);
-        if (!tmp.exists()) {
-            throw new AplicacioException("El fitxer " + tmp.getName() + " no existeix");
-        }
     }
 
     /**
@@ -151,7 +138,7 @@ public class Dades implements Serializable {
         } catch (IndexOutOfBoundsException io) {
             throw new AplicacioException("Id de fitxer incorrecte");
         }
-        
+
     }
 
     /**
@@ -204,15 +191,15 @@ public class Dades implements Serializable {
     public boolean isReproduccioCiclica() {
         return reproduccioCiclica;
     }
-    
+
     public boolean isReproduccioAleatoria() {
         return reproduccioAleatoria;
     }
-    
+
     public void setReproduccioCiclica(boolean reproduccioCiclica) {
         this.reproduccioCiclica = reproduccioCiclica;
     }
-    
+
     public void setReproduccioAleatoria(boolean reproduccioAleatoria) {
         this.reproduccioAleatoria = reproduccioAleatoria;
     }
@@ -286,7 +273,7 @@ public class Dades implements Serializable {
     public List<String> albumToString(String titol) throws AplicacioException {
         List<String> albumList;
         String albumToStr = getAlbumByTitle(titol).toString();
-        
+
         if (albumToStr.isEmpty()) {
             albumList = new ArrayList<>(); // lista biblioBuida
         } else {
@@ -368,7 +355,7 @@ public class Dades implements Serializable {
             throw new AplicacioException("Id de fitxer incorrecte");
         }
     }
-    
+
     public CarpetaFitxers getCarpetaReproduccioAlbum(int id, String titolAlbum) throws AplicacioException {
         if (biblioBuida()) {
             throw new AplicacioException("No hi ha fitxers a la biblioteca");
@@ -427,12 +414,13 @@ public class Dades implements Serializable {
             throw new AplicacioException("Id del album incorrecte");
         }
     }
-    
+
     /**
      * Obtiene el album a traves del título
+     *
      * @param title
      * @return
-     * @throws AplicacioException 
+     * @throws AplicacioException
      */
     public AlbumFitxersMultimedia getAlbumByTitle(String title) throws AplicacioException {
         AlbumFitxersMultimedia albumTmp = new AlbumFitxersMultimedia(title);
@@ -442,5 +430,5 @@ public class Dades implements Serializable {
         }
         return albums.get(albumIndex);
     }
-    
+
 }
