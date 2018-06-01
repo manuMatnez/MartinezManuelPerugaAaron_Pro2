@@ -250,16 +250,14 @@ public class Dades implements Serializable {
      */
     public List<String> albumListToString() {
         List<String> albumList = new ArrayList<>(albums.size());
-        Iterator<AlbumFitxersMultimedia> albumIt = albums.iterator();
-        int id = 1;
-        while (albumIt.hasNext()) {
+
+        for (AlbumFitxersMultimedia album : albums) {
             StringBuilder sb = new StringBuilder();
-            AlbumFitxersMultimedia currentAlbum = albumIt.next();
-            sb.append(currentAlbum.getTitol())
-                    .append(" (spai lliure: ").append(currentAlbum.freeSpace()).append(")");
+            sb.append(album.getTitol())
+                    .append(" (spai lliure: ").append(album.freeSpace()).append(")");
             albumList.add(sb.toString());
-            id++;
         }
+
         return albumList;
     }
 

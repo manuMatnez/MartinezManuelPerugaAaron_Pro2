@@ -282,6 +282,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAlbumsActionPerformed"/>
       </Events>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="cmbAlbums.setModel(new DefaultComboBoxModel&lt;&gt;());"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
@@ -295,7 +296,7 @@
         <Component class="javax.swing.JList" name="lstAlbum">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="updateAlbum()" type="code"/>
+              <Connection code="new DefaultListModel&lt;&gt;()" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -314,7 +315,7 @@
         <Component class="javax.swing.JList" name="lstBiblioteca">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="updateBiblioteca()" type="code"/>
+              <Connection code="new DefaultListModel&lt;&gt;()" type="code"/>
             </Property>
           </Properties>
           <AuxValues>

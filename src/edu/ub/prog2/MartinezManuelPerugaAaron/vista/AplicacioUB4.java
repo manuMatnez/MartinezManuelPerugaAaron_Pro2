@@ -28,11 +28,11 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
@@ -111,16 +111,17 @@ public class AplicacioUB4 extends JFrame {
             }
         });
 
+        cmbAlbums.setModel(new DefaultComboBoxModel<>());
         cmbAlbums.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAlbumsActionPerformed(evt);
             }
         });
 
-        lstAlbum.setModel(updateAlbum());
+        lstAlbum.setModel(new DefaultListModel<>());
         scpAlbums.setViewportView(lstAlbum);
 
-        lstBiblioteca.setModel(updateBiblioteca());
+        lstBiblioteca.setModel(new DefaultListModel<>());
         scpBiblioteca.setViewportView(lstBiblioteca);
 
         etBiblioteca.setFont(etBiblioteca.getFont().deriveFont(etBiblioteca.getFont().getStyle() | java.awt.Font.BOLD));
@@ -458,7 +459,7 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_miSobreActionPerformed
 
     private void cmbAlbumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlbumsActionPerformed
-        lstAlbum.setModel(updateAlbum());
+        refreshAlbum();
     }//GEN-LAST:event_cmbAlbumsActionPerformed
 
     private void btnAfegirFitxerBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFitxerBibliotecaActionPerformed
@@ -466,7 +467,7 @@ public class AplicacioUB4 extends JFrame {
         form.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent ev) {
-                lstBiblioteca.setModel(updateBiblioteca());
+                refreshBiblioteca();
             }
         });
         form.setVisible(true);
@@ -478,8 +479,8 @@ public class AplicacioUB4 extends JFrame {
         try {
             String titol = ctrl.getTitolAlbum(index);
             ctrl.esborrarAlbum(titol);
-            this.cmbAlbums.setModel(updateAlbums());
-            this.lstAlbum.setModel(updateAlbum());
+            refreshAlbums();
+            refreshAlbum();
             JOptionPane.showMessageDialog(this, "Álbum " + titol + " esborrat correctament", "Álbum esborray", JOptionPane.INFORMATION_MESSAGE);
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -489,20 +490,31 @@ public class AplicacioUB4 extends JFrame {
     private void btnCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlbumActionPerformed
         String titol = JOptionPane.showInputDialog(this, "Introdueix el nom d l'álbum", "Crear Álbum - Nom", JOptionPane.QUESTION_MESSAGE);
         if (titol != null) {
-            int capacitat;
-            try {
-                capacitat = Integer.parseInt(JOptionPane.showInputDialog(this, "Introdueix la capacitat de l'álbum", "Crear Álbum - Capacitat", JOptionPane.QUESTION_MESSAGE));
-            } catch (HeadlessException | NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Capacitat no valida, assignada 10 per defecte", "Error amb Capacitat", JOptionPane.ERROR_MESSAGE);
-                capacitat = 10;
-            }
+            int capacitatFinal;
+            String capacitat = JOptionPane.showInputDialog(this, "Introdueix la capacitat de l'álbum", "Crear Álbum - Capacitat", JOptionPane.QUESTION_MESSAGE);
+            if (capacitat != null) {
+                String messageCapacitat = "";
+                String message;
+                int tipus = JOptionPane.INFORMATION_MESSAGE;
+                try {
+                    capacitatFinal = Integer.parseInt(capacitat);
+                } catch (HeadlessException | NumberFormatException ex) {
+                    messageCapacitat = "capacitat no valida, assignada 10 per defecte";
+                    capacitatFinal = 10;
+                }
 
-            try {
-                ctrl.afegirAlbum(titol, capacitat);
-                this.cmbAlbums.setModel(updateAlbums());
-                JOptionPane.showMessageDialog(this, "Álbum " + titol + " creat correctament", "Álbum creat", JOptionPane.INFORMATION_MESSAGE);
-            } catch (AplicacioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                try {
+                    ctrl.afegirAlbum(titol, capacitatFinal);
+                    refreshAlbums();
+                    message = "Álbum " + titol + " creat";
+                    if (!messageCapacitat.isEmpty()) {
+                        message += "\n" + messageCapacitat;
+                        tipus = JOptionPane.WARNING_MESSAGE;
+                    }
+                    JOptionPane.showMessageDialog(this, message, "Álbum creat", tipus);
+                } catch (AplicacioException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
 
@@ -530,9 +542,9 @@ public class AplicacioUB4 extends JFrame {
                     ctrl.esborrarFitxer(i - eliminados);
                     eliminados++;
                 }
-                this.lstBiblioteca.setModel(updateBiblioteca());
-                this.lstAlbum.setModel(updateAlbum());
-                this.cmbAlbums.setModel(updateAlbums());
+                refreshBiblioteca();
+                refreshAlbums();
+                refreshAlbum();
                 JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s", "Fitxer Esborrat/s", JOptionPane.INFORMATION_MESSAGE);
             } catch (AplicacioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -545,19 +557,30 @@ public class AplicacioUB4 extends JFrame {
     private void btnAfegirFitxerAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFitxerAlbumActionPerformed
         int[] indices = this.lstBiblioteca.getSelectedIndices();
         int indexAlbum = this.cmbAlbums.getSelectedIndex();
+        int afegits = 0;
+        String messageFinestra, titolFinestra;
+        int tipusFinestra;
 
         if (indices.length > 0) {
             try {
                 String titol = ctrl.getTitolAlbum(indexAlbum);
                 for (int i : indices) {
                     ctrl.afegirFitxer(titol, i);
+                    afegits++;
                 }
-                this.lstAlbum.setModel(updateAlbum());
-                this.cmbAlbums.setModel(updateAlbums());
-                JOptionPane.showMessageDialog(this, "Fitxer/s afegit/s al álbum", "Fitxer Afegit/s al Álbum", JOptionPane.INFORMATION_MESSAGE);
+                messageFinestra = "Fitxer/s afegit/s al álbum";
+                titolFinestra = "Fitxer/s afegit/s al álbum";
+                tipusFinestra = JOptionPane.INFORMATION_MESSAGE;
             } catch (AplicacioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                messageFinestra = ex.getMessage() + ", fitxers afegits: " + afegits;
+                titolFinestra = "Error";
+                tipusFinestra = JOptionPane.ERROR_MESSAGE;
             }
+            if (afegits >= 1) {
+                refreshAlbum();
+                refreshAlbums();
+            }
+            JOptionPane.showMessageDialog(this, messageFinestra, titolFinestra, tipusFinestra);
         } else {
             JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.WARNING_MESSAGE);
         }
@@ -647,8 +670,8 @@ public class AplicacioUB4 extends JFrame {
                     ctrl.esborrarFitxer(titol, i - eliminados);
                     eliminados++;
                 }
-                this.lstAlbum.setModel(updateAlbum());
-                this.cmbAlbums.setModel(updateAlbums());
+                refreshAlbum();
+                refreshAlbums();
                 JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s del álbum", "Fitxer Esborrat/s del Álbum", JOptionPane.INFORMATION_MESSAGE);
             } catch (AplicacioException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -664,85 +687,56 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     /**
-     * Retorna una Lista Modelo de la biblioteca para asociarsela a un JList
-     *
-     * @return ListModel<String>
+     * Refersca el JList de la biblioteca
      */
-    private ListModel<String> updateBiblioteca() {
+    private void refreshBiblioteca() {
         List<String> bibList = ctrl.mostrarBiblioteca();
-        ListModel<String> model = new javax.swing.AbstractListModel<String>() {
-            String[] strings = bibList.toArray(new String[bibList.size()]);
-
-            @Override
-            public int getSize() {
-                return strings.length;
-            }
-
-            @Override
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        };
-        return model;
+        DefaultListModel<String> model = (DefaultListModel<String>) lstBiblioteca.getModel();
+        model.removeAllElements();
+        for (String s : bibList) {
+            model.addElement(s);
+        }
     }
 
     /**
-     * Retorna una Lista Modelo del álbum seleccionado para asociarsela a un
-     * JList
-     *
-     * @return ListModel<String>
+     * Refresca el JList del album
      */
-    private ListModel<String> updateAlbum() {
-        ListModel<String> model, emptyModel;
+    private void refreshAlbum() {
         int index = this.cmbAlbums.getSelectedIndex();
-        emptyModel = new javax.swing.AbstractListModel<String>() {
-            String[] strings = new String[0];
-
-            @Override
-            public int getSize() {
-                return strings.length;
-            }
-
-            @Override
-            public String getElementAt(int i) {
-                return strings[i];
-            }
-        };
-        if (index < 0) {
-            return emptyModel;
-        } else {
+        DefaultListModel<String> model = (DefaultListModel<String>) lstAlbum.getModel();
+        model.removeAllElements();
+        if (index > -1) {
             try {
                 String titol = ctrl.getTitolAlbum(index);
                 List<String> albumList = ctrl.mostrarAlbum(titol);
-                model = new javax.swing.AbstractListModel<String>() {
-                    String[] strings = albumList.toArray(new String[albumList.size()]);
-
-                    @Override
-                    public int getSize() {
-                        return strings.length;
-                    }
-
-                    @Override
-                    public String getElementAt(int i) {
-                        return strings[i];
-                    }
-                };
-                return model;
+                for (String s : albumList) {
+                    model.addElement(s);
+                }
             } catch (AplicacioException ex) {
-                return emptyModel;
+                System.err.println(ex.getMessage());
             }
         }
     }
 
     /**
-     * Retorna una Lista Modelo de la albums para asociarsela a un JComboBox
-     *
-     * @return DefaultComboBoxModel<String>
+     * Refresca el JComboBox de albums
      */
-    private DefaultComboBoxModel<String> updateAlbums() {
+    private void refreshAlbums() {
         List<String> albumsList = ctrl.mostrarLlistatAlbums();
-        String[] strings = albumsList.toArray(new String[albumsList.size()]);
-        return new DefaultComboBoxModel<>(strings);
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cmbAlbums.getModel();
+        int index = cmbAlbums.getSelectedIndex();
+        model.removeAllElements();
+        for (String s : albumsList) {
+            model.addElement(s);
+        }
+        if (model.getSize() > 0) {
+            if (index == -1) {
+                index++;
+            } else if (index > model.getSize() - 1) {
+                index--;
+            }
+            cmbAlbums.setSelectedIndex(index);
+        }
     }
 
     /**
@@ -802,9 +796,9 @@ public class AplicacioUB4 extends JFrame {
      * Refresca la vista entera
      */
     private void refreshAll() {
-        this.lstBiblioteca.setModel(updateBiblioteca());
-        this.cmbAlbums.setModel(updateAlbums());
-        this.lstAlbum.setModel(updateAlbum());
+        refreshBiblioteca();
+        refreshAlbums();
+        refreshAlbum();
         this.cbmiRepContinua.setSelected(ctrl.isReproduccioContinua());
         this.cbmiRepAleatoria.setSelected(ctrl.isReproduccioAleatoria());
     }
@@ -818,6 +812,9 @@ public class AplicacioUB4 extends JFrame {
 
         // VLC 2.2 para Mac
         if (MAC) {
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", TITLE);
+            
             uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH",
                     "/Applications/VLC.app/Contents/MacOS/plugins", 1);
 
