@@ -33,6 +33,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
@@ -103,8 +105,10 @@ public class AplicacioUB4 extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(TITLE);
-        setMinimumSize(new java.awt.Dimension(640, 480));
+        setBounds(new java.awt.Rectangle(0, 23, 800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
         setName(getClass().getSimpleName());
+        setPreferredSize(new java.awt.Dimension(800, 600));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -112,6 +116,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         cmbAlbums.setModel(new DefaultComboBoxModel<>());
+        cmbAlbums.setFocusable(false);
         cmbAlbums.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAlbumsActionPerformed(evt);
@@ -119,9 +124,11 @@ public class AplicacioUB4 extends JFrame {
         });
 
         lstAlbum.setModel(new DefaultListModel<>());
+        lstAlbum.setFocusable(false);
         scpAlbums.setViewportView(lstAlbum);
 
         lstBiblioteca.setModel(new DefaultListModel<>());
+        lstBiblioteca.setFocusable(false);
         scpBiblioteca.setViewportView(lstBiblioteca);
 
         etBiblioteca.setFont(etBiblioteca.getFont().deriveFont(etBiblioteca.getFont().getStyle() | java.awt.Font.BOLD));
@@ -134,6 +141,7 @@ public class AplicacioUB4 extends JFrame {
         etAlbum.setText("Álbum");
 
         btnAfegirFitxerBiblioteca.setText("Afegir Fitxer");
+        btnAfegirFitxerBiblioteca.setFocusPainted(false);
         btnAfegirFitxerBiblioteca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAfegirFitxerBibliotecaActionPerformed(evt);
@@ -141,6 +149,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnCrearAlbum.setText("Crear Álbum");
+        btnCrearAlbum.setFocusPainted(false);
         btnCrearAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearAlbumActionPerformed(evt);
@@ -148,6 +157,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnEliminarAlbum.setText("Eliminar Álbum");
+        btnEliminarAlbum.setFocusPainted(false);
         btnEliminarAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarAlbumActionPerformed(evt);
@@ -155,6 +165,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnEliminarFitxerBiblioteca.setText("Eliminar Fitxers");
+        btnEliminarFitxerBiblioteca.setFocusPainted(false);
         btnEliminarFitxerBiblioteca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarFitxerBibliotecaActionPerformed(evt);
@@ -162,6 +173,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnAfegirFitxerAlbum.setText("Afegir Fitxers al Álbum");
+        btnAfegirFitxerAlbum.setFocusPainted(false);
         btnAfegirFitxerAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAfegirFitxerAlbumActionPerformed(evt);
@@ -169,6 +181,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnEliminarFitxerAlbum.setText("Eliminar Fitxers de l'Álbum");
+        btnEliminarFitxerAlbum.setFocusPainted(false);
         btnEliminarFitxerAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarFitxerAlbumActionPerformed(evt);
@@ -176,6 +189,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnAtura.setText("Atura");
+        btnAtura.setFocusPainted(false);
         btnAtura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAturaActionPerformed(evt);
@@ -183,6 +197,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnSalta.setText("Salta");
+        btnSalta.setFocusPainted(false);
         btnSalta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaltaActionPerformed(evt);
@@ -190,6 +205,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnReempren.setText("Reempren");
+        btnReempren.setFocusPainted(false);
         btnReempren.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReemprenActionPerformed(evt);
@@ -197,6 +213,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnPause.setText("Pause");
+        btnPause.setFocusPainted(false);
         btnPause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPauseActionPerformed(evt);
@@ -204,6 +221,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnReproduirAlbum.setText("Reproduir Álbum");
+        btnReproduirAlbum.setFocusPainted(false);
         btnReproduirAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReproduirAlbumActionPerformed(evt);
@@ -211,6 +229,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnReproduirBiblioteca.setText("Reproduir Biblioteca");
+        btnReproduirBiblioteca.setFocusPainted(false);
         btnReproduirBiblioteca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReproduirBibliotecaActionPerformed(evt);
@@ -218,6 +237,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnReproduirFitxerBiblioteca.setText("Reproduir Fitxer");
+        btnReproduirFitxerBiblioteca.setFocusPainted(false);
         btnReproduirFitxerBiblioteca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReproduirFitxerBibliotecaActionPerformed(evt);
@@ -225,6 +245,7 @@ public class AplicacioUB4 extends JFrame {
         });
 
         btnReproduirFitxerAlbum.setText("Reproduir Fitxer Álbum");
+        btnReproduirFitxerAlbum.setFocusPainted(false);
         btnReproduirFitxerAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReproduirFitxerAlbumActionPerformed(evt);
@@ -310,51 +331,48 @@ public class AplicacioUB4 extends JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(scpBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnEliminarAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnCrearAlbum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnReproduirAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cmbAlbums, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(120, 120, 120)
+                                        .addComponent(btnEliminarFitxerBiblioteca))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnReproduirBiblioteca)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnReproduirFitxerBiblioteca))
+                                    .addComponent(btnAfegirFitxerBiblioteca))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
                         .addComponent(etBiblioteca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(etAlbums)
-                        .addGap(56, 56, 56))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(scpBiblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbAlbums, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEliminarAlbum)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(btnCrearAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(2, 2, 2))
-                            .addComponent(btnReproduirAlbum, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(120, 120, 120)
-                                .addComponent(btnEliminarFitxerBiblioteca))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnReproduirBiblioteca)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnReproduirFitxerBiblioteca))
-                            .addComponent(btnAfegirFitxerBiblioteca))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(56, 56, 56)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnReproduirFitxerAlbum)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(scpAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAfegirFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnEliminarFitxerAlbum, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(btnAfegirFitxerAlbum)
+                            .addComponent(btnEliminarFitxerAlbum)
+                            .addComponent(scpAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(etAlbum)
-                        .addGap(101, 101, 101))))
+                        .addGap(118, 118, 118))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(btnReempren, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,7 +422,7 @@ public class AplicacioUB4 extends JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnReproduirAlbum)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(scpAlbums, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                            .addComponent(scpAlbums, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAfegirFitxerAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -814,7 +832,7 @@ public class AplicacioUB4 extends JFrame {
         if (MAC) {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", TITLE);
-            
+
             uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH",
                     "/Applications/VLC.app/Contents/MacOS/plugins", 1);
 
@@ -826,6 +844,15 @@ public class AplicacioUB4 extends JFrame {
 
         EventQueue.invokeLater(() -> {
             AplicacioUB4 app = new AplicacioUB4();
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+                System.err.println(e.getMessage());
+            }
+
+            UIManager.put("OptionPane.cancelButtonText", "Cancel·lar");
+            UIManager.put("OptionPane.okButtonText", "Acceptar");
+
             app.setVisible(true);
         });
 

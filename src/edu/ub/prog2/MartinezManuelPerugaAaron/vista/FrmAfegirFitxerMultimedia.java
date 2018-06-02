@@ -50,6 +50,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         this.ctrl = Controlador.getInstance();
         initComponents();
         checkCtrl(); // Cambia entre audio o video
+        this.getRootPane().setDefaultButton(btnAcceptar);
     }
 
     /**
@@ -98,6 +99,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         etCami.setText("Fitxer");
 
         btnAcceptar.setText("Aceptar");
+        btnAcceptar.setFocusPainted(false);
         btnAcceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAcceptarActionPerformed(evt);
@@ -105,6 +107,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setFocusPainted(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -112,6 +115,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         });
 
         btnObrirFitxer.setText("Obrir");
+        btnObrirFitxer.setFocusPainted(false);
         btnObrirFitxer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObrirFitxerActionPerformed(evt);
@@ -121,6 +125,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         rbtnAudio.setFont(rbtnAudio.getFont().deriveFont((rbtnAudio.getFont().getStyle() | java.awt.Font.ITALIC) | java.awt.Font.BOLD));
         rbtnAudio.setSelected(true);
         rbtnAudio.setText("Audio");
+        rbtnAudio.setFocusPainted(false);
         rbtnAudio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtnAudioActionPerformed(evt);
@@ -129,6 +134,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
 
         rbtnVideo.setFont(rbtnVideo.getFont().deriveFont((rbtnVideo.getFont().getStyle() | java.awt.Font.ITALIC) | java.awt.Font.BOLD));
         rbtnVideo.setText("Video");
+        rbtnVideo.setFocusPainted(false);
         rbtnVideo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtnVideoActionPerformed(evt);
@@ -138,6 +144,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         etImatge.setText("Imatge");
 
         btnObrirImatge.setText("Obrir");
+        btnObrirImatge.setFocusPainted(false);
         btnObrirImatge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObrirImatgeActionPerformed(evt);
@@ -412,20 +419,16 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
             etFpsKbps.setText("Kbs");
             pnlVideo.setVisible(false);
             pnlAudioImatge.setVisible(true);
-            rbtnAudio.setEnabled(false);
-            rbtnVideo.setEnabled(true);
+            if (textFpsKbps.getText().contains(".")) {
+                textFpsKbps.setText("");
+            }
         } else {
             setTitle(TITLE + " " + TITLE_VIDEO);
             etFpsKbps.setText("Fps");
             pnlVideo.setVisible(true);
             pnlAudioImatge.setVisible(false);
-            rbtnAudio.setEnabled(true);
-            rbtnVideo.setEnabled(false);
         }
-        textCamiImatge.setText("");
-        textAmplada.setText("");
-        textAlcada.setText("");
-        textFpsKbps.setText("");
+        textCami.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

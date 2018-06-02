@@ -35,6 +35,7 @@ public class FrmSobre extends javax.swing.JDialog {
     public FrmSobre(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.getRootPane().setDefaultButton(btnTornar);
     }
 
     /**
@@ -68,6 +69,7 @@ public class FrmSobre extends javax.swing.JDialog {
         etLogoUb.setPreferredSize(new java.awt.Dimension(60, 60));
 
         btnTornar.setText("Tornar");
+        btnTornar.setFocusPainted(false);
         btnTornar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTornarActionPerformed(evt);

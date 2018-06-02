@@ -171,6 +171,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAcceptarActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnAcceptar.setFocusPainted(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
@@ -179,6 +182,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnCancelar.setFocusPainted(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnObrirFitxer">
       <Properties>
@@ -187,6 +193,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrirFitxerActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnObrirFitxer.setFocusPainted(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbtnAudio">
       <Properties>
@@ -201,6 +210,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnAudioActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rbtnAudio.setFocusPainted(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbtnVideo">
       <Properties>
@@ -214,6 +226,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtnVideoActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="rbtnVideo.setFocusPainted(false);"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JPanel" name="pnlAudioImatge">
 
@@ -256,6 +271,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrirImatgeActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnObrirImatge.setFocusPainted(false);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
