@@ -27,7 +27,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -254,7 +253,7 @@ public class Dades implements Serializable {
         for (AlbumFitxersMultimedia album : albums) {
             StringBuilder sb = new StringBuilder();
             sb.append(album.getTitol())
-                    .append(" (spai lliure: ").append(album.freeSpace()).append(")");
+                    .append(" (").append(album.freeSpace()).append(")");
             albumList.add(sb.toString());
         }
 
@@ -427,6 +426,37 @@ public class Dades implements Serializable {
             throw new AplicacioException("No existeix aquest album");
         }
         return albums.get(albumIndex);
+    }
+
+    /**
+     * Retorna la información del fichero de la biblioteca
+     *
+     * @param id
+     * @return String
+     */
+    public String infoFitxer(int id) {
+        return biblioteca.getAt(id).toString();
+    }
+
+    /**
+     * Retorna la información del fichero del album
+     *
+     * @param titolAlbum
+     * @param id
+     * @return String
+     * @throws AplicacioException
+     */
+    public String infoFitxer(String titolAlbum, int id) throws AplicacioException {
+        try {
+            AlbumFitxersMultimedia album = getAlbumByTitle(titolAlbum);
+            if (album.getSize() == 0) {
+                throw new AplicacioException("No hi ha fitxers en aquest album");
+            }
+            FitxerMultimedia file = (FitxerMultimedia) album.getAt(id);
+            return file.toString();
+        } catch (IndexOutOfBoundsException io) {
+            throw new AplicacioException("Id de fitxer incorrecte");
+        }
     }
 
 }

@@ -180,18 +180,20 @@ public class FitxerMultimedia extends File {
 
         StringBuilder fitxer = new StringBuilder();
 
-        fitxer.append("Descripció='").append(descripcio).append("', Data='")
-                .append(this.getUltimaModificacio())
-                .append("', Nom fitxer='").append(this.getNomFitxer())
-                .append("', Extensio='");
+        fitxer.append("Descripció: ").append(descripcio).append("\n")
+                .append("Data: ").append(this.getUltimaModificacio())
+                .append("Nom fitxer: ").append(this.getNomFitxer()).append("\n")
+                .append("Extensio: ");
 
         if (ext.length() > 0) {
             fitxer.append(ext);
         } else {
             fitxer.append("null");
         }
+        
+        fitxer.append("\n");
 
-        fitxer.append("', Cami complet='").append(getCamiAbsolutComplet()).append("'");
+        fitxer.append("Cami complet: ").append(getCamiAbsolutComplet());
 
         return fitxer.toString();
     }

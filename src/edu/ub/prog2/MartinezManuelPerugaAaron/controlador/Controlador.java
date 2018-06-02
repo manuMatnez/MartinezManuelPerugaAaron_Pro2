@@ -406,4 +406,26 @@ public class Controlador implements InControlador {
         return dades.isReproduccioCiclica();
     }
 
+    /**
+     * Retorna la información del fichero de la biblioteca a través de Dades
+     *
+     * @param id
+     * @return String
+     */
+    public String infoFitxer(int id) {
+        return dades.infoFitxer(id);
+    }
+
+    /**
+     * Retorna la información del fichero del album a través de Dades
+     *
+     * @param titolAlbum
+     * @param id
+     * @return String
+     * @throws AplicacioException
+     */
+    public String infoFitxer(String titolAlbum, int id) throws AplicacioException {
+        return dades.infoFitxer(titolAlbum, id);
+    }
+
 }

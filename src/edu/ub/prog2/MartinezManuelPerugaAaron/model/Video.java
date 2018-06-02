@@ -71,15 +71,15 @@ public class Video extends FitxerReproduible {
     public String toString() {
         StringBuilder fitxer = new StringBuilder();
 
-        fitxer.append("Tipus='").append(this.getClass().getSimpleName()).append("', ");
+        fitxer.append("Tipus: ").append(this.getClass().getSimpleName()).append("\n");
 
-        fitxer.append(super.toString());
+        fitxer.append(super.toString()).append("\n");
 
-        fitxer.append(", Codec='").append(getCodec()).append("'");
-        fitxer.append(", Durada='").append(getDurada()).append("'");
-        fitxer.append(", Alcada='").append(alcada).append("'");
-        fitxer.append(", Amplada='").append(amplada).append("'");
-        fitxer.append(", Fps='").append(fps).append("'");
+        fitxer.append("Codec: ").append(getCodec()).append("\n");
+        fitxer.append("Durada: ").append(getDurada()).append("\n");
+        fitxer.append("Alcada: ").append(alcada).append("\n");
+        fitxer.append("Amplada: ").append(amplada).append("\n");
+        fitxer.append("Fps: ").append(fps);
 
         return fitxer.toString();
     }

@@ -90,11 +90,12 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         btngpAudioVideo.add(rbtnVideo);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(630, 300));
+        setBounds(new java.awt.Rectangle(0, 23, 0, 0));
         setMinimumSize(new java.awt.Dimension(630, 300));
         setName(getClass().getSimpleName());
         setPreferredSize(new java.awt.Dimension(630, 300));
         setResizable(false);
+        setSize(new java.awt.Dimension(0, 0));
 
         etCami.setText("Fitxer");
 

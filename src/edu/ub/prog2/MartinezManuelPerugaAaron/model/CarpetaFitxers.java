@@ -154,8 +154,7 @@ public class CarpetaFitxers implements InFileFolder, Serializable {
             FitxerMultimedia currentFile = fileIt.next();
             sb.append(currentFile.getDescripcio())
                     .append(" [").append(currentFile.getClass().getSimpleName())
-                    .append("] (").append(currentFile.getUltimaModificacio())
-                    .append(")").append("\n");
+                    .append("]").append("\n");
         }
         return sb.toString();
     }

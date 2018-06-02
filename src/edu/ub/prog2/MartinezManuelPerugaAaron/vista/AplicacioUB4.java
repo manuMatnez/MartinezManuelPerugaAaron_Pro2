@@ -31,6 +31,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -105,10 +106,11 @@ public class AplicacioUB4 extends JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(TITLE);
-        setBounds(new java.awt.Rectangle(0, 23, 800, 600));
+        setBounds(new java.awt.Rectangle(0, 23, 0, 0));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName(getClass().getSimpleName());
         setPreferredSize(new java.awt.Dimension(800, 600));
+        setSize(new java.awt.Dimension(0, 0));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -117,18 +119,31 @@ public class AplicacioUB4 extends JFrame {
 
         cmbAlbums.setModel(new DefaultComboBoxModel<>());
         cmbAlbums.setFocusable(false);
+        cmbAlbums.setFont(cmbAlbums.getFont().deriveFont(cmbAlbums.getFont().getSize()-2f));
         cmbAlbums.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAlbumsActionPerformed(evt);
             }
         });
 
+        lstAlbum.setFont(lstAlbum.getFont().deriveFont(lstAlbum.getFont().getSize()+1f));
         lstAlbum.setModel(new DefaultListModel<>());
         lstAlbum.setFocusable(false);
+        lstAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstAlbumMouseClicked(evt);
+            }
+        });
         scpAlbums.setViewportView(lstAlbum);
 
+        lstBiblioteca.setFont(lstBiblioteca.getFont().deriveFont(lstBiblioteca.getFont().getSize()+1f));
         lstBiblioteca.setModel(new DefaultListModel<>());
         lstBiblioteca.setFocusable(false);
+        lstBiblioteca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstBibliotecaMouseClicked(evt);
+            }
+        });
         scpBiblioteca.setViewportView(lstBiblioteca);
 
         etBiblioteca.setFont(etBiblioteca.getFont().deriveFont(etBiblioteca.getFont().getStyle() | java.awt.Font.BOLD));
@@ -704,6 +719,28 @@ public class AplicacioUB4 extends JFrame {
         lstAlbum.clearSelection();
     }//GEN-LAST:event_formMouseClicked
 
+    private void lstBibliotecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstBibliotecaMouseClicked
+        JList list = (JList) evt.getSource();
+        int index = list.locationToIndex(evt.getPoint());
+        if (evt.getClickCount() == 2 && index >= 0) {
+            JOptionPane.showMessageDialog(this, ctrl.infoFitxer(index), "Informació del Fitxer", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_lstBibliotecaMouseClicked
+
+    private void lstAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstAlbumMouseClicked
+        int indexAlbum = this.cmbAlbums.getSelectedIndex();
+        try {
+            String titol = ctrl.getTitolAlbum(indexAlbum);
+            JList list = (JList) evt.getSource();
+            int index = list.locationToIndex(evt.getPoint());
+            if (evt.getClickCount() == 2 && index >= 0) {
+                JOptionPane.showMessageDialog(this, ctrl.infoFitxer(titol, index), "Informació del Fitxer del Álbum", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (AplicacioException ae) {
+            JOptionPane.showMessageDialog(this, ae.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_lstAlbumMouseClicked
+
     /**
      * Refersca el JList de la biblioteca
      */
@@ -731,7 +768,7 @@ public class AplicacioUB4 extends JFrame {
                     model.addElement(s);
                 }
             } catch (AplicacioException ex) {
-                System.err.println(ex.getMessage());
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al actualitzar albums", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

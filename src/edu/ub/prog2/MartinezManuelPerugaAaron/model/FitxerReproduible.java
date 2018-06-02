@@ -79,10 +79,10 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
 
         StringBuilder fitxer = new StringBuilder();
 
-        fitxer.append("Nom='").append(getDescripcio()).append("', Data='")
-                .append(this.getUltimaModificacio())
-                .append("', Nom fitxer='").append(this.getNomFitxer())
-                .append("', Extensio='");
+        fitxer.append("Nom: ").append(getDescripcio()).append("\n")
+                .append("Data: ").append(this.getUltimaModificacio()).append("\n")
+                .append("Nom fitxer: ").append(this.getNomFitxer()).append("\n")
+                .append("Extensio: ");
 
         if (ext.length() > 0) {
             fitxer.append(ext);
@@ -90,7 +90,9 @@ public abstract class FitxerReproduible extends FitxerMultimedia {
             fitxer.append("null");
         }
 
-        fitxer.append("', Cami complet='").append(getCamiAbsolutComplet()).append("'");
+        fitxer.append("\n");
+
+        fitxer.append("Cami complet: ").append(getCamiAbsolutComplet());
 
         return fitxer.toString();
     }
