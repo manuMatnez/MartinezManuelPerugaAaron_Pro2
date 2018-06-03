@@ -115,9 +115,6 @@
     <Property name="name" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
       <Connection code="getClass().getSimpleName()" type="code"/>
     </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[800, 600]"/>
-    </Property>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[0, 0]"/>
     </Property>
@@ -192,7 +189,7 @@
                           <Component id="btnReproduirFitxerAlbum" min="-2" max="-2" attributes="0"/>
                           <Component id="btnAfegirFitxerAlbum" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="btnEliminarFitxerAlbum" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="scpAlbums" min="-2" pref="252" max="-2" attributes="0"/>
+                          <Component id="scpAlbum" min="-2" pref="252" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
@@ -260,7 +257,7 @@
                               <Component id="btnReproduirAlbum" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="scpAlbums" alignment="0" pref="260" max="32767" attributes="0"/>
+                          <Component id="scpAlbum" alignment="0" pref="260" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnAfegirFitxerAlbum" min="-2" max="-2" attributes="0"/>
@@ -295,7 +292,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="scpAlbums">
+    <Container class="javax.swing.JScrollPane" name="scpAlbum">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>

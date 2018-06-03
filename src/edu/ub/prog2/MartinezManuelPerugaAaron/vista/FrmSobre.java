@@ -55,7 +55,7 @@ public class FrmSobre extends javax.swing.JDialog {
         etGPLV3 = new javax.swing.JLabel();
         etVersion = new javax.swing.JLabel();
         etVersionNumber = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        panelCopy = new javax.swing.JPanel();
         etCopyRight = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -102,17 +102,17 @@ public class FrmSobre extends javax.swing.JDialog {
         etCopyRight.setFont(etCopyRight.getFont().deriveFont((etCopyRight.getFont().getStyle() | java.awt.Font.ITALIC), etCopyRight.getFont().getSize()-2));
         etCopyRight.setText(AplicacioUB4.COPY);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelCopyLayout = new javax.swing.GroupLayout(panelCopy);
+        panelCopy.setLayout(panelCopyLayout);
+        panelCopyLayout.setHorizontalGroup(
+            panelCopyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCopyLayout.createSequentialGroup()
                 .addComponent(etCopyRight)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        panelCopyLayout.setVerticalGroup(
+            panelCopyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCopyLayout.createSequentialGroup()
                 .addGap(0, 6, Short.MAX_VALUE)
                 .addComponent(etCopyRight, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -147,7 +147,7 @@ public class FrmSobre extends javax.swing.JDialog {
                 .addContainerGap(93, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(93, 93, 93)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(137, 137, 137)
                 .addComponent(btnTornar)
@@ -175,7 +175,7 @@ public class FrmSobre extends javax.swing.JDialog {
                     .addComponent(etGPLV3)
                     .addComponent(etLlicencia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelCopy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTornar)
                 .addGap(12, 12, 12))
@@ -201,6 +201,6 @@ public class FrmSobre extends javax.swing.JDialog {
     private javax.swing.JLabel etNombrePrograma;
     private javax.swing.JLabel etVersion;
     private javax.swing.JLabel etVersionNumber;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel panelCopy;
     // End of variables declaration//GEN-END:variables
 }

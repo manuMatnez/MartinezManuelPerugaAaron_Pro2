@@ -75,7 +75,7 @@ public class AplicacioUB4 extends JFrame {
     private void initComponents() {
 
         cmbAlbums = new javax.swing.JComboBox<>();
-        scpAlbums = new javax.swing.JScrollPane();
+        scpAlbum = new javax.swing.JScrollPane();
         lstAlbum = new javax.swing.JList<>();
         scpBiblioteca = new javax.swing.JScrollPane();
         lstBiblioteca = new javax.swing.JList<>();
@@ -113,7 +113,6 @@ public class AplicacioUB4 extends JFrame {
         setBounds(new java.awt.Rectangle(0, 23, 0, 0));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName(getClass().getSimpleName());
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(0, 0));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,7 +136,7 @@ public class AplicacioUB4 extends JFrame {
                 lstAlbumMouseClicked(evt);
             }
         });
-        scpAlbums.setViewportView(lstAlbum);
+        scpAlbum.setViewportView(lstAlbum);
 
         lstBiblioteca.setModel(makeListModel(new ArrayList<>()));
         lstBiblioteca.setFocusable(false);
@@ -384,7 +383,7 @@ public class AplicacioUB4 extends JFrame {
                             .addComponent(btnReproduirFitxerAlbum)
                             .addComponent(btnAfegirFitxerAlbum)
                             .addComponent(btnEliminarFitxerAlbum)
-                            .addComponent(scpAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(scpAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -439,7 +438,7 @@ public class AplicacioUB4 extends JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnReproduirAlbum)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(scpAlbums, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+                            .addComponent(scpAlbum, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAfegirFitxerAlbum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -944,7 +943,7 @@ public class AplicacioUB4 extends JFrame {
     private javax.swing.JMenuItem miGuardar;
     private javax.swing.JMenuItem miSobre;
     private javax.swing.JMenuItem miSortir;
-    private javax.swing.JScrollPane scpAlbums;
+    private javax.swing.JScrollPane scpAlbum;
     private javax.swing.JScrollPane scpBiblioteca;
     // End of variables declaration//GEN-END:variables
 
