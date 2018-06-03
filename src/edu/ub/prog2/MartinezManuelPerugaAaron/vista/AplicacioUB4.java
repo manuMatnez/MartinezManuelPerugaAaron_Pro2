@@ -504,7 +504,9 @@ public class AplicacioUB4 extends JFrame {
         form.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent ev) {
-                refreshBiblioteca();
+                if (form.isAfegit()) {
+                    refreshBiblioteca();
+                }
             }
         });
         form.setVisible(true);

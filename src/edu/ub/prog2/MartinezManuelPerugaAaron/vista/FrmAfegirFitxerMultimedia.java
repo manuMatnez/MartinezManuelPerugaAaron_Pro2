@@ -37,6 +37,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     private final static String TITLE = "Afegir Fitxer de";
     private final static String TITLE_AUDIO = "Audio";
     private final static String TITLE_VIDEO = "Video";
+    private boolean afegit;
 
     /**
      * FrmAfegirFitxerMultimedia
@@ -46,10 +47,15 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
      */
     public FrmAfegirFitxerMultimedia(Frame parent, boolean modal) {
         super(parent, modal);
+        afegit = false;
         this.ctrl = Controlador.getInstance();
         initComponents();
-        checkCtrl(); // Cambia entre audio o video
+        audioSelected();
         this.getRootPane().setDefaultButton(btnAcceptar);
+    }
+
+    public boolean isAfegit() {
+        return afegit;
     }
 
     /**
@@ -351,6 +357,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
                 ctrl.afegirVideo(cami, nom, codec, durada, alcada, amplada, fps);
             }
             JOptionPane.showMessageDialog(this, "Fitxer " + nom + " afegit", "Fitxer Afegit", JOptionPane.PLAIN_MESSAGE, INFO_IMG);
+            afegit = true;
             this.dispose();
         } catch (AplicacioException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
@@ -358,19 +365,25 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
     }//GEN-LAST:event_btnAcceptarActionPerformed
 
     private void btnObrirFitxerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrirFitxerActionPerformed
-        this.textCami.setText(fileChooserPath());
+        String path = fileChooserPath();
+        if (!path.isEmpty()) {
+            this.textCami.setText(path);
+        }
     }//GEN-LAST:event_btnObrirFitxerActionPerformed
 
     private void rbtnAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnAudioActionPerformed
-        checkCtrl(); // Cambia entre audio o video
+        audioSelected();
     }//GEN-LAST:event_rbtnAudioActionPerformed
 
     private void rbtnVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnVideoActionPerformed
-        checkCtrl(); // Cambia entre audio o video
+        videoSelected();
     }//GEN-LAST:event_rbtnVideoActionPerformed
 
     private void btnObrirImatgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrirImatgeActionPerformed
-        this.textCamiImatge.setText(fileChooserPath());
+        String path = fileChooserPath();
+        if (!path.isEmpty()) {
+            this.textCamiImatge.setText(path);
+        }
     }//GEN-LAST:event_btnObrirImatgeActionPerformed
 
     private void textAlcadaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textAlcadaKeyTyped
@@ -393,6 +406,25 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         onlyFloatNumbers(textDurada, evt);
     }//GEN-LAST:event_textDuradaKeyTyped
 
+    private void audioSelected() {
+        setTitle(TITLE + " " + TITLE_AUDIO);
+        etFpsKbps.setText("Kbs");
+        pnlVideo.setVisible(false);
+        pnlAudioImatge.setVisible(true);
+        if (textFpsKbps.getText().contains(".")) {
+            textFpsKbps.setText("");
+        }
+        textCami.requestFocus();
+    }
+
+    private void videoSelected() {
+        setTitle(TITLE + " " + TITLE_VIDEO);
+        etFpsKbps.setText("Fps");
+        pnlVideo.setVisible(true);
+        pnlAudioImatge.setVisible(false);
+        textCami.requestFocus();
+    }
+
     /**
      * Retorna el String del path absoluto del fichero seleccionado
      *
@@ -407,28 +439,6 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
             path = file.getAbsolutePath();
         }
         return path;
-    }
-
-    /**
-     * Activa desactiva los controles requeridos para rellenar el JDialog de
-     * Audio o Video
-     */
-    private void checkCtrl() {
-        if (rbtnAudio.isSelected()) {
-            setTitle(TITLE + " " + TITLE_AUDIO);
-            etFpsKbps.setText("Kbs");
-            pnlVideo.setVisible(false);
-            pnlAudioImatge.setVisible(true);
-            if (textFpsKbps.getText().contains(".")) {
-                textFpsKbps.setText("");
-            }
-        } else {
-            setTitle(TITLE + " " + TITLE_VIDEO);
-            etFpsKbps.setText("Fps");
-            pnlVideo.setVisible(true);
-            pnlAudioImatge.setVisible(false);
-        }
-        textCami.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
