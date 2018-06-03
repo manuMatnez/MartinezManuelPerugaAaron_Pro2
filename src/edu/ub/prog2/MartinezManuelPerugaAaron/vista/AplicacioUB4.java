@@ -27,11 +27,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -57,7 +56,11 @@ public class AplicacioUB4 extends JFrame {
     protected final static String VERSION = "4.0";
     protected final static String COPY = "Copyright 2018 Universitat de Barcelona";
 
-    final static boolean MAC = System.getProperty("os.name").toLowerCase().contains("mac");
+    protected final static ImageIcon ERROR_IMG = new ImageIcon(AplicacioUB4.class.getResource("/assets/error.png"));
+    protected final static ImageIcon WARNING_IMG = new ImageIcon(AplicacioUB4.class.getResource("/assets/warning.png"));
+    protected final static ImageIcon INFO_IMG = new ImageIcon(AplicacioUB4.class.getResource("/assets/info.png"));
+
+    private final static boolean MAC = System.getProperty("os.name").toLowerCase().contains("mac");
 
     /**
      * AplicacioUB4
@@ -462,9 +465,9 @@ public class AplicacioUB4 extends JFrame {
             try {
                 ctrl.carregarDadesDisc(cami);
                 refreshAll();
-                JOptionPane.showMessageDialog(this, "Dades carregades correctament", "Dades carregades", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Dades carregades correctament", "Dades carregades", JOptionPane.PLAIN_MESSAGE, INFO_IMG);
             } catch (AplicacioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
             }
         }
     }//GEN-LAST:event_miCarregarActionPerformed
@@ -480,9 +483,9 @@ public class AplicacioUB4 extends JFrame {
             try {
                 ctrl.guardarDadesDisc(cami);
                 fileChooser.setVisible(false);
-                JOptionPane.showMessageDialog(this, "Dades guardades correctament", "Dades guardades", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Dades guardades correctament", "Dades guardades", JOptionPane.PLAIN_MESSAGE, INFO_IMG);
             } catch (AplicacioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
             }
         }
     }//GEN-LAST:event_miGuardarActionPerformed
@@ -515,21 +518,21 @@ public class AplicacioUB4 extends JFrame {
             ctrl.esborrarAlbum(titol);
             refreshAlbums();
             refreshAlbum();
-            JOptionPane.showMessageDialog(this, "Álbum " + titol + " esborrat correctament", "Álbum esborray", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Álbum " + titol + " esborrat correctament", "Álbum esborray", JOptionPane.PLAIN_MESSAGE, INFO_IMG);
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnEliminarAlbumActionPerformed
 
     private void btnCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlbumActionPerformed
-        String titol = JOptionPane.showInputDialog(this, "Introdueix el nom d l'álbum", "Crear Álbum - Nom", JOptionPane.QUESTION_MESSAGE);
+        String titol = JOptionPane.showInputDialog(this, "Introdueix el nom d l'álbum", "Crear Álbum - Nom", JOptionPane.PLAIN_MESSAGE);
         if (titol != null) {
             int capacitatFinal;
-            String capacitat = JOptionPane.showInputDialog(this, "Introdueix la capacitat de l'álbum", "Crear Álbum - Capacitat", JOptionPane.QUESTION_MESSAGE);
+            String capacitat = JOptionPane.showInputDialog(this, "Introdueix la capacitat de l'álbum", "Crear Álbum - Capacitat", JOptionPane.PLAIN_MESSAGE);
             if (capacitat != null) {
                 String messageCapacitat = "";
                 String message;
-                int tipus = JOptionPane.INFORMATION_MESSAGE;
+                ImageIcon tipus = INFO_IMG;
                 try {
                     capacitatFinal = Integer.parseInt(capacitat);
                 } catch (HeadlessException | NumberFormatException ex) {
@@ -543,11 +546,11 @@ public class AplicacioUB4 extends JFrame {
                     message = "Álbum " + titol + " creat";
                     if (!messageCapacitat.isEmpty()) {
                         message += "\n" + messageCapacitat;
-                        tipus = JOptionPane.WARNING_MESSAGE;
+                        tipus = WARNING_IMG;
                     }
-                    JOptionPane.showMessageDialog(this, message, "Álbum creat", tipus);
+                    JOptionPane.showMessageDialog(this, message, "Álbum creat", JOptionPane.PLAIN_MESSAGE, tipus);
                 } catch (AplicacioException ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
                 }
             }
         }
@@ -579,12 +582,12 @@ public class AplicacioUB4 extends JFrame {
                 refreshBiblioteca();
                 refreshAlbums();
                 refreshAlbum();
-                JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s", "Fitxer Esborrat/s", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s", "Fitxer Esborrat/s", JOptionPane.PLAIN_MESSAGE, INFO_IMG);
             } catch (AplicacioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.PLAIN_MESSAGE, WARNING_IMG);
         }
     }//GEN-LAST:event_btnEliminarFitxerBibliotecaActionPerformed
 
@@ -593,7 +596,7 @@ public class AplicacioUB4 extends JFrame {
         int indexAlbum = this.cmbAlbums.getSelectedIndex();
         int afegits = 0;
         String messageFinestra, titolFinestra;
-        int tipusFinestra;
+        ImageIcon tipusFinestra;
 
         if (indices.length > 0) {
             try {
@@ -604,19 +607,19 @@ public class AplicacioUB4 extends JFrame {
                 }
                 messageFinestra = "Fitxer/s afegit/s al álbum";
                 titolFinestra = "Fitxer/s afegit/s al álbum";
-                tipusFinestra = JOptionPane.INFORMATION_MESSAGE;
+                tipusFinestra = INFO_IMG;
             } catch (AplicacioException ex) {
                 messageFinestra = ex.getMessage() + ", fitxers afegits: " + afegits;
                 titolFinestra = "Error";
-                tipusFinestra = JOptionPane.ERROR_MESSAGE;
+                tipusFinestra = ERROR_IMG;
             }
             if (afegits >= 1) {
                 refreshAlbum();
                 refreshAlbums();
             }
-            JOptionPane.showMessageDialog(this, messageFinestra, titolFinestra, tipusFinestra);
+            JOptionPane.showMessageDialog(this, messageFinestra, titolFinestra, JOptionPane.PLAIN_MESSAGE, tipusFinestra);
         } else {
-            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.PLAIN_MESSAGE, WARNING_IMG);
         }
     }//GEN-LAST:event_btnAfegirFitxerAlbumActionPerformed
 
@@ -624,7 +627,7 @@ public class AplicacioUB4 extends JFrame {
         try {
             ctrl.reproduirCarpeta();
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnReproduirBibliotecaActionPerformed
 
@@ -633,7 +636,7 @@ public class AplicacioUB4 extends JFrame {
         try {
             ctrl.reproduirFitxer(index);
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnReproduirFitxerBibliotecaActionPerformed
 
@@ -644,7 +647,7 @@ public class AplicacioUB4 extends JFrame {
             String titol = ctrl.getTitolAlbum(indexAlbum);
             ctrl.reproduirCarpeta(titol);
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnReproduirAlbumActionPerformed
 
@@ -656,7 +659,7 @@ public class AplicacioUB4 extends JFrame {
             String titol = ctrl.getTitolAlbum(indexAlbum);
             ctrl.reproduirFitxer(index, titol);
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnReproduirFitxerAlbumActionPerformed
 
@@ -664,7 +667,7 @@ public class AplicacioUB4 extends JFrame {
         try {
             ctrl.reemprenReproduccio();
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnReemprenActionPerformed
 
@@ -672,7 +675,7 @@ public class AplicacioUB4 extends JFrame {
         try {
             ctrl.pausaReproduccio();
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnPauseActionPerformed
 
@@ -680,7 +683,7 @@ public class AplicacioUB4 extends JFrame {
         try {
             ctrl.aturaReproduccio();
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnAturaActionPerformed
 
@@ -688,7 +691,7 @@ public class AplicacioUB4 extends JFrame {
         try {
             ctrl.saltaReproduccio();
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnSaltaActionPerformed
 
@@ -706,12 +709,12 @@ public class AplicacioUB4 extends JFrame {
                 }
                 refreshAlbum();
                 refreshAlbums();
-                JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s del álbum", "Fitxer Esborrat/s del Álbum", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Fitxer/s esborrat/s del álbum", "Fitxer Esborrat/s del Álbum", JOptionPane.PLAIN_MESSAGE, INFO_IMG);
             } catch (AplicacioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona un o varis fitxers abans", "Avis", JOptionPane.PLAIN_MESSAGE, WARNING_IMG);
         }
     }//GEN-LAST:event_btnEliminarFitxerAlbumActionPerformed
 
@@ -724,7 +727,7 @@ public class AplicacioUB4 extends JFrame {
         JList list = (JList) evt.getSource();
         int index = list.locationToIndex(evt.getPoint());
         if (evt.getClickCount() == 2 && index >= 0) {
-            JOptionPane.showMessageDialog(this, ctrl.infoFitxer(index), "Informació del Fitxer", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, ctrl.infoFitxer(index), "Informació del Fitxer", JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_lstBibliotecaMouseClicked
 
@@ -735,10 +738,10 @@ public class AplicacioUB4 extends JFrame {
             int index = list.locationToIndex(evt.getPoint());
             if (evt.getClickCount() == 2 && index >= 0) {
                 String titol = ctrl.getTitolAlbum(indexAlbum);
-                JOptionPane.showMessageDialog(this, ctrl.infoFitxer(titol, index), "Informació del Fitxer del Álbum", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, ctrl.infoFitxer(titol, index), "Informació del Fitxer del Álbum", JOptionPane.PLAIN_MESSAGE);
             }
         } catch (AplicacioException ae) {
-            JOptionPane.showMessageDialog(this, ae.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ae.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_lstAlbumMouseClicked
 

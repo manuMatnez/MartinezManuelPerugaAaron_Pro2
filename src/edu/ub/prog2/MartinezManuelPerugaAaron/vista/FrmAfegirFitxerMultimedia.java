@@ -17,8 +17,7 @@
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
-import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.AplicacioUB4.onlyFloatNumbers;
-import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.AplicacioUB4.onlyIntNumbers;
+import static edu.ub.prog2.MartinezManuelPerugaAaron.vista.AplicacioUB4.*;
 import edu.ub.prog2.utils.AplicacioException;
 import java.awt.Frame;
 import java.io.File;
@@ -351,10 +350,10 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
                 int alcada = textAlcada.getText().isEmpty() ? 0 : Integer.parseInt(textAlcada.getText());
                 ctrl.afegirVideo(cami, nom, codec, durada, alcada, amplada, fps);
             }
-            JOptionPane.showMessageDialog(this, "Fitxer " + nom + " afegit", "Fitxer Afegit", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Fitxer " + nom + " afegit", "Fitxer Afegit", JOptionPane.PLAIN_MESSAGE, INFO_IMG);
             this.dispose();
         } catch (AplicacioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, ERROR_IMG);
         }
     }//GEN-LAST:event_btnAcceptarActionPerformed
 
