@@ -26,7 +26,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -34,6 +37,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import uk.co.caprica.vlcj.binding.LibVlc;
@@ -126,8 +130,7 @@ public class AplicacioUB4 extends JFrame {
             }
         });
 
-        lstAlbum.setFont(lstAlbum.getFont().deriveFont(lstAlbum.getFont().getSize()+1f));
-        lstAlbum.setModel(new DefaultListModel<>());
+        lstAlbum.setModel(makeListModel(new ArrayList<>()));
         lstAlbum.setFocusable(false);
         lstAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -136,8 +139,7 @@ public class AplicacioUB4 extends JFrame {
         });
         scpAlbums.setViewportView(lstAlbum);
 
-        lstBiblioteca.setFont(lstBiblioteca.getFont().deriveFont(lstBiblioteca.getFont().getSize()+1f));
-        lstBiblioteca.setModel(new DefaultListModel<>());
+        lstBiblioteca.setModel(makeListModel(new ArrayList<>()));
         lstBiblioteca.setFocusable(false);
         lstBiblioteca.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -730,10 +732,10 @@ public class AplicacioUB4 extends JFrame {
     private void lstAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstAlbumMouseClicked
         int indexAlbum = this.cmbAlbums.getSelectedIndex();
         try {
-            String titol = ctrl.getTitolAlbum(indexAlbum);
             JList list = (JList) evt.getSource();
             int index = list.locationToIndex(evt.getPoint());
             if (evt.getClickCount() == 2 && index >= 0) {
+                String titol = ctrl.getTitolAlbum(indexAlbum);
                 JOptionPane.showMessageDialog(this, ctrl.infoFitxer(titol, index), "Informació del Fitxer del Álbum", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (AplicacioException ae) {
@@ -742,15 +744,35 @@ public class AplicacioUB4 extends JFrame {
     }//GEN-LAST:event_lstAlbumMouseClicked
 
     /**
+     * Hace y retorna un nuevo ListModel<String> para asociarselo a un Jlist
+     *
+     * @param list
+     * @return ListModel<String>
+     */
+    private ListModel<String> makeListModel(List<String> list) {
+        return new AbstractListModel<String>() {
+            String[] strings = list.toArray(new String[list.size()]);
+
+            @Override
+            public int getSize() {
+                return strings.length;
+            }
+
+            @Override
+            public String getElementAt(int i) {
+                return strings[i];
+            }
+        };
+    }
+
+    /**
      * Refersca el JList de la biblioteca
      */
     private void refreshBiblioteca() {
         List<String> bibList = ctrl.mostrarBiblioteca();
-        DefaultListModel<String> model = (DefaultListModel<String>) lstBiblioteca.getModel();
-        model.removeAllElements();
-        for (String s : bibList) {
-            model.addElement(s);
-        }
+        int[] indices = lstBiblioteca.getSelectedIndices();
+        this.lstBiblioteca.setModel(makeListModel(bibList));
+        this.lstBiblioteca.setSelectedIndices(indices);
     }
 
     /**
@@ -758,18 +780,14 @@ public class AplicacioUB4 extends JFrame {
      */
     private void refreshAlbum() {
         int index = this.cmbAlbums.getSelectedIndex();
-        DefaultListModel<String> model = (DefaultListModel<String>) lstAlbum.getModel();
-        model.removeAllElements();
-        if (index > -1) {
-            try {
-                String titol = ctrl.getTitolAlbum(index);
-                List<String> albumList = ctrl.mostrarAlbum(titol);
-                for (String s : albumList) {
-                    model.addElement(s);
-                }
-            } catch (AplicacioException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al actualitzar albums", JOptionPane.ERROR_MESSAGE);
-            }
+        try {
+            String titol = ctrl.getTitolAlbum(index);
+            List<String> albumList = ctrl.mostrarAlbum(titol);
+            int[] indices = lstAlbum.getSelectedIndices();
+            lstAlbum.setModel(makeListModel(albumList));
+            lstAlbum.setSelectedIndices(indices);
+        } catch (AplicacioException ex) {
+            lstAlbum.setModel(makeListModel(new ArrayList<>()));
         }
     }
 
@@ -778,16 +796,15 @@ public class AplicacioUB4 extends JFrame {
      */
     private void refreshAlbums() {
         List<String> albumsList = ctrl.mostrarLlistatAlbums();
-        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cmbAlbums.getModel();
         int index = cmbAlbums.getSelectedIndex();
-        model.removeAllElements();
-        for (String s : albumsList) {
-            model.addElement(s);
-        }
-        if (model.getSize() > 0) {
+        String[] strings = albumsList.toArray(new String[albumsList.size()]);
+        cmbAlbums.setModel(new DefaultComboBoxModel<>(strings));
+        int modelSize = cmbAlbums.getModel().getSize();
+
+        if (modelSize > 0) {
             if (index == -1) {
                 index++;
-            } else if (index > model.getSize() - 1) {
+            } else if (index > modelSize - 1) {
                 index--;
             }
             cmbAlbums.setSelectedIndex(index);
