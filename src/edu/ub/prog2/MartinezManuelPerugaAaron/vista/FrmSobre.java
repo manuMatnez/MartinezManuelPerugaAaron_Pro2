@@ -26,6 +26,8 @@ import java.awt.Frame;
  */
 public class FrmSobre extends javax.swing.JDialog {
 
+    protected final static String TITLE = "Sobre";
+
     /**
      * FrmSobre
      *
@@ -59,6 +61,7 @@ public class FrmSobre extends javax.swing.JDialog {
         etCopyRight = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(TITLE);
         setBounds(new java.awt.Rectangle(0, 23, 0, 0));
         setMinimumSize(new java.awt.Dimension(363, 320));
         setResizable(false);
@@ -83,10 +86,10 @@ public class FrmSobre extends javax.swing.JDialog {
         etAutors.setText("Autors:");
 
         etAutor1.setFont(etAutor1.getFont().deriveFont((etAutor1.getFont().getStyle() | java.awt.Font.ITALIC), etAutor1.getFont().getSize()-2));
-        etAutor1.setText(AplicacioUB4.AUTORS[0]);
+        etAutor1.setText(IniciadorAplicacioUB.AUTORS[0]);
 
         etAutor2.setFont(etAutor2.getFont().deriveFont((etAutor2.getFont().getStyle() | java.awt.Font.ITALIC), etAutor2.getFont().getSize()-2));
-        etAutor2.setText(AplicacioUB4.AUTORS[1]);
+        etAutor2.setText(IniciadorAplicacioUB.AUTORS[1]);
 
         etLlicencia.setFont(etLlicencia.getFont().deriveFont(etLlicencia.getFont().getStyle() | java.awt.Font.BOLD));
         etLlicencia.setText("Llicència:");
@@ -97,10 +100,10 @@ public class FrmSobre extends javax.swing.JDialog {
         etVersion.setText("Versión:");
 
         etVersionNumber.setFont(etVersionNumber.getFont().deriveFont((etVersionNumber.getFont().getStyle() | java.awt.Font.ITALIC), etVersionNumber.getFont().getSize()-2));
-        etVersionNumber.setText(AplicacioUB4.VERSION);
+        etVersionNumber.setText(IniciadorAplicacioUB.VERSION);
 
         etCopyRight.setFont(etCopyRight.getFont().deriveFont((etCopyRight.getFont().getStyle() | java.awt.Font.ITALIC), etCopyRight.getFont().getSize()-2));
-        etCopyRight.setText(AplicacioUB4.COPY);
+        etCopyRight.setText(IniciadorAplicacioUB.COPY);
 
         javax.swing.GroupLayout panelCopyLayout = new javax.swing.GroupLayout(panelCopy);
         panelCopy.setLayout(panelCopyLayout);
@@ -124,7 +127,7 @@ public class FrmSobre extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
+                        .addGap(84, 84, 84)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(etVersion)
@@ -144,14 +147,14 @@ public class FrmSobre extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(146, 146, 146)
                         .addComponent(etLogoUb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(93, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(panelCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(btnTornar)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(93, 93, 93)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnTornar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(panelCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

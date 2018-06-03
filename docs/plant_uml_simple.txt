@@ -9,6 +9,9 @@ skinparam class {
   BorderColor<<Foo>> Tomato
 }
 
+class IniciadorAplicacioUB {
+}
+
 class AplicacioUB4 {
 }
 
@@ -78,6 +81,7 @@ FitxerReproduible <|-- Video
 class AplicacioException<< (E,#FF7700)>> {
 }
 
+IniciadorAplicacioUB --> AplicacioUB4
 AplicacioUB4 -> FrmAfegirFitxerMultimedia
 AplicacioUB4 -left-> FrmSobre
 AplicacioUB4 --> Controlador
