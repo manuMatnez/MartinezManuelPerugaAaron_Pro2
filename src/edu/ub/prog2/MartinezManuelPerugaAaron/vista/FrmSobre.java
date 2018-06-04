@@ -86,10 +86,10 @@ public class FrmSobre extends javax.swing.JDialog {
         etAutors.setText("Autors:");
 
         etAutor1.setFont(etAutor1.getFont().deriveFont((etAutor1.getFont().getStyle() | java.awt.Font.ITALIC), etAutor1.getFont().getSize()-2));
-        etAutor1.setText(IniciadorAplicacioUB.AUTORS[0]);
+        etAutor1.setText(AplicacioUB4.AUTORS[0]);
 
         etAutor2.setFont(etAutor2.getFont().deriveFont((etAutor2.getFont().getStyle() | java.awt.Font.ITALIC), etAutor2.getFont().getSize()-2));
-        etAutor2.setText(IniciadorAplicacioUB.AUTORS[1]);
+        etAutor2.setText(AplicacioUB4.AUTORS[1]);
 
         etLlicencia.setFont(etLlicencia.getFont().deriveFont(etLlicencia.getFont().getStyle() | java.awt.Font.BOLD));
         etLlicencia.setText("Llicència:");
@@ -100,10 +100,10 @@ public class FrmSobre extends javax.swing.JDialog {
         etVersion.setText("Versión:");
 
         etVersionNumber.setFont(etVersionNumber.getFont().deriveFont((etVersionNumber.getFont().getStyle() | java.awt.Font.ITALIC), etVersionNumber.getFont().getSize()-2));
-        etVersionNumber.setText(IniciadorAplicacioUB.VERSION);
+        etVersionNumber.setText(AplicacioUB4.VERSION);
 
         etCopyRight.setFont(etCopyRight.getFont().deriveFont((etCopyRight.getFont().getStyle() | java.awt.Font.ITALIC), etCopyRight.getFont().getSize()-2));
-        etCopyRight.setText(IniciadorAplicacioUB.COPY);
+        etCopyRight.setText(AplicacioUB4.COPY);
 
         javax.swing.GroupLayout panelCopyLayout = new javax.swing.GroupLayout(panelCopy);
         panelCopy.setLayout(panelCopyLayout);

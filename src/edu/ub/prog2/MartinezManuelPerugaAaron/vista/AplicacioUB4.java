@@ -16,8 +16,11 @@
  */
 package edu.ub.prog2.MartinezManuelPerugaAaron.vista;
 
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
 import edu.ub.prog2.MartinezManuelPerugaAaron.controlador.Controlador;
 import edu.ub.prog2.utils.AplicacioException;
+import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -34,6 +37,10 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 /**
  * AplicacioUB4 - Vista
@@ -43,8 +50,14 @@ import javax.swing.ListModel;
  */
 public class AplicacioUB4 extends JFrame {
 
+    public final static boolean MAC = System.getProperty("os.name").toLowerCase().contains("mac");
+
     private final Controlador ctrl;
     protected final static String TITLE = "Reproductor UB (Grup C)";
+
+    protected final static String[] AUTORS = new String[]{"Manuel Martínez Martín", "Aarón Peruga Ortiga"};
+    protected final static String VERSION = "4.0";
+    protected final static String COPY = "Copyright 2018 Universitat de Barcelona";
 
     protected final static ImageIcon ERROR_IMG = new ImageIcon(AplicacioUB4.class.getResource("/assets/error.png"));
     protected final static ImageIcon WARNING_IMG = new ImageIcon(AplicacioUB4.class.getResource("/assets/warning.png"));
@@ -895,14 +908,18 @@ public class AplicacioUB4 extends JFrame {
      */
     private void refreshAlbum() {
         int index = this.cmbAlbums.getSelectedIndex();
-        try {
-            String titol = ctrl.getTitolAlbum(index);
-            List<String> albumList = ctrl.mostrarAlbum(titol);
-            int[] indices = lstAlbum.getSelectedIndices();
-            lstAlbum.setModel(makeListModel(albumList));
-            lstAlbum.setSelectedIndices(indices);
-        } catch (AplicacioException ex) {
-            lstAlbum.setModel(makeListModel(new ArrayList<>()));
+        int size = cmbAlbums.getModel().getSize();
+        boolean updateAlbum = (size > 0 && index < size);
+        if (updateAlbum) {
+            try {
+                String titol = ctrl.getTitolAlbum(index);
+                List<String> albumList = ctrl.mostrarAlbum(titol);
+                int[] indices = lstAlbum.getSelectedIndices();
+                lstAlbum.setModel(makeListModel(albumList));
+                lstAlbum.setSelectedIndices(indices);
+            } catch (AplicacioException ex) {
+                lstAlbum.setModel(makeListModel(new ArrayList<>()));
+            }
         }
     }
 
@@ -1026,4 +1043,40 @@ public class AplicacioUB4 extends JFrame {
     private javax.swing.JScrollPane scpBiblioteca;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Main
+     *
+     * @param args[]
+     */
+    public static void main(String args[]) {
+
+        // VLC 2.2 para Mac
+        if (MAC) {
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", TITLE);
+
+            uk.co.caprica.vlcj.binding.LibC.INSTANCE.setenv("VLC_PLUGIN_PATH",
+                    "/Applications/VLC.app/Contents/MacOS/plugins", 1);
+
+            NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),
+                    "/Applications/VLC.app/Contents/MacOS/lib");
+
+            Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+        }
+
+        EventQueue.invokeLater(() -> {
+            AplicacioUB4 app = new AplicacioUB4();
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+                System.err.println(e.getMessage());
+            }
+
+            UIManager.put("OptionPane.cancelButtonText", "Cancel·lar");
+            UIManager.put("OptionPane.okButtonText", "Acceptar");
+
+            app.setVisible(true);
+        });
+
+    }
 }

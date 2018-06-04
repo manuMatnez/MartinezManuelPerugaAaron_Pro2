@@ -172,7 +172,7 @@
           </FontInfo>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="IniciadorAplicacioUB.AUTORS[0]" type="code"/>
+          <Connection code="AplicacioUB4.AUTORS[0]" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -184,7 +184,7 @@
           </FontInfo>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="IniciadorAplicacioUB.AUTORS[1]" type="code"/>
+          <Connection code="AplicacioUB4.AUTORS[1]" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -223,7 +223,7 @@
           </FontInfo>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="IniciadorAplicacioUB.VERSION" type="code"/>
+          <Connection code="AplicacioUB4.VERSION" type="code"/>
         </Property>
       </Properties>
     </Component>
@@ -256,7 +256,7 @@
               </FontInfo>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="IniciadorAplicacioUB.COPY" type="code"/>
+              <Connection code="AplicacioUB4.COPY" type="code"/>
             </Property>
           </Properties>
         </Component>
