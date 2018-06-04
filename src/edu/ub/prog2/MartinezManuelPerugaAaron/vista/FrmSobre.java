@@ -187,6 +187,11 @@ public class FrmSobre extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción del boton Tornar, cierra la ventana
+     *
+     * @param evt
+     */
     private void btnTornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnTornarActionPerformed

@@ -442,6 +442,11 @@ public class AplicacioUB4 extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción de carga, abre un JFileChooser
+     *
+     * @param evt
+     */
     private void miCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCarregarActionPerformed
         File file;
         String cami;
@@ -460,6 +465,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_miCarregarActionPerformed
 
+    /**
+     * Acción de guardado, abre un JFileChooser
+     *
+     * @param evt
+     */
     private void miGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGuardarActionPerformed
         File file;
         String cami;
@@ -478,15 +488,30 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_miGuardarActionPerformed
 
+    /**
+     * Acción de acerca de, abre un JDialog
+     *
+     * @param evt
+     */
     private void miSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSobreActionPerformed
         FrmSobre form = new FrmSobre(this, true);
         form.setVisible(true);
     }//GEN-LAST:event_miSobreActionPerformed
 
+    /**
+     * Acción de cambiar de album en el JComboBox
+     *
+     * @param evt
+     */
     private void cmbAlbumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlbumsActionPerformed
         refreshAlbum();
     }//GEN-LAST:event_cmbAlbumsActionPerformed
 
+    /**
+     * Acción de añadir un fichero a la biblioteca, abre un JDialog
+     *
+     * @param evt
+     */
     private void btnAfegirFitxerBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFitxerBibliotecaActionPerformed
         FrmAfegirFitxerMultimedia form = new FrmAfegirFitxerMultimedia(this, true);
         form.addWindowListener(new WindowAdapter() {
@@ -500,6 +525,11 @@ public class AplicacioUB4 extends JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_btnAfegirFitxerBibliotecaActionPerformed
 
+    /**
+     * Acción de eliminar álbum
+     *
+     * @param evt
+     */
     private void btnEliminarAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAlbumActionPerformed
         int index = this.cmbAlbums.getSelectedIndex();
 
@@ -514,6 +544,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnEliminarAlbumActionPerformed
 
+    /**
+     * Acción de crear álbum
+     *
+     * @param evt
+     */
     private void btnCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlbumActionPerformed
         String titol = JOptionPane.showInputDialog(this, "Introdueix el nom d l'álbum", "Crear Álbum - Nom", JOptionPane.PLAIN_MESSAGE);
         if (titol != null) {
@@ -547,18 +582,38 @@ public class AplicacioUB4 extends JFrame {
 
     }//GEN-LAST:event_btnCrearAlbumActionPerformed
 
+    /**
+     * Acción de salir de la aplicación
+     *
+     * @param evt
+     */
     private void miSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSortirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_miSortirActionPerformed
 
+    /**
+     * Acción de cambiar si es reproducción continua o no
+     *
+     * @param evt
+     */
     private void cbmiRepContinuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmiRepContinuaActionPerformed
         ctrl.activarDesactivarContinua();
     }//GEN-LAST:event_cbmiRepContinuaActionPerformed
 
+    /**
+     * Acción de cambiar si es reproducción aleatoria o no
+     *
+     * @param evt
+     */
     private void cbmiRepAleatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmiRepAleatoriaActionPerformed
         ctrl.activarDesactivarAleatoria();
     }//GEN-LAST:event_cbmiRepAleatoriaActionPerformed
 
+    /**
+     * Acción de eliminar ficheros de la biblioteca
+     *
+     * @param evt
+     */
     private void btnEliminarFitxerBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFitxerBibliotecaActionPerformed
         int[] indices = this.lstBiblioteca.getSelectedIndices();
 
@@ -581,6 +636,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnEliminarFitxerBibliotecaActionPerformed
 
+    /**
+     * Acción de añadir ficheros a un álbum
+     *
+     * @param evt
+     */
     private void btnAfegirFitxerAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAfegirFitxerAlbumActionPerformed
         int[] indices = this.lstBiblioteca.getSelectedIndices();
         int indexAlbum = this.cmbAlbums.getSelectedIndex();
@@ -613,6 +673,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnAfegirFitxerAlbumActionPerformed
 
+    /**
+     * Acción de reproducir la biblioteca
+     *
+     * @param evt
+     */
     private void btnReproduirBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproduirBibliotecaActionPerformed
         try {
             ctrl.reproduirCarpeta();
@@ -621,6 +686,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnReproduirBibliotecaActionPerformed
 
+    /**
+     * Acción de reproducir un fichero de la biblioteca
+     *
+     * @param evt
+     */
     private void btnReproduirFitxerBibliotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproduirFitxerBibliotecaActionPerformed
         int index = this.lstBiblioteca.getSelectedIndex();
         try {
@@ -630,6 +700,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnReproduirFitxerBibliotecaActionPerformed
 
+    /**
+     * Acción de reproducir un álbum
+     *
+     * @param evt
+     */
     private void btnReproduirAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproduirAlbumActionPerformed
         int indexAlbum = this.cmbAlbums.getSelectedIndex();
 
@@ -641,6 +716,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnReproduirAlbumActionPerformed
 
+    /**
+     * Acción de reproducir un fichero de un album
+     *
+     * @param evt
+     */
     private void btnReproduirFitxerAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproduirFitxerAlbumActionPerformed
         int index = this.lstAlbum.getSelectedIndex();
         int indexAlbum = this.cmbAlbums.getSelectedIndex();
@@ -653,6 +733,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnReproduirFitxerAlbumActionPerformed
 
+    /**
+     * Acción de continuar la reproducción
+     *
+     * @param evt
+     */
     private void btnReemprenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReemprenActionPerformed
         try {
             ctrl.reemprenReproduccio();
@@ -661,6 +746,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnReemprenActionPerformed
 
+    /**
+     * Acción de pausar la reproducción
+     *
+     * @param evt
+     */
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
         try {
             ctrl.pausaReproduccio();
@@ -669,6 +759,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnPauseActionPerformed
 
+    /**
+     * Acción de parar la reproducción
+     *
+     * @param evt
+     */
     private void btnAturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAturaActionPerformed
         try {
             ctrl.aturaReproduccio();
@@ -677,6 +772,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnAturaActionPerformed
 
+    /**
+     * Acción de saltar la reproducción
+     *
+     * @param evt
+     */
     private void btnSaltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaltaActionPerformed
         try {
             ctrl.saltaReproduccio();
@@ -685,6 +785,11 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnSaltaActionPerformed
 
+    /**
+     * Acción de eliminar ficheros seleccionados de un album
+     *
+     * @param evt
+     */
     private void btnEliminarFitxerAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFitxerAlbumActionPerformed
         int[] indices = this.lstAlbum.getSelectedIndices();
         int indexAlbum = this.cmbAlbums.getSelectedIndex();
@@ -708,11 +813,23 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_btnEliminarFitxerAlbumActionPerformed
 
+    /**
+     * Evento de click en la ventana, para deseleccionar los JList de álbum y
+     * biblioteca
+     *
+     * @param evt
+     */
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         lstBiblioteca.clearSelection();
         lstAlbum.clearSelection();
     }//GEN-LAST:event_formMouseClicked
 
+    /**
+     * Evento de click en un elemento del JList, para mostrar información de un
+     * fichero de la biblioteca
+     *
+     * @param evt
+     */
     private void lstBibliotecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstBibliotecaMouseClicked
         JList list = (JList) evt.getSource();
         int index = list.locationToIndex(evt.getPoint());
@@ -721,6 +838,12 @@ public class AplicacioUB4 extends JFrame {
         }
     }//GEN-LAST:event_lstBibliotecaMouseClicked
 
+    /**
+     * Evento de click en un elemento del JList, para mostrar información de un
+     * fichero del álbum actual
+     *
+     * @param evt
+     */
     private void lstAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstAlbumMouseClicked
         int indexAlbum = this.cmbAlbums.getSelectedIndex();
         try {

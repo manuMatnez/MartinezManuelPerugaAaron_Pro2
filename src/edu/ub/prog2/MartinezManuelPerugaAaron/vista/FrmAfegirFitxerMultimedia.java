@@ -54,6 +54,12 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         this.getRootPane().setDefaultButton(btnAcceptar);
     }
 
+    /**
+     * Getter de afegit, usado para comprobar si AplicacioUB4 ha de actualiza o
+     * no el JList de biblioteca
+     *
+     * @return boolean
+     */
     public boolean isAfegit() {
         return afegit;
     }
@@ -104,7 +110,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
 
         etCami.setText("Fitxer");
 
-        btnAcceptar.setText("Aceptar");
+        btnAcceptar.setText("Acceptar");
         btnAcceptar.setFocusPainted(false);
         btnAcceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +118,7 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
             }
         });
 
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Cancel·lar");
         btnCancelar.setFocusPainted(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,10 +341,21 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Acción del botón cancelar, cierra la ventana
+     *
+     * @param evt
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Acción del botón acceptar, añade si puede el fichero a la biblioteca y
+     * cierra la ventana
+     *
+     * @param evt
+     */
     private void btnAcceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptarActionPerformed
         String cami = textCami.getText();
         String nom = textNom.getText();
@@ -364,6 +381,11 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         }
     }//GEN-LAST:event_btnAcceptarActionPerformed
 
+    /**
+     * Acción del botón Obrir, usa JFileChooser para escoger fichero
+     *
+     * @param evt
+     */
     private void btnObrirFitxerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrirFitxerActionPerformed
         String path = fileChooserPath();
         if (!path.isEmpty()) {
@@ -371,14 +393,29 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         }
     }//GEN-LAST:event_btnObrirFitxerActionPerformed
 
+    /**
+     * Acción de seleccionar Audio, ajusta el formulario
+     *
+     * @param evt
+     */
     private void rbtnAudioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnAudioActionPerformed
         audioSelected();
     }//GEN-LAST:event_rbtnAudioActionPerformed
 
+    /**
+     * Acción de seleccionar Video, ajusta el formulario
+     *
+     * @param evt
+     */
     private void rbtnVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnVideoActionPerformed
         videoSelected();
     }//GEN-LAST:event_rbtnVideoActionPerformed
 
+    /**
+     * Acción del botón Obrir, usa JFileChooser para escoger la imagen del Audio
+     *
+     * @param evt
+     */
     private void btnObrirImatgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrirImatgeActionPerformed
         String path = fileChooserPath();
         if (!path.isEmpty()) {
@@ -386,14 +423,29 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         }
     }//GEN-LAST:event_btnObrirImatgeActionPerformed
 
+    /**
+     * Evento de escritura en Alcada para tratar la información escrita
+     *
+     * @param evt
+     */
     private void textAlcadaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textAlcadaKeyTyped
         onlyIntNumbers(textAlcada, evt);
     }//GEN-LAST:event_textAlcadaKeyTyped
 
+    /**
+     * Evento de escritura en Amplada para tratar la información escrita
+     *
+     * @param evt
+     */
     private void textAmpladaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textAmpladaKeyTyped
         onlyIntNumbers(textAmplada, evt);
     }//GEN-LAST:event_textAmpladaKeyTyped
 
+    /**
+     * Evento de escritura en FpsKbs para tratar la información escrita
+     *
+     * @param evt
+     */
     private void textFpsKbpsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFpsKbpsKeyTyped
         if (rbtnAudio.isSelected()) {
             onlyIntNumbers(textFpsKbps, evt);
@@ -402,10 +454,18 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         }
     }//GEN-LAST:event_textFpsKbpsKeyTyped
 
+    /**
+     * Evento de escritura en Durada para tratar la información escrita
+     *
+     * @param evt
+     */
     private void textDuradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDuradaKeyTyped
         onlyFloatNumbers(textDurada, evt);
     }//GEN-LAST:event_textDuradaKeyTyped
 
+    /**
+     * Ajusta el formulario a Audio
+     */
     private void audioSelected() {
         setTitle(TITLE + " " + TITLE_AUDIO);
         etFpsKbps.setText("Kbs");
@@ -417,6 +477,9 @@ public class FrmAfegirFitxerMultimedia extends JDialog {
         textCami.requestFocus();
     }
 
+    /**
+     * Ajusta el formulario a Video
+     */
     private void videoSelected() {
         setTitle(TITLE + " " + TITLE_VIDEO);
         etFpsKbps.setText("Fps");
